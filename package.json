@@ -1,0 +1,19 @@
+{
+  "name": "sofdev",
+  "version": "1.0.0",
+  "description": "Software development learning platform for people with no IT background and students",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felix24mihai/Educational-Platform.git"
+  },
+  "author": "Prava Felix-Mihai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/felix24mihai/Educational-Platform/issues"
+  },
+  "homepage": "https://github.com/felix24mihai/Educational-Platform#readme"
+}
