@@ -4,16 +4,31 @@
   "description": "Software development learning platform for people with no IT background and students",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server",
+    "server": "nodemon server"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/felix24mihai/Educational-Platform.git"
+    "url": "git+https://github.com/felix24mihai/EduSoftDev.git"
   },
   "author": "Prava Felix-Mihai",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/felix24mihai/Educational-Platform/issues"
+    "url": "https://github.com/felix24mihai/EduSoftDev/issues"
   },
-  "homepage": "https://github.com/felix24mihai/Educational-Platform#readme"
+  "homepage": "https://github.com/felix24mihai/EduSoftDev#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.7",
+    "express": "^4.17.3",
+    "express-validator": "^6.14.0",
+    "gravatar": "^1.8.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.2.7",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0",
+    "nodemon": "^1.11.1"
+  }
 }
