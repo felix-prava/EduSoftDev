@@ -8,7 +8,7 @@ const config = require('config');
 
 const User = require('../../models/User');
 
-// @route   Post /api/users
+// @route   POST /api/users
 // @desc    Register user
 // @access  Public
 router.post(
@@ -34,8 +34,9 @@ router.post(
       let user = await User.findOne({ email });
 
       if (user) {
-        res.status(400).json({ errors: [{ msg: 'User already exists' }] });
-        return;
+        return res
+          .status(400)
+          .json({ errors: [{ msg: 'User Already Exists' }] });
       }
 
       const avatar = gravatar.url(email, {
