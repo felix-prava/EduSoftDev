@@ -48,11 +48,13 @@ router.post(
       user = new User({
         firstName,
         lastName,
-        preferredName,
         email,
         avatar,
         password,
       });
+      if (preferredName) {
+        user.preferredName = preferredName;
+      }
 
       // Encrypt password
       const salt = await bcrypt.genSalt(10);

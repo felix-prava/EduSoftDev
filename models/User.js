@@ -11,7 +11,6 @@ const UserSchema = new mongoose.Schema({
   },
   preferredName: {
     type: String,
-    required: true,
   },
   email: {
     type: String,
@@ -24,6 +23,10 @@ const UserSchema = new mongoose.Schema({
   },
   avatar: {
     type: String,
+  },
+  role: {
+    type: String,
+    default: 'normal',
   },
   date: {
     type: Date,
