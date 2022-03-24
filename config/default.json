@@ -1,6 +1,0 @@
-{
-  "mongoURI": "mongodb+srv://felix24:8EuZyilyReNI3bje@softdev.hnsbd.mongodb.net/softDev?retryWrites=true&w=majority",
-  "jwtSecret": "jwtMySecretToken",
-  "githubClientId": "d051f4091018a60aff06",
-  "githubSecret": "21e60b3f9f5327dcfd3cc7aad83cda9126b8ac2d"
-}
