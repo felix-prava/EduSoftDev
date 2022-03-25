@@ -5,7 +5,6 @@ const auth = require('../../middleware/auth');
 const compareUsers = require('../../middleware/compareUsers');
 
 const User = require('../../models/User');
-const Profile = require('../../models/Profile');
 const Article = require('../../models/Article');
 
 // @route   POST /api/articles
@@ -154,6 +153,92 @@ router.delete('/:article_id', auth, async (req, res) => {
     await article.remove();
 
     res.json({ msg: 'Article deleted' });
+  } catch (err) {
+    if (err.kind == 'ObjectId') {
+      return res.status(404).json({ msg: 'Article not found' });
+    }
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route   PUT /api/articles/like/:article_id
+// @desc    Like an article
+// @access  Private
+router.put('/like/:article_id', auth, async (req, res) => {
+  try {
+    const article = await Article.findById(req.params.article_id);
+
+    // Check if the article has already been liked
+    if (
+      article.likes.filter((like) => like.user.toString() === req.user.id)
+        .length > 0
+    ) {
+      const removeLikeIndex = article.likes
+        .map((like) => like.user.toString())
+        .indexOf(req.user.id);
+      article.likes.splice(removeLikeIndex, 1);
+    } else {
+      // Check if the article has already been disliked
+      if (
+        article.dislikes.filter(
+          (dislike) => dislike.user.toString() === req.user.id
+        ).length > 0
+      ) {
+        const removeDislikeIndex = article.dislikes
+          .map((dislike) => dislike.user.toString())
+          .indexOf(req.user.id);
+        article.dislikes.splice(removeDislikeIndex, 1);
+      }
+
+      article.likes.unshift({ user: req.user.id });
+    }
+
+    await article.save();
+    res.json(article.likes);
+  } catch (err) {
+    if (err.kind == 'ObjectId') {
+      return res.status(404).json({ msg: 'Article not found' });
+    }
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route   PUT /api/articles/dislike/:article_id
+// @desc    Dislike an article
+// @access  Private
+router.put('/dislike/:article_id', auth, async (req, res) => {
+  try {
+    const article = await Article.findById(req.params.article_id);
+
+    // Check if the article has already been disliked
+    if (
+      article.dislikes.filter(
+        (dislike) => dislike.user.toString() === req.user.id
+      ).length > 0
+    ) {
+      const removeDislikeIndex = article.dislikes
+        .map((dislike) => dislike.user.toString())
+        .indexOf(req.user.id);
+      article.dislikes.splice(removeDislikeIndex, 1);
+    } else {
+      // Check if the article has already been liked
+      if (
+        article.likes.filter((like) => like.user.toString() === req.user.id)
+          .length > 0
+      ) {
+        const removeLikeIndex = article.likes
+          .map((like) => like.user.toString())
+          .indexOf(req.user.id);
+        article.likes.splice(removeLikeIndex, 1);
+      }
+
+      article.dislikes.unshift({ user: req.user.id });
+    }
+
+    await article.save();
+    res.json(article.dislikes);
   } catch (err) {
     if (err.kind == 'ObjectId') {
       return res.status(404).json({ msg: 'Article not found' });
