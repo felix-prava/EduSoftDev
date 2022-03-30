@@ -16,6 +16,7 @@ router.post(
   [
     check('firstName', 'First name is required').not().isEmpty(),
     check('lastName', 'Last name is required').not().isEmpty(),
+    check('username', 'Username is required').not().isEmpty(),
     check('email', 'Please include a valid email').isEmail(),
     check(
       'password',
@@ -28,7 +29,8 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { firstName, lastName, preferredName, email, password } = req.body;
+    const { firstName, lastName, preferredName, username, email, password } =
+      req.body;
 
     try {
       let user = await User.findOne({ email });
@@ -37,6 +39,12 @@ router.post(
         return res
           .status(400)
           .json({ errors: [{ msg: 'User Already Exists' }] });
+      }
+
+      user = await User.findOne({ username });
+
+      if (user) {
+        return res.status(400).json({ errors: [{ msg: 'Username Is Taken' }] });
       }
 
       const avatar = gravatar.url(email, {
@@ -49,6 +57,7 @@ router.post(
         firstName,
         lastName,
         email,
+        username,
         avatar,
         password,
       });

@@ -13,7 +13,10 @@ const ArticleSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  userName: {
+  userLastName: {
+    type: String,
+  },
+  userFirstName: {
     type: String,
   },
   avatar: {
@@ -41,13 +44,15 @@ const ArticleSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'users',
       },
-      text: {
+      body: {
         type: String,
         required: true,
       },
-      userName: {
+      userLastName: {
         type: String,
-        required: true,
+      },
+      userFirstName: {
+        type: String,
       },
       avatar: {
         type: String,

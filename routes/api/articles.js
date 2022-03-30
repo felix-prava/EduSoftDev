@@ -32,6 +32,8 @@ router.post(
         subject: req.body.subject,
         body: req.body.body,
         avatar: user.avatar,
+        userFirstName: user.firstName,
+        userLastName: user.lastName,
         user: req.user.id,
       });
       const article = await newArticle.save();
@@ -247,5 +249,140 @@ router.put('/dislike/:article_id', auth, async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
+
+// @route   POST /api/articles/comment/:article_id
+// @desc    Comment on an article
+// @access  Private
+router.post(
+  '/comment/:article_id',
+  [auth, [check('body', 'Body is required').not().isEmpty()]],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    try {
+      const user = await User.findById(req.user.id).select('-password');
+      const article = await Article.findById(req.params.article_id);
+
+      const newComment = {
+        body: req.body.body,
+        avatar: user.avatar,
+        userFirstName: user.firstName,
+        userLastName: user.lastName,
+        user: req.user.id,
+      };
+      article.comments.unshift(newComment);
+
+      await article.save();
+
+      res.json(article.comments);
+    } catch (err) {
+      if (err.kind == 'ObjectId') {
+        return res.status(404).json({ msg: 'Article not found' });
+      }
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
+
+// @route   DELETE /api/articles/comment/:article_id/:comment_id
+// @desc    Delete a comment
+// @access  Private
+router.delete('/comment/:article_id/:comment_id', auth, async (req, res) => {
+  try {
+    const article = await Article.findById(req.params.article_id);
+    if (!article) {
+      return res.status(404).json({ msg: 'Article not found' });
+    }
+
+    // Pull out comment
+    const comment = article.comments.find(
+      (comment) => comment.id === req.params.comment_id
+    );
+    if (!comment) {
+      return res.status(404).json({ msg: 'Comment does not exist' });
+    }
+
+    const checkStatus = await compareUsers(
+      req.user.id,
+      comment.user.toString(),
+      'mentor'
+    );
+
+    if (checkStatus == 401 || checkStatus == 500)
+      return res
+        .status(checkStatus)
+        .json({ msg: checkStatus == 401 ? 'Unauthorized' : 'Server Error' });
+
+    const removeIndex = article.comments
+      .map((comment) => comment.id.toString())
+      .indexOf(req.params.comment_id);
+
+    article.comments.splice(removeIndex, 1);
+    await article.save();
+
+    res.json({ msg: 'Comment deleted' });
+  } catch (err) {
+    if (err.kind == 'ObjectId') {
+      return res.status(404).json({ msg: 'Article not found' });
+    }
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route   PUT /api/articles/comment/:article_id/:comment_id
+// @desc    Update a comment
+// @access  Private
+router.put(
+  '/comment/:article_id/:comment_id',
+  [auth, [check('body', 'Body is required').not().isEmpty()]],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    const { body } = req.body;
+
+    try {
+      const article = await Article.findById(req.params.article_id);
+      if (!article) {
+        return res.status(404).json({ msg: 'Article not found' });
+      }
+
+      // Pull out comment
+      const comment = article.comments.find(
+        (comment) => comment.id === req.params.comment_id
+      );
+      if (!comment) {
+        return res.status(404).json({ msg: 'Comment does not exist' });
+      }
+
+      const checkStatus = await compareUsers(
+        req.user.id,
+        comment.user.toString(),
+        'mentor'
+      );
+      if (checkStatus == 401 || checkStatus == 500)
+        return res
+          .status(checkStatus)
+          .json({ msg: checkStatus == 401 ? 'Unauthorized' : 'Server Error' });
+
+      // Update comment
+      // return res.json(updatedArticle);
+    } catch (err) {
+      if (err.kind == 'ObjectId') {
+        return res.status(404).json({ msg: 'Article not found' });
+      }
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
+
+// TODO like and dislike for comments
 
 module.exports = router;
