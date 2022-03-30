@@ -63,7 +63,7 @@ router.post(
     if (checkStatus == 401 || checkStatus == 500)
       return res
         .status(checkStatus)
-        .send({ msg: checkStatus == 401 ? 'Unauthorized' : 'Server Error' });
+        .json({ msg: checkStatus == 401 ? 'Unauthorized' : 'Server Error' });
 
     const {
       company,
@@ -178,7 +178,7 @@ router.delete('/:user_id', auth, async (req, res) => {
   if (checkStatus == 401 || checkStatus == 500)
     return res
       .status(checkStatus)
-      .send({ msg: checkStatus == 401 ? 'Unauthorized' : 'Server Error' });
+      .json({ msg: checkStatus == 401 ? 'Unauthorized' : 'Server Error' });
 
   try {
     //TODO Delete comments and articles
@@ -218,7 +218,7 @@ router.put(
     if (checkStatus == 401 || checkStatus == 500)
       return res
         .status(checkStatus)
-        .send({ msg: checkStatus == 401 ? 'Unauthorized' : 'Server Error' });
+        .json({ msg: checkStatus == 401 ? 'Unauthorized' : 'Server Error' });
 
     const { title, company, location, from, to, current, description } =
       req.body;
@@ -255,7 +255,7 @@ router.delete('/experience/:user_id/:exp_id', auth, async (req, res) => {
   if (checkStatus == 401 || checkStatus == 500)
     return res
       .status(checkStatus)
-      .send({ msg: checkStatus == 401 ? 'Unauthorized' : 'Server Error' });
+      .json({ msg: checkStatus == 401 ? 'Unauthorized' : 'Server Error' });
 
   try {
     const profile = await Profile.findOne({ user: req.params.user_id });
@@ -302,7 +302,7 @@ router.put(
     if (checkStatus == 401 || checkStatus == 500)
       return res
         .status(checkStatus)
-        .send({ msg: checkStatus == 401 ? 'Unauthorized' : 'Server Error' });
+        .json({ msg: checkStatus == 401 ? 'Unauthorized' : 'Server Error' });
 
     const { school, degree, fieldOfStudy, from, to, current, description } =
       req.body;
@@ -339,7 +339,7 @@ router.delete('/education/:user_id/:edu_id', auth, async (req, res) => {
   if (checkStatus == 401 || checkStatus == 500)
     return res
       .status(checkStatus)
-      .send({ msg: checkStatus == 401 ? 'Unauthorized' : 'Server Error' });
+      .json({ msg: checkStatus == 401 ? 'Unauthorized' : 'Server Error' });
 
   try {
     const profile = await Profile.findOne({ user: req.params.user_id });
