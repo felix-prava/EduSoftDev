@@ -372,7 +372,20 @@ router.put(
           .json({ msg: checkStatus == 401 ? 'Unauthorized' : 'Server Error' });
 
       // Update comment
-      // return res.json(updatedArticle);
+      let comments = article.comments;
+      for (let i = 0; i < comments.length; i++) {
+        if (comments[i] === comment) {
+          comment.body = body;
+        }
+      }
+
+      const updatedArticle = await Article.findOneAndUpdate(
+        { _id: article.id },
+        { $set: { comments } },
+        { new: true } // return the document after update was applied
+      );
+
+      return res.json(updatedArticle);
     } catch (err) {
       if (err.kind == 'ObjectId') {
         return res.status(404).json({ msg: 'Article not found' });
