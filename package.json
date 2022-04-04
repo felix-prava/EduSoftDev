@@ -20,6 +20,9 @@
   },
   "homepage": "https://github.com/felix24mihai/EduSoftDev#readme",
   "dependencies": {
+    "@headlessui/react": "^1.5.0",
+    "@heroicons/react": "^1.0.6",
+    "@tailwindcss/forms": "^0.5.0",
     "bcryptjs": "^2.4.3",
     "config": "^3.3.7",
     "express": "^4.17.3",
@@ -31,6 +34,6 @@
   },
   "devDependencies": {
     "concurrently": "^7.0.0",
-    "nodemon": "^1.11.1"
+    "nodemon": "^2.0.15"
   }
 }
