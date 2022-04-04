@@ -1,8 +1,33 @@
 import React, { Fragment } from 'react';
 
-const toggleDropdown = function () {
-  const dropdown = document.getElementById('profile-dropdown-options');
+const toggleProfileDropdown = function () {
+  const profileDropdown = document.getElementById('profile-dropdown-options');
+  const notificationsDropdown = document.getElementById(
+    'notifications-dropdown-options'
+  );
+  profileDropdown.classList.toggle('hidden');
+  notificationsDropdown.classList.add('hidden');
+};
+
+const toggleNotificationsDropdown = function () {
+  const profileDropdown = document.getElementById('profile-dropdown-options');
+  const notificationsDropdown = document.getElementById(
+    'notifications-dropdown-options'
+  );
+  notificationsDropdown.classList.toggle('hidden');
+  profileDropdown.classList.add('hidden');
+};
+
+const toggleMobileDropdown = function () {
+  const dropdown = document.getElementById('mobile-menu');
+  const profileDropdown = document.getElementById('profile-dropdown-options');
+  const notificationsDropdown = document.getElementById(
+    'notifications-dropdown-options'
+  );
+
   dropdown.classList.toggle('hidden');
+  profileDropdown.classList.add('hidden');
+  notificationsDropdown.classList.add('hidden');
 };
 
 const Navbar = () => {
@@ -28,6 +53,8 @@ const Navbar = () => {
                   viewBox='0 0 24 24'
                   stroke='currentColor'
                   aria-hidden='true'
+                  id='mobile-menu-button'
+                  onClick={toggleMobileDropdown}
                 >
                   <path
                     strokeLinecap='round'
@@ -73,7 +100,7 @@ const Navbar = () => {
                     className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'
                     aria-current='page'
                   >
-                    Dashboard
+                    Dashboarddd
                   </a>
 
                   <a
@@ -100,7 +127,10 @@ const Navbar = () => {
               </div>
             </div>
             <div className='absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0'>
-              <div id='notifications-bell'>
+              <div
+                id='notifications-bell'
+                onClick={toggleNotificationsDropdown}
+              >
                 <button
                   type='button'
                   className='bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'
@@ -128,7 +158,10 @@ const Navbar = () => {
 
               {/*<!-- Profile dropdown -->*/}
               <div className='ml-3 relative'>
-                <div id='profile-dropdown-button' onClick={toggleDropdown}>
+                <div
+                  id='profile-dropdown-button'
+                  onClick={toggleProfileDropdown}
+                >
                   <button
                     type='button'
                     className='bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'
@@ -143,6 +176,45 @@ const Navbar = () => {
                       alt=''
                     ></img>
                   </button>
+                </div>
+
+                <div id='notifications-dropdown-options' className='hidden'>
+                  <div
+                    className='origin-top-right absolute right-12 mt-2 ml-8 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none'
+                    role='menu'
+                    aria-orientation='vertical'
+                    aria-labelledby='user-menu-button'
+                    tabIndex='-1'
+                  >
+                    {/*<!-- Active: "bg-gray-100", Not Active: "" -->*/}
+                    <a
+                      href='#'
+                      className='block px-4 py-2 text-sm text-gray-700'
+                      role='menuitem'
+                      tabIndex='-1'
+                      id='user-menu-item-0'
+                    >
+                      Your Profile24
+                    </a>
+                    <a
+                      href='#'
+                      className='block px-4 py-2 text-sm text-gray-700'
+                      role='menuitem'
+                      tabIndex='-1'
+                      id='user-menu-item-1'
+                    >
+                      Settings24
+                    </a>
+                    <a
+                      href='#'
+                      className='block px-4 py-2 text-sm text-gray-700'
+                      role='menuitem'
+                      tabIndex='-1'
+                      id='user-menu-item-2'
+                    >
+                      Sign out24
+                    </a>
+                  </div>
                 </div>
 
                 <div id='profile-dropdown-options' className='hidden'>
@@ -189,7 +261,7 @@ const Navbar = () => {
         </div>
 
         {/*<!-- Mobile menu, show/hide based on menu state. -->*/}
-        <div className='sm:hidden' id='mobile-menu'>
+        <div className='sm:hidden hidden' id='mobile-menu'>
           <div className='px-2 pt-2 pb-3 space-y-1'>
             {/*<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->*/}
             <a
