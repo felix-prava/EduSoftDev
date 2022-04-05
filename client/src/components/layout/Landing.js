@@ -1,67 +1,25 @@
-/*
-  This example requires Tailwind CSS v2.0+ 
-  
-  This example requires some changes to your config:
-  
-  
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  
-*/
 import React from 'react';
-import { Fragment } from 'react';
-import { Popover, Transition } from '@headlessui/react';
+import { Link } from 'react-router-dom';
 import {
-  AnnotationIcon,
-  ChatAlt2Icon,
   ChatAltIcon,
   DocumentReportIcon,
   HeartIcon,
   InboxIcon,
-  MenuIcon,
   PencilAltIcon,
-  QuestionMarkCircleIcon,
   ReplyIcon,
   SparklesIcon,
   TrashIcon,
   UsersIcon,
-  XIcon,
 } from '@heroicons/react/outline';
-import { ChevronDownIcon } from '@heroicons/react/solid';
 
-const solutions = [
-  {
-    name: 'Inbox',
-    description:
-      'Get a better understanding of where your traffic is coming from.',
-    href: '#',
-    icon: InboxIcon,
-  },
-  {
-    name: 'Messaging',
-    description: 'Speak directly to your customers in a more meaningful way.',
-    href: '#',
-    icon: AnnotationIcon,
-  },
-  {
-    name: 'Live Chat',
-    description: "Your customers' data will be safe and secure.",
-    href: '#',
-    icon: ChatAlt2Icon,
-  },
-  {
-    name: 'Knowledge Base',
-    description: "Connect with third-party tools that you're already using.",
-    href: '#',
-    icon: QuestionMarkCircleIcon,
-  },
-];
+const toggleMobileDropdown = function () {
+  const dropdown = document.getElementById('mobile-dropdown-menu');
+  dropdown.classList.toggle('hidden');
+};
+
+//open-mobile-menu
+//mobile-dropdown-menu
+
 const features = [
   {
     name: 'Unlimited Inboxes',
@@ -228,10 +186,6 @@ const footerNavigation = {
   ],
 };
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
-}
-
 export default function Landing() {
   return (
     <div className='bg-white'>
@@ -250,6 +204,7 @@ export default function Landing() {
             </div>
             <div className='-mr-2 -my-2 md:hidden'>
               <button
+                onClick={toggleMobileDropdown}
                 type='button'
                 className='bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500'
                 aria-expanded='false'
@@ -283,10 +238,10 @@ export default function Landing() {
                 >
                   <span>Solutions</span>
                   {/*
-                Heroicon name: solid/chevron-down
+                    Heroicon name: solid/chevron-down
 
-                Item active: "text-gray-600", Item inactive: "text-gray-400"
-              */}
+                    Item active: "text-gray-600", Item inactive: "text-gray-400"
+                  */}
                   <svg
                     className='text-gray-400 ml-2 h-5 w-5 group-hover:text-gray-500'
                     xmlns='http://www.w3.org/2000/svg'
@@ -302,15 +257,15 @@ export default function Landing() {
                   </svg>
                 </button>
                 {/*
-              'Solutions' flyout menu, show/hide based on flyout menu state.
+                'Solutions' flyout menu, show/hide based on flyout menu state.
 
-              Entering: "transition ease-out duration-200"
-                From: "opacity-0 translate-y-1"
-                To: "opacity-100 translate-y-0"
-              Leaving: "transition ease-in duration-150"
-                From: "opacity-100 translate-y-0"
-                To: "opacity-0 translate-y-1"
-            */}
+                Entering: "transition ease-out duration-200"
+                  From: "opacity-0 translate-y-1"
+                  To: "opacity-100 translate-y-0"
+                Leaving: "transition ease-in duration-150"
+                  From: "opacity-100 translate-y-0"
+                  To: "opacity-0 translate-y-1"
+                */}
                 <div className='hidden'>
                   <div className='absolute z-10 -ml-4 mt-3 transform w-screen max-w-md lg:max-w-2xl lg:ml-0 lg:left-1/2 lg:-translate-x-1/2'>
                     <div className='rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden'>
@@ -470,34 +425,37 @@ export default function Landing() {
               </a>
             </nav>
             <div className='hidden md:flex items-center justify-end md:flex-1 lg:w-0'>
-              <a
-                href='#'
+              <Link
+                to='/login'
                 className='whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900'
               >
                 {' '}
                 Sign in{' '}
-              </a>
-              <a
-                href='#'
+              </Link>
+              <Link
+                to='/register'
                 className='ml-8 whitespace-nowrap inline-flex items-center justify-center bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white hover:from-purple-700 hover:to-indigo-700'
               >
                 {' '}
                 Sign up{' '}
-              </a>
+              </Link>
             </div>
           </div>
           {/*
-        Mobile menu, show/hide based on mobile menu state.
+            Mobile menu, show/hide based on mobile menu state.
 
-        Entering: "duration-200 ease-out"
-          From: "opacity-0 scale-95"
-          To: "opacity-100 scale-100"
-        Leaving: "duration-100 ease-in"
-          From: "opacity-100 scale-100"
-          To: "opacity-0 scale-95"
-      */}
+            Entering: "duration-200 ease-out"
+              From: "opacity-0 scale-95"
+              To: "opacity-100 scale-100"
+            Leaving: "duration-100 ease-in"
+              From: "opacity-100 scale-100"
+              To: "opacity-0 scale-95"
+          */}
           <div className='absolute z-30 top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden'>
-            <div className='rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50'>
+            <div
+              id='mobile-dropdown-menu'
+              className='rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50 hidden'
+            >
               <div className='pt-5 pb-6 px-5'>
                 <div className='flex items-center justify-between'>
                   <div>
@@ -509,6 +467,7 @@ export default function Landing() {
                   </div>
                   <div className='-mr-2'>
                     <button
+                      onClick={toggleMobileDropdown}
                       type='button'
                       className='bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500'
                     >
@@ -532,7 +491,7 @@ export default function Landing() {
                     </button>
                   </div>
                 </div>
-                <div className='mt-6'>
+                <div className='mt-6 '>
                   <nav className='grid grid-cols-1 gap-7'>
                     <a
                       href='#'
@@ -609,7 +568,7 @@ export default function Landing() {
                         </svg>
                       </div>
                       <div className='ml-4 text-base font-medium text-gray-900'>
-                        Live Chat
+                        Live Chat2
                       </div>
                     </a>
                     <a
@@ -647,38 +606,33 @@ export default function Landing() {
                     href='#'
                     className='text-base font-medium text-gray-900 hover:text-gray-700'
                   >
-                    {' '}
-                    Pricing{' '}
+                    Pricing
                   </a>
                   <a
                     href='#'
                     className='text-base font-medium text-gray-900 hover:text-gray-700'
                   >
-                    {' '}
-                    Partners{' '}
+                    Partners2
                   </a>
                   <a
                     href='#'
                     className='text-base font-medium text-gray-900 hover:text-gray-700'
                   >
-                    {' '}
-                    Company{' '}
+                    Company
                   </a>
                 </div>
                 <div className='mt-6'>
-                  <a
-                    href='#'
+                  <Link
+                    to='/register'
                     className='w-full flex items-center justify-center bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white hover:from-purple-700 hover:to-indigo-700'
                   >
-                    {' '}
-                    Sign up{' '}
-                  </a>
+                    Sign up
+                  </Link>
                   <p className='mt-6 text-center text-base font-medium text-gray-500'>
-                    Existing customer?
-                    <a href='#' className='text-gray-900'>
-                      {' '}
-                      Sign in{' '}
-                    </a>
+                    Existing customer?{' '}
+                    <Link to='/login' className='text-gray-900'>
+                      Sign in
+                    </Link>
                   </p>
                 </div>
               </div>
@@ -715,12 +669,12 @@ export default function Landing() {
                 </p>
                 <div className='mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center'>
                   <div className='space-y-4 sm:space-y-0 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5'>
-                    <a
-                      href='#'
+                    <Link
+                      to='/register'
                       className='flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-indigo-700 bg-white hover:bg-indigo-50 sm:px-8'
                     >
                       Get started
-                    </a>
+                    </Link>
                     <a
                       href='#'
                       className='flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-500 bg-opacity-60 hover:bg-opacity-70 sm:px-8'
@@ -810,12 +764,12 @@ export default function Landing() {
                       pharetra.
                     </p>
                     <div className='mt-6'>
-                      <a
-                        href='#'
+                      <Link
+                        to='/register'
                         className='inline-flex bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white hover:from-purple-700 hover:to-indigo-700'
                       >
                         Get started
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -880,12 +834,12 @@ export default function Landing() {
                       pharetra.
                     </p>
                     <div className='mt-6'>
-                      <a
-                        href='#'
+                      <Link
+                        to='/register'
                         className='inline-flex bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white hover:from-purple-700 hover:to-indigo-700'
                       >
                         Get started
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -1008,12 +962,12 @@ export default function Landing() {
               >
                 Learn more
               </a>
-              <a
-                href='#'
+              <Link
+                to='/register'
                 className='flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-indigo-800 bg-indigo-50 hover:bg-indigo-100'
               >
                 Get started
-              </a>
+              </Link>
             </div>
           </div>
         </div>
