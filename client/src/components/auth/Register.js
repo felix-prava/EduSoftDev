@@ -29,6 +29,7 @@ const Register = ({ setAlert }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    window.scrollTo(0, 0);
     if (password !== passwordConfirmation) {
       setAlert('Passwords do not match', 'error');
       console.log('Passwords do not match');
