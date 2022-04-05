@@ -1,7 +1,9 @@
 import React, { Fragment, useState } from 'react';
-import Navbar from '../layout/Navbar';
+import { connect } from 'react-redux';
+import { setAlert } from '../../actions/alert';
+import PropTypes from 'prop-types';
 
-const Register = () => {
+const Register = ({ setAlert }) => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -28,6 +30,7 @@ const Register = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     if (password !== passwordConfirmation) {
+      setAlert('Passwords do not match', 'error');
       console.log('Passwords do not match');
     } else {
       const newUser = {
@@ -58,7 +61,6 @@ const Register = () => {
 
   return (
     <Fragment>
-      <Navbar />
       <div className='min-h-full flex'>
         <div className='flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24'>
           <div className='mx-auto w-full max-w-sm lg:w-96'>
@@ -243,4 +245,8 @@ const Register = () => {
   );
 };
 
-export default Register;
+Register.propTypes = {
+  setAlert: PropTypes.func.isRequired,
+};
+
+export default connect(null, { setAlert })(Register);
