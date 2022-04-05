@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 
 const toggleProfileDropdown = function () {
   const profileDropdown = document.getElementById('profile-dropdown-options');
