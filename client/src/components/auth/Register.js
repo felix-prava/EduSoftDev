@@ -1,9 +1,10 @@
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
+import { registerUser } from '../../actions/auth';
 import PropTypes from 'prop-types';
 
-const Register = ({ setAlert }) => {
+const Register = ({ setAlert, registerUser }) => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -32,30 +33,18 @@ const Register = ({ setAlert }) => {
     window.scrollTo(0, 0);
     if (password !== passwordConfirmation) {
       setAlert('Passwords do not match', 'error');
-      console.log('Passwords do not match');
     } else {
-      const newUser = {
-        firstName,
-        lastName,
-        username,
-        email,
-        password,
-      };
-      if (preferredName !== '') {
-        newUser.preferredName = preferredName;
-      }
-
       try {
-        const config = {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        };
-        const body = JSON.stringify(newUser);
-
-        //TODO send data
+        registerUser({
+          firstName,
+          lastName,
+          preferredName,
+          username,
+          email,
+          password,
+        });
       } catch (err) {
-        console.error(err.response.data);
+        console.error(err);
       }
     }
   };
@@ -93,7 +82,6 @@ const Register = ({ setAlert }) => {
                         value={firstName}
                         onChange={(e) => onChange(e)}
                         type='text'
-                        required
                         className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
                       />
                     </div>
@@ -113,7 +101,6 @@ const Register = ({ setAlert }) => {
                         value={lastName}
                         onChange={(e) => onChange(e)}
                         type='text'
-                        required
                         className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
                       />
                     </div>
@@ -152,7 +139,6 @@ const Register = ({ setAlert }) => {
                         value={username}
                         onChange={(e) => onChange(e)}
                         type='text'
-                        required
                         className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
                       />
                     </div>
@@ -173,7 +159,6 @@ const Register = ({ setAlert }) => {
                         value={email}
                         onChange={(e) => onChange(e)}
                         autoComplete='email'
-                        required
                         className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
                       />
                     </div>
@@ -248,6 +233,7 @@ const Register = ({ setAlert }) => {
 
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
+  registerUser: PropTypes.func.isRequired,
 };
 
-export default connect(null, { setAlert })(Register);
+export default connect(null, { setAlert, registerUser })(Register);
