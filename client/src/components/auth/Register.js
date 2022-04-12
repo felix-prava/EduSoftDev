@@ -34,18 +34,14 @@ const Register = ({ setAlert, registerUser }) => {
     if (password !== passwordConfirmation) {
       setAlert('Passwords do not match', 'error');
     } else {
-      try {
-        registerUser({
-          firstName,
-          lastName,
-          preferredName,
-          username,
-          email,
-          password,
-        });
-      } catch (err) {
-        console.error(err);
-      }
+      registerUser({
+        firstName,
+        lastName,
+        preferredName,
+        username,
+        email,
+        password,
+      });
     }
   };
 
@@ -82,6 +78,7 @@ const Register = ({ setAlert, registerUser }) => {
                         value={firstName}
                         onChange={(e) => onChange(e)}
                         type='text'
+                        required
                         className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
                       />
                     </div>
@@ -101,6 +98,7 @@ const Register = ({ setAlert, registerUser }) => {
                         value={lastName}
                         onChange={(e) => onChange(e)}
                         type='text'
+                        required
                         className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
                       />
                     </div>
@@ -139,6 +137,7 @@ const Register = ({ setAlert, registerUser }) => {
                         value={username}
                         onChange={(e) => onChange(e)}
                         type='text'
+                        required
                         className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
                       />
                     </div>
@@ -159,6 +158,7 @@ const Register = ({ setAlert, registerUser }) => {
                         value={email}
                         onChange={(e) => onChange(e)}
                         autoComplete='email'
+                        required
                         className='appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
                       />
                     </div>
