@@ -1,8 +1,13 @@
 import React, { Fragment, useState } from 'react';
+import { connect } from 'react-redux';
+import { loginUser } from '../../actions/auth';
+import { setAlert } from '../../actions/alert';
+import PropTypes from 'prop-types';
 
 import { LockClosedIcon } from '@heroicons/react/solid';
+import { Navigate, Link } from 'react-router-dom';
 
-const Login = () => {
+const Login = ({ loginUser, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -15,7 +20,15 @@ const Login = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    loginUser(email, password);
   };
+
+  // Redirect if logged in
+  if (isAuthenticated) {
+    // TODO info alert here + Register
+    setAlert('You are already logged in', 'info', 2000);
+    return <Navigate to={'/'} />;
+  }
 
   return (
     <Fragment>
@@ -85,12 +98,12 @@ const Login = () => {
               </div>
 
               <div className='text-sm'>
-                <a
-                  href='#'
+                <Link
+                  to='#'
                   className='font-medium text-indigo-600 hover:text-indigo-500'
                 >
                   Forgot your password?
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -115,4 +128,13 @@ const Login = () => {
   );
 };
 
-export default Login;
+Login.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
+};
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { loginUser })(Login);

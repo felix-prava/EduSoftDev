@@ -1,5 +1,8 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { logoutUser } from '../../actions/auth';
 
 const toggleProfileDropdown = function () {
   const profileDropdown = document.getElementById('profile-dropdown-options');
@@ -31,7 +34,81 @@ const toggleMobileDropdown = function () {
   notificationsDropdown.classList.add('hidden');
 };
 
-const Navbar = () => {
+const Navbar = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
+  const normalUserLinks = (
+    <Fragment>
+      <Link
+        to='#'
+        className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'
+        aria-current='page'
+      >
+        Dashboarddd
+      </Link>
+
+      <Link
+        to='#'
+        className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+      >
+        Team
+      </Link>
+
+      <Link
+        to='#'
+        className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+      >
+        Projects
+      </Link>
+
+      <Link
+        to='#'
+        className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+      >
+        Calendar
+      </Link>
+
+      <Link
+        to='#'
+        onClick={logoutUser}
+        className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+      >
+        Logout
+      </Link>
+    </Fragment>
+  );
+
+  const guestLinks = (
+    <Fragment>
+      <Link
+        to='/'
+        className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'
+        aria-current='page'
+      >
+        Home
+      </Link>
+
+      <Link
+        to='/register'
+        className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+      >
+        Register
+      </Link>
+
+      <Link
+        to='/login'
+        className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+      >
+        Login
+      </Link>
+
+      <Link
+        to='/about-us'
+        className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+      >
+        About Us
+      </Link>
+    </Fragment>
+  );
+
   return (
     <Fragment>
       <nav className='bg-gray-800'>
@@ -96,34 +173,11 @@ const Navbar = () => {
               </div>
               <div className='hidden sm:block sm:ml-6'>
                 <div className='flex space-x-4'>
-                  <a
-                    href='#'
-                    className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'
-                    aria-current='page'
-                  >
-                    Dashboarddd
-                  </a>
-
-                  <a
-                    href='#'
-                    className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
-                  >
-                    Team
-                  </a>
-
-                  <a
-                    href='#'
-                    className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
-                  >
-                    Projects
-                  </a>
-
-                  <a
-                    href='#'
-                    className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
-                  >
-                    Calendar
-                  </a>
+                  {!loading && (
+                    <Fragment>
+                      {isAuthenticated ? normalUserLinks : guestLinks}
+                    </Fragment>
+                  )}
                 </div>
               </div>
             </div>
@@ -188,33 +242,33 @@ const Navbar = () => {
                     tabIndex='-1'
                   >
                     {/*<!-- Active: "bg-gray-100", Not Active: "" -->*/}
-                    <a
-                      href='#'
+                    <Link
+                      to='#'
                       className='block px-4 py-2 text-sm text-gray-700'
                       role='menuitem'
                       tabIndex='-1'
                       id='user-menu-item-0'
                     >
                       Your Profile24
-                    </a>
-                    <a
-                      href='#'
+                    </Link>
+                    <Link
+                      to='#'
                       className='block px-4 py-2 text-sm text-gray-700'
                       role='menuitem'
                       tabIndex='-1'
                       id='user-menu-item-1'
                     >
                       Settings24
-                    </a>
-                    <a
-                      href='#'
+                    </Link>
+                    <Link
+                      to='#'
                       className='block px-4 py-2 text-sm text-gray-700'
                       role='menuitem'
                       tabIndex='-1'
                       id='user-menu-item-2'
                     >
                       Sign out24
-                    </a>
+                    </Link>
                   </div>
                 </div>
 
@@ -227,33 +281,33 @@ const Navbar = () => {
                     tabIndex='-1'
                   >
                     {/*<!-- Active: "bg-gray-100", Not Active: "" -->*/}
-                    <a
-                      href='#'
+                    <Link
+                      to='#'
                       className='block px-4 py-2 text-sm text-gray-700'
                       role='menuitem'
                       tabIndex='-1'
                       id='user-menu-item-0'
                     >
                       Your Profile
-                    </a>
-                    <a
-                      href='#'
+                    </Link>
+                    <Link
+                      to='#'
                       className='block px-4 py-2 text-sm text-gray-700'
                       role='menuitem'
                       tabIndex='-1'
                       id='user-menu-item-1'
                     >
                       Settings
-                    </a>
-                    <a
-                      href='#'
+                    </Link>
+                    <Link
+                      to='#'
                       className='block px-4 py-2 text-sm text-gray-700'
                       role='menuitem'
                       tabIndex='-1'
                       id='user-menu-item-2'
                     >
                       Sign out
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -265,34 +319,34 @@ const Navbar = () => {
         <div className='sm:hidden hidden' id='mobile-menu'>
           <div className='px-2 pt-2 pb-3 space-y-1'>
             {/*<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->*/}
-            <a
-              href='#'
+            <Link
+              to='#'
               className='bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium'
               aria-current='page'
             >
               Dashboard
-            </a>
+            </Link>
 
-            <a
-              href='#'
+            <Link
+              to='#'
               className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
             >
               Team
-            </a>
+            </Link>
 
-            <a
-              href='#'
+            <Link
+              to='#'
               className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
             >
               Projects
-            </a>
+            </Link>
 
-            <a
-              href='#'
+            <Link
+              to='#'
               className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
             >
               Calendar
-            </a>
+            </Link>
           </div>
         </div>
       </nav>
@@ -300,4 +354,13 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+Navbar.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { logoutUser })(Navbar);
