@@ -9,11 +9,14 @@ const bcrypt = require('bcryptjs');
 const User = require('../../models/User');
 
 // @route   GET /api/auth
-// @desc    Test middleware route
+// @desc    Load user
 // @access  Public
 router.get('/', auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
+    if (user === null) {
+      return res.status(404).json({ msg: 'User not found' });
+    }
     res.status(200).json(user);
   } catch (err) {
     console.error(err.message);

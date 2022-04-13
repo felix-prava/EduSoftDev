@@ -1,10 +1,11 @@
 import React, { Fragment, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
 import { registerUser } from '../../actions/auth';
 import PropTypes from 'prop-types';
 
-const Register = ({ setAlert, registerUser }) => {
+const Register = ({ setAlert, registerUser, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -44,6 +45,12 @@ const Register = ({ setAlert, registerUser }) => {
       });
     }
   };
+
+  // Redirect if logged in
+  if (isAuthenticated) {
+    setAlert('You are already logged in', 'info', 2000);
+    return <Navigate to={'/'} />;
+  }
 
   return (
     <Fragment>
@@ -234,6 +241,11 @@ const Register = ({ setAlert, registerUser }) => {
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
   registerUser: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
 };
 
-export default connect(null, { setAlert, registerUser })(Register);
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { setAlert, registerUser })(Register);
