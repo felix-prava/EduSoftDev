@@ -1,9 +1,11 @@
 import React, { Fragment, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
+import { registerUser } from '../../actions/auth';
 import PropTypes from 'prop-types';
 
-const Register = ({ setAlert }) => {
+const Register = ({ setAlert, registerUser, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -32,33 +34,23 @@ const Register = ({ setAlert }) => {
     window.scrollTo(0, 0);
     if (password !== passwordConfirmation) {
       setAlert('Passwords do not match', 'error');
-      console.log('Passwords do not match');
     } else {
-      const newUser = {
+      registerUser({
         firstName,
         lastName,
+        preferredName,
         username,
         email,
         password,
-      };
-      if (preferredName !== '') {
-        newUser.preferredName = preferredName;
-      }
-
-      try {
-        const config = {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        };
-        const body = JSON.stringify(newUser);
-
-        //TODO send data
-      } catch (err) {
-        console.error(err.response.data);
-      }
+      });
     }
   };
+
+  // Redirect if logged in
+  if (isAuthenticated) {
+    setAlert('You are already logged in', 'info', 2000);
+    return <Navigate to={'/'} />;
+  }
 
   return (
     <Fragment>
@@ -248,6 +240,12 @@ const Register = ({ setAlert }) => {
 
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
+  registerUser: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
 };
 
-export default connect(null, { setAlert })(Register);
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { setAlert, registerUser })(Register);
