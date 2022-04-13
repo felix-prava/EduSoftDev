@@ -5,7 +5,7 @@ import { setAlert } from '../../actions/alert';
 import PropTypes from 'prop-types';
 
 import { LockClosedIcon } from '@heroicons/react/solid';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 
 const Login = ({ loginUser, isAuthenticated }) => {
   const [formData, setFormData] = useState({
@@ -98,12 +98,12 @@ const Login = ({ loginUser, isAuthenticated }) => {
               </div>
 
               <div className='text-sm'>
-                <a
-                  href='#'
+                <Link
+                  to='#'
                   className='font-medium text-indigo-600 hover:text-indigo-500'
                 >
                   Forgot your password?
-                </a>
+                </Link>
               </div>
             </div>
 
