@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logoutUser } from '../../actions/auth';
+import { useLocation } from 'react-router-dom';
 
 const toggleProfileDropdown = function () {
   const profileDropdown = document.getElementById('profile-dropdown-options');
@@ -35,6 +36,10 @@ const toggleMobileDropdown = function () {
 };
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logoutUser }) => {
+  let location = useLocation();
+  if (location.pathname === '/') {
+    return <Fragment></Fragment>;
+  }
   const normalUserLinks = (
     <Fragment>
       <Link

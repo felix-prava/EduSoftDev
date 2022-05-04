@@ -5,7 +5,7 @@ import { GET_PROFILE, PROFILE_ERROR } from './types';
 // Get current user profile
 export const getCurrentUserProfile = () => async (dispatch) => {
   try {
-    const res = await axios.get('/api/profile/me');
+    const res = await axios.get('/api/profiles/me');
 
     dispatch({
       type: GET_PROFILE,
