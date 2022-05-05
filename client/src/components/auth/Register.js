@@ -49,7 +49,7 @@ const Register = ({ setAlert, registerUser, isAuthenticated }) => {
   // Redirect if logged in
   if (isAuthenticated) {
     setAlert('You are already logged in', 'info', 2000);
-    return <Navigate to={'/'} />;
+    return <Navigate to={'/home'} />;
   }
 
   return (
