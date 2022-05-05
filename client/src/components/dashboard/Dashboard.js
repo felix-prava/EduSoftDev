@@ -2,15 +2,13 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// TODO delete comments
+import Spinner from '../layout/Spinner';
 
-const Dashboard = ({ auth }) => {
-  return (
+const Dashboard = ({ auth: { user, loading, isAuthenticated } }) => {
+  return loading || user === null ? (
+    <Spinner />
+  ) : (
     <Fragment>
-      {/* This example requires updating your template:
-
-        <html className="h-full bg-gray-100">
-        <body className="h-full">  */}
       <div className='min-h-full'>
         <div className='lg:pl-32 flex flex-col flex-1'>
           <div className='relative z-10 flex-shrink-0 flex h-16 bg-white border-b border-gray-200 lg:border-none'></div>
@@ -24,20 +22,19 @@ const Dashboard = ({ auth }) => {
                     <div className='flex items-center'>
                       <img
                         className='hidden h-16 w-16 rounded-full sm:block'
-                        src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.6&w=256&h=256&q=80'
+                        src={user.avatar}
                         alt=''
                       />
                       <div>
                         <div className='flex items-center'>
                           <img
                             className='h-16 w-16 rounded-full sm:hidden'
-                            src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.6&w=256&h=256&q=80'
+                            src={user.avatar}
                             alt=''
                           />
 
                           <h1 className='ml-3 text-2xl font-bold leading-7 text-gray-900 sm:leading-9 sm:truncate'>
-                            Good morning, {auth.user && auth.user.lastName}{' '}
-                            {auth.user && auth.user.firstName}
+                            Hello, {user.lastName} {user.firstName}
                           </h1>
                         </div>
                         <dl className='mt-6 flex flex-col sm:ml-3 sm:mt-1 sm:flex-row sm:flex-wrap'>
@@ -105,7 +102,6 @@ const Dashboard = ({ auth }) => {
                 </h2>
                 <div className='mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3'>
                   {/* Card */}
-
                   <div className='bg-white overflow-hidden shadow rounded-lg'>
                     <div className='p-5'>
                       <div className='flex items-center'>
@@ -305,7 +301,6 @@ const Dashboard = ({ auth }) => {
 
 Dashboard.propTypes = {
   auth: PropTypes.object.isRequired,
-  // getModules: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -313,5 +308,3 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(Dashboard);
-
-// export default connect(mapStateToProps, {getModules})(Dashboard);

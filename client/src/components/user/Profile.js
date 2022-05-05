@@ -1,14 +1,21 @@
 import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Spinner from '../layout/Spinner';
 import { getCurrentUserProfile } from '../../actions/profile';
 import { Link } from 'react-router-dom';
 
-const Profile = ({ getCurrentUserProfile, auth, profile }) => {
+const Profile = ({
+  getCurrentUserProfile,
+  auth,
+  profile: { profile, loading },
+}) => {
   useEffect(() => {
     getCurrentUserProfile();
   }, []);
-  return (
+  return loading && profile === null ? (
+    <Spinner />
+  ) : (
     <Fragment>
       <div className='bg-white'>
         <div className='mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24'>
@@ -24,10 +31,7 @@ const Profile = ({ getCurrentUserProfile, auth, profile }) => {
               </p>
             </div>
             <div className='lg:col-span-2'>
-              <ul
-                role='list'
-                className='space-y-12 sm:divide-y sm:divide-gray-200 sm:space-y-0 sm:-mt-8 lg:gap-x-8 lg:space-y-0'
-              >
+              <ul className='space-y-12 sm:divide-y sm:divide-gray-200 sm:space-y-0 sm:-mt-8 lg:gap-x-8 lg:space-y-0'>
                 <li className='sm:py-8'>
                   <div className='space-y-4 sm:grid sm:grid-cols-3 sm:items-start sm:gap-6 sm:space-y-0'>
                     <div className='sm:col-span-2'>
@@ -43,7 +47,7 @@ const Profile = ({ getCurrentUserProfile, auth, profile }) => {
                             Eget turpis urna maecenas cras. Nisl dictum.
                           </p>
                         </div>
-                        <ul role='list' className='flex space-x-5'>
+                        <ul className='flex space-x-5'>
                           <li>
                             <Link
                               to='#'
@@ -100,7 +104,7 @@ const Profile = ({ getCurrentUserProfile, auth, profile }) => {
                             Eget turpis urna maecenas cras. Nisl dictum.
                           </p>
                         </div>
-                        <ul role='list' className='flex space-x-5'>
+                        <ul className='flex space-x-5'>
                           <li>
                             <Link
                               to='#'
