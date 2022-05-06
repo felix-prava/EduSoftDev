@@ -7,14 +7,17 @@ import { Link } from 'react-router-dom';
 
 const Profile = ({
   getCurrentUserProfile,
-  auth,
+  auth: { user },
   profile: { profile, loading },
 }) => {
   useEffect(() => {
     getCurrentUserProfile();
-  }, []);
-  return loading && profile === null ? (
-    <Spinner />
+  }, [getCurrentUserProfile]);
+  if (loading) {
+    return <Spinner />;
+  }
+  return profile === null ? (
+    <Fragment>You don't have a profile</Fragment>
   ) : (
     <Fragment>
       <div className='bg-white'>
