@@ -7,14 +7,13 @@ import { Link } from 'react-router-dom';
 
 const Profile = ({
   getCurrentUserProfile,
-  auth,
   auth: { user },
   profile: { profile, loading },
 }) => {
   useEffect(() => {
     getCurrentUserProfile();
   }, [getCurrentUserProfile]);
-  if (loading || auth.loading) {
+  if (loading) {
     return <Spinner />;
   }
   return (
@@ -33,6 +32,14 @@ const Profile = ({
                     Tell us some things about you! You can also add school and
                     job experiences so we can better understand who are you.
                   </p>
+                  <Link to='/create-profile'>
+                    <button
+                      type='button'
+                      className='mt-6 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
+                    >
+                      Create Profile
+                    </button>
+                  </Link>
                 </Fragment>
               ) : (
                 <Fragment>
@@ -48,101 +55,106 @@ const Profile = ({
                 </Fragment>
               )}{' '}
             </div>
+
             <div className='lg:col-span-2'>
-              <div className='bg-white mb-8'>
-                <h2 className='text-2xl font-extrabold text-gray-900 sm:text-3xl'>
-                  General Info
-                </h2>
-                <div className='max-w-lg mx-auto md:max-w-none md:grid md:grid-cols-2 md:gap-8'>
-                  <div>
-                    <div className='mt-5'>
-                      <div className='flex'>
-                        <div className='flex-shrink-0'>
-                          <svg
-                            className='h-6 w-6 text-gray-400'
-                            xmlns='http://www.w3.org/2000/svg'
-                            fill='none'
-                            viewBox='0 0 24 24'
-                            strokeWidth='2'
-                            stroke='currentColor'
-                            aria-hidden='true'
-                          >
-                            <path
-                              strokeLinecap='round'
-                              strokeLinejoin='round'
-                              d='M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z'
-                            />
-                          </svg>
+              {user && (
+                <div className='bg-white mb-8'>
+                  <h2 className='text-2xl font-extrabold text-gray-900 sm:text-3xl'>
+                    General Info
+                  </h2>
+                  <div className='max-w-lg mx-auto md:max-w-none md:grid md:grid-cols-2 md:gap-8'>
+                    <div>
+                      <div className='mt-5'>
+                        <div className='flex'>
+                          <div className='flex-shrink-0 text-gray-600 hover:text-gray-800'>
+                            <svg
+                              className='h-6 w-6'
+                              xmlns='http://www.w3.org/2000/svg'
+                              class='h-6 w-6'
+                              fill='none'
+                              viewBox='0 0 24 24'
+                              stroke='currentColor'
+                              stroke-width='2'
+                            >
+                              <path
+                                stroke-linecap='round'
+                                stroke-linejoin='round'
+                                d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'
+                              />
+                            </svg>
+                          </div>
+                          <div className='ml-3 text-base text-gray-500 hover:text-gray-700'>
+                            <p>
+                              {user.lastName} {user.firstName}
+                            </p>
+                          </div>
                         </div>
-                        <div className='ml-3 text-base text-gray-500'>
-                          <p>
-                            {user.lastName} {user.firstName}
-                          </p>
-                        </div>
-                      </div>
-                      <div className='mt-6 flex'>
-                        <div className='flex-shrink-0'>
-                          <svg
-                            className='h-6 w-6 text-gray-400'
-                            xmlns='http://www.w3.org/2000/svg'
-                            fill='none'
-                            viewBox='0 0 24 24'
-                            strokeWidth='2'
-                            stroke='currentColor'
-                            aria-hidden='true'
-                          >
-                            <path
-                              strokeLinecap='round'
-                              strokeLinejoin='round'
-                              d='M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'
-                            />
-                          </svg>
-                        </div>
-                        <div className='ml-3 text-base text-gray-500'>
-                          <p>{user.email}</p>
+                        <div className='mt-6 flex'>
+                          <div className='flex-shrink-0 text-gray-600 hover:text-gray-800'>
+                            <svg
+                              className='h-6 w-6'
+                              xmlns='http://www.w3.org/2000/svg'
+                              fill='none'
+                              viewBox='0 0 24 24'
+                              strokeWidth='2'
+                              stroke='currentColor'
+                              aria-hidden='true'
+                            >
+                              <path
+                                strokeLinecap='round'
+                                strokeLinejoin='round'
+                                d='M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'
+                              />
+                            </svg>
+                          </div>
+                          <div className='ml-3 text-base text-gray-500 hover:text-gray-700'>
+                            <p>{user.email}</p>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div className='sm:mt-16 md:mt-0'>
-                    <div className='mt-5'>
-                      <div className='flex'>
-                        <div className='flex-shrink-0'>
-                          <svg
-                            className='h-6 w-6 text-gray-400 stroke-current'
-                            xmlns='http://www.w3.org/2000/svg'
-                            class='h-6 w-6'
-                            fill='none'
-                            viewBox='0 0 24 24'
-                            stroke='currentColor'
-                            stroke-width='2'
-                          >
-                            <path
-                              stroke-linecap='round'
-                              stroke-linejoin='round'
-                              d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'
-                            />
-                          </svg>
+                    <div className='sm:mt-16 md:mt-0'>
+                      <div className='mt-5'>
+                        <div className='flex'>
+                          <div className='flex-shrink-0 text-gray-600 hover:text-gray-800'>
+                            <svg
+                              className='h-6 w-6'
+                              xmlns='http://www.w3.org/2000/svg'
+                              class='h-6 w-6'
+                              fill='none'
+                              viewBox='0 0 24 24'
+                              stroke='currentColor'
+                              stroke-width='2'
+                            >
+                              <path
+                                stroke-linecap='round'
+                                stroke-linejoin='round'
+                                d='M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'
+                              />
+                            </svg>
+                          </div>
+                          <div className='ml-3 text-base text-gray-500 hover:text-gray-700'>
+                            <p>{user.username}</p>
+                          </div>
                         </div>
-                        <div className='ml-3 text-base text-gray-500'>
-                          <p>{user.username}</p>
-                        </div>
-                      </div>
-                      <div className='mt-4 flex'>
-                        <div className='flex-shrink-0'></div>
-                        <div className=' text-gray-500'>
-                          <button
-                            type='button'
-                            className='inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
-                          >
-                            Edit General Info
-                          </button>
+                        <div className='mt-4 flex'>
+                          <div className='flex-shrink-0'></div>
+                          <div className=' text-gray-500'>
+                            <Link to='/my-profile/edit/general-info'>
+                              <button
+                                type='button'
+                                className='inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
+                              >
+                                Edit General Info
+                              </button>
+                            </Link>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              )}
 
               <div className='space-y-5 sm:space-y-4'>
                 <h2 className='text-3xl font-extrabold tracking-tight sm:text-4xl'>
