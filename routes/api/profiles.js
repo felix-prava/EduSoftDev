@@ -73,7 +73,6 @@ router.post(
       skills,
       bio,
       githubUsername,
-      objective,
       linkedin,
       youtube,
       facebook,
@@ -90,7 +89,6 @@ router.post(
     if (status) profileFields.status = status;
     if (bio) profileFields.bio = bio;
     if (githubUsername) profileFields.githubUsername = githubUsername;
-    if (objective) profileFields.objective = objective;
     if (skills) {
       profileFields.skills = skills.split(',').map((skill) => skill.trim());
     }

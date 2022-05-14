@@ -23,14 +23,14 @@ const Profile = ({
         <div className='mx-auto py-12 px-4 max-w-7xl sm:px-6 lg:px-8 lg:py-24'>
           <div className='space-y-12 lg:grid lg:grid-cols-3 lg:gap-8 lg:space-y-0'>
             <div className='space-y-5 sm:space-y-4'>
+              <h2 className='text-3xl font-extrabold tracking-tight sm:text-4xl'>
+                My profile
+              </h2>
               {profile === null ? (
                 <Fragment>
-                  <h2 className='text-3xl font-extrabold tracking-tight sm:text-4xl'>
-                    You don't have a profile..
-                  </h2>
                   <p className='text-xl text-gray-500'>
-                    Tell us some things about you! You can also add school and
-                    job experiences so we can better understand who are you.
+                    Tell us some things about you! You can add school, job
+                    experiences and social media links.
                   </p>
                   <Link to='/create-profile'>
                     <button
@@ -43,9 +43,6 @@ const Profile = ({
                 </Fragment>
               ) : (
                 <Fragment>
-                  <h2 className='text-3xl font-extrabold tracking-tight sm:text-4xl'>
-                    My profile
-                  </h2>
                   <p className='text-xl text-gray-500'>
                     Nulla quam felis, enim faucibus proin velit, ornare id
                     pretium. Augue ultrices sed arcu condimentum vestibulum
