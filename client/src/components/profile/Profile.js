@@ -13,9 +13,11 @@ const Profile = ({
   useEffect(() => {
     getCurrentUserProfile();
   }, [getCurrentUserProfile]);
+
   if (loading) {
     return <Spinner />;
   }
+
   return (
     <Fragment>
       {' '}

@@ -36,13 +36,7 @@ router.get('/me', auth, async (req, res) => {
 // @access  Private
 router.post(
   '/:user_id',
-  [
-    auth,
-    [
-      check('status', 'Status is required').not().isEmpty(),
-      check('skills', 'Skills are required').not().isEmpty(),
-    ],
-  ],
+  [auth, [check('status', 'Status is required').not().isEmpty()]],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -66,11 +60,7 @@ router.post(
         .json({ msg: checkStatus == 401 ? 'Unauthorized' : 'Server Error' });
 
     const {
-      company,
-      website,
-      location,
       status,
-      skills,
       bio,
       githubUsername,
       linkedin,
@@ -83,15 +73,12 @@ router.post(
     // Build profile objects
     const profileFields = {};
     profileFields.user = req.params.user_id;
-    if (company) profileFields.company = company;
-    if (website) profileFields.website = website;
-    if (location) profileFields.location = location;
     if (status) profileFields.status = status;
     if (bio) profileFields.bio = bio;
     if (githubUsername) profileFields.githubUsername = githubUsername;
-    if (skills) {
+    /* if (skills) {
       profileFields.skills = skills.split(',').map((skill) => skill.trim());
-    }
+    } */
 
     // Build social object
     profileFields.social = {};

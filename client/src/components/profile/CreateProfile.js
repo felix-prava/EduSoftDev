@@ -1,9 +1,21 @@
-import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Fragment, useState, useEffect } from 'react';
+import { Navigate, Link, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { createProfile, getCurrentUserProfile } from '../../actions/profile';
 
-const CreateProfile = (props) => {
+const CreateProfile = ({
+  profile: { profile },
+  auth: { user },
+  createProfile,
+  getCurrentUserProfile,
+}) => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    getCurrentUserProfile();
+  }, [getCurrentUserProfile]);
+
   const [formData, setFormData] = useState({
     status: '',
     bio: '',
@@ -16,6 +28,11 @@ const CreateProfile = (props) => {
   });
 
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
+
+  // Redirect if user already has a profile
+  if (profile) {
+    return <Navigate to={'/edit-profile'} />;
+  }
 
   const {
     status,
@@ -31,10 +48,18 @@ const CreateProfile = (props) => {
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    createProfile(formData, navigate, user._id);
+  };
+
   return (
     <Fragment>
       <div className='container mt-8'>
-        <form className='space-y-8 divide-y divide-gray-200'>
+        <form
+          className='space-y-8 divide-y divide-gray-200'
+          onSubmit={(e) => onSubmit(e)}
+        >
           <div className='space-y-8 divide-y divide-gray-200'>
             <div>
               <div>
@@ -304,6 +329,19 @@ const CreateProfile = (props) => {
   );
 };
 
-CreateProfile.propTypes = {};
+CreateProfile.propTypes = {
+  createProfile: PropTypes.func.isRequired,
+  getCurrentUserProfile: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired,
+};
 
-export default CreateProfile;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  profile: state.profile,
+});
+
+export default connect(mapStateToProps, {
+  createProfile,
+  getCurrentUserProfile,
+})(CreateProfile);
