@@ -4,6 +4,10 @@ import Navbar from './components/layout/Navbar';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Alert from './components/layout/Alert';
+import Dashboard from './components/dashboard/Dashboard';
+import PrivateRoute from './components/routing/PrivateRoute';
+import Profile from './components/profile/Profile';
+import CreateProfile from './components/profile/CreateProfile';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { loadUser } from './actions/auth';
@@ -32,6 +36,33 @@ const App = () => {
           <Fragment>
             <Route exact path='/register' element={<Register />} />
             <Route exact path='/login' element={<Login />} />
+            <Route
+              exact
+              path='/home'
+              element={
+                <PrivateRoute>
+                  <Dashboard />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              exact
+              path='/my-profile'
+              element={
+                <PrivateRoute>
+                  <Profile />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              exact
+              path='/create-profile'
+              element={
+                <PrivateRoute>
+                  <CreateProfile />
+                </PrivateRoute>
+              }
+            />
           </Fragment>
         </Routes>
       </Router>

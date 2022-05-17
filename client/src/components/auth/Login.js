@@ -27,7 +27,7 @@ const Login = ({ loginUser, isAuthenticated }) => {
   if (isAuthenticated) {
     // TODO info alert here + Register
     setAlert('You are already logged in', 'info', 2000);
-    return <Navigate to={'/'} />;
+    return <Navigate to={'/home'} />;
   }
 
   return (

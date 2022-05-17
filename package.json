@@ -34,6 +34,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.0",
     "concurrently": "^7.0.0",
     "nodemon": "^2.0.15"
   }
