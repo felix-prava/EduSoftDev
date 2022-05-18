@@ -1,20 +1,17 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { Navigate, Link, useNavigate } from 'react-router-dom';
+import { Navigate, Link, useNavigate, useLocation } from 'react-router-dom';
+
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createProfile, getCurrentUserProfile } from '../../actions/profile';
 
 const CreateProfile = ({
-  profile: { profile },
+  profile: { profile, loading },
   auth: { user },
   createProfile,
   getCurrentUserProfile,
 }) => {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    getCurrentUserProfile();
-  }, [getCurrentUserProfile]);
 
   const [formData, setFormData] = useState({
     status: '',
@@ -29,10 +26,27 @@ const CreateProfile = ({
 
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
 
-  // Redirect if user already has a profile
-  if (profile) {
-    return <Navigate to={'/edit-profile'} />;
-  }
+  useEffect(() => {
+    getCurrentUserProfile();
+    if (profile) {
+      setFormData({
+        status: loading || !profile.status ? '' : profile.status || '',
+        bio: loading || !profile.bio ? '' : profile.bio || '',
+        githubUsername:
+          loading || !profile.githubUsername
+            ? ''
+            : profile.githubUsername || '',
+        linkedin:
+          loading || !profile.social ? '' : profile.social.linkedin || '',
+        youtube: loading || !profile.social ? '' : profile.social.youtube || '',
+        facebook:
+          loading || !profile.social ? '' : profile.social.facebook || '',
+        instagram:
+          loading || !profile.social ? '' : profile.social.instagram || '',
+        twitter: loading || !profile.social ? '' : profile.social.twitter || '',
+      });
+    }
+  }, [loading]);
 
   const {
     status,
@@ -48,8 +62,18 @@ const CreateProfile = ({
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
+  // Redirect if user already has a profile
+  let location = useLocation();
+  if (profile && location.pathname === '/create-profile') {
+    return <Navigate to={'/edit-profile'} />;
+  }
+
   const onSubmit = (e) => {
     e.preventDefault();
+    if (location.pathname === '/edit-profile') {
+      createProfile(formData, navigate, user._id, true);
+      return;
+    }
     createProfile(formData, navigate, user._id);
   };
 
