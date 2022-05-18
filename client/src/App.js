@@ -8,6 +8,7 @@ import Dashboard from './components/dashboard/Dashboard';
 import PrivateRoute from './components/routing/PrivateRoute';
 import Profile from './components/profile/Profile';
 import CreateProfile from './components/profile/CreateProfile';
+import EditProfile from './components/profile/EditProfile';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { loadUser } from './actions/auth';
@@ -60,6 +61,15 @@ const App = () => {
               element={
                 <PrivateRoute>
                   <CreateProfile />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              exact
+              path='/edit-profile'
+              element={
+                <PrivateRoute>
+                  <EditProfile />
                 </PrivateRoute>
               }
             />

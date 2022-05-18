@@ -93,9 +93,9 @@ router.post(
 
       if (profile) {
         // Update profile
-        profile = await Profile.findOneAndUpdate(
+        profile = await Profile.findOneAndReplace(
           { user: req.params.user_id },
-          { $set: profileFields },
+          profileFields,
           { new: true } // return the document after update was applied
         );
 
