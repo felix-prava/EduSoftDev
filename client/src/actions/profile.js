@@ -26,7 +26,7 @@ export const getCurrentUserProfile = () => async (dispatch) => {
 };
 
 // Create or update a profile
-export const createProfile =
+export const createUpdateProfile =
   (formData, navigate, userId, edit = false) =>
   async (dispatch) => {
     try {

@@ -3,12 +3,15 @@ import { Navigate, Link, useNavigate, useLocation } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createProfile, getCurrentUserProfile } from '../../actions/profile';
+import {
+  createUpdateProfile,
+  getCurrentUserProfile,
+} from '../../actions/profile';
 
 const AddExperience = ({
   profile: { profile, loading },
   auth: { user },
-  createProfile,
+  createUpdateProfile,
   getCurrentUserProfile,
 }) => {
   const navigate = useNavigate();
@@ -71,10 +74,10 @@ const AddExperience = ({
   const onSubmit = (e) => {
     e.preventDefault();
     if (location.pathname === '/edit-profile') {
-      createProfile(formData, navigate, user._id, true);
+      createUpdateProfile(formData, navigate, user._id, true);
       return;
     }
-    createProfile(formData, navigate, user._id);
+    createUpdateProfile(formData, navigate, user._id);
   };
 
   return (
@@ -354,7 +357,7 @@ const AddExperience = ({
 };
 
 AddExperience.propTypes = {
-  createProfile: PropTypes.func.isRequired,
+  createUpdateProfile: PropTypes.func.isRequired,
   getCurrentUserProfile: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
@@ -366,6 +369,6 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  createProfile,
+  createUpdateProfile,
   getCurrentUserProfile,
 })(AddExperience);
