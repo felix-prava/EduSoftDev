@@ -1,6 +1,11 @@
 import axios from 'axios';
 import { setAlert } from './alert';
-import { GET_PROFILE, PROFILE_ERROR, CLEAR_PROFILE } from './types';
+import {
+  GET_PROFILE,
+  UPDATE_PROFILE,
+  PROFILE_ERROR,
+  CLEAR_PROFILE,
+} from './types';
 
 // Get current user profile
 export const getCurrentUserProfile = () => async (dispatch) => {
@@ -34,7 +39,7 @@ export const createProfile =
       const res = await axios.post('/api/profiles/' + userId, formData, config);
 
       dispatch({
-        type: GET_PROFILE,
+        type: edit == false ? GET_PROFILE : UPDATE_PROFILE,
         payload: res.data,
       });
 

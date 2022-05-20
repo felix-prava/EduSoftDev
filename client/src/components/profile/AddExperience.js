@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createProfile, getCurrentUserProfile } from '../../actions/profile';
 
-const CreateProfile = ({
+const AddExperience = ({
   profile: { profile, loading },
   auth: { user },
   createProfile,
@@ -88,7 +88,7 @@ const CreateProfile = ({
             <div>
               <div>
                 <h3 className='text-2xl font-bold leading-6 font-medium text-gray-900 sm:text-2xl'>
-                  My Profile
+                  Add Experience
                 </h3>
               </div>
 
@@ -353,7 +353,7 @@ const CreateProfile = ({
   );
 };
 
-CreateProfile.propTypes = {
+AddExperience.propTypes = {
   createProfile: PropTypes.func.isRequired,
   getCurrentUserProfile: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
@@ -368,4 +368,4 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   createProfile,
   getCurrentUserProfile,
-})(CreateProfile);
+})(AddExperience);

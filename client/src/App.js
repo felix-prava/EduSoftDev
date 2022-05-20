@@ -9,6 +9,7 @@ import PrivateRoute from './components/routing/PrivateRoute';
 import Profile from './components/profile/Profile';
 import CreateProfile from './components/profile/CreateProfile';
 import EditProfile from './components/profile/EditProfile';
+import AddExperience from './components/profile/AddExperience';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { loadUser } from './actions/auth';
@@ -70,6 +71,15 @@ const App = () => {
               element={
                 <PrivateRoute>
                   <EditProfile />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              exact
+              path='/add-experience'
+              element={
+                <PrivateRoute>
+                  <AddExperience />
                 </PrivateRoute>
               }
             />
