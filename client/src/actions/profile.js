@@ -39,7 +39,7 @@ export const createUpdateProfile =
       const res = await axios.post('/api/profiles/' + userId, formData, config);
 
       dispatch({
-        type: edit == false ? GET_PROFILE : UPDATE_PROFILE,
+        type: edit === false ? GET_PROFILE : UPDATE_PROFILE,
         payload: res.data,
       });
 
@@ -55,6 +55,81 @@ export const createUpdateProfile =
       if (errors) {
         errors.forEach((error) => dispatch(setAlert(error.msg, 'error')));
       }
+
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: { msg: err.response.statusText, status: err.response.status },
+      });
+    }
+  };
+
+// Add Experience
+export const addExperience =
+  (formData, navigate, userId) => async (dispatch) => {
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      const res = await axios.put(
+        '/api/profiles/experience/' + userId,
+        formData,
+        config
+      );
+
+      dispatch({
+        type: UPDATE_PROFILE,
+        payload: res.data,
+      });
+
+      dispatch(setAlert('Experience Added', 'success'));
+
+      navigate('/my-profile');
+    } catch (err) {
+      const errors = err.response.data.errors;
+      if (errors) {
+        errors.forEach((error) => dispatch(setAlert(error.msg, 'error')));
+      }
+
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: { msg: err.response.statusText, status: err.response.status },
+      });
+    }
+  };
+
+// Add Education
+export const addEducation =
+  (formData, navigate, userId) => async (dispatch) => {
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+
+      const res = await axios.put(
+        '/api/profiles/education/' + userId,
+        formData,
+        config
+      );
+
+      dispatch({
+        type: UPDATE_PROFILE,
+        payload: res.data,
+      });
+
+      dispatch(setAlert('Education Added', 'success'));
+
+      navigate('/my-profile');
+    } catch (err) {
+      const errors = err.response.data.errors;
+      if (errors) {
+        errors.forEach((error) => dispatch(setAlert(error.msg, 'error')));
+      }
+
       dispatch({
         type: PROFILE_ERROR,
         payload: { msg: err.response.statusText, status: err.response.status },
