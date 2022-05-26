@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 const AddEducation = ({ auth: { user } }) => {
   return (
     <Fragment>
-      <div className='container mt-8'>Add Educationnn {user.firstName}</div>
+      <div className='container mt-8'>Add Education {user.firstName}</div>
     </Fragment>
   );
 };
