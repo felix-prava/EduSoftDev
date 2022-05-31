@@ -194,9 +194,16 @@ router.put(
     ],
   ],
   async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+    const validation = validationResult(req);
+    const errors = !validation.isEmpty();
+    let errorsArray = validation.array();
+    if (req.body.to === '' && req.body.current === false) {
+      errorsArray.push({
+        msg: 'End date is required if this is your current job',
+      });
+    }
+    if (errors) {
+      return res.status(400).json({ errors: errorsArray });
     }
 
     const checkStatus = await compareUsers(req.user.id, req.params.user_id);
@@ -278,9 +285,16 @@ router.put(
     ],
   ],
   async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+    const validation = validationResult(req);
+    const errors = !validation.isEmpty();
+    let errorsArray = validation.array();
+    if (req.body.to === '' && req.body.current === false) {
+      errorsArray.push({
+        msg: 'End date is required if this is your current school',
+      });
+    }
+    if (errors) {
+      return res.status(400).json({ errors: errorsArray });
     }
 
     const checkStatus = await compareUsers(req.user.id, req.params.user_id);
