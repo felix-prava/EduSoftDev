@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
+import { deleteEducation } from '../../actions/profile';
 
-const Education = ({ education, auth: { user } }) => {
+const Education = ({ auth: { user }, education, deleteEducation }) => {
   const educations = education.map((edu) => (
     <li key={edu._id} className='sm:py-8'>
       <div className='space-y-4 mr-4 sm:gap-6 sm:space-y-0'>
@@ -26,14 +26,13 @@ const Education = ({ education, auth: { user } }) => {
                 </p>
               </div>
               <div>
-                <Link to={'/education/' + user._id + '/' + edu._id}>
-                  <button
-                    type='button'
-                    className='mt-4 sm:float-center inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-400'
-                  >
-                    Delete
-                  </button>
-                </Link>
+                <button
+                  type='button'
+                  onClick={() => deleteEducation(edu._id, user._id)}
+                  className='mt-4 sm:float-center inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-400'
+                >
+                  Delete
+                </button>
               </div>
             </div>
             <div className='text-lg'>
@@ -55,12 +54,13 @@ const Education = ({ education, auth: { user } }) => {
 };
 
 Education.propTypes = {
-  education: PropTypes.array.isRequired,
   auth: PropTypes.object.isRequired,
+  education: PropTypes.array.isRequired,
+  deleteEducation: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps)(Education);
+export default connect(mapStateToProps, { deleteEducation })(Education);

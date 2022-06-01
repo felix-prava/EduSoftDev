@@ -5,6 +5,7 @@ import {
   UPDATE_PROFILE,
   PROFILE_ERROR,
   CLEAR_PROFILE,
+  ACCOUNT_DELETED,
 } from './types';
 
 // Get current user profile
@@ -136,3 +137,68 @@ export const addEducation =
       });
     }
   };
+
+// Delete experience
+export const deleteExperience = (expId, userId) => async (dispatch) => {
+  try {
+    const res = await axios.delete(
+      `/api/profiles/experience/${userId}/${expId}`
+    );
+
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: res.data,
+    });
+
+    dispatch(setAlert('Experience Removed', 'success'));
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+// Delete education
+export const deleteEducation = (expId, userId) => async (dispatch) => {
+  try {
+    const res = await axios.delete(
+      `/api/profiles/education/${userId}/${expId}`
+    );
+
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: res.data,
+    });
+
+    dispatch(setAlert('Education Removed', 'success'));
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+// Delete account & profile
+export const deleteAccount = (userId) => async (dispatch) => {
+  if (window.confirm('Are you sure? This can NOT be undone!')) {
+    try {
+      const res = await axios.delete(`/api/profiles/${userId}`);
+
+      dispatch({
+        type: CLEAR_PROFILE,
+      });
+      dispatch({
+        type: ACCOUNT_DELETED,
+      });
+
+      dispatch(setAlert('Your account has been permanantly deleted', 'error'));
+    } catch (err) {
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: { msg: err.response.statusText, status: err.response.status },
+      });
+    }
+  }
+};
