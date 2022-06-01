@@ -1,1 +1,5 @@
-# Educational-Platform
+# SoftDev Educational Platform
+
+# Objectives:
+
+# Features:
