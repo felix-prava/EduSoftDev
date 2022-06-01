@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import CreateProfile from './CreateProfile';
 
 import PropTypes from 'prop-types';
@@ -7,8 +7,7 @@ import { connect } from 'react-redux';
 
 const EditProfile = ({ profile: { profile } }) => {
   // Redirect if user doesn't have a profile
-  let location = useLocation();
-  if (profile === null && location.pathname === '/edit-profile') {
+  if (profile === null) {
     return <Navigate to={'/create-profile'} />;
   }
 

@@ -1,9 +1,11 @@
 import React, { Fragment, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import { getCurrentUserProfile } from '../../actions/profile';
-import { Link } from 'react-router-dom';
+import Experience from './Experience';
+import Education from './Education';
 
 const Profile = ({
   getCurrentUserProfile,
@@ -37,8 +39,22 @@ const Profile = ({
                   <Link to='/create-profile'>
                     <button
                       type='button'
-                      className='mt-6 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
+                      className='mt-2 inline-flex text-center content-center mr-4 px-4 py-2 border border-transparent shadow-sm w-full text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
                     >
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        className='h-6 w-6 mr-2'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        stroke='currentColor'
+                        strokeWidth='2'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          d='M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z'
+                        />
+                      </svg>
                       Create Profile
                     </button>
                   </Link>
@@ -51,8 +67,78 @@ const Profile = ({
                     suspendisse. Volutpat eu faucibus vivamus eget bibendum
                     cras.
                   </p>
+                  <Link to='/edit-profile'>
+                    <button
+                      type='button'
+                      className='mt-2 inline-flex text-center content-center mr-4 px-4 py-2 border border-transparent shadow-sm w-full text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
+                    >
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        className='h-6 w-6 mr-2'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        stroke='currentColor'
+                        strokeWidth='2'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          d='M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z'
+                        />
+                      </svg>
+                      Edit Profile
+                    </button>
+                  </Link>
                 </Fragment>
               )}{' '}
+              <div className='grid grid-cols-2 grid-flow-col gap-4'>
+                <Link to='/add-experience'>
+                  <button
+                    type='button'
+                    className='mt-2 inline-flex text-center px-4 py-2 border border-transparent shadow-sm w-full text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
+                  >
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      className='h-6 w-6 mr-2'
+                      fill='none'
+                      viewBox='0 0 24 24'
+                      stroke='currentColor'
+                      strokeWidth='2'
+                    >
+                      <path
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        d='M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'
+                      />
+                    </svg>
+                    Add Experience
+                  </button>
+                </Link>
+                <Link to='/add-education'>
+                  <button
+                    type='button'
+                    className='mt-2 content-center inline-flex text-center px-4 py-2 border border-transparent shadow-sm w-full text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
+                  >
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      className='h-6 w-6 mr-2'
+                      fill='none'
+                      viewBox='0 0 24 24'
+                      stroke='currentColor'
+                      strokeWidth='2'
+                    >
+                      <path d='M12 14l9-5-9-5-9 5 9 5z' />
+                      <path d='M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z' />
+                      <path
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        d='M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222'
+                      />
+                    </svg>
+                    Add Education
+                  </button>
+                </Link>
+              </div>
             </div>
 
             <div className='lg:col-span-2'>
@@ -152,133 +238,30 @@ const Profile = ({
                   </div>
                 </div>
               )}
-
-              <div className='space-y-5 sm:space-y-4'>
+              <div className='space-y-5 sm:space-y-4 mb-6'>
                 <h2 className='text-3xl font-extrabold tracking-tight sm:text-4xl'>
-                  Profile
+                  Experience
                 </h2>
-                <p className='text-xl text-gray-500'>
-                  Nulla quam felis, enim faucibus proin velit, ornare id
-                  pretium. Augue ultrices sed arcu condimentum vestibulum
-                  suspendisse. Volutpat eu faucibus vivamus eget bibendum cras.
-                </p>
+                {profile === null || profile.experience.length === 0 ? (
+                  <p className='text-xl text-gray-500'>
+                    You have not added any professional experience yet.
+                  </p>
+                ) : (
+                  <Experience experience={profile.experience} />
+                )}
               </div>
-              <ul className='space-y-12 sm:divide-y sm:divide-gray-200 sm:space-y-0 sm:-mt-8 lg:gap-x-8 lg:space-y-0'>
-                <li className='sm:py-8'>
-                  <div className='space-y-4 sm:grid sm:grid-cols-3 sm:items-start sm:gap-6 sm:space-y-0'>
-                    <div className='sm:col-span-2'>
-                      <div className='space-y-4'>
-                        <div className='text-lg leading-6 font-medium space-y-1'>
-                          <h3>Leslie Alexander</h3>
-                          <p className='text-indigo-600'>Co-Founder / CEO</p>
-                        </div>
-                        <div className='text-lg'>
-                          <p className='text-gray-500'>
-                            Ultricies massa malesuada viverra cras lobortis.
-                            Tempor orci hac ligula dapibus mauris sit ut eu.
-                            Eget turpis urna maecenas cras. Nisl dictum.
-                          </p>
-                        </div>
-                        <ul className='flex space-x-5'>
-                          <li>
-                            <Link
-                              to='#'
-                              className='text-gray-400 hover:text-gray-500'
-                            >
-                              <span className='sr-only'>Twitter</span>
-                              <svg
-                                className='w-5 h-5'
-                                fill='currentColor'
-                                viewBox='0 0 20 20'
-                                aria-hidden='true'
-                              >
-                                <path d='M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84' />
-                              </svg>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link
-                              to='#'
-                              className='text-gray-400 hover:text-gray-500'
-                            >
-                              <span className='sr-only'>LinkedIn</span>
-                              <svg
-                                className='w-5 h-5'
-                                fill='currentColor'
-                                viewBox='0 0 20 20'
-                                aria-hidden='true'
-                              >
-                                <path
-                                  fillRule='evenodd'
-                                  d='M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z'
-                                  clipRule='evenodd'
-                                />
-                              </svg>
-                            </Link>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li className='sm:py-8'>
-                  <div className='space-y-4 sm:grid sm:grid-cols-3 sm:items-start sm:gap-6 sm:space-y-0'>
-                    <div className='sm:col-span-2'>
-                      <div className='space-y-4'>
-                        <div className='text-lg leading-6 font-medium space-y-1'>
-                          <h3>Leslie Alexander</h3>
-                          <p className='text-indigo-600'>Co-Founder / CEO</p>
-                        </div>
-                        <div className='text-lg'>
-                          <p className='text-gray-500'>
-                            Ultricies massa malesuada viverra cras lobortis.
-                            Tempor orci hac ligula dapibus mauris sit ut eu.
-                            Eget turpis urna maecenas cras. Nisl dictum.
-                          </p>
-                        </div>
-                        <ul className='flex space-x-5'>
-                          <li>
-                            <Link
-                              to='#'
-                              className='text-gray-400 hover:text-gray-500'
-                            >
-                              <span className='sr-only'>Twitter</span>
-                              <svg
-                                className='w-5 h-5'
-                                fill='currentColor'
-                                viewBox='0 0 20 20'
-                                aria-hidden='true'
-                              >
-                                <path d='M6.29 18.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0020 3.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.073 4.073 0 01.8 7.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 010 16.407a11.616 11.616 0 006.29 1.84' />
-                              </svg>
-                            </Link>
-                          </li>
-                          <li>
-                            <Link
-                              to='#'
-                              className='text-gray-400 hover:text-gray-500'
-                            >
-                              <span className='sr-only'>LinkedIn</span>
-                              <svg
-                                className='w-5 h-5'
-                                fill='currentColor'
-                                viewBox='0 0 20 20'
-                                aria-hidden='true'
-                              >
-                                <path
-                                  fillRule='evenodd'
-                                  d='M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z'
-                                  clipRule='evenodd'
-                                />
-                              </svg>
-                            </Link>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              </ul>
+              <div className='space-y-5 sm:space-y-4 mb-6'>
+                <h2 className='text-3xl font-extrabold tracking-tight sm:text-4xl'>
+                  Education
+                </h2>
+                {profile === null || profile.education.length === 0 ? (
+                  <p className='text-xl text-gray-500'>
+                    You have not added any education yet.
+                  </p>
+                ) : (
+                  <Education education={profile.education} />
+                )}
+              </div>
             </div>
           </div>
         </div>

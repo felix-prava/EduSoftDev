@@ -3,12 +3,15 @@ import { Navigate, Link, useNavigate, useLocation } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { createProfile, getCurrentUserProfile } from '../../actions/profile';
+import {
+  createUpdateProfile,
+  getCurrentUserProfile,
+} from '../../actions/profile';
 
 const CreateProfile = ({
   profile: { profile, loading },
   auth: { user },
-  createProfile,
+  createUpdateProfile,
   getCurrentUserProfile,
 }) => {
   const navigate = useNavigate();
@@ -71,10 +74,10 @@ const CreateProfile = ({
   const onSubmit = (e) => {
     e.preventDefault();
     if (location.pathname === '/edit-profile') {
-      createProfile(formData, navigate, user._id, true);
+      createUpdateProfile(formData, navigate, user._id, true);
       return;
     }
-    createProfile(formData, navigate, user._id);
+    createUpdateProfile(formData, navigate, user._id);
   };
 
   return (
@@ -87,7 +90,7 @@ const CreateProfile = ({
           <div className='space-y-8 divide-y divide-gray-200'>
             <div>
               <div>
-                <h3 className='text-lg leading-6 font-medium text-gray-900'>
+                <h3 className='text-2xl font-bold leading-6 font-medium text-gray-900 sm:text-2xl'>
                   My Profile
                 </h3>
               </div>
@@ -354,7 +357,7 @@ const CreateProfile = ({
 };
 
 CreateProfile.propTypes = {
-  createProfile: PropTypes.func.isRequired,
+  createUpdateProfile: PropTypes.func.isRequired,
   getCurrentUserProfile: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
@@ -366,6 +369,6 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  createProfile,
+  createUpdateProfile,
   getCurrentUserProfile,
 })(CreateProfile);
