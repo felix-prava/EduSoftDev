@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import Account from '../settings/Account';
 import Password from '../settings/Password';
 
@@ -44,30 +44,8 @@ const Settings = ({ auth: { user } }) => {
           <div className='lg:grid lg:grid-cols-12 lg:gap-x-5'>
             <aside className='py-6 px-2 sm:px-6 lg:py-0 lg:px-0 lg:col-span-2'>
               <nav className='space-y-1'>
-                <a
-                  href='#'
-                  className='text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium'
-                >
-                  <svg
-                    className='text-gray-400 group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6'
-                    xmlns='http://www.w3.org/2000/svg'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    strokeWidth='2'
-                    stroke='currentColor'
-                    aria-hidden='true'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      d='M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z'
-                    />
-                  </svg>
-                  <span className='truncate'> Profile </span>
-                </a>
-
-                <a
-                  href='#'
+                <Link
+                  to='/settings/account'
                   className={
                     location.pathname === '/settings/account'
                       ? selectedMenuItemClass
@@ -99,10 +77,10 @@ const Settings = ({ auth: { user } }) => {
                     />
                   </svg>
                   <span className='truncate'> Account </span>
-                </a>
+                </Link>
 
-                <a
-                  href='#'
+                <Link
+                  to='/settings/security'
                   className={
                     location.pathname === '/settings/security'
                       ? selectedMenuItemClass
@@ -129,14 +107,80 @@ const Settings = ({ auth: { user } }) => {
                     />
                   </svg>
                   <span className='truncate'> Password </span>
-                </a>
+                </Link>
 
-                <a
-                  href='#'
-                  className='text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium'
+                <Link
+                  to='/settings/appearance'
+                  className={
+                    location.pathname === '/settings/appearance'
+                      ? selectedMenuItemClass
+                      : menuItemClass
+                  }
                 >
                   <svg
-                    className='text-gray-400 group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6'
+                    xmlns='http://www.w3.org/2000/svg'
+                    className={
+                      location.pathname === '/settings/appearance'
+                        ? selectedItemSvgClass
+                        : svgClass
+                    }
+                    fill='none'
+                    viewBox='0 0 24 24'
+                    stroke='currentColor'
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      d='M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z'
+                    />
+                  </svg>
+                  <span className='truncate'> Appearance </span>
+                </Link>
+
+                <Link
+                  to='/settings/emails'
+                  className={
+                    location.pathname === '/settings/emails'
+                      ? selectedMenuItemClass
+                      : menuItemClass
+                  }
+                >
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    className={
+                      location.pathname === '/settings/emails'
+                        ? selectedItemSvgClass
+                        : svgClass
+                    }
+                    fill='none'
+                    viewBox='0 0 24 24'
+                    stroke='currentColor'
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      d='M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207'
+                    />
+                  </svg>
+                  <span className='truncate'> Emails </span>
+                </Link>
+
+                <Link
+                  to='/settings/notifications'
+                  className={
+                    location.pathname === '/settings/notifications'
+                      ? selectedMenuItemClass
+                      : menuItemClass
+                  }
+                >
+                  <svg
+                    className={
+                      location.pathname === '/settings/notifications'
+                        ? selectedItemSvgClass
+                        : svgClass
+                    }
                     xmlns='http://www.w3.org/2000/svg'
                     fill='none'
                     viewBox='0 0 24 24'
@@ -151,15 +195,22 @@ const Settings = ({ auth: { user } }) => {
                     />
                   </svg>
                   <span className='truncate'> Notifications </span>
-                </a>
+                </Link>
 
-                <a
-                  href='#'
-                  className='bg-gray-50 text-orange-600 hover:bg-white group rounded-md px-3 py-2 flex items-center text-sm font-medium'
-                  aria-current='page'
+                <Link
+                  to='/settings/billing'
+                  className={
+                    location.pathname === '/settings/billing'
+                      ? selectedMenuItemClass
+                      : menuItemClass
+                  }
                 >
                   <svg
-                    className='text-orange-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6'
+                    className={
+                      location.pathname === '/settings/billing'
+                        ? selectedItemSvgClass
+                        : svgClass
+                    }
                     xmlns='http://www.w3.org/2000/svg'
                     fill='none'
                     viewBox='0 0 24 24'
@@ -174,29 +225,7 @@ const Settings = ({ auth: { user } }) => {
                     />
                   </svg>
                   <span className='truncate'> Plan &amp; Billing </span>
-                </a>
-
-                <a
-                  href='#'
-                  className='text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium'
-                >
-                  <svg
-                    className='text-gray-400 group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6'
-                    xmlns='http://www.w3.org/2000/svg'
-                    fill='none'
-                    viewBox='0 0 24 24'
-                    strokeWidth='2'
-                    stroke='currentColor'
-                    aria-hidden='true'
-                  >
-                    <path
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                      d='M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z'
-                    />
-                  </svg>
-                  <span className='truncate'> Integrations </span>
-                </a>
+                </Link>
               </nav>
             </aside>
             {settingsMenu}
