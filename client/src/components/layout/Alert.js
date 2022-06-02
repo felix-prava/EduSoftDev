@@ -8,8 +8,6 @@ const Alert = ({ alerts, removeAlert }) =>
   alerts !== null &&
   alerts.length > 0 &&
   alerts.map((alert) => {
-    const alertColour = alert.alertType === 'error' ? 'red' : 'green';
-
     let firstDivClassName = null;
     if (alert.alertType === 'error') {
       firstDivClassName = 'rounded-md bg-red-50 p-4';
