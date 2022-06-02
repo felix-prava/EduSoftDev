@@ -122,7 +122,8 @@ router.put('/:user_id', auth, async (req, res) => {
     const userFields = {};
     if (firstName) userFields.firstName = firstName;
     if (lastName) userFields.lastName = lastName;
-    if (preferredName) userFields.preferredName = preferredName;
+    if (preferredName || preferredName === '')
+      userFields.preferredName = preferredName;
     if (username) {
       try {
         const userExists = await User.exists({ username });
