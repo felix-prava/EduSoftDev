@@ -11,6 +11,7 @@ import CreateProfile from './components/profile/CreateProfile';
 import EditProfile from './components/profile/EditProfile';
 import AddExperience from './components/profile/AddExperience';
 import AddEducation from './components/profile/AddEducation';
+import SettingsSidebar from './components/layout/SettingsSidebar';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { loadUser } from './actions/auth';
@@ -90,6 +91,15 @@ const App = () => {
               element={
                 <PrivateRoute>
                   <AddEducation />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              exact
+              path='/settings/:resource'
+              element={
+                <PrivateRoute>
+                  <SettingsSidebar />
                 </PrivateRoute>
               }
             />

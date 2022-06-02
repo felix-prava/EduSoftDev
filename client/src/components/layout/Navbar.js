@@ -297,7 +297,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
                         My Profile
                       </Link>
                       <Link
-                        to='#'
+                        to='/settings/account'
                         className='block px-4 py-2 text-sm text-gray-700'
                         role='menuitem'
                         tabIndex='-1'

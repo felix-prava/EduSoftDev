@@ -10,6 +10,7 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   CLEAR_PROFILE,
+  USER_UPDATED,
 } from './types';
 
 // Load user info
@@ -98,3 +99,41 @@ export const logoutUser = () => (dispatch) => {
   dispatch({ type: CLEAR_PROFILE });
   dispatch({ type: LOGOUT });
 };
+
+export const updateUser =
+  (
+    { firstName, lastName, preferredName, username, email, password },
+    userId,
+    msg
+  ) =>
+  async (dispatch) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    const body = JSON.stringify({
+      firstName,
+      lastName,
+      preferredName,
+      username,
+      email,
+      password,
+    });
+
+    try {
+      const res = await axios.put('/api/users/' + userId, body, config);
+
+      dispatch({
+        type: USER_UPDATED,
+        payload: res.data,
+      });
+
+      dispatch(setAlert(msg, 'success'));
+    } catch (err) {
+      const errors = err.response.data.errors;
+      if (errors) {
+        errors.forEach((error) => dispatch(setAlert(error.msg, 'error')));
+      }
+    }
+  };
