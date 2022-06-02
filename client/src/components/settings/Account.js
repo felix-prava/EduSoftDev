@@ -1,87 +1,121 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { deleteAccount } from '../../actions/profile';
+import { updateUser } from '../../actions/auth';
+import { setAlert } from '../../actions/alert';
 
-const Account = ({ auth: { user }, deleteAccount }) => {
+const Account = ({ auth: { user }, updateUser, deleteAccount, setAlert }) => {
+  const [formData, setFormData] = useState({
+    username: '',
+    preferredName: '',
+  });
+
+  const { username, preferredName } = formData;
+
+  const onChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
   return (
     <Fragment>
       <div className='space-y-6 sm:px-6 lg:px-0 lg:col-span-9'>
         <section aria-labelledby='update-username'>
-          <form action='#' method='POST'>
-            <div className='shadow sm:rounded-md sm:overflow-hidden'>
-              <div className='bg-white py-6 px-4 sm:p-6'>
-                <div>
-                  <h2
-                    id='update-username'
-                    className='text-lg leading-6 font-medium text-gray-900'
-                  >
-                    Change Username
-                  </h2>
-                </div>
-
-                <div className='mt-6 grid grid-cols-4 gap-6'>
-                  <div className='col-span-4 sm:col-span-2'>
-                    <input
-                      type='text'
-                      name='username'
-                      id='username'
-                      className='mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm'
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className='px-4 py-3 bg-gray-50 text-right sm:px-6'>
-                <button
-                  type='submit'
-                  className='bg-gray-800 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900'
+          <div className='shadow sm:rounded-md sm:overflow-hidden'>
+            <div className='bg-white py-6 px-4 sm:p-6'>
+              <div>
+                <h2
+                  id='update-username'
+                  className='text-lg leading-6 font-medium text-gray-900'
                 >
-                  Save
-                </button>
+                  Change Username
+                </h2>
+              </div>
+
+              <div className='mt-6 grid grid-cols-4 gap-6'>
+                <div className='col-span-4 sm:col-span-2'>
+                  <input
+                    type='text'
+                    name='username'
+                    id='username'
+                    value={username}
+                    onChange={(e) => onChange(e)}
+                    className='mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm'
+                  />
+                </div>
               </div>
             </div>
-          </form>
+            <div className='px-4 py-3 bg-gray-50 text-right sm:px-6'>
+              <button
+                onClick={() => {
+                  if (username === '') {
+                    setAlert("Username can't be empty", 'error');
+                    return;
+                  }
+                  if (user.username !== username) {
+                    updateUser({ username }, user._id, 'Username Updated');
+                  } else {
+                    setAlert('This is your current username', 'error');
+                  }
+                }}
+                className='bg-gray-800 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900'
+              >
+                Save
+              </button>
+            </div>
+          </div>
         </section>
 
         <section aria-labelledby='preferred-name'>
-          <form action='#' method='POST'>
-            <div className='shadow sm:rounded-md sm:overflow-hidden'>
-              <div className='bg-white py-6 px-4 sm:p-6'>
-                <div>
-                  <h2
-                    id='preferred-name'
-                    className='text-lg leading-6 font-medium text-gray-900'
-                  >
-                    Change Preferred Name
-                  </h2>
-                </div>
-
-                <div className='mt-6 grid grid-cols-4 gap-6'>
-                  <div className='col-span-4 sm:col-span-2'>
-                    <input
-                      type='text'
-                      name='preferredName'
-                      id='preferredName'
-                      placeholder={
-                        user && user.preferredName
-                          ? user.preferredName
-                          : "You don't have a preferred name"
-                      }
-                      className='mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm'
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className='px-4 py-3 bg-gray-50 text-right sm:px-6'>
-                <button
-                  type='submit'
-                  className='bg-gray-800 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900'
+          <div className='shadow sm:rounded-md sm:overflow-hidden'>
+            <div className='bg-white py-6 px-4 sm:p-6'>
+              <div>
+                <h2
+                  id='preferred-name'
+                  className='text-lg leading-6 font-medium text-gray-900'
                 >
-                  Save
-                </button>
+                  Change Preferred Name
+                </h2>
+              </div>
+
+              <div className='mt-6 grid grid-cols-4 gap-6'>
+                <div className='col-span-4 sm:col-span-2'>
+                  <input
+                    type='text'
+                    name='preferredName'
+                    id='preferredName'
+                    value={preferredName}
+                    onChange={(e) => onChange(e)}
+                    placeholder={
+                      user && user.preferredName
+                        ? user.preferredName
+                        : "You don't have a preferred name"
+                    }
+                    className='mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm'
+                  />
+                </div>
               </div>
             </div>
-          </form>
+            <div className='px-4 py-3 bg-gray-50 text-right sm:px-6'>
+              <button
+                onClick={() => {
+                  if (user.preferredName !== preferredName) {
+                    updateUser(
+                      { preferredName },
+                      user._id,
+                      preferredName === ''
+                        ? 'Preferred Name Deleted' //TODO Delete preferredName
+                        : 'Preferred Name Update'
+                    );
+                  } else {
+                    setAlert('This is your current preferred name', 'error');
+                  }
+                }}
+                className='bg-gray-800 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900'
+              >
+                Save
+              </button>
+            </div>
+          </div>
         </section>
 
         <section aria-labelledby='profile-picture'>
@@ -147,10 +181,16 @@ const Account = ({ auth: { user }, deleteAccount }) => {
 Account.propTypes = {
   auth: PropTypes.object.isRequired,
   deleteAccount: PropTypes.func.isRequired,
+  updateUser: PropTypes.func.isRequired,
+  setAlert: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { deleteAccount })(Account);
+export default connect(mapStateToProps, {
+  updateUser,
+  deleteAccount,
+  setAlert,
+})(Account);

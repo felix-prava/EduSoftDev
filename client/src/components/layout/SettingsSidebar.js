@@ -5,7 +5,7 @@ import { useLocation, Link } from 'react-router-dom';
 import Account from '../settings/Account';
 import Password from '../settings/Password';
 
-const Settings = ({ auth: { user } }) => {
+const SettingsSidebar = ({ auth: { user } }) => {
   const menuItemClass =
     'text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium';
   const selectedMenuItemClass =
@@ -236,7 +236,7 @@ const Settings = ({ auth: { user } }) => {
   );
 };
 
-Settings.propTypes = {
+SettingsSidebar.propTypes = {
   auth: PropTypes.object.isRequired,
 };
 
@@ -244,4 +244,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps)(Settings);
+export default connect(mapStateToProps)(SettingsSidebar);
