@@ -4,8 +4,8 @@ const request = require('request');
 const config = require('config');
 const auth = require('../../middleware/auth');
 const checkRole = require('../../middleware/checkRole');
-const { check, validationResult } = require('express-validator');
 const compareUsers = require('../../middleware/compareUsers');
+const { check, validationResult } = require('express-validator');
 
 const User = require('../../models/User');
 const Profile = require('../../models/Profile');
@@ -43,9 +43,8 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    //TODO better way to check if user exists
     try {
-      const userExists = await User.findById(req.params.user_id);
+      const userExists = await User.exists({ _id: req.params.user_id });
       if (!userExists) {
         return res.status(400).send('User does not exists');
       }

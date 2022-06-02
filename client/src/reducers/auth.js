@@ -2,6 +2,7 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   USER_LOADED,
+  USER_UPDATED,
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
@@ -31,6 +32,7 @@ export default function Auth(state = initialState, action) {
       };
 
     case USER_LOADED:
+    case USER_UPDATED:
       return {
         ...state,
         isAuthenticated: true,
