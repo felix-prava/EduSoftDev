@@ -102,7 +102,15 @@ export const logoutUser = () => (dispatch) => {
 
 export const updateUser =
   (
-    { firstName, lastName, preferredName, username, email, password },
+    {
+      firstName,
+      lastName,
+      preferredName,
+      username,
+      email,
+      oldPassword,
+      password,
+    },
     userId,
     msg
   ) =>
@@ -118,6 +126,7 @@ export const updateUser =
       preferredName,
       username,
       email,
+      oldPassword,
       password,
     });
 
@@ -130,6 +139,7 @@ export const updateUser =
       });
 
       dispatch(setAlert(msg, 'success'));
+      return 0;
     } catch (err) {
       const errors = err.response.data.errors;
       if (errors) {
