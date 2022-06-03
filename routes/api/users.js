@@ -115,8 +115,15 @@ router.put('/:user_id', auth, async (req, res) => {
         .status(checkStatus)
         .json({ msg: checkStatus == 401 ? 'Unauthorized' : 'Server Error' });
 
-    const { firstName, lastName, preferredName, username, email, password } =
-      req.body;
+    const {
+      firstName,
+      lastName,
+      preferredName,
+      username,
+      email,
+      password,
+      oldPassword,
+    } = req.body;
 
     // Build user fields
     const userFields = {};
@@ -148,7 +155,35 @@ router.put('/:user_id', auth, async (req, res) => {
       }
       userFields.email = email;
     }
-    if (password) userFields.password = password;
+    if (password && oldPassword) {
+      if (password.length < 6) {
+        return res.status(400).json({
+          errors: [
+            { msg: 'Please enter a password with 6 or more characters' },
+          ],
+        });
+      }
+      if (oldPassword === password) {
+        return res.status(400).json({
+          errors: [{ msg: 'New password cannot be the same as the old one' }],
+        });
+      }
+      const passwordsMatch = await bcrypt.compare(oldPassword, user.password);
+
+      if (!passwordsMatch) {
+        return res.status(400).json({
+          errors: [{ msg: 'The old password you have entered is incorrect' }],
+        });
+      }
+
+      try {
+        // Encrypt password
+        const salt = await bcrypt.genSalt(10);
+        userFields.password = await bcrypt.hash(password, salt);
+      } catch (err) {
+        res.status(500).json({ error: [{ msg: 'Server error' }] });
+      }
+    }
 
     try {
       updatedUser = await User.findOneAndUpdate(
