@@ -12,6 +12,7 @@ import EditProfile from './components/profile/EditProfile';
 import AddExperience from './components/profile/AddExperience';
 import AddEducation from './components/profile/AddEducation';
 import SettingsSidebar from './components/layout/SettingsSidebar';
+import Profiles from './components/profile/Profiles';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { loadUser } from './actions/auth';
@@ -100,6 +101,15 @@ const App = () => {
               element={
                 <PrivateRoute>
                   <SettingsSidebar />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              exact
+              path='/admin/profiles'
+              element={
+                <PrivateRoute expectedRole='admin' redirect='false'>
+                  <Profiles />
                 </PrivateRoute>
               }
             />
