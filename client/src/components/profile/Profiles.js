@@ -9,12 +9,14 @@ const Profiles = ({ getAllProfiles, profile: { profiles, loading } }) => {
   useEffect(() => {
     getAllProfiles();
   }, [getAllProfiles]); // TODO check
+
+  const backgroundColor = profiles.length > 0 ? 'bg-gray-300' : 'bg-white';
   return (
     <Fragment>
       {loading ? (
         <Spinner />
       ) : (
-        <div className='bg-white'>
+        <div className={backgroundColor}>
           <div className='max-w-7xl mx-auto py-12 px-4 text-center sm:px-6 lg:px-8 lg:py-24'>
             <div className='space-y-12'>
               <div className='space-y-5 sm:mx-auto sm:max-w-xl sm:space-y-4 lg:max-w-5xl'>

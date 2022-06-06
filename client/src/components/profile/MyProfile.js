@@ -7,7 +7,7 @@ import { getCurrentUserProfile } from '../../actions/profile';
 import Experience from './Experience';
 import Education from './Education';
 
-const Profile = ({
+const MyProfile = ({
   getCurrentUserProfile,
   auth: { user },
   profile: { profile, loading },
@@ -28,7 +28,7 @@ const Profile = ({
           <div className='space-y-12 lg:grid lg:grid-cols-3 lg:gap-8 lg:space-y-0'>
             <div className='space-y-5 sm:space-y-4'>
               <h2 className='text-3xl font-extrabold tracking-tight sm:text-4xl'>
-                My profile
+                My Profile
               </h2>
               {profile === null ? (
                 <Fragment>
@@ -270,7 +270,7 @@ const Profile = ({
   );
 };
 
-Profile.propTypes = {
+MyProfile.propTypes = {
   getCurrentUserProfile: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
@@ -281,4 +281,4 @@ const mapStateToProps = (state) => ({
   profile: state.profile,
 });
 
-export default connect(mapStateToProps, { getCurrentUserProfile })(Profile);
+export default connect(mapStateToProps, { getCurrentUserProfile })(MyProfile);
