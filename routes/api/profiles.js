@@ -122,6 +122,7 @@ router.get('/', [auth, checkRole()], async (_req, res) => {
       'firstName',
       'lastName',
       'preferredName',
+      'email',
       'avatar',
     ]);
     res.json(profiles);

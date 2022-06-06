@@ -98,6 +98,7 @@ export const loginUser = (email, password) => async (dispatch) => {
 export const logoutUser = () => (dispatch) => {
   dispatch({ type: CLEAR_PROFILE });
   dispatch({ type: LOGOUT });
+  // TODO navigate to '/'
 };
 
 export const updateUser =
