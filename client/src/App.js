@@ -6,7 +6,8 @@ import Login from './components/auth/Login';
 import Alert from './components/layout/Alert';
 import Dashboard from './components/dashboard/Dashboard';
 import PrivateRoute from './components/routing/PrivateRoute';
-import Profile from './components/profile/MyProfile';
+import MyProfile from './components/profile/MyProfile';
+import UserProfile from './components/profile/UserProfile';
 import CreateProfile from './components/profile/CreateProfile';
 import EditProfile from './components/profile/EditProfile';
 import AddExperience from './components/profile/AddExperience';
@@ -55,7 +56,16 @@ const App = () => {
               path='/my-profile'
               element={
                 <PrivateRoute>
-                  <Profile />
+                  <MyProfile />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              exact
+              path='/profile/:id'
+              element={
+                <PrivateRoute>
+                  <UserProfile />
                 </PrivateRoute>
               }
             />

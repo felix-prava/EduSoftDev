@@ -49,7 +49,7 @@ const CreateProfile = ({
         twitter: loading || !profile.social ? '' : profile.social.twitter || '',
       });
     }
-  }, [loading]);
+  }, [loading, getCurrentUserProfile, profile]);
 
   const {
     status,
