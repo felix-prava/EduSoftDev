@@ -6,22 +6,19 @@ import Spinner from '../layout/Spinner';
 import { getProfileById } from '../../actions/profile';
 import Experience from './Experience';
 import Education from './Education';
-import UserProfileGeneralInfo from './UserProfileGeneralInfo';
 
 const UserProfile = ({
   profile: { profile, loading },
-  auth: {
-    user: { _id, firstName, lastName, email, username, avatar },
-  },
+  auth: { user: currentUser },
   getProfileById,
 }) => {
-  let user = null;
-  let social = null;
-  let status = null;
+  let social,
+    status,
+    user = null;
   if (profile !== null) {
-    user = profile.user;
     social = profile.social;
     status = profile.status;
+    user = profile.user;
   }
   const { id } = useParams();
   useEffect(() => {
@@ -41,10 +38,10 @@ const UserProfile = ({
                 <div className='space-y-5 sm:space-y-4'>
                   <img
                     className='mb-2 mx-auto h-40 w-40 rounded-full xl:w-56 xl:h-56'
-                    src={avatar}
+                    src={user.avatar}
                     alt=''
                   />
-                  {_id === id && (
+                  {currentUser._id === id && (
                     <Fragment>
                       <Link to='/edit-profile'>
                         <button
@@ -148,7 +145,7 @@ const UserProfile = ({
                               </div>
                               <div className='ml-3 text-base text-gray-500 hover:text-gray-700'>
                                 <p>
-                                  {lastName} {firstName}
+                                  {user.lastName} {user.firstName}
                                 </p>
                               </div>
                             </div>
@@ -216,7 +213,7 @@ const UserProfile = ({
                                 </svg>
                               </div>
                               <div className='ml-3 text-base text-gray-500 hover:text-gray-700'>
-                                <p>{username}</p>
+                                <p>{user.username}</p>
                               </div>
                             </div>
                             <div className='mt-6 flex'>
@@ -238,7 +235,7 @@ const UserProfile = ({
                                 </svg>
                               </div>
                               <div className='ml-3 text-base text-gray-500 hover:text-gray-700'>
-                                <p>{email}</p>
+                                <p>{user.email}</p>
                               </div>
                             </div>
                             <div className='mt-6 flex'>
@@ -279,7 +276,10 @@ const UserProfile = ({
                         You have not added any professional experience yet.
                       </p>
                     ) : (
-                      <Experience experience={profile.experience} />
+                      <Experience
+                        experience={profile.experience}
+                        userId={user._id}
+                      />
                     )}
                   </div>
                   <div className='space-y-5 sm:space-y-4 mb-6'>
@@ -291,7 +291,10 @@ const UserProfile = ({
                         You have not added any education yet.
                       </p>
                     ) : (
-                      <Education education={profile.education} />
+                      <Education
+                        education={profile.education}
+                        userId={user._id}
+                      />
                     )}
                   </div>
                 </div>

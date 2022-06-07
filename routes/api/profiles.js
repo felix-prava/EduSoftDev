@@ -258,7 +258,16 @@ router.delete('/experience/:user_id/:exp_id', auth, async (req, res) => {
       .json({ msg: checkStatus == 401 ? 'Unauthorized' : 'Server Error' });
 
   try {
-    const profile = await Profile.findOne({ user: req.params.user_id });
+    const profile = await Profile.findOne({
+      user: req.params.user_id,
+    }).populate('user', [
+      'firstName',
+      'lastName',
+      'preferredName',
+      'email',
+      'username',
+      'avatar',
+    ]);
 
     // Get remove index
     const removeIndex = profile.experience
@@ -349,7 +358,16 @@ router.delete('/education/:user_id/:edu_id', auth, async (req, res) => {
       .json({ msg: checkStatus == 401 ? 'Unauthorized' : 'Server Error' });
 
   try {
-    const profile = await Profile.findOne({ user: req.params.user_id });
+    const profile = await Profile.findOne({
+      user: req.params.user_id,
+    }).populate('user', [
+      'firstName',
+      'lastName',
+      'preferredName',
+      'email',
+      'username',
+      'avatar',
+    ]);
 
     // Get remove index
     const removeIndex = profile.education
