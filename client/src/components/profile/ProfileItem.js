@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const ProfileItem = ({
   profile: {
-    user: { _id, firstName, lastName, email, avatar },
+    user: { _id, firstName, lastName, email, username, avatar },
     status,
     social,
   },
@@ -37,6 +37,7 @@ const ProfileItem = ({
               </h3>
               <p className='text-indigo-400'>{status}</p>
               <p className='text-base text-indigo-300'>{email}</p>
+              <p className='text-base text-indigo-400'>{username}</p>
               <Link to={`/profile/${_id}`}>
                 <button className='mt-2 group relative py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
                   View Profile
