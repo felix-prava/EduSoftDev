@@ -91,6 +91,9 @@ router.post(
       let profile = await Profile.findOne({ user: req.params.user_id });
 
       if (profile) {
+        profileFields.date = profile.date;
+        profileFields.experience = profile.experience;
+        profileFields.education = profile.education;
         // Update profile
         profile = await Profile.findOneAndReplace(
           { user: req.params.user_id },
