@@ -5,6 +5,7 @@ import {
   UPDATE_PROFILE,
   PROFILE_ERROR,
   CLEAR_PROFILE,
+  GITHUB_ERROR,
 } from '../actions/types';
 
 const initialState = {
@@ -49,6 +50,12 @@ export default function Profile(state = initialState, action) {
       return {
         ...state,
         repos: payload,
+        loading: false,
+      };
+    case GITHUB_ERROR:
+      return {
+        ...state,
+        repos: [],
         loading: false,
       };
     default:
