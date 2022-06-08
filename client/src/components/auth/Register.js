@@ -31,7 +31,6 @@ const Register = ({ setAlert, registerUser, isAuthenticated }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    window.scrollTo(0, 0);
     if (password !== passwordConfirmation) {
       setAlert('Passwords do not match', 'error');
     } else {

@@ -4,7 +4,12 @@ import Moment from 'react-moment';
 import { connect } from 'react-redux';
 import { deleteExperience } from '../../actions/profile';
 
-const Experience = ({ auth: { user }, experience, deleteExperience }) => {
+const Experience = ({
+  auth: { user },
+  experience,
+  userId,
+  deleteExperience,
+}) => {
   const experiences = experience.map((exp) => (
     <li key={exp._id} className='sm:py-8'>
       <div className='space-y-4 mr-4 sm:gap-6 sm:space-y-0'>
@@ -26,15 +31,17 @@ const Experience = ({ auth: { user }, experience, deleteExperience }) => {
                   )}
                 </p>
               </div>
-              <div>
-                <button
-                  type='button'
-                  onClick={() => deleteExperience(exp._id, user._id)}
-                  className='mt-4 sm:float-center inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-400'
-                >
-                  Delete
-                </button>
-              </div>
+              {(user._id === userId || user.role === 'admin') && (
+                <div>
+                  <button
+                    type='button'
+                    onClick={() => deleteExperience(exp._id, userId)}
+                    className='mt-4 sm:float-center inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-400'
+                  >
+                    Delete
+                  </button>
+                </div>
+              )}
             </div>
             <div className='text-lg'>
               <p className='text-gray-500'>{exp.description}</p>

@@ -81,6 +81,37 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
     </Fragment>
   );
 
+  const mentorLinks = (
+    <Fragment>
+      <Link
+        to='/home'
+        className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'
+        aria-current='page'
+      >
+        Home
+      </Link>
+    </Fragment>
+  );
+
+  const adminLinks = (
+    <Fragment>
+      <Link
+        to='/home'
+        className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'
+        aria-current='page'
+      >
+        Home
+      </Link>
+
+      <Link
+        to='/admin/profiles'
+        className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+      >
+        Profiles
+      </Link>
+    </Fragment>
+  );
+
   const guestLinks = (
     <Fragment>
       <Link
@@ -113,6 +144,16 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
       </Link>
     </Fragment>
   );
+
+  function displayNavbarLinks(userRole) {
+    if (userRole === 'normal') {
+      return normalUserLinks;
+    }
+    if (userRole === 'mentor') {
+      return mentorLinks;
+    }
+    return adminLinks;
+  }
 
   return (
     <Fragment>
@@ -180,7 +221,9 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
                 <div className='flex space-x-4'>
                   {!loading && (
                     <Fragment>
-                      {isAuthenticated ? normalUserLinks : guestLinks}
+                      {isAuthenticated
+                        ? user && displayNavbarLinks(user.role)
+                        : guestLinks}
                     </Fragment>
                   )}
                 </div>
@@ -307,6 +350,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
                       </Link>
                       <Link
                         to='#'
+                        onClick={logoutUser}
                         className='block px-4 py-2 text-sm text-gray-700'
                         role='menuitem'
                         tabIndex='-1'

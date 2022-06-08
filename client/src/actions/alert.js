@@ -9,6 +9,7 @@ export const setAlert =
       type: SET_ALERT,
       payload: { msg, alertType, id },
     });
+    window.scrollTo(0, 0);
 
     setTimeout(() => dispatch({ type: REMOVE_ALERT, payload: id }), timeout);
   };
