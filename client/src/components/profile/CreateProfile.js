@@ -30,7 +30,8 @@ const CreateProfile = ({
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
 
   useEffect(() => {
-    getCurrentUserProfile();
+    if (!profile) getCurrentUserProfile();
+
     if (profile) {
       setFormData({
         status: loading || !profile.status ? '' : profile.status || '',
@@ -49,7 +50,7 @@ const CreateProfile = ({
         twitter: loading || !profile.social ? '' : profile.social.twitter || '',
       });
     }
-  }, [loading]);
+  }, [loading, getCurrentUserProfile, profile]);
 
   const {
     status,

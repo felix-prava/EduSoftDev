@@ -91,6 +91,9 @@ router.post(
       let profile = await Profile.findOne({ user: req.params.user_id });
 
       if (profile) {
+        profileFields.date = profile.date;
+        profileFields.experience = profile.experience;
+        profileFields.education = profile.education;
         // Update profile
         profile = await Profile.findOneAndReplace(
           { user: req.params.user_id },
@@ -122,6 +125,8 @@ router.get('/', [auth, checkRole()], async (_req, res) => {
       'firstName',
       'lastName',
       'preferredName',
+      'email',
+      'username',
       'avatar',
     ]);
     res.json(profiles);
@@ -138,7 +143,14 @@ router.get('/user/:user_id', auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({
       user: req.params.user_id,
-    }).populate('user', ['firstName', 'lastName', 'preferredName', 'avatar']);
+    }).populate('user', [
+      'firstName',
+      'lastName',
+      'preferredName',
+      'avatar',
+      'email',
+      'username',
+    ]);
 
     if (!profile) {
       return res.status(400).json({ msg: 'Profile not found' });
@@ -249,7 +261,16 @@ router.delete('/experience/:user_id/:exp_id', auth, async (req, res) => {
       .json({ msg: checkStatus == 401 ? 'Unauthorized' : 'Server Error' });
 
   try {
-    const profile = await Profile.findOne({ user: req.params.user_id });
+    const profile = await Profile.findOne({
+      user: req.params.user_id,
+    }).populate('user', [
+      'firstName',
+      'lastName',
+      'preferredName',
+      'email',
+      'username',
+      'avatar',
+    ]);
 
     // Get remove index
     const removeIndex = profile.experience
@@ -340,7 +361,16 @@ router.delete('/education/:user_id/:edu_id', auth, async (req, res) => {
       .json({ msg: checkStatus == 401 ? 'Unauthorized' : 'Server Error' });
 
   try {
-    const profile = await Profile.findOne({ user: req.params.user_id });
+    const profile = await Profile.findOne({
+      user: req.params.user_id,
+    }).populate('user', [
+      'firstName',
+      'lastName',
+      'preferredName',
+      'email',
+      'username',
+      'avatar',
+    ]);
 
     // Get remove index
     const removeIndex = profile.education

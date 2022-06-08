@@ -2,16 +2,56 @@ import axios from 'axios';
 import { setAlert } from './alert';
 import {
   GET_PROFILE,
+  GET_PROFILES,
   UPDATE_PROFILE,
   PROFILE_ERROR,
   CLEAR_PROFILE,
   ACCOUNT_DELETED,
+  GET_REPOS,
+  GITHUB_ERROR,
 } from './types';
 
 // Get current user profile
 export const getCurrentUserProfile = () => async (dispatch) => {
   try {
     const res = await axios.get('/api/profiles/me');
+
+    dispatch({
+      type: GET_PROFILE,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({ type: CLEAR_PROFILE });
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+// Get all profiles
+export const getAllProfiles = () => async (dispatch) => {
+  dispatch({ type: CLEAR_PROFILE });
+  try {
+    const res = await axios.get('/api/profiles');
+
+    dispatch({
+      type: GET_PROFILES,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({ type: CLEAR_PROFILE });
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+// Get profile by userId
+export const getProfileById = (userId) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/profiles/user/${userId}`);
 
     dispatch({
       type: GET_PROFILE,
@@ -200,5 +240,23 @@ export const deleteAccount = (userId) => async (dispatch) => {
         payload: { msg: err.response.statusText, status: err.response.status },
       });
     }
+  }
+};
+
+// Get Github repos
+export const getGithubRepos = (githubUsername) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/profiles/github/${githubUsername}`);
+
+    dispatch({
+      type: GET_REPOS,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({ type: GITHUB_ERROR });
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
   }
 };
