@@ -10,6 +10,7 @@ import MyProfile from './components/profile/MyProfile';
 import UserProfile from './components/profile/UserProfile';
 import CreateProfile from './components/profile/CreateProfile';
 import EditProfile from './components/profile/EditProfile';
+import EditGeneralInfo from './components/profile/EditGeneralInfo';
 import AddExperience from './components/profile/AddExperience';
 import AddEducation from './components/profile/AddEducation';
 import SettingsSidebar from './components/layout/SettingsSidebar';
@@ -57,6 +58,15 @@ const App = () => {
               element={
                 <PrivateRoute>
                   <MyProfile />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              exact
+              path='/my-profile/edit/general-info'
+              element={
+                <PrivateRoute>
+                  <EditGeneralInfo />
                 </PrivateRoute>
               }
             />

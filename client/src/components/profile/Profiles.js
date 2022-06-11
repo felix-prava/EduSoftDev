@@ -8,7 +8,7 @@ import Spinner from '../layout/Spinner';
 const Profiles = ({ getAllProfiles, profile: { profiles, loading } }) => {
   useEffect(() => {
     getAllProfiles();
-  }, [getAllProfiles]); // TODO check
+  }, [getAllProfiles]);
 
   const backgroundColor = profiles.length > 0 ? 'bg-gray-300' : 'bg-white';
   return (
