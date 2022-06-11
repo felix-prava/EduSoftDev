@@ -131,20 +131,20 @@ router.put('/:user_id', auth, async (req, res) => {
     if (lastName) userFields.lastName = lastName;
     if (preferredName || preferredName === '')
       userFields.preferredName = preferredName;
-    if (username) {
+    if (username && user.username !== username) {
       try {
         const userExists = await User.exists({ username });
         if (userExists) {
           return res
             .status(400)
-            .json({ errors: [{ msg: 'Username Is Taken' }] });
+            .json({ errors: [{ msg: 'Username is taken' }] });
         }
       } catch (err) {
         res.status(500).json({ error: [{ msg: 'Server error' }] });
       }
       userFields.username = username;
     }
-    if (email) {
+    if (email && user.email !== email) {
       try {
         const userExists = await User.exists({ email });
         if (userExists) {
@@ -153,6 +153,7 @@ router.put('/:user_id', auth, async (req, res) => {
       } catch (err) {
         res.status(500).json({ error: [{ msg: 'Server error' }] });
       }
+      // TODO check email format
       userFields.email = email;
     }
     if (password && oldPassword) {
