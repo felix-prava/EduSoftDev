@@ -17,14 +17,14 @@ import Dashboard from './components/dashboard/Dashboard';
 import PrivateRoute from './components/routing/PrivateRoute';
 
 // Profiles
-import MyProfile from './components/profile/MyProfile';
-import UserProfile from './components/profile/UserProfile';
-import CreateProfile from './components/profile/CreateProfile';
-import EditProfile from './components/profile/EditProfile';
-import EditGeneralInfo from './components/profile/EditGeneralInfo';
-import AddExperience from './components/profile/AddExperience';
-import AddEducation from './components/profile/AddEducation';
-import Profiles from './components/profile/Profiles';
+import MyProfile from './components/profiles/MyProfile';
+import UserProfile from './components/profiles/UserProfile';
+import CreateProfile from './components/profiles/CreateProfile';
+import EditProfile from './components/profiles/EditProfile';
+import EditGeneralInfo from './components/profiles/EditGeneralInfo';
+import AddExperience from './components/profiles/AddExperience';
+import AddEducation from './components/profiles/AddEducation';
+import Profiles from './components/profiles/Profiles';
 
 // Articles
 import Articles from './components/articles/Articles';
@@ -33,6 +33,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
+
 // Redux
 import { Provider } from 'react-redux';
 import store from './store';
@@ -91,7 +92,7 @@ const App = () => {
             />
             <Route
               exact
-              path='/profile/:id'
+              path='/profiles/:id'
               element={
                 <PrivateRoute>
                   <UserProfile />

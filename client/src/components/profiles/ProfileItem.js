@@ -38,7 +38,7 @@ const ProfileItem = ({
               <p className='text-indigo-400'>{status}</p>
               <p className='text-base text-indigo-300'>{email}</p>
               <p className='text-base text-indigo-400'>{username}</p>
-              <Link to={`/profile/${_id}`}>
+              <Link to={`/profiles/${_id}`}>
                 <button className='mt-2 group relative py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
                   View Profile
                 </button>
