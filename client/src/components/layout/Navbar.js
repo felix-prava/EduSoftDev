@@ -40,6 +40,15 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
   if (location.pathname === '/') {
     return <Fragment></Fragment>;
   }
+  const articles = (
+    <Link
+      to='/articles'
+      className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+    >
+      IT Articles
+    </Link>
+  );
+
   const normalUserLinks = (
     <Fragment>
       <Link
@@ -64,12 +73,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
         Projects
       </Link>
 
-      <Link
-        to='#'
-        className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
-      >
-        Calendar
-      </Link>
+      {articles}
 
       <Link
         to='#'
@@ -90,6 +94,8 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
       >
         Home
       </Link>
+
+      {articles}
     </Fragment>
   );
 
@@ -109,6 +115,8 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
       >
         Profiles
       </Link>
+
+      {articles}
     </Fragment>
   );
 
@@ -135,6 +143,8 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
       >
         Login
       </Link>
+
+      {articles}
 
       <Link
         to='/about-us'

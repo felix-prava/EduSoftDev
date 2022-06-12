@@ -1,11 +1,22 @@
 import React, { Fragment, useEffect } from 'react';
-import Landing from './components/layout/Landing';
-import Navbar from './components/layout/Navbar';
+
+// Auth
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
+
+// Layout
+import Landing from './components/layout/Landing';
+import Navbar from './components/layout/Navbar';
 import Alert from './components/layout/Alert';
+import SettingsSidebar from './components/layout/SettingsSidebar';
+
+// Dashboard
 import Dashboard from './components/dashboard/Dashboard';
+
+// Routing
 import PrivateRoute from './components/routing/PrivateRoute';
+
+// Profiles
 import MyProfile from './components/profile/MyProfile';
 import UserProfile from './components/profile/UserProfile';
 import CreateProfile from './components/profile/CreateProfile';
@@ -13,8 +24,11 @@ import EditProfile from './components/profile/EditProfile';
 import EditGeneralInfo from './components/profile/EditGeneralInfo';
 import AddExperience from './components/profile/AddExperience';
 import AddEducation from './components/profile/AddEducation';
-import SettingsSidebar from './components/layout/SettingsSidebar';
 import Profiles from './components/profile/Profiles';
+
+// Articles
+import Articles from './components/articles/Articles';
+
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { loadUser } from './actions/auth';
@@ -41,8 +55,11 @@ const App = () => {
         <Routes>
           <Route exact path='/' element={<Landing />} />
           <Fragment>
+            {/* Auth */}
             <Route exact path='/register' element={<Register />} />
             <Route exact path='/login' element={<Login />} />
+
+            {/* Dashboard */}
             <Route
               exact
               path='/home'
@@ -52,6 +69,8 @@ const App = () => {
                 </PrivateRoute>
               }
             />
+
+            {/* Profiles */}
             <Route
               exact
               path='/my-profile'
@@ -117,15 +136,6 @@ const App = () => {
             />
             <Route
               exact
-              path='/settings/:resource'
-              element={
-                <PrivateRoute>
-                  <SettingsSidebar />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              exact
               path='/admin/profiles'
               element={
                 <PrivateRoute expectedRole='admin' redirect='false'>
@@ -133,6 +143,20 @@ const App = () => {
                 </PrivateRoute>
               }
             />
+
+            {/* Settings */}
+            <Route
+              exact
+              path='/settings/:resource'
+              element={
+                <PrivateRoute>
+                  <SettingsSidebar />
+                </PrivateRoute>
+              }
+            />
+
+            {/* Articles */}
+            <Route exact path='/articles' element={<Articles />} />
           </Fragment>
         </Routes>
       </Router>
