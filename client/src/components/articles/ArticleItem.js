@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
+import { addLike, addDislike } from '../../actions/article';
+import { setAlert } from '../../actions/alert';
 
 const ArticleItem = ({
   auth,
@@ -19,7 +21,28 @@ const ArticleItem = ({
     dislikes,
     date,
   },
+  addLike,
+  addDislike,
+  setAlert,
 }) => {
+  function likeArticle(articleId) {
+    if (auth.isAuthenticated) {
+      addLike(articleId);
+    } else {
+      setAlert('Must be logged in to like this article', 'error');
+      // TODO pop-up with option log in
+    }
+  }
+
+  function dislikeArticle(articleId) {
+    if (auth.isAuthenticated) {
+      addDislike(articleId);
+    } else {
+      setAlert('Must be logged in to dislike this article', 'error');
+      // TODO pop-up with option log in
+    }
+  }
+
   return (
     <Fragment>
       <div id={_id}>
@@ -38,6 +61,7 @@ const ArticleItem = ({
           <div className='mt-6 flex space-x-3'>
             <button
               type='button'
+              onClick={(e) => likeArticle(_id)}
               className='inline-flex items-center px-4 py-1 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
             >
               <svg
@@ -52,6 +76,7 @@ const ArticleItem = ({
             </button>
             <button
               type='button'
+              onClick={(e) => dislikeArticle(_id)}
               className='inline-flex items-center px-4 py-1 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
             >
               <svg
@@ -124,10 +149,15 @@ const ArticleItem = ({
 ArticleItem.propTypes = {
   article: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
+  addLike: PropTypes.func.isRequired,
+  addDislike: PropTypes.func.isRequired,
+  setAlert: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, {})(ArticleItem);
+export default connect(mapStateToProps, { addLike, addDislike, setAlert })(
+  ArticleItem
+);

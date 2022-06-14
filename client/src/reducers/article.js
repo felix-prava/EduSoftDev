@@ -1,4 +1,9 @@
-import { GET_ARTICLES, ARTICLE_ERROR } from '../actions/types';
+import {
+  GET_ARTICLES,
+  ARTICLE_ERROR,
+  UPDATE_LIKES,
+  UPDATE_DISLIKES,
+} from '../actions/types';
 
 const initialState = {
   article: null,
@@ -24,6 +29,16 @@ export default function (state = initialState, action) {
         articles: [],
         error: payload,
         loading: false,
+      };
+    case UPDATE_LIKES:
+    case UPDATE_DISLIKES:
+      return {
+        ...state,
+        articles: state.articles.map((article) =>
+          article._id === payload.articleId
+            ? { ...article, likes: payload.likes, dislikes: payload.dislikes }
+            : article
+        ),
       };
     default:
       return state;

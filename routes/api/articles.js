@@ -197,7 +197,7 @@ router.put('/like/:article_id', auth, async (req, res) => {
     }
 
     await article.save();
-    res.json(article.likes);
+    res.json({ likes: article.likes, dislikes: article.dislikes });
   } catch (err) {
     if (err.kind == 'ObjectId') {
       return res.status(404).json({ msg: 'Article not found' });
@@ -240,7 +240,7 @@ router.put('/dislike/:article_id', auth, async (req, res) => {
     }
 
     await article.save();
-    res.json(article.dislikes);
+    res.json({ likes: article.likes, dislikes: article.dislikes });
   } catch (err) {
     if (err.kind == 'ObjectId') {
       return res.status(404).json({ msg: 'Article not found' });
