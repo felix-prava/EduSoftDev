@@ -3,6 +3,7 @@ import {
   ARTICLE_ERROR,
   UPDATE_LIKES,
   UPDATE_DISLIKES,
+  DELETE_ARTICLE,
 } from '../actions/types';
 
 const initialState = {
@@ -39,6 +40,12 @@ export default function (state = initialState, action) {
             ? { ...article, likes: payload.likes, dislikes: payload.dislikes }
             : article
         ),
+      };
+    case DELETE_ARTICLE:
+      return {
+        ...state,
+        articles: state.articles.filter((article) => article._id !== payload),
+        loading: false,
       };
     default:
       return state;

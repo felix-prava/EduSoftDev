@@ -5,6 +5,7 @@ import {
   ARTICLE_ERROR,
   UPDATE_LIKES,
   UPDATE_DISLIKES,
+  DELETE_ARTICLE,
 } from './types';
 
 // Get articles
@@ -57,6 +58,24 @@ export const addDislike = (articleId) => async (dispatch) => {
         dislikes: res.data.dislikes,
       },
     });
+  } catch (err) {
+    dispatch({
+      type: ARTICLE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+// Delete an article
+export const deleteArticle = (articleId) => async (dispatch) => {
+  try {
+    await axios.delete(`/api/articles/${articleId}`);
+
+    dispatch({
+      type: DELETE_ARTICLE,
+      payload: articleId,
+    });
+    dispatch(setAlert('Article Deleted', 'success'));
   } catch (err) {
     dispatch({
       type: ARTICLE_ERROR,

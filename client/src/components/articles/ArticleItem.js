@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
-import { addLike, addDislike } from '../../actions/article';
+import { addLike, addDislike, deleteArticle } from '../../actions/article';
 import { setAlert } from '../../actions/alert';
 
 const ArticleItem = ({
@@ -23,6 +23,7 @@ const ArticleItem = ({
   },
   addLike,
   addDislike,
+  deleteArticle,
   setAlert,
 }) => {
   function likeArticle(articleId) {
@@ -96,7 +97,10 @@ const ArticleItem = ({
               Discussion {comments.length > 0 && comments.length}
             </button>
             {!auth.loading && auth.user !== null && auth.user._id === user && (
-              <button className='bg-red-600 border border-transparent rounded-md shadow-sm py-1 px-3 flex items-center inline-flex justify-center ml-4 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600'>
+              <button
+                onClick={(e) => deleteArticle(_id)}
+                className='bg-red-600 border border-transparent rounded-md shadow-sm py-1 px-3 flex items-center inline-flex justify-center ml-4 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600'
+              >
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
                   className='h-5 w-5'
@@ -151,6 +155,7 @@ ArticleItem.propTypes = {
   auth: PropTypes.object.isRequired,
   addLike: PropTypes.func.isRequired,
   addDislike: PropTypes.func.isRequired,
+  deleteArticle: PropTypes.func.isRequired,
   setAlert: PropTypes.func.isRequired,
 };
 
@@ -158,6 +163,9 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { addLike, addDislike, setAlert })(
-  ArticleItem
-);
+export default connect(mapStateToProps, {
+  addLike,
+  addDislike,
+  deleteArticle,
+  setAlert,
+})(ArticleItem);
