@@ -6,6 +6,7 @@ import {
   UPDATE_LIKES,
   UPDATE_DISLIKES,
   DELETE_ARTICLE,
+  ADD_ARTICLE,
 } from './types';
 
 // Get articles
@@ -76,6 +77,30 @@ export const deleteArticle = (articleId) => async (dispatch) => {
       payload: articleId,
     });
     dispatch(setAlert('Article Deleted', 'success'));
+  } catch (err) {
+    dispatch({
+      type: ARTICLE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+// Add an article
+export const addArticle = (formData) => async (dispatch) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+    const res = await axios.post('/api/articles', formData, config);
+
+    dispatch({
+      type: ADD_ARTICLE,
+      payload: res.data,
+    });
+    dispatch(setAlert('Post Created', 'success'));
   } catch (err) {
     dispatch({
       type: ARTICLE_ERROR,

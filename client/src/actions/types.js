@@ -21,3 +21,4 @@ export const ARTICLE_ERROR = 'ARTICLE_ERROR';
 export const UPDATE_LIKES = 'UPDATE_LIKES';
 export const UPDATE_DISLIKES = 'UPDATE_DISLIKES';
 export const DELETE_ARTICLE = 'DELETE_ARTICLE';
+export const ADD_ARTICLE = 'ADD_ARTICLE';

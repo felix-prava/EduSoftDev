@@ -4,6 +4,7 @@ import {
   UPDATE_LIKES,
   UPDATE_DISLIKES,
   DELETE_ARTICLE,
+  ADD_ARTICLE,
 } from '../actions/types';
 
 const initialState = {
@@ -21,6 +22,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         articles: payload,
+        loading: false,
+      };
+    case ADD_ARTICLE:
+      return {
+        ...state,
+        articles: [payload, ...state.articles],
         loading: false,
       };
     case ARTICLE_ERROR:

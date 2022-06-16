@@ -1,11 +1,16 @@
 import React, { Fragment, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getArticles } from '../../actions/article';
 import Spinner from '../layout/Spinner';
 import ArticleItem from './ArticleItem';
 
-const Articles = ({ article: { articles, loading }, getArticles }) => {
+const Articles = ({
+  auth: { isAuthenticated },
+  article: { articles, loading },
+  getArticles,
+}) => {
   useEffect(() => {
     getArticles();
   }, [getArticles]);
@@ -22,6 +27,14 @@ const Articles = ({ article: { articles, loading }, getArticles }) => {
                 <h2 className='text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl'>
                   Articles
                 </h2>
+                {isAuthenticated && (
+                  <p className='mt-6 text-lg tracking-tight text-gray-900'>
+                    Do you want to share something interesting with us?{' '}
+                    <Link to='/create-article' className='text-blue-500'>
+                      Create your own article
+                    </Link>
+                  </p>
+                )}
               </div>
               <div className='mt-6 pt-10 grid gap-16 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-12'>
                 {articles.map((article) => (
@@ -37,11 +50,13 @@ const Articles = ({ article: { articles, loading }, getArticles }) => {
 };
 
 Articles.propTypes = {
+  auth: PropTypes.object.isRequired,
   article: PropTypes.object.isRequired,
   getArticles: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  auth: state.auth,
   article: state.article,
 });
 

@@ -28,6 +28,7 @@ import Profiles from './components/profiles/Profiles';
 
 // Articles
 import Articles from './components/articles/Articles';
+import CreateArticle from './components/articles/CreateArticle';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -158,6 +159,15 @@ const App = () => {
 
             {/* Articles */}
             <Route exact path='/articles' element={<Articles />} />
+            <Route
+              exact
+              path='/create-article'
+              element={
+                <PrivateRoute>
+                  <CreateArticle />
+                </PrivateRoute>
+              }
+            />
           </Fragment>
         </Routes>
       </Router>
