@@ -1,24 +1,40 @@
 import React, { Fragment, useEffect } from 'react';
-import Landing from './components/layout/Landing';
-import Navbar from './components/layout/Navbar';
+
+// Auth
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
+
+// Layout
+import Landing from './components/layout/Landing';
+import Navbar from './components/layout/Navbar';
 import Alert from './components/layout/Alert';
-import Dashboard from './components/dashboard/Dashboard';
-import PrivateRoute from './components/routing/PrivateRoute';
-import MyProfile from './components/profile/MyProfile';
-import UserProfile from './components/profile/UserProfile';
-import CreateProfile from './components/profile/CreateProfile';
-import EditProfile from './components/profile/EditProfile';
-import EditGeneralInfo from './components/profile/EditGeneralInfo';
-import AddExperience from './components/profile/AddExperience';
-import AddEducation from './components/profile/AddEducation';
 import SettingsSidebar from './components/layout/SettingsSidebar';
-import Profiles from './components/profile/Profiles';
+
+// Dashboard
+import Dashboard from './components/dashboard/Dashboard';
+
+// Routing
+import PrivateRoute from './components/routing/PrivateRoute';
+
+// Profiles
+import MyProfile from './components/profiles/MyProfile';
+import UserProfile from './components/profiles/UserProfile';
+import CreateProfile from './components/profiles/CreateProfile';
+import EditProfile from './components/profiles/EditProfile';
+import EditGeneralInfo from './components/profiles/EditGeneralInfo';
+import AddExperience from './components/profiles/AddExperience';
+import AddEducation from './components/profiles/AddEducation';
+import Profiles from './components/profiles/Profiles';
+
+// Articles
+import Articles from './components/articles/Articles';
+import CreateArticle from './components/articles/CreateArticle';
+
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
+
 // Redux
 import { Provider } from 'react-redux';
 import store from './store';
@@ -41,8 +57,11 @@ const App = () => {
         <Routes>
           <Route exact path='/' element={<Landing />} />
           <Fragment>
+            {/* Auth */}
             <Route exact path='/register' element={<Register />} />
             <Route exact path='/login' element={<Login />} />
+
+            {/* Dashboard */}
             <Route
               exact
               path='/home'
@@ -52,6 +71,8 @@ const App = () => {
                 </PrivateRoute>
               }
             />
+
+            {/* Profiles */}
             <Route
               exact
               path='/my-profile'
@@ -72,7 +93,7 @@ const App = () => {
             />
             <Route
               exact
-              path='/profile/:id'
+              path='/profiles/:id'
               element={
                 <PrivateRoute>
                   <UserProfile />
@@ -117,6 +138,17 @@ const App = () => {
             />
             <Route
               exact
+              path='/admin/profiles'
+              element={
+                <PrivateRoute expectedRole='admin' redirect='false'>
+                  <Profiles />
+                </PrivateRoute>
+              }
+            />
+
+            {/* Settings */}
+            <Route
+              exact
               path='/settings/:resource'
               element={
                 <PrivateRoute>
@@ -124,12 +156,15 @@ const App = () => {
                 </PrivateRoute>
               }
             />
+
+            {/* Articles */}
+            <Route exact path='/articles' element={<Articles />} />
             <Route
               exact
-              path='/admin/profiles'
+              path='/create-article'
               element={
-                <PrivateRoute expectedRole='admin' redirect='false'>
-                  <Profiles />
+                <PrivateRoute>
+                  <CreateArticle />
                 </PrivateRoute>
               }
             />

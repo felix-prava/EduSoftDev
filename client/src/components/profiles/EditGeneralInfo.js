@@ -36,7 +36,7 @@ const EditGeneralInfo = ({ auth: { user, loading }, updateUser, setAlert }) => {
     }
     if (!validFormData) return;
 
-    const result = await updateUser(
+    await updateUser(
       { firstName, lastName, username, email },
       user._id,
       'Information Updated'

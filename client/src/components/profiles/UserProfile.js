@@ -7,7 +7,7 @@ import { getProfileById } from '../../actions/profile';
 import Experience from './Experience';
 import Education from './Education';
 import ProfileSocialItems from './ProfileSocialItems';
-import ProfileGithub from './ProfileGithub';
+import GithubRepos from './GithubRepos';
 
 const UserProfile = ({
   profile: { profile, loading },
@@ -305,7 +305,7 @@ const UserProfile = ({
                       <h2 className='text-3xl font-extrabold tracking-tight sm:text-4xl'>
                         Github Repos
                       </h2>
-                      <ProfileGithub username={profile.githubUsername} />
+                      <GithubRepos username={profile.githubUsername} />
                     </div>
                   )}
                 </div>
