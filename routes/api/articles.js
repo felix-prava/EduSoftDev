@@ -31,6 +31,7 @@ router.post(
       const newArticle = new Article({
         subject: req.body.subject,
         body: req.body.body,
+        description: req.body.description,
         avatar: user.avatar,
         userFirstName: user.firstName,
         userLastName: user.lastName,
@@ -63,7 +64,7 @@ router.put(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const { subject, body } = req.body;
+    const { subject, body, description } = req.body;
 
     try {
       const article = await Article.findById(req.params.article_id);
@@ -84,7 +85,7 @@ router.put(
       // Update article
       const updatedArticle = await Article.findOneAndUpdate(
         { _id: article.id },
-        { $set: { subject, body } },
+        { $set: { subject, body, description } },
         { new: true } // return the document after update was applied
       );
 
@@ -197,7 +198,7 @@ router.put('/like/:article_id', auth, async (req, res) => {
     }
 
     await article.save();
-    res.json(article.likes);
+    res.json({ likes: article.likes, dislikes: article.dislikes });
   } catch (err) {
     if (err.kind == 'ObjectId') {
       return res.status(404).json({ msg: 'Article not found' });
@@ -240,7 +241,7 @@ router.put('/dislike/:article_id', auth, async (req, res) => {
     }
 
     await article.save();
-    res.json(article.dislikes);
+    res.json({ likes: article.likes, dislikes: article.dislikes });
   } catch (err) {
     if (err.kind == 'ObjectId') {
       return res.status(404).json({ msg: 'Article not found' });
