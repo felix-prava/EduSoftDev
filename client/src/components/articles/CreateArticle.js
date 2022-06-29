@@ -18,6 +18,10 @@ const CreateArticle = ({ addArticle }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    addArticle(formData);
+    if (subject !== '' && body !== '') {
+      setFormData({ subject: '', body: '', description: '' });
+    }
   };
 
   return (
@@ -80,7 +84,7 @@ const CreateArticle = ({ addArticle }) => {
 
             <div>
               <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
-                <div className='sm:col-span-3'>
+                <div className='sm:col-span-6'>
                   <label
                     htmlFor='description'
                     className='block text-sm font-medium text-gray-700'

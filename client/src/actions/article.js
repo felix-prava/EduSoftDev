@@ -100,11 +100,11 @@ export const addArticle = (formData) => async (dispatch) => {
       type: ADD_ARTICLE,
       payload: res.data,
     });
-    dispatch(setAlert('Post Created', 'success'));
+    dispatch(setAlert('Article Created', 'success'));
   } catch (err) {
-    dispatch({
-      type: ARTICLE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
-    });
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'error')));
+    }
   }
 };
