@@ -28,6 +28,7 @@ import Profiles from './components/profiles/Profiles';
 
 // Articles
 import Articles from './components/articles/Articles';
+import Article from './components/articles/Article';
 import CreateArticle from './components/articles/CreateArticle';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -159,6 +160,7 @@ const App = () => {
 
             {/* Articles */}
             <Route exact path='/articles' element={<Articles />} />
+            <Route exact path='/articles/:id' element={<Article />} />
             <Route
               exact
               path='/create-article'

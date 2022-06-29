@@ -1,5 +1,6 @@
 import {
   GET_ARTICLES,
+  GET_ARTICLE,
   ARTICLE_ERROR,
   UPDATE_LIKES,
   UPDATE_DISLIKES,
@@ -14,7 +15,7 @@ const initialState = {
   error: {},
 };
 
-export default function (state = initialState, action) {
+export default function ArticleReducer(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
@@ -22,6 +23,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         articles: payload,
+        loading: false,
+      };
+    case GET_ARTICLE:
+      return {
+        ...state,
+        article: payload,
         loading: false,
       };
     case ADD_ARTICLE:

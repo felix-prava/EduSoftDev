@@ -56,7 +56,7 @@ const ArticleItem = ({
               className='text-base font-semibold text-indigo-600 hover:text-indigo-500'
             >
               {' '}
-              Read full story{' '}
+              Read full article{' '}
             </Link>
           </div>
           <div className='mt-6 flex space-x-3'>
@@ -94,8 +94,11 @@ const ArticleItem = ({
               type='button'
               className='inline-flex items-center px-4 py-1 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
             >
-              Discussion {comments.length > 0 && comments.length}
+              <Link to={`/articles/${_id}`}>
+                Discussion {comments.length > 0 && comments.length}
+              </Link>
             </button>
+
             {!auth.loading && auth.user !== null && auth.user._id === user && (
               <button
                 onClick={(e) => deleteArticle(_id)}

@@ -2,6 +2,7 @@ import axios from 'axios';
 import { setAlert } from './alert';
 import {
   GET_ARTICLES,
+  GET_ARTICLE,
   ARTICLE_ERROR,
   UPDATE_LIKES,
   UPDATE_DISLIKES,
@@ -16,6 +17,23 @@ export const getArticles = () => async (dispatch) => {
 
     dispatch({
       type: GET_ARTICLES,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: ARTICLE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+// Get article
+export const getArticle = (articleId) => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/articles/${articleId}`);
+
+    dispatch({
+      type: GET_ARTICLE,
       payload: res.data,
     });
   } catch (err) {
