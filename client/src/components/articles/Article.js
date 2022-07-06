@@ -13,6 +13,24 @@ import {
 import { setAlert } from '../../actions/alert';
 
 import Moment from 'react-moment';
+import moment from 'moment';
+
+function displayCommentDate(date) {
+  // today.diff(future)
+  let yesterdayMidnight = moment().subtract(1, 'days').endOf('day');
+  console.log(date);
+  console.log(moment(date).toString());
+  console.log(yesterdayMidnight.toString());
+  if (moment(date) > yesterdayMidnight) {
+    return (
+      <Fragment>
+        Today <Moment format='HH:mm'>{date}</Moment>
+      </Fragment>
+    );
+  } else {
+    return <Moment format='DD/MM'>{date}</Moment>;
+  }
+}
 
 const Article = ({
   getArticle,
@@ -45,6 +63,8 @@ const Article = ({
       // TODO pop-up with option log in
     }
   }
+
+  const commentsMargin = auth.isAuthenticated ? 'pb-4' : 'mt-28 pt-8 pb-4';
 
   return loading || article === null ? (
     <Spinner />
@@ -118,23 +138,19 @@ const Article = ({
                 <span className='sr-only'>
                   {article.userLastName} {article.userFirstName}
                 </span>
-                <img
-                  className='h-10 w-10 rounded-full'
-                  src={article.avatar}
-                  alt=''
-                />
+                <Link to={`/profiles/${article.user}`}>
+                  <img
+                    className='h-10 w-10 rounded-full'
+                    src={article.avatar}
+                    alt=''
+                  />
+                </Link>
               </div>
               <div className='ml-3'>
                 <p className='text-sm font-medium text-gray-900'>
-                  {article.user ? (
-                    <Link to={`/profiles/${article.user}`}>
-                      {article.userLastName} {article.userFirstName}
-                    </Link>
-                  ) : (
-                    <Fragment>
-                      {article.userLastName} {article.userFirstName}
-                    </Fragment>
-                  )}
+                  <Link to={`/profiles/${article.user}`}>
+                    {article.userLastName} {article.userFirstName}
+                  </Link>
                 </p>
                 <div className='flex space-x-1 text-sm text-gray-500'>
                   <time dateTime={article.date}>
@@ -152,6 +168,39 @@ const Article = ({
             <AddComment articleId={article._id} />
           </div>
         )}
+        <div className={commentsMargin}>
+          <ul role='list' className='divide-y divide-gray-200'>
+            {article.comments.map((comment) => (
+              <li className='py-4' key={comment._id}>
+                <div className='flex space-x-3'>
+                  <Link to={`/profiles/${comment.user}`}>
+                    <img
+                      className='h-6 w-6 rounded-full'
+                      src={comment.avatar}
+                      alt=''
+                    />
+                  </Link>
+                  <div className='flex-1 space-y-1'>
+                    <div className='flex items-center justify-between'>
+                      <h3 className='text-sm font-medium'>
+                        <Link to={`/profiles/${comment.user}`}>
+                          {/*<!-- 
+                          TODO - Delete old comments (without an username)
+                           -->*/}
+                          {comment.username || 'legolas24'}
+                        </Link>
+                      </h3>
+                      <p className='text-sm text-gray-500'>
+                        {displayCommentDate(comment.date)}
+                      </p>
+                    </div>
+                    <p className='text-sm text-gray-500'>{comment.body}</p>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </Fragment>
   );
