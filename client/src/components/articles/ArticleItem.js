@@ -131,7 +131,7 @@ const ArticleItem = ({
           <div className='ml-3'>
             <p className='text-sm font-medium text-gray-900'>
               {user ? (
-                <Link to={`/users/${user._id}`}>
+                <Link to={`/profiles/${user}`}>
                   {userLastName} {userFirstName}
                 </Link>
               ) : (

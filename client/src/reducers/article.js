@@ -6,6 +6,8 @@ import {
   UPDATE_DISLIKES,
   DELETE_ARTICLE,
   ADD_ARTICLE,
+  ADD_COMMENT,
+  REMOVE_COMMENT,
 } from '../actions/types';
 
 const initialState = {
@@ -54,6 +56,23 @@ export default function ArticleReducer(state = initialState, action) {
             ? { ...article, likes: payload.likes, dislikes: payload.dislikes }
             : article
         ),
+      };
+    case ADD_COMMENT:
+      return {
+        ...state,
+        article: { ...state.article, comments: payload },
+        loading: false,
+      };
+    case REMOVE_COMMENT:
+      return {
+        ...state,
+        article: {
+          ...state.article,
+          comments: state.article.comments.filter(
+            (comment) => comment._id !== payload
+          ),
+        },
+        loading: false,
       };
     case DELETE_ARTICLE:
       return {

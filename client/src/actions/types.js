@@ -23,3 +23,5 @@ export const UPDATE_LIKES = 'UPDATE_LIKES';
 export const UPDATE_DISLIKES = 'UPDATE_DISLIKES';
 export const DELETE_ARTICLE = 'DELETE_ARTICLE';
 export const ADD_ARTICLE = 'ADD_ARTICLE';
+export const ADD_COMMENT = 'ADD_COMMENT';
+export const REMOVE_COMMENT = 'REMOVE_COMMENT';
