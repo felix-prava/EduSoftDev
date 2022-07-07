@@ -11,26 +11,8 @@ import {
   deleteArticle,
 } from '../../actions/article';
 import { setAlert } from '../../actions/alert';
-
-import Moment from 'react-moment';
-import moment from 'moment';
-
-function displayCommentDate(date) {
-  // today.diff(future)
-  let yesterdayMidnight = moment().subtract(1, 'days').endOf('day');
-  console.log(date);
-  console.log(moment(date).toString());
-  console.log(yesterdayMidnight.toString());
-  if (moment(date) > yesterdayMidnight) {
-    return (
-      <Fragment>
-        Today <Moment format='HH:mm'>{date}</Moment>
-      </Fragment>
-    );
-  } else {
-    return <Moment format='DD/MM'>{date}</Moment>;
-  }
-}
+import { deleteComment } from '../../actions/article';
+import { displayDate } from '../../utils/helpers';
 
 const Article = ({
   getArticle,
@@ -39,6 +21,7 @@ const Article = ({
   addLike,
   addDislike,
   deleteArticle,
+  deleteComment,
   setAlert,
 }) => {
   const { id } = useParams();
@@ -155,8 +138,7 @@ const Article = ({
                 <div className='flex space-x-1 text-sm text-gray-500'>
                   <time dateTime={article.date}>
                     {' '}
-                    Posted on{' '}
-                    <Moment format='DD/MM/YYYY'>{article.date}</Moment>{' '}
+                    Posted on {displayDate(article.date)}
                   </time>
                 </div>
               </div>
@@ -169,7 +151,7 @@ const Article = ({
           </div>
         )}
         <div className={commentsMargin}>
-          <ul role='list' className='divide-y divide-gray-200'>
+          <ul className='divide-y divide-gray-200'>
             {article.comments.map((comment) => (
               <li className='py-4' key={comment._id}>
                 <div className='flex space-x-3'>
@@ -191,7 +173,30 @@ const Article = ({
                         </Link>
                       </h3>
                       <p className='text-sm text-gray-500'>
-                        {displayCommentDate(comment.date)}
+                        {displayDate(comment.date)}
+                        {!auth.loading &&
+                          auth.user !== null &&
+                          auth.user._id === comment.user && (
+                            <button
+                              onClick={(e) =>
+                                deleteComment(article._id, comment._id)
+                              }
+                              className='bg-red-600 border border-transparent rounded-md shadow-sm py-1 px-3 flex items-center inline-flex justify-center ml-4 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600'
+                            >
+                              <svg
+                                xmlns='http://www.w3.org/2000/svg'
+                                className='h-5 w-5'
+                                viewBox='0 0 20 20'
+                                fill='currentColor'
+                              >
+                                <path
+                                  fillRule='evenodd'
+                                  d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
+                                  clipRule='evenodd'
+                                />
+                              </svg>
+                            </button>
+                          )}
                       </p>
                     </div>
                     <p className='text-sm text-gray-500'>{comment.body}</p>
@@ -213,6 +218,7 @@ Article.propTypes = {
   addLike: PropTypes.func.isRequired,
   addDislike: PropTypes.func.isRequired,
   deleteArticle: PropTypes.func.isRequired,
+  deleteComment: PropTypes.func.isRequired,
   setAlert: PropTypes.func.isRequired,
 };
 
@@ -226,5 +232,6 @@ export default connect(mapStateToProps, {
   addLike,
   addDislike,
   deleteArticle,
+  deleteComment,
   setAlert,
 })(Article);
