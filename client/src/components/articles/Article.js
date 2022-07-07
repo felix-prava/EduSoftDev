@@ -176,7 +176,9 @@ const Article = ({
                         {displayDate(comment.date)}
                         {!auth.loading &&
                           auth.user !== null &&
-                          auth.user._id === comment.user && (
+                          (auth.user._id === comment.user ||
+                            auth.user.role === 'admin' ||
+                            auth.user.role === 'mentor') && (
                             <button
                               onClick={(e) =>
                                 deleteComment(article._id, comment._id)
