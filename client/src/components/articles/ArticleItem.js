@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Moment from 'react-moment';
 import { connect } from 'react-redux';
 import { addLike, addDislike, deleteArticle } from '../../actions/article';
 import { setAlert } from '../../actions/alert';
+import { displayDate } from '../../utils/helpers';
 
 const ArticleItem = ({
   auth,
@@ -141,10 +141,7 @@ const ArticleItem = ({
               )}
             </p>
             <div className='flex space-x-1 text-sm text-gray-500'>
-              <time dateTime={date}>
-                {' '}
-                Posted on <Moment format='DD/MM/YYYY'>{date}</Moment>{' '}
-              </time>
+              <time dateTime={date}> Posted on {displayDate(date)}</time>
             </div>
           </div>
         </div>
