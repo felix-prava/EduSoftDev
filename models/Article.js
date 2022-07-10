@@ -51,10 +51,7 @@ const ArticleSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
-      userLastName: {
-        type: String,
-      },
-      userFirstName: {
+      username: {
         type: String,
       },
       avatar: {

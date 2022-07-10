@@ -270,8 +270,7 @@ router.post(
       const newComment = {
         body: req.body.body,
         avatar: user.avatar,
-        userFirstName: user.firstName,
-        userLastName: user.lastName,
+        username: user.username,
         user: req.user.id,
       };
       article.comments.unshift(newComment);

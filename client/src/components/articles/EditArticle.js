@@ -1,10 +1,14 @@
-import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Fragment, useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addArticle } from '../../actions/article';
+import { updateArticle, getArticle } from '../../actions/article';
 
-const CreateArticle = ({ addArticle }) => {
+const EditArticle = ({
+  article: { article, loading },
+  updateArticle,
+  getArticle,
+}) => {
   const [formData, setFormData] = useState({
     subject: '',
     description: '',
@@ -18,11 +22,20 @@ const CreateArticle = ({ addArticle }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    addArticle(formData);
-    if (subject !== '' && body !== '') {
-      setFormData({ subject: '', body: '', description: '' });
-    }
+    updateArticle(formData, id);
   };
+
+  const { id } = useParams();
+  useEffect(() => {
+    if (!article) getArticle(id);
+    if (article) {
+      setFormData({
+        subject: article.subject,
+        description: article.description,
+        body: article.body,
+      });
+    }
+  }, [getArticle, article, id]);
 
   return (
     <Fragment>
@@ -35,7 +48,7 @@ const CreateArticle = ({ addArticle }) => {
             <div>
               <div>
                 <h3 className='text-2xl font-bold leading-6 font-medium text-gray-900 sm:text-2xl'>
-                  Create an article
+                  Edit article
                 </h3>
               </div>
 
@@ -108,7 +121,7 @@ const CreateArticle = ({ addArticle }) => {
 
           <div className='pt-5'>
             <div className='flex justify-end mb-8'>
-              <Link to='/articles'>
+              <Link to={`/articles/${id}`}>
                 <button
                   type='button'
                   className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
@@ -130,8 +143,16 @@ const CreateArticle = ({ addArticle }) => {
   );
 };
 
-CreateArticle.propTypes = {
-  addArticle: PropTypes.func.isRequired,
+EditArticle.propTypes = {
+  article: PropTypes.object.isRequired,
+  updateArticle: PropTypes.func.isRequired,
+  getArticle: PropTypes.func.isRequired,
 };
 
-export default connect(null, { addArticle })(CreateArticle);
+const mapStateToProps = (state) => ({
+  article: state.article,
+});
+
+export default connect(mapStateToProps, { updateArticle, getArticle })(
+  EditArticle
+);

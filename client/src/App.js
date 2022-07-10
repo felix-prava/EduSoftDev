@@ -28,7 +28,9 @@ import Profiles from './components/profiles/Profiles';
 
 // Articles
 import Articles from './components/articles/Articles';
+import Article from './components/articles/Article';
 import CreateArticle from './components/articles/CreateArticle';
+import EditArticle from './components/articles/EditArticle';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -120,7 +122,7 @@ const App = () => {
             />
             <Route
               exact
-              path='/add-experience'
+              path='/my-profile/add-experience'
               element={
                 <PrivateRoute>
                   <AddExperience />
@@ -129,7 +131,7 @@ const App = () => {
             />
             <Route
               exact
-              path='/add-education'
+              path='/my-profile/add-education'
               element={
                 <PrivateRoute>
                   <AddEducation />
@@ -159,12 +161,22 @@ const App = () => {
 
             {/* Articles */}
             <Route exact path='/articles' element={<Articles />} />
+            <Route exact path='/articles/:id' element={<Article />} />
             <Route
               exact
-              path='/create-article'
+              path='/articles/create-article'
               element={
                 <PrivateRoute>
                   <CreateArticle />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              exact
+              path='/articles/edit/:id'
+              element={
+                <PrivateRoute>
+                  <EditArticle />
                 </PrivateRoute>
               }
             />
