@@ -8,6 +8,7 @@ import {
   UPDATE_DISLIKES,
   DELETE_ARTICLE,
   ADD_ARTICLE,
+  UPDATE_ARTICLE,
   ADD_COMMENT,
   REMOVE_COMMENT,
 } from './types';
@@ -127,6 +128,30 @@ export const addArticle = (formData) => async (dispatch) => {
       payload: res.data,
     });
     dispatch(setAlert('Article Created', 'success'));
+  } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'error')));
+    }
+  }
+};
+
+// Update an article
+export const updateArticle = (formData, articleId) => async (dispatch) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+    const res = await axios.put(`/api/articles/${articleId}`, formData, config);
+
+    dispatch({
+      type: UPDATE_ARTICLE,
+      payload: res.data,
+    });
+    dispatch(setAlert('Article Updated', 'success'));
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {

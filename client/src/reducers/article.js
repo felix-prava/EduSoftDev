@@ -6,6 +6,7 @@ import {
   UPDATE_DISLIKES,
   DELETE_ARTICLE,
   ADD_ARTICLE,
+  UPDATE_ARTICLE,
   ADD_COMMENT,
   REMOVE_COMMENT,
 } from '../actions/types';
@@ -37,6 +38,12 @@ export default function ArticleReducer(state = initialState, action) {
       return {
         ...state,
         articles: [payload, ...state.articles],
+        loading: false,
+      };
+    case UPDATE_ARTICLE:
+      return {
+        ...state,
+        article: payload,
         loading: false,
       };
     case ARTICLE_ERROR:
