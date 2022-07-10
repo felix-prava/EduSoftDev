@@ -30,7 +30,10 @@ const Articles = ({
                 {isAuthenticated && (
                   <p className='mt-6 text-lg tracking-tight text-gray-900'>
                     Do you want to share something interesting with us?{' '}
-                    <Link to='/create-article' className='text-blue-500'>
+                    <Link
+                      to='/articles/create-article'
+                      className='text-blue-500'
+                    >
                       Create your own article
                     </Link>
                   </p>

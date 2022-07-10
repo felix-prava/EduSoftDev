@@ -1,5 +1,6 @@
 module.exports = function checkRole(role = 'mentor') {
   return async (req, res, next) => {
+    // Should I delete this TO DO??
     // TODO message for front end to redirect back or redirect to login page
     try {
       const user = await User.findById(req.user.id, { role: 1, _id: 0 });

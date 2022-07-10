@@ -64,8 +64,8 @@ const Article = ({
             <div className='mt-6 flex space-x-3 '>
               <button
                 type='button'
-                onClick={(e) => likeArticle(article._id)}
-                className='inline-flex items-center px-4 py-1 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
+                onClick={() => likeArticle(article._id)}
+                className='inline-flex items-center px-4 py-1 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
               >
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
@@ -79,7 +79,7 @@ const Article = ({
               </button>
               <button
                 type='button'
-                onClick={(e) => dislikeArticle(article._id)}
+                onClick={() => dislikeArticle(article._id)}
                 className='inline-flex items-center px-4 py-1 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
               >
                 <svg
@@ -92,12 +92,40 @@ const Article = ({
                 </svg>
                 {article.dislikes.length > 0 && article.dislikes.length}
               </button>
+              {!auth.loading &&
+                auth.user !== null &&
+                (auth.user._id === article.user ||
+                  auth.user.role === 'admin' ||
+                  auth.user.role === 'mentor') && (
+                  <button
+                    type='button'
+                    className='inline-flex items-center px-2 py-1 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
+                  >
+                    <Link to={`/articles/edit/${article._id}`}>
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        className='flex-shrink-0 ml-1 mr-1 h-6 w-6'
+                        viewBox='0 0 20 20'
+                        fill='currentColor'
+                      >
+                        <path d='M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z' />
+                        <path
+                          fill-rule='evenodd'
+                          d='M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z'
+                          clip-rule='evenodd'
+                        />
+                      </svg>
+                    </Link>
+                  </button>
+                )}
 
               {!auth.loading &&
                 auth.user !== null &&
-                auth.user._id === article.user && (
+                (auth.user._id === article.user ||
+                  auth.user.role === 'admin' ||
+                  auth.user.role === 'mentor') && (
                   <button
-                    onClick={(e) => deleteArticle(article._id)}
+                    onClick={() => deleteArticle(article._id)}
                     className='bg-red-600 border border-transparent rounded-md shadow-sm py-1 px-3 flex items-center inline-flex justify-center ml-4 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600'
                   >
                     <svg
@@ -180,7 +208,7 @@ const Article = ({
                             auth.user.role === 'admin' ||
                             auth.user.role === 'mentor') && (
                             <button
-                              onClick={(e) =>
+                              onClick={() =>
                                 deleteComment(article._id, comment._id)
                               }
                               className='bg-red-600 border border-transparent rounded-md shadow-sm py-1 px-3 flex items-center inline-flex justify-center ml-4 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600'
