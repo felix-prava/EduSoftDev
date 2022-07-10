@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
@@ -45,6 +45,11 @@ const Article = ({
       setAlert('Must be logged in to dislike this article', 'error');
       // TODO pop-up with option log in
     }
+  }
+
+  let navigate = useNavigate();
+  function editArticle(articleId) {
+    navigate(`/articles/edit/${articleId}`);
   }
 
   const commentsMargin = auth.isAuthenticated ? 'pb-4' : 'mt-28 pt-8 pb-4';
@@ -99,23 +104,22 @@ const Article = ({
                   auth.user.role === 'mentor') && (
                   <button
                     type='button'
+                    onClick={() => editArticle(article._id)}
                     className='inline-flex items-center px-2 py-1 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
                   >
-                    <Link to={`/articles/edit/${article._id}`}>
-                      <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        className='flex-shrink-0 ml-1 mr-1 h-6 w-6'
-                        viewBox='0 0 20 20'
-                        fill='currentColor'
-                      >
-                        <path d='M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z' />
-                        <path
-                          fillRule='evenodd'
-                          d='M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z'
-                          clipRule='evenodd'
-                        />
-                      </svg>
-                    </Link>
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      className='flex-shrink-0 ml-1 mr-1 h-6 w-6'
+                      viewBox='0 0 20 20'
+                      fill='currentColor'
+                    >
+                      <path d='M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z' />
+                      <path
+                        fillRule='evenodd'
+                        d='M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z'
+                        clipRule='evenodd'
+                      />
+                    </svg>
                   </button>
                 )}
 

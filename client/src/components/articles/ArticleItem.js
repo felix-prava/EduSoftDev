@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addLike, addDislike, deleteArticle } from '../../actions/article';
 import { setAlert } from '../../actions/alert';
@@ -33,6 +33,11 @@ const ArticleItem = ({
       setAlert('Must be logged in to like this article', 'error');
       // TODO pop-up with option log in
     }
+  }
+
+  let navigate = useNavigate();
+  function showArticle(articleId) {
+    navigate(`/articles/${articleId}`);
   }
 
   function dislikeArticle(articleId) {
@@ -93,11 +98,10 @@ const ArticleItem = ({
             </button>
             <button
               type='button'
+              onClick={() => showArticle(_id)}
               className='inline-flex items-center px-4 py-1 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
             >
-              <Link to={`/articles/${_id}`}>
-                Discussion {comments.length > 0 && comments.length}
-              </Link>
+              Discussion {comments.length > 0 && comments.length}
             </button>
 
             {!auth.loading &&
