@@ -49,6 +49,14 @@ export default function ArticleReducer(state = initialState, action) {
       };
     case UPDATE_LIKES:
     case UPDATE_DISLIKES:
+      let returnedArticle = state.article;
+      if (payload.singleArticle) {
+        returnedArticle = {
+          ...state.article,
+          likes: payload.likes,
+          dislikes: payload.dislikes,
+        };
+      }
       return {
         ...state,
         articles: state.articles.map((article) =>
@@ -56,6 +64,7 @@ export default function ArticleReducer(state = initialState, action) {
             ? { ...article, likes: payload.likes, dislikes: payload.dislikes }
             : article
         ),
+        article: returnedArticle,
       };
     case ADD_COMMENT:
       return {

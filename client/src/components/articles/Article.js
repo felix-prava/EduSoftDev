@@ -31,7 +31,7 @@ const Article = ({
 
   function likeArticle(articleId) {
     if (auth.isAuthenticated) {
-      addLike(articleId);
+      addLike(articleId, true);
     } else {
       setAlert('Must be logged in to like this article', 'error');
       // TODO pop-up with option log in
@@ -40,7 +40,7 @@ const Article = ({
 
   function dislikeArticle(articleId) {
     if (auth.isAuthenticated) {
-      addDislike(articleId);
+      addDislike(articleId, true);
     } else {
       setAlert('Must be logged in to dislike this article', 'error');
       // TODO pop-up with option log in
