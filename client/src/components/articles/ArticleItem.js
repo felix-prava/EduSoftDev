@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import Moment from 'react-moment';
+import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addLike, addDislike, deleteArticle } from '../../actions/article';
 import { setAlert } from '../../actions/alert';
+import { displayDate } from '../../utils/helpers';
 
 const ArticleItem = ({
   auth,
@@ -35,6 +35,11 @@ const ArticleItem = ({
     }
   }
 
+  let navigate = useNavigate();
+  function showArticle(articleId) {
+    navigate(`/articles/${articleId}`);
+  }
+
   function dislikeArticle(articleId) {
     if (auth.isAuthenticated) {
       addDislike(articleId);
@@ -44,6 +49,7 @@ const ArticleItem = ({
     }
   }
 
+  // TODO Link to discussion leads to comment section
   return (
     <Fragment>
       <div id={_id}>
@@ -56,14 +62,14 @@ const ArticleItem = ({
               className='text-base font-semibold text-indigo-600 hover:text-indigo-500'
             >
               {' '}
-              Read full story{' '}
+              Read full article{' '}
             </Link>
           </div>
           <div className='mt-6 flex space-x-3'>
             <button
               type='button'
-              onClick={(e) => likeArticle(_id)}
-              className='inline-flex items-center px-4 py-1 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
+              onClick={() => likeArticle(_id)}
+              className='inline-flex items-center px-4 py-1 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
             >
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -77,7 +83,7 @@ const ArticleItem = ({
             </button>
             <button
               type='button'
-              onClick={(e) => dislikeArticle(_id)}
+              onClick={() => dislikeArticle(_id)}
               className='inline-flex items-center px-4 py-1 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
             >
               <svg
@@ -92,29 +98,35 @@ const ArticleItem = ({
             </button>
             <button
               type='button'
+              onClick={() => showArticle(_id)}
               className='inline-flex items-center px-4 py-1 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
             >
               Discussion {comments.length > 0 && comments.length}
             </button>
-            {!auth.loading && auth.user !== null && auth.user._id === user && (
-              <button
-                onClick={(e) => deleteArticle(_id)}
-                className='bg-red-600 border border-transparent rounded-md shadow-sm py-1 px-3 flex items-center inline-flex justify-center ml-4 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600'
-              >
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  className='h-5 w-5'
-                  viewBox='0 0 20 20'
-                  fill='currentColor'
+
+            {!auth.loading &&
+              auth.user !== null &&
+              (auth.user._id === user ||
+                auth.user.role === 'admin' ||
+                auth.user.role === 'mentor') && (
+                <button
+                  onClick={(e) => deleteArticle(_id)}
+                  className='bg-red-600 border border-transparent rounded-md shadow-sm py-1 px-3 flex items-center inline-flex justify-center ml-4 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600'
                 >
-                  <path
-                    fillRule='evenodd'
-                    d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
-                    clipRule='evenodd'
-                  />
-                </svg>
-              </button>
-            )}
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    className='h-5 w-5'
+                    viewBox='0 0 20 20'
+                    fill='currentColor'
+                  >
+                    <path
+                      fillRule='evenodd'
+                      d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
+                      clipRule='evenodd'
+                    />
+                  </svg>
+                </button>
+              )}
           </div>
         </div>
 
@@ -128,7 +140,7 @@ const ArticleItem = ({
           <div className='ml-3'>
             <p className='text-sm font-medium text-gray-900'>
               {user ? (
-                <Link to={`/users/${user._id}`}>
+                <Link to={`/profiles/${user}`}>
                   {userLastName} {userFirstName}
                 </Link>
               ) : (
@@ -138,10 +150,7 @@ const ArticleItem = ({
               )}
             </p>
             <div className='flex space-x-1 text-sm text-gray-500'>
-              <time dateTime={date}>
-                {' '}
-                Posted on <Moment format='DD/MM/YYYY'>{date}</Moment>{' '}
-              </time>
+              <time dateTime={date}> Posted on {displayDate(date)}</time>
             </div>
           </div>
         </div>

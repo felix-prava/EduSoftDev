@@ -1,10 +1,14 @@
 import {
   GET_ARTICLES,
+  GET_ARTICLE,
   ARTICLE_ERROR,
   UPDATE_LIKES,
   UPDATE_DISLIKES,
   DELETE_ARTICLE,
   ADD_ARTICLE,
+  UPDATE_ARTICLE,
+  ADD_COMMENT,
+  REMOVE_COMMENT,
 } from '../actions/types';
 
 const initialState = {
@@ -14,7 +18,7 @@ const initialState = {
   error: {},
 };
 
-export default function (state = initialState, action) {
+export default function ArticleReducer(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
@@ -24,10 +28,22 @@ export default function (state = initialState, action) {
         articles: payload,
         loading: false,
       };
+    case GET_ARTICLE:
+      return {
+        ...state,
+        article: payload,
+        loading: false,
+      };
     case ADD_ARTICLE:
       return {
         ...state,
         articles: [payload, ...state.articles],
+        loading: false,
+      };
+    case UPDATE_ARTICLE:
+      return {
+        ...state,
+        article: payload,
         loading: false,
       };
     case ARTICLE_ERROR:
@@ -40,6 +56,14 @@ export default function (state = initialState, action) {
       };
     case UPDATE_LIKES:
     case UPDATE_DISLIKES:
+      let returnedArticle = state.article;
+      if (payload.singleArticle) {
+        returnedArticle = {
+          ...state.article,
+          likes: payload.likes,
+          dislikes: payload.dislikes,
+        };
+      }
       return {
         ...state,
         articles: state.articles.map((article) =>
@@ -47,6 +71,24 @@ export default function (state = initialState, action) {
             ? { ...article, likes: payload.likes, dislikes: payload.dislikes }
             : article
         ),
+        article: returnedArticle,
+      };
+    case ADD_COMMENT:
+      return {
+        ...state,
+        article: { ...state.article, comments: payload },
+        loading: false,
+      };
+    case REMOVE_COMMENT:
+      return {
+        ...state,
+        article: {
+          ...state.article,
+          comments: state.article.comments.filter(
+            (comment) => comment._id !== payload
+          ),
+        },
+        loading: false,
       };
     case DELETE_ARTICLE:
       return {

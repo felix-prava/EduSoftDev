@@ -92,7 +92,7 @@ const MyProfile = ({
                 </Fragment>
               )}{' '}
               <div className='grid grid-cols-2 grid-flow-col gap-4'>
-                <Link to='/add-experience'>
+                <Link to='/my-profile/add-experience'>
                   <button
                     type='button'
                     className='mt-2 inline-flex text-center px-4 py-2 border border-transparent shadow-sm w-full text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
@@ -114,7 +114,7 @@ const MyProfile = ({
                     Add Experience
                   </button>
                 </Link>
-                <Link to='/add-education'>
+                <Link to='/my-profile/add-education'>
                   <button
                     type='button'
                     className='mt-2 content-center inline-flex text-center px-4 py-2 border border-transparent shadow-sm w-full text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
