@@ -9,6 +9,7 @@ import Landing from './components/layout/Landing';
 import Navbar from './components/layout/Navbar';
 import Alert from './components/layout/Alert';
 import SettingsSidebar from './components/layout/SettingsSidebar';
+import PageNotFound from './components/layout/PageNotFound';
 
 // Dashboard
 import Dashboard from './components/dashboard/Dashboard';
@@ -31,6 +32,9 @@ import Articles from './components/articles/Articles';
 import Article from './components/articles/Article';
 import CreateArticle from './components/articles/CreateArticle';
 import EditArticle from './components/articles/EditArticle';
+
+// Learning Materials - The Basics of Programming
+import Modules from './components/basics-of-programming/Modules';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -180,6 +184,20 @@ const App = () => {
                 </PrivateRoute>
               }
             />
+
+            {/* Learning Materials - The Basics of Programming */}
+            <Route
+              exact
+              path='/modules'
+              element={
+                <PrivateRoute>
+                  <Modules />
+                </PrivateRoute>
+              }
+            />
+
+            {/* Page not Found */}
+            <Route exact path='/:anything' element={<PageNotFound />} />
           </Fragment>
         </Routes>
       </Router>

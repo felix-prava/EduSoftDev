@@ -33,6 +33,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: 'normal',
   },
+  exp: {
+    type: Number,
+    default: 0,
+  },
   date: {
     type: Date,
     default: Date.now,
