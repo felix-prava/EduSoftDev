@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 const Modules = ({ auth: { isAuthenticated, loading, user } }) => {
+  const expNeededForSecondModule = 10;
+  const expNeededForThirdModule = 1000;
+
   return (
     <Fragment>
       <div className='relative bg-gray-50 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8'>
@@ -33,15 +36,9 @@ const Modules = ({ auth: { isAuthenticated, loading, user } }) => {
               </div>
               <div className='flex-1 bg-white p-6 flex flex-col justify-between'>
                 <div className='flex-1'>
-                  <p className='text-sm font-medium text-indigo-600'>
-                    <a href='#' className='hover:underline'>
-                      {' '}
-                      Article{' '}
-                    </a>
-                  </p>
                   <a href='#' className='block mt-2'>
                     <p className='text-xl font-semibold text-gray-900'>
-                      Boost your conversion rate
+                      Introduction
                     </p>
                     <p className='mt-3 text-base text-gray-500'>
                       Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -63,22 +60,35 @@ const Modules = ({ auth: { isAuthenticated, loading, user } }) => {
               </div>
               <div className='flex-1 bg-white p-6 flex flex-col justify-between'>
                 <div className='flex-1'>
-                  <p className='text-sm font-medium text-indigo-600'>
-                    <a href='#' className='hover:underline'>
-                      {' '}
-                      Video{' '}
-                    </a>
-                  </p>
                   <a href='#' className='block mt-2'>
                     <p className='text-xl font-semibold text-gray-900'>
-                      How to use search engine optimization to drive sales
+                      If Else - Conditional Statments
                     </p>
-                    <p className='mt-3 text-base text-gray-500'>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Velit facilis asperiores porro quaerat doloribus, eveniet
-                      dolore. Adipisci tempora aut inventore optio animi.,
-                      tempore temporibus quo laudantium.
-                    </p>
+                    {user && user.exp > expNeededForSecondModule ? (
+                      <p className='mt-3 text-base text-gray-500'>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Velit facilis asperiores porro quaerat doloribus,
+                        eveniet dolore. Adipisci tempora aut inventore optio
+                        animi., tempore temporibus quo laudantium.
+                      </p>
+                    ) : (
+                      <Fragment>
+                        <div className='items-center justify-center border border-dahsed'>
+                          <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            className='h-8 w-8'
+                            viewBox='0 0 20 20'
+                            fill='currentColor'
+                          >
+                            <path
+                              fillRule='evenodd'
+                              d='M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z'
+                              clipRule='evenodd'
+                            />
+                          </svg>
+                        </div>
+                      </Fragment>
+                    )}
                   </a>
                 </div>
               </div>
@@ -94,48 +104,36 @@ const Modules = ({ auth: { isAuthenticated, loading, user } }) => {
               </div>
               <div className='flex-1 bg-white p-6 flex flex-col justify-between'>
                 <div className='flex-1'>
-                  <p className='text-sm font-medium text-indigo-600'>
-                    <a href='#' className='hover:underline'>
-                      {' '}
-                      Case Study{' '}
-                    </a>
+                  <p className='text-xl font-semibold text-gray-900'>
+                    While and For Loops
                   </p>
-                  <a href='#' className='block mt-2'>
-                    <p className='text-xl font-semibold text-gray-900'>
-                      Improve your customer experience
-                    </p>
+                  {user && user.exp > expNeededForThirdModule ? (
                     <p className='mt-3 text-base text-gray-500'>
                       Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Sint harum rerum voluptatem quo recusandae magni placeat
-                      saepe molestiae, sed excepturi cumque corporis perferendis
-                      hic.
+                      Velit facilis asperiores porro quaerat doloribus, eveniet
+                      dolore. Adipisci tempora aut inventore optio animi.,
+                      tempore temporibus quo laudantium.
                     </p>
-                  </a>
-                </div>
-                <div className='mt-6 flex items-center'>
-                  <div className='flex-shrink-0'>
-                    <a href='#'>
-                      <span className='sr-only'>Daniela Metz</span>
-                      <img
-                        className='h-10 w-10 rounded-full'
-                        src='https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-                        alt=''
-                      />
-                    </a>
-                  </div>
-                  <div className='ml-3'>
-                    <p className='text-sm font-medium text-gray-900'>
-                      <a href='#' className='hover:underline'>
-                        {' '}
-                        Daniela Metz{' '}
-                      </a>
-                    </p>
-                    <div className='flex space-x-1 text-sm text-gray-500'>
-                      <time datetime='2020-02-12'> Feb 12, 2020 </time>
-                      <span aria-hidden='true'> &middot; </span>
-                      <span> 11 min read </span>
-                    </div>
-                  </div>
+                  ) : (
+                    <Fragment>
+                      <div className='place-content-center border border-dahsed'>
+                        <div>
+                          <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            className='h-8 w-8 justify-self-center'
+                            viewBox='0 0 20 20'
+                            fill='currentColor'
+                          >
+                            <path
+                              fillRule='evenodd'
+                              d='M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z'
+                              clipRule='evenodd'
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </Fragment>
+                  )}
                 </div>
               </div>
             </div>
