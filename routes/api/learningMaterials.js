@@ -23,11 +23,14 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { body } = req.body;
+    const { body, module, expNeeded, expGained } = req.body;
 
     try {
       problem = new LearningMaterial({
         body,
+        module,
+        expNeeded,
+        expGained,
       });
 
       await problem.save();

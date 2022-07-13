@@ -37,6 +37,30 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  solvedProblems: [
+    {
+      problem: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'learning_material',
+      },
+    },
+  ],
+  lessonsLearned: [
+    {
+      problem: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'learning_material',
+      },
+    },
+  ],
+  solvedQuizzes: [
+    {
+      problem: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'learning_material',
+      },
+    },
+  ],
   date: {
     type: Date,
     default: Date.now,

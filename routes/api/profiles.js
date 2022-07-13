@@ -150,6 +150,7 @@ router.get('/user/:user_id', auth, async (req, res) => {
       'avatar',
       'email',
       'username',
+      'exp',
     ]);
 
     if (!profile) {

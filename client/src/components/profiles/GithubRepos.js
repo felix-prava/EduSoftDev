@@ -8,6 +8,7 @@ const GithubRepos = ({ username, getGithubRepos, repos }) => {
   useEffect(() => {
     getGithubRepos(username);
   }, [getGithubRepos, username]);
+  // TODO key is not unique error
   const githubRepos = repos.map((repo) => (
     <Fragment>
       <li key={repo._id} className='sm:py-8'>

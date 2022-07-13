@@ -3,25 +3,65 @@ const mongoose = require('mongoose');
 const LearningMaterialSchema = new mongoose.Schema({
   type: {
     type: String,
-    default: 'problem',
+    default: 'problem', // other options: lesson, quiz
+  },
+  module: {
+    type: String,
+    required: true,
+  },
+  expNeeded: {
+    type: Number,
+    required: true,
+  },
+  expGained: {
+    type: Number,
+    required: true,
+  },
+  expMax: {
+    type: Number,
   },
   body: {
     type: String,
     required: true,
   },
-  likes: [
+  tests: [
     {
-      user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'users',
+      input: {
+        type: String,
+      },
+      output: {
+        type: String,
       },
     },
   ],
-  dislikes: [
+  examples: [
     {
-      user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'users',
+      input: {
+        type: String,
+      },
+      output: {
+        type: String,
+      },
+    },
+  ],
+  hints: [
+    {
+      body: {
+        type: String,
+      },
+    },
+  ],
+  wrongAnswers: [
+    {
+      body: {
+        type: String,
+      },
+    },
+  ],
+  rightAnswers: [
+    {
+      body: {
+        type: String,
       },
     },
   ],
@@ -44,6 +84,14 @@ const LearningMaterialSchema = new mongoose.Schema({
       },
     },
   ],
+  previous: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'learning_materials',
+  },
+  next: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'learning_materials',
+  },
   date: {
     type: Date,
     default: Date.now,
