@@ -47,7 +47,7 @@ const UserSchema = new mongoose.Schema({
   ],
   lessonsLearned: [
     {
-      problem: {
+      lesson: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'learning_material',
       },
@@ -55,7 +55,7 @@ const UserSchema = new mongoose.Schema({
   ],
   solvedQuizzes: [
     {
-      problem: {
+      quiz: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'learning_material',
       },
