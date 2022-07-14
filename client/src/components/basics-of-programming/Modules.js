@@ -116,7 +116,7 @@ const Modules = ({ auth: { isAuthenticated, loading, user } }) => {
                     </p>
                   ) : (
                     <Fragment>
-                      <div className='place-content-center border border-dahsed'>
+                      <div className=' place-content-center border border-dahsed'>
                         <div>
                           <svg
                             xmlns='http://www.w3.org/2000/svg'
