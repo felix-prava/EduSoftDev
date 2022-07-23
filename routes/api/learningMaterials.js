@@ -4,16 +4,12 @@ const auth = require('../../middleware/auth');
 const checkRole = require('../../middleware/checkRole');
 const compareUsers = require('../../middleware/compareUsers');
 const { check, validationResult } = require('express-validator');
-const jwt = require('jsonwebtoken');
-const config = require('config');
-const bcrypt = require('bcryptjs');
 
-const User = require('../../models/User');
 const LearningMaterial = require('../../models/LearningMaterial');
 
 // @route   POST /api/learning-materials/add-problem
 // @desc    Create a problem
-// @access  Public
+// @access  Private
 router.post(
   '/add-problem',
   [auth, checkRole('admin'), check('body', 'Body is required').not().isEmpty()],
@@ -41,5 +37,18 @@ router.post(
     }
   }
 );
+
+// @route   GET /api/learning-materials/:module_name
+// @desc    Get problems, lessons and quizzes by module name
+// @access  Private
+router.get('/:module_name', async (req, res) => {
+  try {
+    const learningMaterials = await LearningMaterial.find().sort({ date: -1 });
+    res.json(learningMaterials);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 module.exports = router;

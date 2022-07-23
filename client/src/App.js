@@ -35,6 +35,7 @@ import EditArticle from './components/articles/EditArticle';
 
 // Learning Materials - The Basics of Programming
 import Modules from './components/basics-of-programming/Modules';
+import IntroductionChapter from './components/basics-of-programming/IntroductionChapter';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -192,6 +193,15 @@ const App = () => {
               element={
                 <PrivateRoute>
                   <Modules />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              exact
+              path='/modules/introduction'
+              element={
+                <PrivateRoute>
+                  <IntroductionChapter />
                 </PrivateRoute>
               }
             />

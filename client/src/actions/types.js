@@ -33,3 +33,11 @@ export const UPDATE_LIKES = 'UPDATE_LIKES';
 export const UPDATE_DISLIKES = 'UPDATE_DISLIKES';
 export const DELETE_ARTICLE = 'DELETE_ARTICLE';
 export const REMOVE_COMMENT = 'REMOVE_COMMENT';
+
+// Learning problems, quizzes and lessons
+export const GET_MODULE_PROBLEMS = 'GET_MODULE_PROBLEMS';
+export const GET_PROBLEM = 'GET_PROBLEM';
+export const LEARNING_ERROR = 'LEARNING_ERROR';
+export const ADD_PROBLEM = 'ADD_PROBLEM';
+export const ADD_LESSON = 'ADD_LESSON';
+export const ADD_QUIZ = 'ADD_QUIZ';
