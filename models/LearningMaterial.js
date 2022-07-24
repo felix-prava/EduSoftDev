@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const LearningMaterialSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
   type: {
     type: String,
     default: 'problem', // other options: lesson, quiz

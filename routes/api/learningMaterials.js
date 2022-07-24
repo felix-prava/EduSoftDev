@@ -43,7 +43,9 @@ router.post(
 // @access  Private
 router.get('/:module_name', async (req, res) => {
   try {
-    const learningMaterials = await LearningMaterial.find().sort({ date: -1 });
+    const learningMaterials = await LearningMaterial.find({
+      module: 'introduction',
+    }).sort({ date: -1 });
     res.json(learningMaterials);
   } catch (err) {
     console.error(err.message);

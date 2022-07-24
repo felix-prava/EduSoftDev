@@ -35,7 +35,7 @@ import EditArticle from './components/articles/EditArticle';
 
 // Learning Materials - The Basics of Programming
 import Modules from './components/basics-of-programming/Modules';
-import IntroductionChapter from './components/basics-of-programming/IntroductionChapter';
+import IntroductionChapter from './components/basics-of-programming/modules/IntroductionChapter';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
