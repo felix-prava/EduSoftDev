@@ -3,7 +3,21 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const MaterialItem = ({ auth, problem: { name }, userExp }) => {
+const MaterialItem = ({
+  auth: { user },
+  problem: { _id, name, type, expNeeded, shortDescription },
+  userExp,
+}) => {
+  const materialType =
+    type === 'Problem' ? 'problems' : type === 'Lesson' ? 'lessons' : 'quizzes';
+  const materialTypeClass =
+    type === 'Problem'
+      ? 'text-blue-600'
+      : type === 'Lesson'
+      ? 'text-rose-500'
+      : 'text-lime-400';
+  const materialPath = `/${materialType}/${_id}`;
+
   return (
     <Fragment>
       <div className='flex flex-col rounded-lg shadow-lg overflow-hidden'>
@@ -16,15 +30,16 @@ const MaterialItem = ({ auth, problem: { name }, userExp }) => {
         </div>
         <div className='flex-1 bg-white p-6 flex flex-col justify-between'>
           <div className='flex-1'>
-            <Link to='/modules/if-else' className='block mt-2'>
+            <Link to={materialPath} className='block mt-2'>
               <p className='text-xl font-semibold text-gray-900'>{name}</p>
-              {true ? (
-                <p className='mt-3 text-base text-gray-500'>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit
-                  facilis asperiores porro quaerat doloribus, eveniet dolore.
-                  Adipisci tempora aut inventore optio animi., tempore
-                  temporibus quo laudantium.
-                </p>
+              {userExp > expNeeded ||
+              (user && (user.role === 'admin' || user.role === 'mentor')) ? (
+                <Fragment>
+                  <p className={materialTypeClass}>{type}</p>
+                  <p className='mt-3 text-base text-gray-500'>
+                    {shortDescription || 'No short description available'}
+                  </p>
+                </Fragment>
               ) : (
                 <Fragment>
                   <div className='items-center justify-center border border-dahsed'>

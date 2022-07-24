@@ -44,7 +44,7 @@ router.post(
 router.get('/:module_name', async (req, res) => {
   try {
     const learningMaterials = await LearningMaterial.find({
-      module: 'introduction',
+      module: req.params.module_name,
     }).sort({ date: -1 });
     res.json(learningMaterials);
   } catch (err) {

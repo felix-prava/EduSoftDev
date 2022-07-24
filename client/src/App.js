@@ -36,6 +36,9 @@ import EditArticle from './components/articles/EditArticle';
 // Learning Materials - The Basics of Programming
 import Modules from './components/basics-of-programming/Modules';
 import IntroductionChapter from './components/basics-of-programming/modules/IntroductionChapter';
+import CreateProblem from './components/basics-of-programming/CreateProblem';
+import CreateLesson from './components/basics-of-programming/CreateLesson';
+import CreateQuiz from './components/basics-of-programming/CreateQuiz';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -202,6 +205,33 @@ const App = () => {
               element={
                 <PrivateRoute>
                   <IntroductionChapter />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              exact
+              path='/modules/:module/create-problem'
+              element={
+                <PrivateRoute expectedRole='mentor' redirect='false'>
+                  <CreateProblem />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              exact
+              path='/modules/:module/create-lesson'
+              element={
+                <PrivateRoute expectedRole='mentor' redirect='false'>
+                  <CreateLesson />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              exact
+              path='/modules/:module/create-quiz'
+              element={
+                <PrivateRoute expectedRole='mentor' redirect='false'>
+                  <CreateQuiz />
                 </PrivateRoute>
               }
             />

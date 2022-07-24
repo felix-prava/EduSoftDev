@@ -7,7 +7,7 @@ const LearningMaterialSchema = new mongoose.Schema({
   },
   type: {
     type: String,
-    default: 'problem', // other options: lesson, quiz
+    default: 'Problem', // other options: Lesson, Quiz
   },
   module: {
     type: String,
@@ -25,6 +25,10 @@ const LearningMaterialSchema = new mongoose.Schema({
     type: Number,
   },
   body: {
+    type: String,
+    required: true,
+  },
+  shortDescription: {
     type: String,
     required: true,
   },
@@ -92,9 +96,15 @@ const LearningMaterialSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'learning_materials',
   },
+  previousType: {
+    type: String,
+  },
   next: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'learning_materials',
+  },
+  nextType: {
+    type: String,
   },
   date: {
     type: Date,
