@@ -1,13 +1,6 @@
 import axios from 'axios';
 import { setAlert } from './alert';
-import {
-  GET_PROBLEM,
-  GET_MODULE_PROBLEMS,
-  ADD_PROBLEM,
-  ADD_LESSON,
-  ADD_QUIZ,
-  LEARNING_ERROR,
-} from './types';
+import { GET_PROBLEM, GET_MODULE_PROBLEMS, LEARNING_ERROR } from './types';
 
 // Get problems, quizzes and lessons by module
 export const getAllMaterials = (moduleName) => async (dispatch) => {
@@ -25,6 +18,31 @@ export const getAllMaterials = (moduleName) => async (dispatch) => {
     });
   }
 };
+
+// Add learning material
+export const addLearningMaterial =
+  (formData, materialType) => async (dispatch) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    try {
+      await axios.post(
+        `/api/learning-materials/add-${materialType}`,
+        formData,
+        config
+      );
+      // TODO redirect user
+      dispatch(setAlert('Problem Created', 'success'));
+    } catch (err) {
+      const errors = err.response.data.errors;
+      if (errors) {
+        errors.forEach((error) => dispatch(setAlert(error.msg, 'error')));
+      }
+    }
+  };
 
 // Get profile by userId
 /* export const getProfileById = (userId) => async (dispatch) => {

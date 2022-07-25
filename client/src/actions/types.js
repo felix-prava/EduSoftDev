@@ -38,6 +38,3 @@ export const REMOVE_COMMENT = 'REMOVE_COMMENT';
 export const GET_MODULE_PROBLEMS = 'GET_MODULE_PROBLEMS';
 export const GET_PROBLEM = 'GET_PROBLEM';
 export const LEARNING_ERROR = 'LEARNING_ERROR';
-export const ADD_PROBLEM = 'ADD_PROBLEM';
-export const ADD_LESSON = 'ADD_LESSON';
-export const ADD_QUIZ = 'ADD_QUIZ';

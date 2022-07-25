@@ -92,20 +92,6 @@ const LearningMaterialSchema = new mongoose.Schema({
       },
     },
   ],
-  previous: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'learning_materials',
-  },
-  previousType: {
-    type: String,
-  },
-  next: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'learning_materials',
-  },
-  nextType: {
-    type: String,
-  },
   date: {
     type: Date,
     default: Date.now,
