@@ -40,6 +40,10 @@ const LearningMaterialSchema = new mongoose.Schema({
       output: {
         type: String,
       },
+      showTest: {
+        type: Boolean,
+        default: true,
+      },
     },
   ],
   examples: [
