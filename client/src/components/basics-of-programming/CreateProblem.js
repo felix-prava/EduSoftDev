@@ -68,7 +68,6 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
     testsInputField.value = null;
     testsOutputField.value = null;
     testsCheckbox.checked = false;
-    console.log(tests);
     testsHeader.textContent = `Tests (${tests.length})`;
     setAlert('A new test was added', 'success', 2000, false);
   };
