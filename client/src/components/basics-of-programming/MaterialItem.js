@@ -12,10 +12,10 @@ const MaterialItem = ({
     type === 'Problem' ? 'problems' : type === 'Lesson' ? 'lessons' : 'quizzes';
   const materialTypeClass =
     type === 'Problem'
-      ? 'text-blue-600'
+      ? 'text-blue-700'
       : type === 'Lesson'
-      ? 'text-rose-500'
-      : 'text-lime-400';
+      ? 'text-rose-600'
+      : 'text-lime-600';
   const materialPath = `/${materialType}/${_id}`;
 
   return (

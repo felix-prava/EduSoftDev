@@ -21,7 +21,7 @@ export const getAllMaterials = (moduleName) => async (dispatch) => {
 
 // Add learning material
 export const addLearningMaterial =
-  (formData, materialType) => async (dispatch) => {
+  (formData, materialType, moduleName, navigate) => async (dispatch) => {
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -36,7 +36,8 @@ export const addLearningMaterial =
       );
       materialType =
         materialType.charAt(0).toUpperCase() + materialType.slice(1);
-      // TODO redirect user
+
+      navigate(`/modules/${moduleName}`);
       dispatch(setAlert(`${materialType} Created`, 'success'));
     } catch (err) {
       const errors = err.response.data.errors;

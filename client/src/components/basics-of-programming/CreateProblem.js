@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addLearningMaterial } from '../../actions/learning';
@@ -7,6 +7,8 @@ import { setAlert } from '../../actions/alert';
 
 const CreateProblem = ({ addLearningMaterial, setAlert }) => {
   const { module } = useParams();
+  let navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: '',
     module: module,
@@ -120,7 +122,7 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    addLearningMaterial(formData, 'problem');
+    addLearningMaterial(formData, 'problem', module, navigate);
   };
 
   return (

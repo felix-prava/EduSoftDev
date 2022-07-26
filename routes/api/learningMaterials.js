@@ -14,7 +14,7 @@ router.get('/:module_name', async (req, res) => {
   try {
     const learningMaterials = await LearningMaterial.find({
       module: req.params.module_name,
-    }).sort({ expNeeded: -1 });
+    }).sort({ expNeeded: 1 });
     res.json(learningMaterials);
   } catch (err) {
     console.error(err.message);
@@ -152,6 +152,9 @@ router.post(
     check('expGained', 'Experience gained must be a number').isFloat(),
     check('body', 'Body is required').not().isEmpty(),
     check('shortDescription', 'Short description is required').not().isEmpty(),
+    check('rightAnswers', 'You must add at least one right answer!!')
+      .not()
+      .isEmpty(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
