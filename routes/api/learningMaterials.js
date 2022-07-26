@@ -33,7 +33,9 @@ router.post(
     check('name', 'Name is required').not().isEmpty(),
     check('module', 'Module is required').not().isEmpty(),
     check('expNeeded', 'Minimum experience is required').not().isEmpty(),
+    check('expNeeded', 'Minimum experience must be a number').isFloat(),
     check('expGained', 'Experience gained is required').not().isEmpty(),
+    check('expGained', 'Experience gained must be a number').isFloat(),
     check('body', 'Body is required').not().isEmpty(),
     check('shortDescription', 'Short description is required').not().isEmpty(),
   ],
@@ -88,7 +90,14 @@ router.post(
   [
     auth,
     checkRole('mentor'),
+    check('name', 'Name is required').not().isEmpty(),
+    check('module', 'Module is required').not().isEmpty(),
+    check('expNeeded', 'Minimum experience is required').not().isEmpty(),
+    check('expNeeded', 'Minimum experience must be a number').isFloat(),
+    check('expGained', 'Experience gained is required').not().isEmpty(),
+    check('expGained', 'Experience gained must be a number').isFloat(),
     check('body', 'Body is required').not().isEmpty(),
+    check('shortDescription', 'Short description is required').not().isEmpty(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -135,7 +144,14 @@ router.post(
   [
     auth,
     checkRole('mentor'),
+    check('name', 'Name is required').not().isEmpty(),
+    check('module', 'Module is required').not().isEmpty(),
+    check('expNeeded', 'Minimum experience is required').not().isEmpty(),
+    check('expNeeded', 'Minimum experience must be a number').isFloat(),
+    check('expGained', 'Experience gained is required').not().isEmpty(),
+    check('expGained', 'Experience gained must be a number').isFloat(),
     check('body', 'Body is required').not().isEmpty(),
+    check('shortDescription', 'Short description is required').not().isEmpty(),
   ],
   async (req, res) => {
     const errors = validationResult(req);

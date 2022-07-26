@@ -1,15 +1,14 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addLearningMaterial } from '../../actions/learning';
 
 const CreateProblem = ({ addLearningMaterial }) => {
+  const { module } = useParams();
   const [formData, setFormData] = useState({
-    subject: '',
-    description: '',
     name: '',
-    module: '',
+    module: module,
     expNeeded: '',
     expGained: '',
     expMax: '',
@@ -20,17 +19,15 @@ const CreateProblem = ({ addLearningMaterial }) => {
     hints: [],
   });
 
-  const { subject, body, description } = formData;
+  const { name, expNeeded, expGained, expMax, body, shortDescription, tests } =
+    formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = (e) => {
     e.preventDefault();
-    addLearningMaterial(formData);
-    if (subject !== '' && body !== '') {
-      setFormData({ subject: '', body: '', description: '' });
-    }
+    addLearningMaterial(formData, 'problem');
   };
 
   return (
@@ -44,27 +41,92 @@ const CreateProblem = ({ addLearningMaterial }) => {
             <div>
               <div>
                 <h3 className='text-2xl font-bold leading-6 font-medium text-gray-900 sm:text-2xl'>
-                  Create an article
+                  Create a new problem
                 </h3>
               </div>
 
               <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
                 <div className='sm:col-span-6'>
                   <label
-                    htmlFor='subject'
+                    htmlFor='name'
                     className='block text-sm font-medium text-gray-700'
                   >
                     {' '}
-                    What's this article about?{' '}
+                    What's the name of the problem?{' '}
                   </label>
                   <div className='mt-1'>
                     <input
                       type='text'
-                      name='subject'
-                      value={subject}
+                      name='name'
+                      value={name}
                       onChange={(e) => onChange(e)}
                       className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
                     />
+                  </div>
+                </div>
+              </div>
+
+              <div className='space-y-8 divide-y divide-gray-200'>
+                <div className='pt-8'>
+                  <div className='grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
+                    <div className='sm:col-span-2'>
+                      <label
+                        htmlFor='expNeeded'
+                        className='block text-sm font-medium text-gray-700'
+                      >
+                        {' '}
+                        Experience Needed{' '}
+                      </label>
+                      <div className='mt-1'>
+                        <input
+                          type='number'
+                          step='any'
+                          name='expNeeded'
+                          value={expNeeded}
+                          onChange={(e) => onChange(e)}
+                          className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                        />
+                      </div>
+                    </div>
+
+                    <div className='sm:col-span-2'>
+                      <label
+                        htmlFor='expGained'
+                        className='block text-sm font-medium text-gray-700'
+                      >
+                        {' '}
+                        Experience Gained{' '}
+                      </label>
+                      <div className='mt-1'>
+                        <input
+                          type='number'
+                          step='any'
+                          name='expGained'
+                          value={expGained}
+                          onChange={(e) => onChange(e)}
+                          className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                        />
+                      </div>
+                    </div>
+
+                    <div className='sm:col-span-2'>
+                      <label
+                        htmlFor='expMax'
+                        className='block text-sm font-medium text-gray-700'
+                      >
+                        {' '}
+                        Max Experience{' '}
+                      </label>
+                      <div className='mt-1'>
+                        <input
+                          type='number'
+                          name='expMax'
+                          value={expMax}
+                          onChange={(e) => onChange(e)}
+                          className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -95,7 +157,7 @@ const CreateProblem = ({ addLearningMaterial }) => {
               <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
                 <div className='sm:col-span-6'>
                   <label
-                    htmlFor='description'
+                    htmlFor='shortDescription'
                     className='block text-sm font-medium text-gray-700'
                   >
                     {' '}
@@ -104,8 +166,8 @@ const CreateProblem = ({ addLearningMaterial }) => {
                   <div className='mt-1'>
                     <input
                       type='text'
-                      name='description'
-                      value={description}
+                      name='shortDescription'
+                      value={shortDescription}
                       onChange={(e) => onChange(e)}
                       className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
                     />
@@ -117,7 +179,7 @@ const CreateProblem = ({ addLearningMaterial }) => {
 
           <div className='pt-5'>
             <div className='flex justify-end mb-8'>
-              <Link to='/articles'>
+              <Link to={`/modules/${module}`}>
                 <button
                   type='button'
                   className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'

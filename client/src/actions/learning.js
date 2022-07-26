@@ -34,8 +34,10 @@ export const addLearningMaterial =
         formData,
         config
       );
+      materialType =
+        materialType.charAt(0).toUpperCase() + materialType.slice(1);
       // TODO redirect user
-      dispatch(setAlert('Problem Created', 'success'));
+      dispatch(setAlert(`${materialType} Created`, 'success'));
     } catch (err) {
       const errors = err.response.data.errors;
       if (errors) {
