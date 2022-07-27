@@ -79,7 +79,6 @@ const LearningMaterialSchema = new mongoose.Schema({
   ],
   waitingMinutes: {
     type: Number,
-    default: 5,
   },
   failedQuizMessage: {
     type: String,

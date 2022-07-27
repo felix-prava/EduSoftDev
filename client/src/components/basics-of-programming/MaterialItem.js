@@ -20,6 +20,11 @@ const MaterialItem = ({
       : 'text-lime-600';
   const materialPath = `/${materialType}/${_id}`;
 
+  let navigate = useNavigate();
+  function editLearningMaterial(learningMaterialId) {
+    navigate(`/${materialType}/edit/${learningMaterialId}`);
+  }
+
   return (
     <Fragment>
       <div className='flex flex-col rounded-lg shadow-lg overflow-hidden'>
@@ -42,26 +47,51 @@ const MaterialItem = ({
                     {shortDescription || 'No short description available'}
                   </p>
                   {(user.role === 'admin' || user.role === 'mentor') && (
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                        deleteLearningMaterial(_id, type);
-                      }}
-                      className='float-right mt-2 bg-red-600 border border-transparent rounded-md shadow-sm py-1 px-3 flex items-center inline-flex justify-center ml-4 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600'
-                    >
-                      <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        className='h-5 w-5'
-                        viewBox='0 0 20 20'
-                        fill='currentColor'
+                    <Fragment>
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          deleteLearningMaterial(_id, type);
+                        }}
+                        className='float-right mt-2 bg-red-600 border border-transparent rounded-md shadow-sm py-1 px-3 flex items-center inline-flex justify-center ml-4 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600'
                       >
-                        <path
-                          fillRule='evenodd'
-                          d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
-                          clipRule='evenodd'
-                        />
-                      </svg>
-                    </button>
+                        <svg
+                          xmlns='http://www.w3.org/2000/svg'
+                          className='h-5 w-5'
+                          viewBox='0 0 20 20'
+                          fill='currentColor'
+                        >
+                          <path
+                            fillRule='evenodd'
+                            d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
+                            clipRule='evenodd'
+                          />
+                        </svg>
+                      </button>
+
+                      <button
+                        type='button'
+                        onClick={(e) => {
+                          e.preventDefault();
+                          editLearningMaterial(_id);
+                        }}
+                        className='float-right mt-2 py-1 px-3 flex items-center inline-flex justify-center ml-4 text-sm font-medium border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
+                      >
+                        <svg
+                          xmlns='http://www.w3.org/2000/svg'
+                          className='h-5 w-5'
+                          viewBox='0 0 20 20'
+                          fill='currentColor'
+                        >
+                          <path d='M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z' />
+                          <path
+                            fillRule='evenodd'
+                            d='M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z'
+                            clipRule='evenodd'
+                          />
+                        </svg>
+                      </button>
+                    </Fragment>
                   )}
                 </Fragment>
               ) : (

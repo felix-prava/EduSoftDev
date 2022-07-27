@@ -1,12 +1,13 @@
 import {
   GET_MODULE_PROBLEMS,
   GET_LEARNING_MATERIAL,
+  UPDATE_LEARNING_MATERIAL,
   DELETE_LEARNING_MATERIAL,
   LEARNING_ERROR,
 } from '../actions/types';
 
 const initialState = {
-  problem: null,
+  learningMaterial: null,
   problems: [],
   loading: true,
   error: {},
@@ -16,9 +17,10 @@ export default function LearningMaterialsReducer(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
     case GET_LEARNING_MATERIAL:
+    case UPDATE_LEARNING_MATERIAL:
       return {
         ...state,
-        problem: payload,
+        learningMaterial: payload,
         loading: false,
       };
     case GET_MODULE_PROBLEMS:

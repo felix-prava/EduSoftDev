@@ -4,11 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { updateArticle, getArticle } from '../../actions/article';
 
-const EditArticle = ({
-  article: { article, loading },
-  updateArticle,
-  getArticle,
-}) => {
+const EditArticle = ({ article: { article }, updateArticle, getArticle }) => {
   const [formData, setFormData] = useState({
     subject: '',
     description: '',

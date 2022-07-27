@@ -85,7 +85,6 @@ const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
     addLearningMaterial(formData, 'quiz', module, navigate);
   };
 

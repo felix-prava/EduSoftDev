@@ -1,19 +1,41 @@
 import axios from 'axios';
 import { setAlert } from './alert';
 import {
-  GET_LEARNING_MATERIAL,
   GET_MODULE_PROBLEMS,
-  LEARNING_ERROR,
+  GET_LEARNING_MATERIAL,
+  UPDATE_LEARNING_MATERIAL,
   DELETE_LEARNING_MATERIAL,
+  LEARNING_ERROR,
 } from './types';
 
 // Get problems, quizzes and lessons by module
 export const getAllMaterials = (moduleName) => async (dispatch) => {
   try {
-    const res = await axios.get(`/api/learning-materials/${moduleName}`);
+    const res = await axios.get(
+      `/api/learning-materials/modules/${moduleName}`
+    );
 
     dispatch({
       type: GET_MODULE_PROBLEMS,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: LEARNING_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+// Get problems, quizzes and lessons by module
+export const getLearningMaterial = (learningMaterialId) => async (dispatch) => {
+  try {
+    const res = await axios.get(
+      `/api/learning-materials/${learningMaterialId}`
+    );
+
+    dispatch({
+      type: GET_LEARNING_MATERIAL,
       payload: res.data,
     });
   } catch (err) {
@@ -44,6 +66,44 @@ export const addLearningMaterial =
 
       navigate(`/modules/${moduleName}`);
       dispatch(setAlert(`${materialType} Created`, 'success'));
+    } catch (err) {
+      const errors = err.response.data.errors;
+      if (errors) {
+        errors.forEach((error) => dispatch(setAlert(error.msg, 'error')));
+      }
+    }
+  };
+
+// Update learning material
+export const updateLearningMaterial =
+  (formData, materialId, materialType) => async (dispatch) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    let route = 'problems';
+    if (materialType === 'Lesson') {
+      route = 'lessons';
+    } else if (materialType === 'Quiz') {
+      route = 'quizzes';
+    }
+    try {
+      const res = await axios.put(
+        `/api/learning-materials/${route}/${materialId}`,
+        formData,
+        config
+      );
+      materialType =
+        materialType.charAt(0).toUpperCase() + materialType.slice(1);
+
+      dispatch({
+        type: UPDATE_LEARNING_MATERIAL,
+        payload: res.data,
+      });
+
+      dispatch(setAlert(`${materialType} Updated`, 'success'));
     } catch (err) {
       const errors = err.response.data.errors;
       if (errors) {
