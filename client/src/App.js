@@ -35,7 +35,7 @@ import EditArticle from './components/articles/EditArticle';
 
 // Learning Materials - The Basics of Programming
 import Modules from './components/basics-of-programming/Modules';
-import IntroductionChapter from './components/basics-of-programming/modules/IntroductionChapter';
+import ModuleItem from './components/basics-of-programming/ModuleItem';
 import CreateProblem from './components/basics-of-programming/CreateProblem';
 import CreateLesson from './components/basics-of-programming/CreateLesson';
 import CreateQuiz from './components/basics-of-programming/CreateQuiz';
@@ -201,10 +201,10 @@ const App = () => {
             />
             <Route
               exact
-              path='/modules/introduction'
+              path='/modules/:module'
               element={
                 <PrivateRoute>
-                  <IntroductionChapter />
+                  <ModuleItem />
                 </PrivateRoute>
               }
             />
