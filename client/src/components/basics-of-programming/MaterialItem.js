@@ -1,12 +1,14 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { deleteLearningMaterial } from '../../actions/learning';
 
 const MaterialItem = ({
   auth: { user },
   problem: { _id, name, type, expNeeded, shortDescription },
   userExp,
+  deleteLearningMaterial,
 }) => {
   const materialType =
     type === 'Problem' ? 'problems' : type === 'Lesson' ? 'lessons' : 'quizzes';
@@ -39,6 +41,28 @@ const MaterialItem = ({
                   <p className='mt-3 text-base text-gray-500'>
                     {shortDescription || 'No short description available'}
                   </p>
+                  {(user.role === 'admin' || user.role === 'mentor') && (
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        deleteLearningMaterial(_id, type);
+                      }}
+                      className='float-right mt-2 bg-red-600 border border-transparent rounded-md shadow-sm py-1 px-3 flex items-center inline-flex justify-center ml-4 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600'
+                    >
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        className='h-5 w-5'
+                        viewBox='0 0 20 20'
+                        fill='currentColor'
+                      >
+                        <path
+                          fillRule='evenodd'
+                          d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
+                          clipRule='evenodd'
+                        />
+                      </svg>
+                    </button>
+                  )}
                 </Fragment>
               ) : (
                 <Fragment>
@@ -68,10 +92,13 @@ const MaterialItem = ({
 
 MaterialItem.propTypes = {
   auth: PropTypes.object.isRequired,
+  deleteLearningMaterial: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, {})(MaterialItem);
+export default connect(mapStateToProps, { deleteLearningMaterial })(
+  MaterialItem
+);

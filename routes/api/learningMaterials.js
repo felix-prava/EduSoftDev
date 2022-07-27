@@ -224,4 +224,31 @@ router.post(
   }
 );
 
+// @route   DELETE /api/learning-materials/:learning_material_id
+// @desc    Delete a learning material
+// @access  Private
+router.delete(
+  '/:learning_material_id',
+  [auth, checkRole('mentor')],
+  async (req, res) => {
+    try {
+      const learningMaterial = await LearningMaterial.findById(
+        req.params.learning_material_id
+      );
+      if (!learningMaterial) {
+        return res.status(404).json({ msg: 'Learning material not found' });
+      }
+      await learningMaterial.remove();
+      // TODO update next and prev
+      res.json({ msg: 'Learning material deleted' });
+    } catch (err) {
+      if (err.kind == 'ObjectId') {
+        return res.status(404).json({ msg: 'Learning material not found' });
+      }
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
+
 module.exports = router;

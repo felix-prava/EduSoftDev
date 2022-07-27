@@ -1,6 +1,11 @@
 import axios from 'axios';
 import { setAlert } from './alert';
-import { GET_PROBLEM, GET_MODULE_PROBLEMS, LEARNING_ERROR } from './types';
+import {
+  GET_LEARNING_MATERIAL,
+  GET_MODULE_PROBLEMS,
+  LEARNING_ERROR,
+  DELETE_LEARNING_MATERIAL,
+} from './types';
 
 // Get problems, quizzes and lessons by module
 export const getAllMaterials = (moduleName) => async (dispatch) => {
@@ -44,6 +49,25 @@ export const addLearningMaterial =
       if (errors) {
         errors.forEach((error) => dispatch(setAlert(error.msg, 'error')));
       }
+    }
+  };
+
+// Delete one learning material
+export const deleteLearningMaterial =
+  (learningMaterialId, materialType) => async (dispatch) => {
+    try {
+      await axios.delete(`/api/learning-materials/${learningMaterialId}`);
+
+      dispatch({
+        type: DELETE_LEARNING_MATERIAL,
+        payload: learningMaterialId,
+      });
+      dispatch(setAlert(`${materialType} Deleted`, 'success', 2500, false));
+    } catch (err) {
+      dispatch({
+        type: LEARNING_ERROR,
+        payload: { msg: err.response.statusText, status: err.response.status },
+      });
     }
   };
 

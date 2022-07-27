@@ -36,5 +36,6 @@ export const REMOVE_COMMENT = 'REMOVE_COMMENT';
 
 // Learning problems, quizzes and lessons
 export const GET_MODULE_PROBLEMS = 'GET_MODULE_PROBLEMS';
-export const GET_PROBLEM = 'GET_PROBLEM';
+export const GET_LEARNING_MATERIAL = 'GET_LEARNING_MATERIAL';
 export const LEARNING_ERROR = 'LEARNING_ERROR';
+export const DELETE_LEARNING_MATERIAL = 'DELETE_LEARNING_MATERIAL';
