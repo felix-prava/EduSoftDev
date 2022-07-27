@@ -77,6 +77,13 @@ const LearningMaterialSchema = new mongoose.Schema({
       },
     },
   ],
+  waitingMinutes: {
+    type: Number,
+    default: 5,
+  },
+  failedQuizMessage: {
+    type: String,
+  },
   comments: [
     {
       user: {
@@ -93,6 +100,14 @@ const LearningMaterialSchema = new mongoose.Schema({
       date: {
         type: Date,
         default: Date.now,
+      },
+    },
+  ],
+  solvingUsers: [
+    {
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'users',
       },
     },
   ],

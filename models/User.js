@@ -61,6 +61,25 @@ const UserSchema = new mongoose.Schema({
       },
     },
   ],
+  failedQuizzes: [
+    {
+      quiz: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'learning_material',
+      },
+      failedQuizDate: {
+        type: Date,
+        default: Date.now,
+      },
+      waitingMinutes: {
+        type: Number,
+      },
+    },
+  ],
+  lastLearningMaterial: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'learning_material',
+  },
   date: {
     type: Date,
     default: Date.now,

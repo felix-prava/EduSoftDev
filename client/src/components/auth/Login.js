@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { LockClosedIcon } from '@heroicons/react/solid';
 import { Navigate, Link } from 'react-router-dom';
 
-const Login = ({ loginUser, isAuthenticated }) => {
+const Login = ({ loginUser, isAuthenticated, setAlert }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -130,6 +130,7 @@ const Login = ({ loginUser, isAuthenticated }) => {
 
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
+  setAlert: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
 };
 
@@ -137,4 +138,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { loginUser })(Login);
+export default connect(mapStateToProps, { loginUser, setAlert })(Login);

@@ -9,6 +9,18 @@ import PageNotFound from '../layout/PageNotFound';
 import {
   INTRODUCTION_TITLE,
   INTRODUCTION_DESCRIPTION,
+  IF_ELSE_TITLE,
+  IF_ELSE_DESCRIPTION,
+  WHILE_FOR_TITLE,
+  WHILE_FOR_DESCRIPTION,
+  ARRAYS_FUNCTIONS_TITLE,
+  ARRAYS_FUNCTIONS_DESCRIPTION,
+  MATRIX_STRINGS_TITLE,
+  MATRIX_STRINGS_DESCRIPTION,
+  DATABASE_OOP_TITLE,
+  DATABASE_OOP_DESCRIPTION,
+  BACKTRACKING_RECURSION_TITLE,
+  BACKTRACKING_RECURSION_DESCRIPTION,
 } from './modulesInformation';
 
 const ModuleItem = ({
@@ -31,7 +43,28 @@ const ModuleItem = ({
       description = INTRODUCTION_DESCRIPTION;
       break;
     case 'if-else':
-      title = 'Ola';
+      title = IF_ELSE_TITLE;
+      description = IF_ELSE_DESCRIPTION;
+      break;
+    case 'while-for':
+      title = WHILE_FOR_TITLE;
+      description = WHILE_FOR_DESCRIPTION;
+      break;
+    case 'arrays-functions':
+      title = ARRAYS_FUNCTIONS_TITLE;
+      description = ARRAYS_FUNCTIONS_DESCRIPTION;
+      break;
+    case 'matrix-strings':
+      title = MATRIX_STRINGS_TITLE;
+      description = MATRIX_STRINGS_DESCRIPTION;
+      break;
+    case 'oop-db':
+      title = DATABASE_OOP_TITLE;
+      description = DATABASE_OOP_DESCRIPTION;
+      break;
+    case 'backtracking-recursion':
+      title = BACKTRACKING_RECURSION_TITLE;
+      description = BACKTRACKING_RECURSION_DESCRIPTION;
       break;
     default:
       displayErrorPage = true;

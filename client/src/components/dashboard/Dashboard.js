@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 
-const Dashboard = ({ auth: { user, loading, isAuthenticated } }) => {
+const Dashboard = ({
+  auth: { user, loading, solvedProblems, lessonsLearned, quizzesSolved },
+}) => {
   return loading || user === null ? (
     <Spinner />
   ) : (
@@ -126,11 +128,107 @@ const Dashboard = ({ auth: { user, loading, isAuthenticated } }) => {
                         <div className='ml-5 w-0 flex-1'>
                           <dl>
                             <dt className='text-sm font-medium text-gray-500 truncate'>
-                              Problems
+                              Solved Problems
                             </dt>
                             <dd>
                               <div className='text-lg font-medium text-gray-900'>
-                                $30,659.45
+                                {(solvedProblems && solvedProblems.length) || 0}
+                              </div>
+                            </dd>
+                          </dl>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='bg-gray-50 px-5 py-3'>
+                      <div className='text-sm'>
+                        <Link
+                          to='#'
+                          className='font-medium text-cyan-700 hover:text-cyan-900'
+                        >
+                          {' '}
+                          View all{' '}
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className='bg-white overflow-hidden shadow rounded-lg'>
+                    <div className='p-5'>
+                      <div className='flex items-center'>
+                        <div className='flex-shrink-0'>
+                          {/* Heroicon name: outline/scale */}
+                          <svg
+                            className='h-6 w-6 text-gray-400'
+                            xmlns='http://www.w3.org/2000/svg'
+                            fill='none'
+                            viewBox='0 0 24 24'
+                            strokeWidth='2'
+                            stroke='currentColor'
+                            aria-hidden='true'
+                          >
+                            <path
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
+                              d='M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3'
+                            />
+                          </svg>
+                        </div>
+                        <div className='ml-5 w-0 flex-1'>
+                          <dl>
+                            <dt className='text-sm font-medium text-gray-500 truncate'>
+                              Lessons Learned
+                            </dt>
+                            <dd>
+                              <div className='text-lg font-medium text-gray-900'>
+                                {(lessonsLearned && lessonsLearned.length) || 0}
+                              </div>
+                            </dd>
+                          </dl>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='bg-gray-50 px-5 py-3'>
+                      <div className='text-sm'>
+                        <Link
+                          to='#'
+                          className='font-medium text-cyan-700 hover:text-cyan-900'
+                        >
+                          {' '}
+                          View all{' '}
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className='bg-white overflow-hidden shadow rounded-lg'>
+                    <div className='p-5'>
+                      <div className='flex items-center'>
+                        <div className='flex-shrink-0'>
+                          {/* Heroicon name: outline/scale */}
+                          <svg
+                            className='h-6 w-6 text-gray-400'
+                            xmlns='http://www.w3.org/2000/svg'
+                            fill='none'
+                            viewBox='0 0 24 24'
+                            strokeWidth='2'
+                            stroke='currentColor'
+                            aria-hidden='true'
+                          >
+                            <path
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
+                              d='M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3'
+                            />
+                          </svg>
+                        </div>
+                        <div className='ml-5 w-0 flex-1'>
+                          <dl>
+                            <dt className='text-sm font-medium text-gray-500 truncate'>
+                              Quizzes Completed
+                            </dt>
+                            <dd>
+                              <div className='text-lg font-medium text-gray-900'>
+                                {(quizzesSolved && quizzesSolved.length) || 0}
                               </div>
                             </dd>
                           </dl>

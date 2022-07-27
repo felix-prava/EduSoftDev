@@ -33,9 +33,12 @@ router.post(
     check('name', 'Name is required').not().isEmpty(),
     check('module', 'Module is required').not().isEmpty(),
     check('expNeeded', 'Minimum experience is required').not().isEmpty(),
-    check('expNeeded', 'Minimum experience must be a number').isFloat(),
+    check(
+      'expNeeded',
+      'Minimum experience must be a positive number'
+    ).isFloat(),
     check('expGained', 'Experience gained is required').not().isEmpty(),
-    check('expGained', 'Experience gained must be a number').isFloat(),
+    check('expGained', 'Experience gained must be a positive number').isFloat(),
     check('body', 'Body is required').not().isEmpty(),
     check('shortDescription', 'Short description is required').not().isEmpty(),
   ],
@@ -93,9 +96,12 @@ router.post(
     check('name', 'Name is required').not().isEmpty(),
     check('module', 'Module is required').not().isEmpty(),
     check('expNeeded', 'Minimum experience is required').not().isEmpty(),
-    check('expNeeded', 'Minimum experience must be a number').isFloat(),
+    check(
+      'expNeeded',
+      'Minimum experience must be a positive number'
+    ).isFloat(),
     check('expGained', 'Experience gained is required').not().isEmpty(),
-    check('expGained', 'Experience gained must be a number').isFloat(),
+    check('expGained', 'Experience gained must be a positive number').isFloat(),
     check('body', 'Body is required').not().isEmpty(),
     check('shortDescription', 'Short description is required').not().isEmpty(),
   ],
@@ -147,12 +153,29 @@ router.post(
     check('name', 'Name is required').not().isEmpty(),
     check('module', 'Module is required').not().isEmpty(),
     check('expNeeded', 'Minimum experience is required').not().isEmpty(),
-    check('expNeeded', 'Minimum experience must be a number').isFloat(),
+    check('expNeeded', 'Minimum experience must be a positive number').isFloat({
+      gt: 0,
+    }),
     check('expGained', 'Experience gained is required').not().isEmpty(),
-    check('expGained', 'Experience gained must be a number').isFloat(),
+    check('expGained', 'Experience gained must be a positive number').isFloat({
+      gt: 0,
+    }),
     check('body', 'Body is required').not().isEmpty(),
     check('shortDescription', 'Short description is required').not().isEmpty(),
-    check('rightAnswers', 'You must add at least one right answer!!')
+    check('rightAnswers', 'You must add at least one right answer')
+      .not()
+      .isEmpty(),
+    check(
+      'waitingMinutes',
+      'The number of minutes a user must wait before retaking the quiz is required'
+    )
+      .not()
+      .isEmpty(),
+    check(
+      'waitingMinutes',
+      'The number of minutes a user must wait before retaking the quiz must be a positive integer'
+    ).isInt({ gt: 0 }),
+    check('failedQuizMessage', 'A message for a failed quiz is required')
       .not()
       .isEmpty(),
   ],
@@ -170,6 +193,8 @@ router.post(
       expMax,
       body,
       shortDescription,
+      waitingMinutes,
+      failedQuizMessage,
       wrongAnswers,
       rightAnswers,
     } = req.body;
@@ -184,6 +209,8 @@ router.post(
         expMax,
         body,
         shortDescription,
+        waitingMinutes,
+        failedQuizMessage,
         wrongAnswers,
         rightAnswers,
       });

@@ -17,6 +17,8 @@ const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
     expMax: '',
     body: '',
     shortDescription: '',
+    waitingMinutes: 5,
+    failedQuizMessage: '',
     wrongAnswers: [],
     rightAnswers: [],
   });
@@ -30,6 +32,8 @@ const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
     shortDescription,
     wrongAnswers,
     rightAnswers,
+    waitingMinutes,
+    failedQuizMessage,
   } = formData;
 
   let wrongAnswersField = null;
@@ -81,6 +85,7 @@ const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    console.log(formData);
     addLearningMaterial(formData, 'quiz', module, navigate);
   };
 
@@ -225,6 +230,50 @@ const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
                       onChange={(e) => onChange(e)}
                       className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
                     />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className='space-y-8 divide-y divide-gray-200'>
+              <div className='pt-8'>
+                <div className='grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
+                  <div className='sm:col-span-3'>
+                    <label
+                      htmlFor='failedQuizMessage'
+                      className='block text-sm font-medium text-gray-700'
+                    >
+                      {' '}
+                      Message for Failed Quiz{' '}
+                    </label>
+                    <div className='mt-1'>
+                      <input
+                        type='text'
+                        name='failedQuizMessage'
+                        value={failedQuizMessage}
+                        onChange={(e) => onChange(e)}
+                        className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                      />
+                    </div>
+                  </div>
+
+                  <div className='sm:col-span-3'>
+                    <label
+                      htmlFor='waitingMinutes'
+                      className='block text-sm font-medium text-gray-700'
+                    >
+                      {' '}
+                      Waiting Minutes{' '}
+                    </label>
+                    <div className='mt-1'>
+                      <input
+                        type='number'
+                        name='waitingMinutes'
+                        value={waitingMinutes}
+                        onChange={(e) => onChange(e)}
+                        className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
