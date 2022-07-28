@@ -514,4 +514,49 @@ router.delete(
   }
 );
 
+// @route   DELETE /api/learning-materials/quizzes/:quiz_id/:answer_type/:answer_id
+// @desc    Delete an answer from a quiz
+// @access  Private
+router.delete(
+  '/quizzes/:quiz_id/:answer_type/:answer_id',
+  auth,
+  async (req, res) => {
+    try {
+      const quiz = await LearningMaterial.findById(req.params.quiz_id);
+      if (!quiz) {
+        return res.status(404).json({ msg: 'Quiz not found' });
+      }
+
+      const answerType = req.params.answer_type;
+      let answers = quiz.wrongAnswers;
+      if (answerType === 'rightAnswers') {
+        answers = quiz.rightAnswers;
+      }
+
+      // Pull out answer
+      const answer = answers.find(
+        (answer) => answer.id === req.params.answer_id
+      );
+      if (!answer) {
+        return res.status(404).json({ msg: 'Answer does not exist' });
+      }
+
+      const removeIndex = answers
+        .map((answer) => answer.id.toString())
+        .indexOf(req.params.answer_id);
+
+      answers.splice(removeIndex, 1);
+      await quiz.save();
+
+      res.json({ msg: 'Answer deleted' });
+    } catch (err) {
+      if (err.kind == 'ObjectId') {
+        return res.status(404).json({ msg: 'Quiz not found' });
+      }
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
+
 module.exports = router;

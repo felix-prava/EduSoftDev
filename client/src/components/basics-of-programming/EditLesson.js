@@ -38,13 +38,13 @@ const EditLesson = ({
     if (!learningMaterial) getLearningMaterial(lessonId);
     if (learningMaterial) {
       setFormData({
-        name: learningMaterial.name,
-        module: learningMaterial.module,
-        expNeeded: learningMaterial.expNeeded,
-        expGained: learningMaterial.expGained,
-        expMax: learningMaterial.expMax,
-        body: learningMaterial.body,
-        shortDescription: learningMaterial.shortDescription,
+        name: learningMaterial.name || '',
+        module: learningMaterial.module || '',
+        expNeeded: learningMaterial.expNeeded || '',
+        expGained: learningMaterial.expGained || '',
+        expMax: learningMaterial.expMax || '',
+        body: learningMaterial.body || '',
+        shortDescription: learningMaterial.shortDescription || '',
       });
     }
   }, [getLearningMaterial, learningMaterial, lessonId]);

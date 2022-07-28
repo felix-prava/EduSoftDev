@@ -40,6 +40,7 @@ import CreateProblem from './components/basics-of-programming/CreateProblem';
 import CreateLesson from './components/basics-of-programming/CreateLesson';
 import CreateQuiz from './components/basics-of-programming/CreateQuiz';
 import EditLesson from './components/basics-of-programming/EditLesson';
+import EditQuiz from './components/basics-of-programming/EditQuiz';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -242,6 +243,15 @@ const App = () => {
               element={
                 <PrivateRoute>
                   <EditLesson />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              exact
+              path='/quizzes/edit/:quizId'
+              element={
+                <PrivateRoute>
+                  <EditQuiz />
                 </PrivateRoute>
               }
             />

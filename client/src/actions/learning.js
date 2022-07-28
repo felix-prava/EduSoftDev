@@ -5,6 +5,7 @@ import {
   GET_LEARNING_MATERIAL,
   UPDATE_LEARNING_MATERIAL,
   DELETE_LEARNING_MATERIAL,
+  REMOVE_ANSWER,
   LEARNING_ERROR,
 } from './types';
 
@@ -128,6 +129,27 @@ export const deleteLearningMaterial =
         type: LEARNING_ERROR,
         payload: { msg: err.response.statusText, status: err.response.status },
       });
+    }
+  };
+
+// Delete answer from a quiz
+export const deleteAnswer =
+  (quizId, answerType, answerId) => async (dispatch) => {
+    try {
+      await axios.delete(
+        `/api/learning-materials/quizzes/${quizId}/${answerType}/${answerId}`
+      );
+
+      dispatch({
+        type: REMOVE_ANSWER,
+        payload: { answerType, answerId },
+      });
+      dispatch(setAlert('Answer Deleted', 'success', 2000, false));
+    } catch (err) {
+      const errors = err.response.data.errors;
+      if (errors) {
+        errors.forEach((error) => dispatch(setAlert(error.msg, 'error')));
+      }
     }
   };
 
