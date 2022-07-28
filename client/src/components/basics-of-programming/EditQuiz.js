@@ -5,14 +5,18 @@ import { connect } from 'react-redux';
 import {
   getLearningMaterial,
   updateLearningMaterial,
+  addAnswer,
   deleteAnswer,
 } from '../../actions/learning';
+import { setAlert } from '../../actions/alert';
 
 const EditQuiz = ({
   learning: { learningMaterial },
   getLearningMaterial,
   updateLearningMaterial,
+  addAnswer,
   deleteAnswer,
+  setAlert,
 }) => {
   const [formData, setFormData] = useState({
     name: '',
@@ -41,6 +45,37 @@ const EditQuiz = ({
     wrongAnswers,
     rightAnswers,
   } = formData;
+
+  let wrongAnswersField = null;
+  let rightAnswersField = null;
+
+  const addNewAnswer = function (answerType) {
+    if (answerType === 'wrongAnswer') {
+      if (wrongAnswersField === null) {
+        wrongAnswersField = document.getElementById('wrong-answer-field');
+      }
+      if (wrongAnswersField.value === '') {
+        setAlert("You can't add an empty answer", 'error', 3500);
+        return;
+      }
+      addAnswer(learningMaterial._id, 'wrongAnswer', {
+        body: wrongAnswersField.value,
+      });
+      wrongAnswersField.value = null;
+      return;
+    }
+    if (rightAnswersField === null) {
+      rightAnswersField = document.getElementById('right-answer-field');
+    }
+    if (rightAnswersField.value === '') {
+      setAlert("You can't add an empty answer", 'error', 3500);
+      return;
+    }
+    addAnswer(learningMaterial._id, 'rightAnswer', {
+      body: rightAnswersField.value,
+    });
+    rightAnswersField.value = null;
+  };
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -284,6 +319,7 @@ const EditQuiz = ({
               <div className='mt-6 flex justify-end mb-8'>
                 <button
                   type='button'
+                  onClick={() => addNewAnswer('wrongAnswer')}
                   className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
                 >
                   Add Wrong Answer
@@ -364,6 +400,7 @@ const EditQuiz = ({
               <div className='mt-6 flex justify-end mb-8'>
                 <button
                   type='button'
+                  onClick={() => addNewAnswer('rightAnswer')}
                   className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
                 >
                   Add Right Answer
@@ -449,7 +486,9 @@ EditQuiz.propTypes = {
   learning: PropTypes.object.isRequired,
   getLearningMaterial: PropTypes.func.isRequired,
   updateLearningMaterial: PropTypes.func.isRequired,
+  addAnswer: PropTypes.func.isRequired,
   deleteAnswer: PropTypes.func.isRequired,
+  setAlert: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -459,5 +498,7 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getLearningMaterial,
   updateLearningMaterial,
+  addAnswer,
   deleteAnswer,
+  setAlert,
 })(EditQuiz);

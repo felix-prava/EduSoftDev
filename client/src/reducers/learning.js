@@ -3,6 +3,7 @@ import {
   GET_LEARNING_MATERIAL,
   UPDATE_LEARNING_MATERIAL,
   DELETE_LEARNING_MATERIAL,
+  ADD_ANSWER,
   REMOVE_ANSWER,
   LEARNING_ERROR,
 } from '../actions/types';
@@ -16,6 +17,7 @@ const initialState = {
 
 export default function LearningMaterialsReducer(state = initialState, action) {
   const { type, payload } = action;
+
   switch (type) {
     case GET_LEARNING_MATERIAL:
     case UPDATE_LEARNING_MATERIAL:
@@ -38,7 +40,25 @@ export default function LearningMaterialsReducer(state = initialState, action) {
         ),
         loading: false,
       };
-    case REMOVE_ANSWER:
+    case ADD_ANSWER: {
+      let wrongAnswers = state.learningMaterial.wrongAnswers;
+      let rightAnswers = state.learningMaterial.rightAnswers;
+      if (payload.answerType === 'wrongAnswer') {
+        wrongAnswers = payload.answers;
+      } else {
+        rightAnswers = payload.answers;
+      }
+      return {
+        ...state,
+        learningMaterial: {
+          ...state.learningMaterial,
+          wrongAnswers: wrongAnswers,
+          rightAnswers: rightAnswers,
+        },
+        loading: false,
+      };
+    }
+    case REMOVE_ANSWER: {
       let wrongAnswers = state.learningMaterial.wrongAnswers;
       let rightAnswers = state.learningMaterial.rightAnswers;
       if (payload.answerType === 'wrongAnswers') {
@@ -59,6 +79,7 @@ export default function LearningMaterialsReducer(state = initialState, action) {
         },
         loading: false,
       };
+    }
     case LEARNING_ERROR:
       return {
         ...state,

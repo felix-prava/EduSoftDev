@@ -5,6 +5,7 @@ import {
   GET_LEARNING_MATERIAL,
   UPDATE_LEARNING_MATERIAL,
   DELETE_LEARNING_MATERIAL,
+  ADD_ANSWER,
   REMOVE_ANSWER,
   LEARNING_ERROR,
 } from './types';
@@ -131,6 +132,34 @@ export const deleteLearningMaterial =
       });
     }
   };
+
+// Add an answer to a quiz
+export const addAnswer = (quizId, answerType, formData) => async (dispatch) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+    const res = await axios.post(
+      `/api/learning-materials/quizzes/${quizId}/${answerType}`,
+      formData,
+      config
+    );
+
+    dispatch({
+      type: ADD_ANSWER,
+      payload: { answers: res.data, answerType },
+    });
+    dispatch(setAlert('Answer Added', 'success', 2000, false));
+  } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'error')));
+    }
+  }
+};
 
 // Delete answer from a quiz
 export const deleteAnswer =

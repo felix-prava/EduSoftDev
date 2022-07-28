@@ -514,12 +514,53 @@ router.delete(
   }
 );
 
+// @route   POST /api/learning-materials/quizzes/:quiz_id/:answer_type
+// @desc    Add an answer to a quiz
+// @access  Private
+router.post(
+  '/quizzes/:quiz_id/:answer_type',
+  [
+    auth,
+    checkRole('mentor'),
+    check('body', 'Body is required').not().isEmpty(),
+  ],
+  async (req, res) => {
+    try {
+      const quiz = await LearningMaterial.findById(req.params.quiz_id);
+      if (!quiz) {
+        return res.status(404).json({ msg: 'Quiz not found' });
+      }
+
+      const answerType = req.params.answer_type;
+      let answers = quiz.wrongAnswers;
+      if (answerType === 'rightAnswer') {
+        answers = quiz.rightAnswers;
+      }
+
+      const newAnswer = {
+        body: req.body.body,
+      };
+      answers.push(newAnswer);
+
+      await quiz.save();
+
+      res.json(answers);
+    } catch (err) {
+      if (err.kind == 'ObjectId') {
+        return res.status(404).json({ msg: 'Quiz not found' });
+      }
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
+
 // @route   DELETE /api/learning-materials/quizzes/:quiz_id/:answer_type/:answer_id
 // @desc    Delete an answer from a quiz
 // @access  Private
 router.delete(
   '/quizzes/:quiz_id/:answer_type/:answer_id',
-  auth,
+  [auth, checkRole('mentor')],
   async (req, res) => {
     try {
       const quiz = await LearningMaterial.findById(req.params.quiz_id);
