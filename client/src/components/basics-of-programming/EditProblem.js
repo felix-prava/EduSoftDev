@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 import {
   getLearningMaterial,
   updateLearningMaterial,
+  addHint,
   addAnswer,
+  deleteHint,
   deleteAnswer,
 } from '../../actions/learning';
 import { setAlert } from '../../actions/alert';
@@ -14,8 +16,10 @@ const EditProblem = ({
   learning: { learningMaterial },
   getLearningMaterial,
   updateLearningMaterial,
+  addHint,
   addAnswer,
   deleteAnswer,
+  deleteHint,
   setAlert,
 }) => {
   const [formData, setFormData] = useState({
@@ -26,10 +30,9 @@ const EditProblem = ({
     expMax: '',
     body: '',
     shortDescription: '',
-    failedQuizMessage: '',
-    waitingMinutes: '',
-    wrongAnswers: [],
-    rightAnswers: [],
+    tests: [],
+    examples: [],
+    hints: [],
   });
 
   const {
@@ -40,14 +43,26 @@ const EditProblem = ({
     expMax,
     body,
     shortDescription,
-    failedQuizMessage,
-    waitingMinutes,
-    wrongAnswers,
-    rightAnswers,
+    tests,
+    examples,
+    hints,
   } = formData;
 
   let wrongAnswersField = null;
   let rightAnswersField = null;
+  let hintsField = null;
+
+  const addNewHint = function () {
+    if (hintsField === null) {
+      hintsField = document.getElementById('hint-field');
+    }
+    if (hintsField.value === '') {
+      setAlert("You can't add an empty hint", 'error', 3500);
+      return;
+    }
+    addHint(learningMaterial._id, { body: hintsField.value });
+    hintsField.value = null;
+  };
 
   const addNewAnswer = function (answerType) {
     if (answerType === 'wrongAnswer') {
@@ -87,8 +102,9 @@ const EditProblem = ({
 
   const { problemId } = useParams();
   useEffect(() => {
-    getLearningMaterial(problemId);
-    if (learningMaterial || learningMaterial._id !== problemId) {
+    if (!learningMaterial || learningMaterial._id !== problemId)
+      getLearningMaterial(problemId);
+    if (learningMaterial) {
       setFormData({
         name: learningMaterial.name || '',
         module: learningMaterial.module || '',
@@ -97,10 +113,9 @@ const EditProblem = ({
         expMax: learningMaterial.expMax || '',
         body: learningMaterial.body || '',
         shortDescription: learningMaterial.shortDescription || '',
-        failedQuizMessage: learningMaterial.failedQuizMessage || '',
-        waitingMinutes: learningMaterial.waitingMinutes || '',
-        wrongAnswers: learningMaterial.wrongAnswers || [],
-        rightAnswers: learningMaterial.rightAnswers || [],
+        tests: learningMaterial.tests || [],
+        examples: learningMaterial.examples || [],
+        hints: learningMaterial.hints || [],
       });
     }
   }, [getLearningMaterial, learningMaterial, problemId]);
@@ -251,67 +266,60 @@ const EditProblem = ({
               </div>
             </div>
 
-            <div className='space-y-8 divide-y divide-gray-200'>
-              <div className='pt-8'>
-                <div className='grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
-                  <div className='sm:col-span-3'>
-                    <label
-                      htmlFor='failedQuizMessage'
-                      className='block text-sm font-medium text-gray-700'
-                    >
-                      {' '}
-                      Message for Failed Quiz{' '}
-                    </label>
-                    <div className='mt-1'>
-                      <input
-                        type='text'
-                        name='failedQuizMessage'
-                        value={failedQuizMessage}
-                        onChange={(e) => onChange(e)}
-                        className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
-                      />
-                    </div>
-                  </div>
-
-                  <div className='sm:col-span-3'>
-                    <label
-                      htmlFor='waitingMinutes'
-                      className='block text-sm font-medium text-gray-700'
-                    >
-                      {' '}
-                      Waiting Minutes{' '}
-                    </label>
-                    <div className='mt-1'>
-                      <input
-                        type='number'
-                        name='waitingMinutes'
-                        value={waitingMinutes}
-                        onChange={(e) => onChange(e)}
-                        className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
             <div>
               <div>
-                <h1 className='mt-6 font-xl font-bold leading-6 font-medium text-gray-900 sm:text-xl'>
-                  Wrong Answers
+                <h1
+                  id='tests-header'
+                  className='mt-6 font-xl font-bold leading-6 font-medium text-gray-900 sm:text-xl'
+                >
+                  Tests
                 </h1>
               </div>
-              <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
-                <div className='sm:col-span-6'>
-                  <label className='block text-sm font-medium text-gray-700'>
+              <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-7'>
+                <div className='sm:col-span-3'>
+                  <label
+                    htmlFor='testInput'
+                    className='block text-sm font-medium text-gray-700'
+                  >
                     {' '}
-                    Wrong Answer{' '}
+                    Input{' '}
+                  </label>
+                  <div className='mt-1'>
+                    <textarea
+                      type='text'
+                      id='test-input-field'
+                      className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                    />
+                  </div>
+                </div>
+
+                <div className='sm:col-span-3'>
+                  <label
+                    htmlFor='testOutput'
+                    className='block text-sm font-medium text-gray-700'
+                  >
+                    {' '}
+                    Output{' '}
+                  </label>
+                  <div className='mt-1'>
+                    <textarea
+                      type='text'
+                      id='test-output-field'
+                      className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                    />
+                  </div>
+                </div>
+
+                <div className='sm:col-span-1'>
+                  <label className='block text-sm font-medium text-gray-700'>
+                    Show Test
                   </label>
                   <div className='mt-1'>
                     <input
-                      type='text'
-                      id='wrong-answer-field'
-                      className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                      aria-describedby='comments-description'
+                      id='show-test-checkbox'
+                      type='checkbox'
+                      className='focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded'
                     />
                   </div>
                 </div>
@@ -319,22 +327,20 @@ const EditProblem = ({
               <div className='mt-6 flex justify-end mb-8'>
                 <button
                   type='button'
-                  onClick={() => addNewAnswer('wrongAnswer')}
                   className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
                 >
-                  Add Wrong Answer
+                  Add Test
                 </button>
               </div>
-
               <div>
                 <ul className='divide-y divide-gray-200'>
-                  {wrongAnswers.map((wrongAnswer, index) => (
-                    <li className='py-4' key={wrongAnswer._id}>
+                  {tests.map((test, index) => (
+                    <li className='py-4' key={test._id}>
                       <div className='flex space-x-3'>
                         <div className='flex-1 space-y-1'>
                           <div className='flex items-center justify-between'>
                             <h3 className='text-sm font-medium'>
-                              {`Wrong answer ${index + 1}`}
+                              {`Test ${index + 1}`}
                             </h3>
                             <p className='text-sm text-gray-500'>
                               {learningMaterial && (
@@ -344,8 +350,8 @@ const EditProblem = ({
                                     e.preventDefault();
                                     deleteAnswer(
                                       learningMaterial._id,
-                                      'wrongAnswers',
-                                      wrongAnswer._id
+                                      'rightAnswers',
+                                      test._id
                                     );
                                   }}
                                 >
@@ -366,7 +372,118 @@ const EditProblem = ({
                             </p>
                           </div>
                           <p className='text-sm text-gray-500'>
-                            {wrongAnswer.body}
+                            Input: {test.input}
+                          </p>
+                          <p className='text-sm text-gray-500'>
+                            Output: {test.output}
+                          </p>
+                          <p className='text-sm text-gray-500'>
+                            Display Test: {test.showTest ? 'Yes' : 'No'}
+                          </p>
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div>
+              <div>
+                <h1
+                  id='examples-header'
+                  className='mt-6 font-xl font-bold leading-6 font-medium text-gray-900 sm:text-xl'
+                >
+                  Examples
+                </h1>
+              </div>
+              <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
+                <div className='sm:col-span-3'>
+                  <label
+                    htmlFor='exampleInput'
+                    className='block text-sm font-medium text-gray-700'
+                  >
+                    {' '}
+                    Input{' '}
+                  </label>
+                  <div className='mt-1'>
+                    <textarea
+                      type='text'
+                      id='example-input-field'
+                      className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                    />
+                  </div>
+                </div>
+
+                <div className='sm:col-span-3'>
+                  <label
+                    htmlFor='exampleOutput'
+                    className='block text-sm font-medium text-gray-700'
+                  >
+                    {' '}
+                    Output{' '}
+                  </label>
+                  <div className='mt-1'>
+                    <textarea
+                      type='text'
+                      id='example-output-field'
+                      className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className='mt-6 flex justify-end mb-8'>
+                <button
+                  type='button'
+                  className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
+                >
+                  Add Example
+                </button>
+              </div>
+              <div>
+                <ul className='divide-y divide-gray-200'>
+                  {examples.map((example, index) => (
+                    <li className='py-4' key={example._id}>
+                      <div className='flex space-x-3'>
+                        <div className='flex-1 space-y-1'>
+                          <div className='flex items-center justify-between'>
+                            <h3 className='text-sm font-medium'>
+                              {`Example ${index + 1}`}
+                            </h3>
+                            <p className='text-sm text-gray-500'>
+                              {learningMaterial && (
+                                <button
+                                  className='bg-red-600 border border-transparent rounded-md shadow-sm py-1 px-3 flex items-center inline-flex justify-center ml-4 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600'
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    deleteAnswer(
+                                      learningMaterial._id,
+                                      'rightAnswers',
+                                      example._id
+                                    );
+                                  }}
+                                >
+                                  <svg
+                                    xmlns='http://www.w3.org/2000/svg'
+                                    className='h-5 w-5'
+                                    viewBox='0 0 20 20'
+                                    fill='currentColor'
+                                  >
+                                    <path
+                                      fillRule='evenodd'
+                                      d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
+                                      clipRule='evenodd'
+                                    />
+                                  </svg>
+                                </button>
+                              )}
+                            </p>
+                          </div>
+                          <p className='text-sm text-gray-500'>
+                            Input: {example.input}
+                          </p>
+                          <p className='text-sm text-gray-500'>
+                            Output: {example.output}
                           </p>
                         </div>
                       </div>
@@ -379,19 +496,19 @@ const EditProblem = ({
             <div>
               <div>
                 <h1 className='mt-6 font-xl font-bold leading-6 font-medium text-gray-900 sm:text-xl'>
-                  Right Answers
+                  Hints
                 </h1>
               </div>
               <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
                 <div className='sm:col-span-6'>
                   <label className='block text-sm font-medium text-gray-700'>
                     {' '}
-                    Right Answer{' '}
+                    New Hint{' '}
                   </label>
                   <div className='mt-1'>
                     <input
                       type='text'
-                      id='right-answer-field'
+                      id='hint-field'
                       className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
                     />
                   </div>
@@ -400,22 +517,22 @@ const EditProblem = ({
               <div className='mt-6 flex justify-end mb-8'>
                 <button
                   type='button'
-                  onClick={() => addNewAnswer('rightAnswer')}
+                  onClick={addNewHint}
                   className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
                 >
-                  Add Right Answer
+                  Add Hint
                 </button>
               </div>
 
               <div>
                 <ul className='divide-y divide-gray-200'>
-                  {rightAnswers.map((rightAnswer, index) => (
-                    <li className='py-4' key={rightAnswer._id}>
+                  {hints.map((hint, index) => (
+                    <li className='py-4' key={hint._id}>
                       <div className='flex space-x-3'>
                         <div className='flex-1 space-y-1'>
                           <div className='flex items-center justify-between'>
                             <h3 className='text-sm font-medium'>
-                              {`Right answer ${index + 1}`}
+                              {`Hint ${index + 1}`}
                             </h3>
                             <p className='text-sm text-gray-500'>
                               {learningMaterial && (
@@ -423,11 +540,7 @@ const EditProblem = ({
                                   className='bg-red-600 border border-transparent rounded-md shadow-sm py-1 px-3 flex items-center inline-flex justify-center ml-4 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600'
                                   onClick={(e) => {
                                     e.preventDefault();
-                                    deleteAnswer(
-                                      learningMaterial._id,
-                                      'rightAnswers',
-                                      rightAnswer._id
-                                    );
+                                    deleteHint(learningMaterial._id, hint._id);
                                   }}
                                 >
                                   <svg
@@ -446,9 +559,7 @@ const EditProblem = ({
                               )}
                             </p>
                           </div>
-                          <p className='text-sm text-gray-500'>
-                            {rightAnswer.body}
-                          </p>
+                          <p className='text-sm text-gray-500'>{hint.body}</p>
                         </div>
                       </div>
                     </li>
@@ -486,8 +597,10 @@ EditProblem.propTypes = {
   learning: PropTypes.object.isRequired,
   getLearningMaterial: PropTypes.func.isRequired,
   updateLearningMaterial: PropTypes.func.isRequired,
+  addHint: PropTypes.func.isRequired,
   addAnswer: PropTypes.func.isRequired,
   deleteAnswer: PropTypes.func.isRequired,
+  deleteHint: PropTypes.func.isRequired,
   setAlert: PropTypes.func.isRequired,
 };
 
@@ -498,7 +611,9 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getLearningMaterial,
   updateLearningMaterial,
+  addHint,
   addAnswer,
   deleteAnswer,
+  deleteHint,
   setAlert,
 })(EditProblem);

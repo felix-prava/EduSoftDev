@@ -514,6 +514,41 @@ router.delete(
   }
 );
 
+// @route   POST /api/learning-materials/problems/:problem_id/hints
+// @desc    Add a hint to a problem
+// @access  Private
+router.post(
+  '/problems/:problem_id/hints',
+  [
+    auth,
+    checkRole('mentor'),
+    check('body', 'Body is required').not().isEmpty(),
+  ],
+  async (req, res) => {
+    try {
+      const problem = await LearningMaterial.findById(req.params.problem_id);
+      if (!problem) {
+        return res.status(404).json({ msg: 'Problem not found' });
+      }
+
+      const newAnswer = {
+        body: req.body.body,
+      };
+      problem.hints.push(newAnswer);
+
+      await problem.save();
+
+      res.json(problem.hints);
+    } catch (err) {
+      if (err.kind == 'ObjectId') {
+        return res.status(404).json({ msg: 'Problem not found' });
+      }
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
+
 // @route   POST /api/learning-materials/quizzes/:quiz_id/:answer_type
 // @desc    Add an answer to a quiz
 // @access  Private
@@ -548,6 +583,44 @@ router.post(
     } catch (err) {
       if (err.kind == 'ObjectId') {
         return res.status(404).json({ msg: 'Quiz not found' });
+      }
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
+
+// @route   DELETE /api/learning-materials/problems/:problem_id/hints/:hint_id
+// @desc    Delete a hint from a problem
+// @access  Private
+router.delete(
+  '/problems/:problem_id/hints/:hint_id',
+  [auth, checkRole('mentor')],
+  async (req, res) => {
+    try {
+      const problem = await LearningMaterial.findById(req.params.problem_id);
+      if (!problem) {
+        return res.status(404).json({ msg: 'Problem not found' });
+      }
+      let hints = problem.hints;
+
+      // Pull out hint
+      const hint = hints.find((hint) => hint.id === req.params.hint_id);
+      if (!hint) {
+        return res.status(404).json({ msg: 'Hint does not exist' });
+      }
+
+      const removeIndex = hints
+        .map((hint) => hint.id.toString())
+        .indexOf(req.params.hint_id);
+
+      hints.splice(removeIndex, 1);
+      await problem.save();
+
+      res.json({ msg: 'Hint deleted' });
+    } catch (err) {
+      if (err.kind == 'ObjectId') {
+        return res.status(404).json({ msg: 'Problem not found' });
       }
       console.error(err.message);
       res.status(500).send('Server Error');

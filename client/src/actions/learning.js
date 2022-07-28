@@ -5,7 +5,9 @@ import {
   GET_LEARNING_MATERIAL,
   UPDATE_LEARNING_MATERIAL,
   DELETE_LEARNING_MATERIAL,
+  ADD_HINT,
   ADD_ANSWER,
+  REMOVE_HINT,
   REMOVE_ANSWER,
   LEARNING_ERROR,
 } from './types';
@@ -133,6 +135,34 @@ export const deleteLearningMaterial =
     }
   };
 
+// Add one hint to a problem
+export const addHint = (problemId, formData) => async (dispatch) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+    const res = await axios.post(
+      `/api/learning-materials/problems/${problemId}/hints`,
+      formData,
+      config
+    );
+
+    dispatch({
+      type: ADD_HINT,
+      payload: res.data,
+    });
+    dispatch(setAlert('Hint Added', 'success', 2000, false));
+  } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'error')));
+    }
+  }
+};
+
 // Add an answer to a quiz
 export const addAnswer = (quizId, answerType, formData) => async (dispatch) => {
   const config = {
@@ -153,6 +183,26 @@ export const addAnswer = (quizId, answerType, formData) => async (dispatch) => {
       payload: { answers: res.data, answerType },
     });
     dispatch(setAlert('Answer Added', 'success', 2000, false));
+  } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'error')));
+    }
+  }
+};
+
+// Delete answer from a quiz
+export const deleteHint = (problemId, hintId) => async (dispatch) => {
+  try {
+    await axios.delete(
+      `/api/learning-materials/problems/${problemId}/hints/${hintId}`
+    );
+
+    dispatch({
+      type: REMOVE_HINT,
+      payload: hintId,
+    });
+    dispatch(setAlert('Hint Deleted', 'success', 2000, false));
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {

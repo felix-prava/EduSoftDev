@@ -3,7 +3,9 @@ import {
   GET_LEARNING_MATERIAL,
   UPDATE_LEARNING_MATERIAL,
   DELETE_LEARNING_MATERIAL,
+  ADD_HINT,
   ADD_ANSWER,
+  REMOVE_HINT,
   REMOVE_ANSWER,
   LEARNING_ERROR,
 } from '../actions/types';
@@ -40,6 +42,15 @@ export default function LearningMaterialsReducer(state = initialState, action) {
         ),
         loading: false,
       };
+    case ADD_HINT:
+      return {
+        ...state,
+        learningMaterial: {
+          ...state.learningMaterial,
+          hints: payload,
+        },
+        loading: false,
+      };
     case ADD_ANSWER: {
       let wrongAnswers = state.learningMaterial.wrongAnswers;
       let rightAnswers = state.learningMaterial.rightAnswers;
@@ -58,6 +69,17 @@ export default function LearningMaterialsReducer(state = initialState, action) {
         loading: false,
       };
     }
+    case REMOVE_HINT:
+      return {
+        ...state,
+        learningMaterial: {
+          ...state.learningMaterial,
+          hints: state.learningMaterial.hints.filter(
+            (hint) => hint._id !== payload
+          ),
+        },
+        loading: false,
+      };
     case REMOVE_ANSWER: {
       let wrongAnswers = state.learningMaterial.wrongAnswers;
       let rightAnswers = state.learningMaterial.rightAnswers;
