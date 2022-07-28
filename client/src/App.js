@@ -39,6 +39,7 @@ import ModuleItem from './components/basics-of-programming/ModuleItem';
 import CreateProblem from './components/basics-of-programming/CreateProblem';
 import CreateLesson from './components/basics-of-programming/CreateLesson';
 import CreateQuiz from './components/basics-of-programming/CreateQuiz';
+import EditProblem from './components/basics-of-programming/EditProblem';
 import EditLesson from './components/basics-of-programming/EditLesson';
 import EditQuiz from './components/basics-of-programming/EditQuiz';
 
@@ -234,6 +235,15 @@ const App = () => {
               element={
                 <PrivateRoute expectedRole='mentor' redirect='false'>
                   <CreateQuiz />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              exact
+              path='/problems/edit/:problemId'
+              element={
+                <PrivateRoute>
+                  <EditProblem />
                 </PrivateRoute>
               }
             />

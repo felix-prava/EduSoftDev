@@ -10,7 +10,7 @@ import {
 } from '../../actions/learning';
 import { setAlert } from '../../actions/alert';
 
-const EditQuiz = ({
+const EditProblem = ({
   learning: { learningMaterial },
   getLearningMaterial,
   updateLearningMaterial,
@@ -82,14 +82,13 @@ const EditQuiz = ({
 
   const onSubmit = (e) => {
     e.preventDefault();
-    updateLearningMaterial(formData, quizId, learningMaterial.type);
+    updateLearningMaterial(formData, problemId, learningMaterial.type);
   };
 
-  const { quizId } = useParams();
+  const { problemId } = useParams();
   useEffect(() => {
-    if (!learningMaterial || learningMaterial._id !== quizId)
-      getLearningMaterial(quizId);
-    if (learningMaterial) {
+    getLearningMaterial(problemId);
+    if (learningMaterial || learningMaterial._id !== problemId) {
       setFormData({
         name: learningMaterial.name || '',
         module: learningMaterial.module || '',
@@ -104,7 +103,7 @@ const EditQuiz = ({
         rightAnswers: learningMaterial.rightAnswers || [],
       });
     }
-  }, [getLearningMaterial, learningMaterial, quizId]);
+  }, [getLearningMaterial, learningMaterial, problemId]);
 
   return (
     <Fragment>
@@ -483,7 +482,7 @@ const EditQuiz = ({
   );
 };
 
-EditQuiz.propTypes = {
+EditProblem.propTypes = {
   learning: PropTypes.object.isRequired,
   getLearningMaterial: PropTypes.func.isRequired,
   updateLearningMaterial: PropTypes.func.isRequired,
@@ -502,4 +501,4 @@ export default connect(mapStateToProps, {
   addAnswer,
   deleteAnswer,
   setAlert,
-})(EditQuiz);
+})(EditProblem);

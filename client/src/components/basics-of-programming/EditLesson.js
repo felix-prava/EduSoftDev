@@ -35,7 +35,8 @@ const EditLesson = ({
 
   const { lessonId } = useParams();
   useEffect(() => {
-    if (!learningMaterial) getLearningMaterial(lessonId);
+    if (!learningMaterial || learningMaterial._id !== lessonId)
+      getLearningMaterial(lessonId);
     if (learningMaterial) {
       setFormData({
         name: learningMaterial.name || '',
