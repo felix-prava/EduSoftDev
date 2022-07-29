@@ -1,37 +1,33 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, { Fragment, useState } from 'react';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { updateArticle, getArticle } from '../../actions/article';
+import { addLearningMaterial } from '../../actions/learning';
 
-const EditArticle = ({ article: { article }, updateArticle, getArticle }) => {
+const CreateLesson = ({ addLearningMaterial }) => {
+  const { module } = useParams();
+  let navigate = useNavigate();
+
   const [formData, setFormData] = useState({
-    subject: '',
-    description: '',
+    name: '',
+    module: module,
+    expNeeded: '',
+    expGained: '',
+    expMax: '',
     body: '',
+    shortDescription: '',
   });
 
-  const { subject, body, description } = formData;
+  const { name, expNeeded, expGained, expMax, body, shortDescription } =
+    formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = (e) => {
     e.preventDefault();
-    updateArticle(formData, id);
+    addLearningMaterial(formData, 'lesson', module, navigate);
   };
-
-  const { id } = useParams();
-  useEffect(() => {
-    if (!article) getArticle(id);
-    if (article) {
-      setFormData({
-        subject: article.subject,
-        description: article.description,
-        body: article.body,
-      });
-    }
-  }, [getArticle, article, id]);
 
   return (
     <Fragment>
@@ -44,27 +40,92 @@ const EditArticle = ({ article: { article }, updateArticle, getArticle }) => {
             <div>
               <div>
                 <h3 className='text-2xl font-bold leading-6 font-medium text-gray-900 sm:text-2xl'>
-                  Edit article
+                  Create a new lesson
                 </h3>
               </div>
 
               <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
                 <div className='sm:col-span-6'>
                   <label
-                    htmlFor='subject'
+                    htmlFor='name'
                     className='block text-sm font-medium text-gray-700'
                   >
                     {' '}
-                    What's this article about?{' '}
+                    What's the title of this lesson?{' '}
                   </label>
                   <div className='mt-1'>
                     <input
                       type='text'
-                      name='subject'
-                      value={subject}
+                      name='name'
+                      value={name}
                       onChange={(e) => onChange(e)}
                       className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
                     />
+                  </div>
+                </div>
+              </div>
+
+              <div className='space-y-8 divide-y divide-gray-200'>
+                <div className='pt-8'>
+                  <div className='grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
+                    <div className='sm:col-span-2'>
+                      <label
+                        htmlFor='expNeeded'
+                        className='block text-sm font-medium text-gray-700'
+                      >
+                        {' '}
+                        Experience Needed{' '}
+                      </label>
+                      <div className='mt-1'>
+                        <input
+                          type='number'
+                          step='any'
+                          name='expNeeded'
+                          value={expNeeded}
+                          onChange={(e) => onChange(e)}
+                          className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                        />
+                      </div>
+                    </div>
+
+                    <div className='sm:col-span-2'>
+                      <label
+                        htmlFor='expGained'
+                        className='block text-sm font-medium text-gray-700'
+                      >
+                        {' '}
+                        Experience Gained{' '}
+                      </label>
+                      <div className='mt-1'>
+                        <input
+                          type='number'
+                          step='any'
+                          name='expGained'
+                          value={expGained}
+                          onChange={(e) => onChange(e)}
+                          className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                        />
+                      </div>
+                    </div>
+
+                    <div className='sm:col-span-2'>
+                      <label
+                        htmlFor='expMax'
+                        className='block text-sm font-medium text-gray-700'
+                      >
+                        {' '}
+                        Max Experience{' '}
+                      </label>
+                      <div className='mt-1'>
+                        <input
+                          type='number'
+                          name='expMax'
+                          value={expMax}
+                          onChange={(e) => onChange(e)}
+                          className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -95,7 +156,7 @@ const EditArticle = ({ article: { article }, updateArticle, getArticle }) => {
               <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
                 <div className='sm:col-span-6'>
                   <label
-                    htmlFor='description'
+                    htmlFor='shortDescription'
                     className='block text-sm font-medium text-gray-700'
                   >
                     {' '}
@@ -104,8 +165,8 @@ const EditArticle = ({ article: { article }, updateArticle, getArticle }) => {
                   <div className='mt-1'>
                     <input
                       type='text'
-                      name='description'
-                      value={description}
+                      name='shortDescription'
+                      value={shortDescription}
                       onChange={(e) => onChange(e)}
                       className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
                     />
@@ -117,7 +178,7 @@ const EditArticle = ({ article: { article }, updateArticle, getArticle }) => {
 
           <div className='pt-5'>
             <div className='flex justify-end mb-8'>
-              <Link to={`/articles/${id}`}>
+              <Link to={`/modules/${module}`}>
                 <button
                   type='button'
                   className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
@@ -139,16 +200,8 @@ const EditArticle = ({ article: { article }, updateArticle, getArticle }) => {
   );
 };
 
-EditArticle.propTypes = {
-  article: PropTypes.object.isRequired,
-  updateArticle: PropTypes.func.isRequired,
-  getArticle: PropTypes.func.isRequired,
+CreateLesson.propTypes = {
+  addLearningMaterial: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  article: state.article,
-});
-
-export default connect(mapStateToProps, { updateArticle, getArticle })(
-  EditArticle
-);
+export default connect(null, { addLearningMaterial })(CreateLesson);

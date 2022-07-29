@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 
-const Dashboard = ({ auth: { user, loading, isAuthenticated } }) => {
+const Dashboard = ({
+  auth: { user, loading, solvedProblems, lessonsLearned, quizzesSolved },
+}) => {
   return loading || user === null ? (
     <Spinner />
   ) : (
@@ -106,31 +108,123 @@ const Dashboard = ({ auth: { user, loading, isAuthenticated } }) => {
                     <div className='p-5'>
                       <div className='flex items-center'>
                         <div className='flex-shrink-0'>
-                          {/* Heroicon name: outline/scale */}
                           <svg
-                            className='h-6 w-6 text-gray-400'
                             xmlns='http://www.w3.org/2000/svg'
+                            className='h-6 w-6 text-gray-400'
                             fill='none'
                             viewBox='0 0 24 24'
-                            strokeWidth='2'
                             stroke='currentColor'
-                            aria-hidden='true'
+                            strokeWidth='2'
                           >
                             <path
                               strokeLinecap='round'
                               strokeLinejoin='round'
-                              d='M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3'
+                              d='M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z'
                             />
                           </svg>
                         </div>
                         <div className='ml-5 w-0 flex-1'>
                           <dl>
                             <dt className='text-sm font-medium text-gray-500 truncate'>
-                              Problems
+                              Solved Problems
                             </dt>
                             <dd>
                               <div className='text-lg font-medium text-gray-900'>
-                                $30,659.45
+                                {(solvedProblems && solvedProblems.length) || 0}
+                              </div>
+                            </dd>
+                          </dl>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='bg-gray-50 px-5 py-3'>
+                      <div className='text-sm'>
+                        <Link
+                          to='#'
+                          className='font-medium text-cyan-700 hover:text-cyan-900'
+                        >
+                          {' '}
+                          View all{' '}
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className='bg-white overflow-hidden shadow rounded-lg'>
+                    <div className='p-5'>
+                      <div className='flex items-center'>
+                        <div className='flex-shrink-0'>
+                          <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            className='h-6 w-6 text-gray-400'
+                            fill='none'
+                            viewBox='0 0 24 24'
+                            stroke='currentColor'
+                            strokeWidth='2'
+                          >
+                            <path d='M12 14l9-5-9-5-9 5 9 5z' />
+                            <path d='M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z' />
+                            <path
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
+                              d='M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222'
+                            />
+                          </svg>
+                        </div>
+                        <div className='ml-5 w-0 flex-1'>
+                          <dl>
+                            <dt className='text-sm font-medium text-gray-500 truncate'>
+                              Lessons Learned
+                            </dt>
+                            <dd>
+                              <div className='text-lg font-medium text-gray-900'>
+                                {(lessonsLearned && lessonsLearned.length) || 0}
+                              </div>
+                            </dd>
+                          </dl>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='bg-gray-50 px-5 py-3'>
+                      <div className='text-sm'>
+                        <Link
+                          to='#'
+                          className='font-medium text-cyan-700 hover:text-cyan-900'
+                        >
+                          {' '}
+                          View all{' '}
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className='bg-white overflow-hidden shadow rounded-lg'>
+                    <div className='p-5'>
+                      <div className='flex items-center'>
+                        <div className='flex-shrink-0'>
+                          <svg
+                            xmlns='http://www.w3.org/2000/svg'
+                            className='h-6 w-6 text-gray-400'
+                            fill='none'
+                            viewBox='0 0 24 24'
+                            stroke='currentColor'
+                            strokeWidth='2'
+                          >
+                            <path
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
+                              d='M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4'
+                            />
+                          </svg>
+                        </div>
+                        <div className='ml-5 w-0 flex-1'>
+                          <dl>
+                            <dt className='text-sm font-medium text-gray-500 truncate'>
+                              Quizzes Completed
+                            </dt>
+                            <dd>
+                              <div className='text-lg font-medium text-gray-900'>
+                                {(quizzesSolved && quizzesSolved.length) || 0}
                               </div>
                             </dd>
                           </dl>

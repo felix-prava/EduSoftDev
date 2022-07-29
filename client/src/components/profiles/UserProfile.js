@@ -190,7 +190,7 @@ const UserProfile = ({
                                 </svg>
                               </div>
                               <div className='ml-3 text-base text-gray-500 hover:text-gray-700'>
-                                <p>0 EXP</p>
+                                <p>{user.exp} exp</p>
                               </div>
                             </div>
                           </div>

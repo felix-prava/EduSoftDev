@@ -33,6 +33,53 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: 'normal',
   },
+  exp: {
+    type: Number,
+    default: 0,
+  },
+  solvedProblems: [
+    {
+      problem: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'learning_material',
+      },
+    },
+  ],
+  lessonsLearned: [
+    {
+      lesson: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'learning_material',
+      },
+    },
+  ],
+  solvedQuizzes: [
+    {
+      quiz: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'learning_material',
+      },
+    },
+  ],
+  failedQuizzes: [
+    {
+      quiz: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'learning_material',
+      },
+      failedQuizDate: {
+        type: Date,
+        default: Date.now,
+      },
+      waitingMinutes: {
+        type: Number,
+      },
+    },
+  ],
+  lastLearningMaterial: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'learning_material',
+  },
   date: {
     type: Date,
     default: Date.now,
