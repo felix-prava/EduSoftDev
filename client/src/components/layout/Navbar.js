@@ -40,6 +40,16 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
   if (location.pathname === '/') {
     return <Fragment></Fragment>;
   }
+
+  const modules = (
+    <Link
+      to='/modules'
+      className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+    >
+      Modules
+    </Link>
+  );
+
   const articles = (
     <Link
       to='/articles'
@@ -66,13 +76,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
         Team
       </Link>
 
-      <Link
-        to='#'
-        className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
-      >
-        Projects
-      </Link>
-
+      {modules}
       {articles}
 
       <Link
@@ -95,6 +99,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
         Home
       </Link>
 
+      {modules}
       {articles}
     </Fragment>
   );
@@ -108,6 +113,8 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
       >
         Home
       </Link>
+
+      {modules}
 
       <Link
         to='/admin/profiles'

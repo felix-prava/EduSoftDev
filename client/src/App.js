@@ -9,6 +9,7 @@ import Landing from './components/layout/Landing';
 import Navbar from './components/layout/Navbar';
 import Alert from './components/layout/Alert';
 import SettingsSidebar from './components/layout/SettingsSidebar';
+import PageNotFound from './components/layout/PageNotFound';
 
 // Dashboard
 import Dashboard from './components/dashboard/Dashboard';
@@ -31,6 +32,16 @@ import Articles from './components/articles/Articles';
 import Article from './components/articles/Article';
 import CreateArticle from './components/articles/CreateArticle';
 import EditArticle from './components/articles/EditArticle';
+
+// Learning Materials - The Basics of Programming
+import Modules from './components/basics-of-programming/Modules';
+import ModuleItem from './components/basics-of-programming/ModuleItem';
+import CreateProblem from './components/basics-of-programming/CreateProblem';
+import CreateLesson from './components/basics-of-programming/CreateLesson';
+import CreateQuiz from './components/basics-of-programming/CreateQuiz';
+import EditProblem from './components/basics-of-programming/EditProblem';
+import EditLesson from './components/basics-of-programming/EditLesson';
+import EditQuiz from './components/basics-of-programming/EditQuiz';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -180,6 +191,83 @@ const App = () => {
                 </PrivateRoute>
               }
             />
+
+            {/* Learning Materials - The Basics of Programming */}
+            <Route
+              exact
+              path='/modules'
+              element={
+                <PrivateRoute>
+                  <Modules />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              exact
+              path='/modules/:module'
+              element={
+                <PrivateRoute>
+                  <ModuleItem />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              exact
+              path='/modules/:module/create-problem'
+              element={
+                <PrivateRoute expectedRole='mentor' redirect='false'>
+                  <CreateProblem />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              exact
+              path='/modules/:module/create-lesson'
+              element={
+                <PrivateRoute expectedRole='mentor' redirect='false'>
+                  <CreateLesson />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              exact
+              path='/modules/:module/create-quiz'
+              element={
+                <PrivateRoute expectedRole='mentor' redirect='false'>
+                  <CreateQuiz />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              exact
+              path='/problems/edit/:problemId'
+              element={
+                <PrivateRoute>
+                  <EditProblem />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              exact
+              path='/lessons/edit/:lessonId'
+              element={
+                <PrivateRoute>
+                  <EditLesson />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              exact
+              path='/quizzes/edit/:quizId'
+              element={
+                <PrivateRoute>
+                  <EditQuiz />
+                </PrivateRoute>
+              }
+            />
+
+            {/* Page not Found */}
+            <Route exact path='/:anything' element={<PageNotFound />} />
           </Fragment>
         </Routes>
       </Router>

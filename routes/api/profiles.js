@@ -119,7 +119,7 @@ router.post(
 // @route   GET /api/profiles
 // @desc    Get all profiles
 // @access  Private
-router.get('/', [auth, checkRole()], async (_req, res) => {
+router.get('/', [auth, checkRole('admin')], async (_req, res) => {
   try {
     const profiles = await Profile.find().populate('user', [
       'firstName',
@@ -150,6 +150,7 @@ router.get('/user/:user_id', auth, async (req, res) => {
       'avatar',
       'email',
       'username',
+      'exp',
     ]);
 
     if (!profile) {

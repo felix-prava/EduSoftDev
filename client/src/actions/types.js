@@ -33,3 +33,18 @@ export const UPDATE_LIKES = 'UPDATE_LIKES';
 export const UPDATE_DISLIKES = 'UPDATE_DISLIKES';
 export const DELETE_ARTICLE = 'DELETE_ARTICLE';
 export const REMOVE_COMMENT = 'REMOVE_COMMENT';
+
+// Learning problems, quizzes and lessons
+export const GET_MODULE_PROBLEMS = 'GET_MODULE_PROBLEMS';
+export const GET_LEARNING_MATERIAL = 'GET_LEARNING_MATERIAL';
+export const UPDATE_LEARNING_MATERIAL = 'UPDATE_LEARNING_MATERIAL';
+export const LEARNING_ERROR = 'LEARNING_ERROR';
+export const DELETE_LEARNING_MATERIAL = 'DELETE_LEARNING_MATERIAL';
+export const ADD_TEST = 'ADD_TEST';
+export const ADD_EXAMPLE = 'ADD_EXAMPLE';
+export const ADD_HINT = 'ADD_HINT';
+export const ADD_ANSWER = 'ADD_ANSWER';
+export const REMOVE_TEST = 'REMOVE_TEST';
+export const REMOVE_EXAMPLE = 'REMOVE_EXAMPLE';
+export const REMOVE_HINT = 'REMOVE_HINT';
+export const REMOVE_ANSWER = 'REMOVE_ANSWER';
