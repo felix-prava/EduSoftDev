@@ -549,6 +549,52 @@ router.post(
   }
 );
 
+// @route   POST /api/learning-materials/problems/:problem_id/:request_type
+// @desc    Add a test or an example to a problem
+// @access  Private
+router.post(
+  '/problems/:problem_id/:request_type',
+  [
+    auth,
+    checkRole('mentor'),
+    check('input', 'An input is required').not().isEmpty(),
+    check('output', 'An output is required').not().isEmpty(),
+  ],
+  async (req, res) => {
+    try {
+      const problem = await LearningMaterial.findById(req.params.problem_id);
+      if (!problem) {
+        return res.status(404).json({ msg: 'Problem not found' });
+      }
+
+      const requestType = req.params.request_type;
+      let dataArray = problem.examples;
+      if (requestType === 'tests') {
+        dataArray = problem.tests;
+      }
+
+      const newAnswer = {
+        input: req.body.input,
+        output: req.body.output,
+      };
+      if (requestType === 'tests') {
+        newAnswer.showTest = req.body.showTest;
+      }
+      dataArray.push(newAnswer);
+
+      await problem.save();
+
+      res.json(dataArray);
+    } catch (err) {
+      if (err.kind == 'ObjectId') {
+        return res.status(404).json({ msg: 'Problem not found' });
+      }
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
+
 // @route   POST /api/learning-materials/quizzes/:quiz_id/:answer_type
 // @desc    Add an answer to a quiz
 // @access  Private

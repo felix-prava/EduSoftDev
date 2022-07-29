@@ -5,6 +5,8 @@ import {
   GET_LEARNING_MATERIAL,
   UPDATE_LEARNING_MATERIAL,
   DELETE_LEARNING_MATERIAL,
+  ADD_TEST,
+  ADD_EXAMPLE,
   ADD_HINT,
   ADD_ANSWER,
   REMOVE_HINT,
@@ -135,7 +137,63 @@ export const deleteLearningMaterial =
     }
   };
 
-// Add one hint to a problem
+// Add an example to a problem
+export const addExample = (problemId, formData) => async (dispatch) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+    const res = await axios.post(
+      `/api/learning-materials/problems/${problemId}/examples`,
+      formData,
+      config
+    );
+
+    dispatch({
+      type: ADD_EXAMPLE,
+      payload: res.data,
+    });
+    dispatch(setAlert('Example Added', 'success', 2000, false));
+  } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'error')));
+    }
+  }
+};
+
+// Add a test to a problem
+export const addTest = (problemId, formData) => async (dispatch) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+    const res = await axios.post(
+      `/api/learning-materials/problems/${problemId}/tests`,
+      formData,
+      config
+    );
+
+    dispatch({
+      type: ADD_TEST,
+      payload: res.data,
+    });
+    dispatch(setAlert('Test Added', 'success', 2000, false));
+  } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'error')));
+    }
+  }
+};
+
+// Add a hint to a problem
 export const addHint = (problemId, formData) => async (dispatch) => {
   const config = {
     headers: {

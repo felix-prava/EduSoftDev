@@ -6,6 +6,8 @@ import {
   getLearningMaterial,
   updateLearningMaterial,
   addHint,
+  addExample,
+  addTest,
   addAnswer,
   deleteHint,
   deleteAnswer,
@@ -17,6 +19,8 @@ const EditProblem = ({
   getLearningMaterial,
   updateLearningMaterial,
   addHint,
+  addExample,
+  addTest,
   addAnswer,
   deleteAnswer,
   deleteHint,
@@ -48,9 +52,12 @@ const EditProblem = ({
     hints,
   } = formData;
 
-  let wrongAnswersField = null;
-  let rightAnswersField = null;
   let hintsField = null;
+  let examplesInputField = null;
+  let examplesOutputField = null;
+  let testsInputField = null;
+  let testsOutputField = null;
+  let testsCheckbox = null;
 
   const addNewHint = function () {
     if (hintsField === null) {
@@ -64,32 +71,47 @@ const EditProblem = ({
     hintsField.value = null;
   };
 
-  const addNewAnswer = function (answerType) {
-    if (answerType === 'wrongAnswer') {
-      if (wrongAnswersField === null) {
-        wrongAnswersField = document.getElementById('wrong-answer-field');
-      }
-      if (wrongAnswersField.value === '') {
-        setAlert("You can't add an empty answer", 'error', 3500);
-        return;
-      }
-      addAnswer(learningMaterial._id, 'wrongAnswer', {
-        body: wrongAnswersField.value,
-      });
-      wrongAnswersField.value = null;
+  const addNewTest = function () {
+    if (testsInputField === null) {
+      testsInputField = document.getElementById('test-input-field');
+    }
+    if (testsOutputField === null) {
+      testsOutputField = document.getElementById('test-output-field');
+    }
+    if (testsCheckbox === null) {
+      testsCheckbox = document.getElementById('show-test-checkbox');
+    }
+    if (testsInputField.value === '' || testsOutputField.value === '') {
+      setAlert('A test must have an input and an output', 'error', 3500);
       return;
     }
-    if (rightAnswersField === null) {
-      rightAnswersField = document.getElementById('right-answer-field');
-    }
-    if (rightAnswersField.value === '') {
-      setAlert("You can't add an empty answer", 'error', 3500);
-      return;
-    }
-    addAnswer(learningMaterial._id, 'rightAnswer', {
-      body: rightAnswersField.value,
+    addTest(learningMaterial._id, {
+      input: testsInputField.value,
+      output: testsOutputField.value,
+      showTest: testsCheckbox.checked,
     });
-    rightAnswersField.value = null;
+    testsInputField.value = null;
+    testsOutputField.value = null;
+    testsCheckbox.checked = false;
+  };
+
+  const addNewExample = function () {
+    if (examplesInputField === null) {
+      examplesInputField = document.getElementById('example-input-field');
+    }
+    if (examplesOutputField === null) {
+      examplesOutputField = document.getElementById('example-output-field');
+    }
+    if (examplesInputField.value === '' || examplesOutputField.value === '') {
+      setAlert('An example must have an input and an output', 'error', 3500);
+      return;
+    }
+    addExample(learningMaterial._id, {
+      input: examplesInputField.value,
+      output: examplesOutputField.value,
+    });
+    examplesInputField.value = null;
+    examplesOutputField.value = null;
   };
 
   const onChange = (e) =>
@@ -327,6 +349,7 @@ const EditProblem = ({
               <div className='mt-6 flex justify-end mb-8'>
                 <button
                   type='button'
+                  onClick={addNewTest}
                   className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
                 >
                   Add Test
@@ -435,6 +458,7 @@ const EditProblem = ({
               <div className='mt-6 flex justify-end mb-8'>
                 <button
                   type='button'
+                  onClick={addNewExample}
                   className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
                 >
                   Add Example
@@ -598,6 +622,8 @@ EditProblem.propTypes = {
   getLearningMaterial: PropTypes.func.isRequired,
   updateLearningMaterial: PropTypes.func.isRequired,
   addHint: PropTypes.func.isRequired,
+  addExample: PropTypes.func.isRequired,
+  addTest: PropTypes.func.isRequired,
   addAnswer: PropTypes.func.isRequired,
   deleteAnswer: PropTypes.func.isRequired,
   deleteHint: PropTypes.func.isRequired,
@@ -612,6 +638,8 @@ export default connect(mapStateToProps, {
   getLearningMaterial,
   updateLearningMaterial,
   addHint,
+  addExample,
+  addTest,
   addAnswer,
   deleteAnswer,
   deleteHint,

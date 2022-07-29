@@ -3,6 +3,8 @@ import {
   GET_LEARNING_MATERIAL,
   UPDATE_LEARNING_MATERIAL,
   DELETE_LEARNING_MATERIAL,
+  ADD_TEST,
+  ADD_EXAMPLE,
   ADD_HINT,
   ADD_ANSWER,
   REMOVE_HINT,
@@ -40,6 +42,24 @@ export default function LearningMaterialsReducer(state = initialState, action) {
         problems: state.problems.filter(
           (learningMaterial) => learningMaterial._id !== payload
         ),
+        loading: false,
+      };
+    case ADD_TEST:
+      return {
+        ...state,
+        learningMaterial: {
+          ...state.learningMaterial,
+          tests: payload,
+        },
+        loading: false,
+      };
+    case ADD_EXAMPLE:
+      return {
+        ...state,
+        learningMaterial: {
+          ...state.learningMaterial,
+          examples: payload,
+        },
         loading: false,
       };
     case ADD_HINT:
