@@ -361,44 +361,54 @@ const EditProblem = ({
                     <li className='py-4' key={test._id}>
                       <div className='flex space-x-3'>
                         <div className='flex-1 space-y-1'>
-                          <div className='flex items-center justify-between'>
-                            <h3 className='text-sm font-medium'>
-                              {`Test ${index + 1}`}
-                            </h3>
-                            <p className='text-sm text-gray-500'>
-                              {learningMaterial && (
-                                <button
-                                  className='bg-red-600 border border-transparent rounded-md shadow-sm py-1 px-3 flex items-center inline-flex justify-center ml-4 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600'
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    deleteTest(learningMaterial._id, test._id);
-                                  }}
-                                >
-                                  <svg
-                                    xmlns='http://www.w3.org/2000/svg'
-                                    className='h-5 w-5'
-                                    viewBox='0 0 20 20'
-                                    fill='currentColor'
+                          <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
+                            <div className='sm:col-span-3'>
+                              <div className='flex items-center justify-between'>
+                                <h3 className='text-sm font-medium'>
+                                  {`Test ${index + 1}`}
+                                </h3>
+                              </div>
+
+                              <p className='text-sm text-gray-500'>
+                                Input: {test.input}
+                              </p>
+                              <p className='text-sm text-gray-500'>
+                                Output: {test.output}
+                              </p>
+                              <p className='text-sm text-gray-500'>
+                                Display Test: {test.showTest ? 'Yes' : 'No'}
+                              </p>
+                            </div>
+                            <div className='sm:col-span-3'>
+                              <p className='float-right text-sm text-gray-500'>
+                                {learningMaterial && (
+                                  <button
+                                    className='bg-red-600 border border-transparent rounded-md shadow-sm py-1 px-3 flex items-center inline-flex justify-center ml-4 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600'
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      deleteTest(
+                                        learningMaterial._id,
+                                        test._id
+                                      );
+                                    }}
                                   >
-                                    <path
-                                      fillRule='evenodd'
-                                      d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
-                                      clipRule='evenodd'
-                                    />
-                                  </svg>
-                                </button>
-                              )}
-                            </p>
+                                    <svg
+                                      xmlns='http://www.w3.org/2000/svg'
+                                      className='h-5 w-5'
+                                      viewBox='0 0 20 20'
+                                      fill='currentColor'
+                                    >
+                                      <path
+                                        fillRule='evenodd'
+                                        d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
+                                        clipRule='evenodd'
+                                      />
+                                    </svg>
+                                  </button>
+                                )}
+                              </p>
+                            </div>
                           </div>
-                          <p className='text-sm text-gray-500'>
-                            Input: {test.input}
-                          </p>
-                          <p className='text-sm text-gray-500'>
-                            Output: {test.output}
-                          </p>
-                          <p className='text-sm text-gray-500'>
-                            Display Test: {test.showTest ? 'Yes' : 'No'}
-                          </p>
                         </div>
                       </div>
                     </li>
@@ -466,44 +476,52 @@ const EditProblem = ({
                     <li className='py-4' key={example._id}>
                       <div className='flex space-x-3'>
                         <div className='flex-1 space-y-1'>
-                          <div className='flex items-center justify-between'>
-                            <h3 className='text-sm font-medium'>
-                              {`Example ${index + 1}`}
-                            </h3>
-                            <p className='text-sm text-gray-500'>
-                              {learningMaterial && (
-                                <button
-                                  className='bg-red-600 border border-transparent rounded-md shadow-sm py-1 px-3 flex items-center inline-flex justify-center ml-4 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600'
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    deleteExample(
-                                      learningMaterial._id,
-                                      example._id
-                                    );
-                                  }}
-                                >
-                                  <svg
-                                    xmlns='http://www.w3.org/2000/svg'
-                                    className='h-5 w-5'
-                                    viewBox='0 0 20 20'
-                                    fill='currentColor'
+                          <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
+                            <div className='sm:col-span-3'>
+                              <div className='flex items-center justify-between'>
+                                <h3 className='text-sm font-medium'>
+                                  {`Example ${index + 1}`}
+                                </h3>
+                              </div>
+                              {/*<!-- TODO 2 columns for bigger examples and tests. Buttons on the second column -->*/}
+
+                              <p className='text-sm text-gray-500'>
+                                Input: {example.input}
+                              </p>
+                              <p className='text-sm text-gray-500'>
+                                Output: {example.output}
+                              </p>
+                            </div>
+                            <div className='sm:col-span-3'>
+                              <p className='float-right text-sm text-gray-500'>
+                                {learningMaterial && (
+                                  <button
+                                    className='bg-red-600 border border-transparent rounded-md shadow-sm py-1 px-3 flex items-center inline-flex justify-center ml-4 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600'
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      deleteExample(
+                                        learningMaterial._id,
+                                        example._id
+                                      );
+                                    }}
                                   >
-                                    <path
-                                      fillRule='evenodd'
-                                      d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
-                                      clipRule='evenodd'
-                                    />
-                                  </svg>
-                                </button>
-                              )}
-                            </p>
+                                    <svg
+                                      xmlns='http://www.w3.org/2000/svg'
+                                      className='h-5 w-5'
+                                      viewBox='0 0 20 20'
+                                      fill='currentColor'
+                                    >
+                                      <path
+                                        fillRule='evenodd'
+                                        d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
+                                        clipRule='evenodd'
+                                      />
+                                    </svg>
+                                  </button>
+                                )}
+                              </p>
+                            </div>
                           </div>
-                          <p className='text-sm text-gray-500'>
-                            Input: {example.input}
-                          </p>
-                          <p className='text-sm text-gray-500'>
-                            Output: {example.output}
-                          </p>
                         </div>
                       </div>
                     </li>
