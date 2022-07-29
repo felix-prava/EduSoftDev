@@ -9,6 +9,8 @@ import {
   ADD_EXAMPLE,
   ADD_HINT,
   ADD_ANSWER,
+  REMOVE_TEST,
+  REMOVE_EXAMPLE,
   REMOVE_HINT,
   REMOVE_ANSWER,
   LEARNING_ERROR,
@@ -249,7 +251,47 @@ export const addAnswer = (quizId, answerType, formData) => async (dispatch) => {
   }
 };
 
-// Delete answer from a quiz
+// Delete test from a problem
+export const deleteTest = (problemId, testId) => async (dispatch) => {
+  try {
+    await axios.delete(
+      `/api/learning-materials/problems/${problemId}/tests/${testId}`
+    );
+
+    dispatch({
+      type: REMOVE_TEST,
+      payload: testId,
+    });
+    dispatch(setAlert('Test Deleted', 'success', 2000, false));
+  } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'error')));
+    }
+  }
+};
+
+// Delete example from a problem
+export const deleteExample = (problemId, exampleId) => async (dispatch) => {
+  try {
+    await axios.delete(
+      `/api/learning-materials/problems/${problemId}/examples/${exampleId}`
+    );
+
+    dispatch({
+      type: REMOVE_EXAMPLE,
+      payload: exampleId,
+    });
+    dispatch(setAlert('Example Deleted', 'success', 2000, false));
+  } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'error')));
+    }
+  }
+};
+
+// Delete hint from a problem
 export const deleteHint = (problemId, hintId) => async (dispatch) => {
   try {
     await axios.delete(

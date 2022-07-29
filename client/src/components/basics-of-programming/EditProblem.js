@@ -5,12 +5,12 @@ import { connect } from 'react-redux';
 import {
   getLearningMaterial,
   updateLearningMaterial,
-  addHint,
-  addExample,
   addTest,
-  addAnswer,
+  addExample,
+  addHint,
+  deleteTest,
+  deleteExample,
   deleteHint,
-  deleteAnswer,
 } from '../../actions/learning';
 import { setAlert } from '../../actions/alert';
 
@@ -18,11 +18,11 @@ const EditProblem = ({
   learning: { learningMaterial },
   getLearningMaterial,
   updateLearningMaterial,
-  addHint,
-  addExample,
   addTest,
-  addAnswer,
-  deleteAnswer,
+  addExample,
+  addHint,
+  deleteTest,
+  deleteExample,
   deleteHint,
   setAlert,
 }) => {
@@ -371,11 +371,7 @@ const EditProblem = ({
                                   className='bg-red-600 border border-transparent rounded-md shadow-sm py-1 px-3 flex items-center inline-flex justify-center ml-4 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600'
                                   onClick={(e) => {
                                     e.preventDefault();
-                                    deleteAnswer(
-                                      learningMaterial._id,
-                                      'rightAnswers',
-                                      test._id
-                                    );
+                                    deleteTest(learningMaterial._id, test._id);
                                   }}
                                 >
                                   <svg
@@ -480,9 +476,8 @@ const EditProblem = ({
                                   className='bg-red-600 border border-transparent rounded-md shadow-sm py-1 px-3 flex items-center inline-flex justify-center ml-4 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600'
                                   onClick={(e) => {
                                     e.preventDefault();
-                                    deleteAnswer(
+                                    deleteExample(
                                       learningMaterial._id,
-                                      'rightAnswers',
                                       example._id
                                     );
                                   }}
@@ -624,8 +619,8 @@ EditProblem.propTypes = {
   addHint: PropTypes.func.isRequired,
   addExample: PropTypes.func.isRequired,
   addTest: PropTypes.func.isRequired,
-  addAnswer: PropTypes.func.isRequired,
-  deleteAnswer: PropTypes.func.isRequired,
+  deleteTest: PropTypes.func.isRequired,
+  deleteExample: PropTypes.func.isRequired,
   deleteHint: PropTypes.func.isRequired,
   setAlert: PropTypes.func.isRequired,
 };
@@ -640,8 +635,8 @@ export default connect(mapStateToProps, {
   addHint,
   addExample,
   addTest,
-  addAnswer,
-  deleteAnswer,
+  deleteTest,
+  deleteExample,
   deleteHint,
   setAlert,
 })(EditProblem);

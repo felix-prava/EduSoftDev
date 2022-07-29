@@ -7,6 +7,8 @@ import {
   ADD_EXAMPLE,
   ADD_HINT,
   ADD_ANSWER,
+  REMOVE_TEST,
+  REMOVE_EXAMPLE,
   REMOVE_HINT,
   REMOVE_ANSWER,
   LEARNING_ERROR,
@@ -89,6 +91,28 @@ export default function LearningMaterialsReducer(state = initialState, action) {
         loading: false,
       };
     }
+    case REMOVE_TEST:
+      return {
+        ...state,
+        learningMaterial: {
+          ...state.learningMaterial,
+          tests: state.learningMaterial.tests.filter(
+            (test) => test._id !== payload
+          ),
+        },
+        loading: false,
+      };
+    case REMOVE_EXAMPLE:
+      return {
+        ...state,
+        learningMaterial: {
+          ...state.learningMaterial,
+          examples: state.learningMaterial.examples.filter(
+            (example) => example._id !== payload
+          ),
+        },
+        loading: false,
+      };
     case REMOVE_HINT:
       return {
         ...state,

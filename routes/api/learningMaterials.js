@@ -636,6 +636,84 @@ router.post(
   }
 );
 
+// @route   DELETE /api/learning-materials/problems/:problem_id/tests/:test_id
+// @desc    Delete a test from a problem
+// @access  Private
+router.delete(
+  '/problems/:problem_id/tests/:test_id',
+  [auth, checkRole('mentor')],
+  async (req, res) => {
+    try {
+      const problem = await LearningMaterial.findById(req.params.problem_id);
+      if (!problem) {
+        return res.status(404).json({ msg: 'Problem not found' });
+      }
+      let tests = problem.tests;
+
+      // Pull out test
+      const test = tests.find((test) => test.id === req.params.test_id);
+      if (!test) {
+        return res.status(404).json({ msg: 'Test does not exist' });
+      }
+
+      const removeIndex = tests
+        .map((test) => test.id.toString())
+        .indexOf(req.params.test_id);
+
+      tests.splice(removeIndex, 1);
+      await problem.save();
+
+      res.json({ msg: 'Test deleted' });
+    } catch (err) {
+      if (err.kind == 'ObjectId') {
+        return res.status(404).json({ msg: 'Problem not found' });
+      }
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
+
+// @route   DELETE /api/learning-materials/problems/:problem_id/examples/:example_id
+// @desc    Delete a hint from a problem
+// @access  Private
+router.delete(
+  '/problems/:problem_id/examples/:example_id',
+  [auth, checkRole('mentor')],
+  async (req, res) => {
+    try {
+      const problem = await LearningMaterial.findById(req.params.problem_id);
+      if (!problem) {
+        return res.status(404).json({ msg: 'Problem not found' });
+      }
+      let examples = problem.examples;
+
+      // Pull out example
+      const example = examples.find(
+        (example) => example.id === req.params.example_id
+      );
+      if (!example) {
+        return res.status(404).json({ msg: 'Example does not exist' });
+      }
+
+      const removeIndex = examples
+        .map((example) => example.id.toString())
+        .indexOf(req.params.example_id);
+
+      examples.splice(removeIndex, 1);
+      await problem.save();
+
+      res.json({ msg: 'Example deleted' });
+    } catch (err) {
+      if (err.kind == 'ObjectId') {
+        return res.status(404).json({ msg: 'Problem not found' });
+      }
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
+
 // @route   DELETE /api/learning-materials/problems/:problem_id/hints/:hint_id
 // @desc    Delete a hint from a problem
 // @access  Private
