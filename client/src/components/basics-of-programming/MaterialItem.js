@@ -8,6 +8,7 @@ const MaterialItem = ({
   auth: { user },
   problem: { _id, name, type, expNeeded, shortDescription },
   userExp,
+  module,
   deleteLearningMaterial,
 }) => {
   const materialType =
@@ -18,7 +19,7 @@ const MaterialItem = ({
       : type === 'Lesson'
       ? 'text-rose-600'
       : 'text-lime-600';
-  const materialPath = `/${materialType}/${_id}`;
+  const materialPath = `/${module}/${materialType}/${_id}`;
 
   let navigate = useNavigate();
   function editLearningMaterial(learningMaterialId) {
@@ -39,10 +40,10 @@ const MaterialItem = ({
           <div className='flex-1'>
             <Link to={materialPath} className='block mt-2'>
               <p className='text-xl font-semibold text-gray-900'>{name}</p>
+              <p className={materialTypeClass}>{type}</p>
               {userExp > expNeeded ||
               (user && (user.role === 'admin' || user.role === 'mentor')) ? (
                 <Fragment>
-                  <p className={materialTypeClass}>{type}</p>
                   <p className='mt-3 text-base text-gray-500'>
                     {shortDescription || 'No short description available'}
                   </p>
@@ -95,11 +96,11 @@ const MaterialItem = ({
                   )}
                 </Fragment>
               ) : (
-                <Fragment>
-                  <div className='items-center justify-center border border-dahsed'>
+                <div className='grid grid-cols-1 gap-4 place-items-center h-24'>
+                  <div>
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
-                      className='h-8 w-8'
+                      className='h-16 w-16'
                       viewBox='0 0 20 20'
                       fill='currentColor'
                     >
@@ -110,7 +111,7 @@ const MaterialItem = ({
                       />
                     </svg>
                   </div>
-                </Fragment>
+                </div>
               )}
             </Link>
           </div>

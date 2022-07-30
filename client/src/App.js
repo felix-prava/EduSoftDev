@@ -39,6 +39,7 @@ import ModuleItem from './components/basics-of-programming/ModuleItem';
 import CreateProblem from './components/basics-of-programming/CreateProblem';
 import CreateLesson from './components/basics-of-programming/CreateLesson';
 import CreateQuiz from './components/basics-of-programming/CreateQuiz';
+import Lesson from './components/basics-of-programming/Lesson';
 import EditProblem from './components/basics-of-programming/EditProblem';
 import EditLesson from './components/basics-of-programming/EditLesson';
 import EditQuiz from './components/basics-of-programming/EditQuiz';
@@ -208,6 +209,15 @@ const App = () => {
               element={
                 <PrivateRoute>
                   <ModuleItem />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              exact
+              path='/:module/lessons/:lessonId'
+              element={
+                <PrivateRoute>
+                  <Lesson />
                 </PrivateRoute>
               }
             />
