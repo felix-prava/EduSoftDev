@@ -256,11 +256,11 @@ const Dashboard = ({
                             <span className='truncate'>
                               Payment to Molly Sanders
                             </span>
-                            <span>
-                              <span className='text-gray-900 font-medium'>
-                                $20,000
-                              </span>{' '}
-                              USD
+                            <span className='py-2'>
+                              <span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 capitalize'>
+                                {' '}
+                                success{' '}
+                              </span>
                             </span>
                             <time dateTime='2020-07-11'>July 11, 2020</time>
                           </span>

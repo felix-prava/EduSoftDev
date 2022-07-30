@@ -11,9 +11,27 @@ const Quiz = ({
 }) => {
   const { module, quizId } = useParams();
 
+  let answers = [];
+
   useEffect(() => {
     getLearningMaterial(quizId);
   }, [getLearningMaterial, quizId]);
+
+  if (learningMaterial) {
+    for (let i = 0; i < learningMaterial.wrongAnswers.length; i++) {
+      answers.push({
+        body: learningMaterial.wrongAnswers[i],
+        wrongAnswer: true,
+      });
+    }
+    for (let i = 0; i < learningMaterial.rightAnswers.length; i++) {
+      answers.push({
+        body: learningMaterial.rightAnswers[i],
+        wrongAnswer: false,
+      });
+    }
+    console.log(answers);
+  }
 
   return loading || learningMaterial === null ? (
     <Spinner />

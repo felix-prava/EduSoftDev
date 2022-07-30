@@ -12,10 +12,11 @@ import {
   deleteExample,
   deleteHint,
 } from '../../actions/learning';
+import Spinner from '../layout/Spinner';
 import { setAlert } from '../../actions/alert';
 
 const EditProblem = ({
-  learning: { learningMaterial },
+  learning: { learningMaterial, loading },
   getLearningMaterial,
   updateLearningMaterial,
   addTest,
@@ -142,7 +143,9 @@ const EditProblem = ({
     }
   }, [getLearningMaterial, learningMaterial, problemId]);
 
-  return (
+  return loading || learningMaterial === null ? (
+    <Spinner />
+  ) : (
     <Fragment>
       <div className='container mt-8'>
         <form
