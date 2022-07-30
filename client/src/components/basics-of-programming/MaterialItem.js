@@ -6,7 +6,7 @@ import { deleteLearningMaterial } from '../../actions/learning';
 
 const MaterialItem = ({
   auth: { user },
-  problem: { _id, name, type, expNeeded, shortDescription },
+  problem: { _id, name, type, expNeeded, expGained, expMax, shortDescription },
   userExp,
   module,
   deleteLearningMaterial,
@@ -21,9 +21,14 @@ const MaterialItem = ({
       : 'text-lime-600';
   const materialPath = `/${module}/${materialType}/${_id}`;
 
+  const itemsColSpan =
+    user && (user.role === 'admin' || user.role === 'mentor')
+      ? 'sm:col-span-7'
+      : 'sm:col-span-9';
+
   let navigate = useNavigate();
   function editLearningMaterial(learningMaterialId) {
-    navigate(`/${materialType}/edit/${learningMaterialId}`);
+    navigate(`/${module}/${materialType}/edit/${learningMaterialId}`);
   }
 
   return (
@@ -38,64 +43,85 @@ const MaterialItem = ({
         </div>
         <div className='flex-1 bg-white p-6 flex flex-col justify-between'>
           <div className='flex-1'>
-            <Link to={materialPath} className='block mt-2'>
-              <p className='text-xl font-semibold text-gray-900'>{name}</p>
-              <p className={materialTypeClass}>{type}</p>
-              {userExp > expNeeded ||
-              (user && (user.role === 'admin' || user.role === 'mentor')) ? (
-                <Fragment>
-                  <p className='mt-3 text-base text-gray-500'>
-                    {shortDescription || 'No short description available'}
-                  </p>
-                  {(user.role === 'admin' || user.role === 'mentor') && (
-                    <Fragment>
-                      <button
-                        onClick={(e) => {
-                          e.preventDefault();
-                          deleteLearningMaterial(_id, type);
-                        }}
-                        className='float-right mt-2 bg-red-600 border border-transparent rounded-md shadow-sm py-1 px-3 flex items-center inline-flex justify-center ml-4 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600'
+            {userExp > expNeeded ||
+            (user && (user.role === 'admin' || user.role === 'mentor')) ? (
+              <Fragment>
+                <Link to={materialPath} className='block mt-2'>
+                  <div className='grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-9'>
+                    <div className={itemsColSpan}>
+                      <p className='text-xl font-semibold text-gray-900'>
+                        {name}
+                      </p>
+                      <p className={materialTypeClass}>{type}</p>
+                      <p className='mt-3 text-base text-gray-500'>
+                        {shortDescription || 'No description available'}
+                      </p>
+                    </div>
+                    {(user.role === 'admin' || user.role === 'mentor') && (
+                      <div className='sm:col-span-2'>
+                        <p className='text-blue-700'>
+                          E.N. {expNeeded || 'N/A'}
+                        </p>
+                        <p className='text-lime-600'>
+                          E.G. {expGained || 'N/A'}
+                        </p>
+                        <p className='text-rose-600'>E.M. {expMax || 'N/A'}</p>
+                      </div>
+                    )}
+                  </div>
+                </Link>
+                {(user.role === 'admin' || user.role === 'mentor') && (
+                  <Fragment>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        deleteLearningMaterial(_id, type);
+                      }}
+                      className='float-right mt-2 bg-red-600 border border-transparent rounded-md shadow-sm py-1 px-3 flex items-center inline-flex justify-center ml-4 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600'
+                    >
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        className='h-5 w-5'
+                        viewBox='0 0 20 20'
+                        fill='currentColor'
                       >
-                        <svg
-                          xmlns='http://www.w3.org/2000/svg'
-                          className='h-5 w-5'
-                          viewBox='0 0 20 20'
-                          fill='currentColor'
-                        >
-                          <path
-                            fillRule='evenodd'
-                            d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
-                            clipRule='evenodd'
-                          />
-                        </svg>
-                      </button>
+                        <path
+                          fillRule='evenodd'
+                          d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
+                          clipRule='evenodd'
+                        />
+                      </svg>
+                    </button>
 
-                      <button
-                        type='button'
-                        onClick={(e) => {
-                          e.preventDefault();
-                          editLearningMaterial(_id);
-                        }}
-                        className='float-right mt-2 py-1 px-3 flex items-center inline-flex justify-center ml-4 text-sm font-medium border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
+                    <button
+                      type='button'
+                      onClick={(e) => {
+                        e.preventDefault();
+                        editLearningMaterial(_id);
+                      }}
+                      className='float-right mt-2 py-1 px-3 flex items-center inline-flex justify-center ml-4 text-sm font-medium border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
+                    >
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        className='h-5 w-5'
+                        viewBox='0 0 20 20'
+                        fill='currentColor'
                       >
-                        <svg
-                          xmlns='http://www.w3.org/2000/svg'
-                          className='h-5 w-5'
-                          viewBox='0 0 20 20'
-                          fill='currentColor'
-                        >
-                          <path d='M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z' />
-                          <path
-                            fillRule='evenodd'
-                            d='M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z'
-                            clipRule='evenodd'
-                          />
-                        </svg>
-                      </button>
-                    </Fragment>
-                  )}
-                </Fragment>
-              ) : (
+                        <path d='M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z' />
+                        <path
+                          fillRule='evenodd'
+                          d='M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z'
+                          clipRule='evenodd'
+                        />
+                      </svg>
+                    </button>
+                  </Fragment>
+                )}
+              </Fragment>
+            ) : (
+              <Fragment>
+                <p className='text-xl font-semibold text-gray-900'>{name}</p>
+                <p className={materialTypeClass}>{type}</p>
                 <div className='grid grid-cols-1 gap-4 place-items-center h-24'>
                   <div>
                     <svg
@@ -112,8 +138,8 @@ const MaterialItem = ({
                     </svg>
                   </div>
                 </div>
-              )}
-            </Link>
+              </Fragment>
+            )}
           </div>
         </div>
       </div>

@@ -5,15 +5,15 @@ import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import { getLearningMaterial } from '../../actions/learning';
 
-const Lesson = ({
+const Quiz = ({
   getLearningMaterial,
   learning: { learningMaterial, loading },
 }) => {
-  const { module, lessonId } = useParams();
+  const { module, quizId } = useParams();
 
   useEffect(() => {
-    getLearningMaterial(lessonId);
-  }, [getLearningMaterial, lessonId]);
+    getLearningMaterial(quizId);
+  }, [getLearningMaterial, quizId]);
 
   return loading || learningMaterial === null ? (
     <Spinner />
@@ -42,7 +42,7 @@ const Lesson = ({
               type='button'
               className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
             >
-              Lesson Learned
+              Send Answer
             </button>
           </div>
         </div>
@@ -51,7 +51,7 @@ const Lesson = ({
   );
 };
 
-Lesson.propTypes = {
+Quiz.propTypes = {
   learning: PropTypes.object.isRequired,
   getLearningMaterial: PropTypes.func.isRequired,
 };
@@ -62,4 +62,4 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   getLearningMaterial,
-})(Lesson);
+})(Quiz);

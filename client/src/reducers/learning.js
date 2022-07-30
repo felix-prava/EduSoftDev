@@ -35,6 +35,7 @@ export default function LearningMaterialsReducer(state = initialState, action) {
     case GET_MODULE_PROBLEMS:
       return {
         ...state,
+        learningMaterial: null,
         problems: payload,
         loading: false,
       };

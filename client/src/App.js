@@ -39,7 +39,9 @@ import ModuleItem from './components/basics-of-programming/ModuleItem';
 import CreateProblem from './components/basics-of-programming/CreateProblem';
 import CreateLesson from './components/basics-of-programming/CreateLesson';
 import CreateQuiz from './components/basics-of-programming/CreateQuiz';
+import Problem from './components/basics-of-programming/Problem';
 import Lesson from './components/basics-of-programming/Lesson';
+import Quiz from './components/basics-of-programming/Quiz';
 import EditProblem from './components/basics-of-programming/EditProblem';
 import EditLesson from './components/basics-of-programming/EditLesson';
 import EditQuiz from './components/basics-of-programming/EditQuiz';
@@ -223,6 +225,24 @@ const App = () => {
             />
             <Route
               exact
+              path='/:module/problems/:problemId'
+              element={
+                <PrivateRoute>
+                  <Problem />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              exact
+              path='/:module/quizzes/:quizId'
+              element={
+                <PrivateRoute>
+                  <Quiz />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              exact
               path='/modules/:module/create-problem'
               element={
                 <PrivateRoute expectedRole='mentor' redirect='false'>
@@ -250,7 +270,7 @@ const App = () => {
             />
             <Route
               exact
-              path='/problems/edit/:problemId'
+              path='/:module/problems/edit/:problemId'
               element={
                 <PrivateRoute>
                   <EditProblem />
@@ -259,7 +279,7 @@ const App = () => {
             />
             <Route
               exact
-              path='/lessons/edit/:lessonId'
+              path='/:module/lessons/edit/:lessonId'
               element={
                 <PrivateRoute>
                   <EditLesson />
@@ -268,7 +288,7 @@ const App = () => {
             />
             <Route
               exact
-              path='/quizzes/edit/:quizId'
+              path='/:module/quizzes/edit/:quizId'
               element={
                 <PrivateRoute>
                   <EditQuiz />
