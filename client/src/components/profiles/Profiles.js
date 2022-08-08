@@ -10,13 +10,12 @@ const Profiles = ({ getAllProfiles, profile: { profiles, loading } }) => {
     getAllProfiles();
   }, [getAllProfiles]);
 
-  const backgroundColor = profiles.length > 0 ? 'bg-gray-300' : 'bg-white';
   return (
     <Fragment>
-      {profiles === null || loading ? (
+      {profiles.length === 0 || loading ? (
         <Spinner />
       ) : (
-        <div className={backgroundColor}>
+        <div className='bg-gray-300'>
           <div className='max-w-7xl mx-auto py-12 px-4 text-center sm:px-6 lg:px-8 lg:py-24'>
             <div className='space-y-12'>
               <div className='space-y-5 sm:mx-auto sm:max-w-xl sm:space-y-4 lg:max-w-5xl'>

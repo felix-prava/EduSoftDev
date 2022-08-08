@@ -40,24 +40,6 @@ const Dashboard = ({
                           </h1>
                         </div>
                         <dl className='mt-6 flex flex-col sm:ml-3 sm:mt-1 sm:flex-row sm:flex-wrap'>
-                          <dt className='sr-only'>Company</dt>
-                          <dd className='flex items-center text-sm text-gray-500 font-medium capitalize sm:mr-6'>
-                            {/* Heroicon name: solid/office-building */}
-                            <svg
-                              className='flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400'
-                              xmlns='http://www.w3.org/2000/svg'
-                              viewBox='0 0 20 20'
-                              fill='currentColor'
-                              aria-hidden='true'
-                            >
-                              <path
-                                fillRule='evenodd'
-                                d='M4 4a2 2 0 012-2h8a2 2 0 012 2v12a1 1 0 110 2h-3a1 1 0 01-1-1v-2a1 1 0 00-1-1H9a1 1 0 00-1 1v2a1 1 0 01-1 1H4a1 1 0 110-2V4zm3 1h2v2H7V5zm2 4H7v2h2V9zm2-4h2v2h-2V5zm2 4h-2v2h2V9z'
-                                clipRule='evenodd'
-                              />
-                            </svg>
-                            Duke street studio
-                          </dd>
                           <dd className='mt-3 flex items-center text-sm text-gray-500 font-medium sm:mr-6 sm:mt-0 capitalize'>
                             {/* Heroicon name: solid/check-circle */}
                             <svg
@@ -82,15 +64,9 @@ const Dashboard = ({
                   <div className='mt-6 flex space-x-3 md:mt-0 md:ml-4'>
                     <button
                       type='button'
-                      className='inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
-                    >
-                      Go to last problem
-                    </button>
-                    <button
-                      type='button'
                       className='inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
                     >
-                      IDK
+                      Continue Learning
                     </button>
                   </div>
                 </div>
@@ -249,7 +225,7 @@ const Dashboard = ({
               </div>
 
               <h2 className='max-w-6xl mx-auto mt-8 px-4 text-lg leading-6 font-medium text-gray-900 sm:px-6 lg:px-8'>
-                Recent activity
+                Recent solutions
               </h2>
 
               {/* Activity list (smallest breakpoint only) */}
@@ -280,11 +256,11 @@ const Dashboard = ({
                             <span className='truncate'>
                               Payment to Molly Sanders
                             </span>
-                            <span>
-                              <span className='text-gray-900 font-medium'>
-                                $20,000
-                              </span>{' '}
-                              USD
+                            <span className='py-2'>
+                              <span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 capitalize'>
+                                {' '}
+                                success{' '}
+                              </span>
                             </span>
                             <time dateTime='2020-07-11'>July 11, 2020</time>
                           </span>
@@ -320,10 +296,7 @@ const Dashboard = ({
                         <thead>
                           <tr>
                             <th className='px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                              Transaction
-                            </th>
-                            <th className='px-6 py-3 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                              Amount
+                              Problem
                             </th>
                             <th className='hidden px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider md:block'>
                               Status
@@ -360,12 +333,6 @@ const Dashboard = ({
                                   </p>
                                 </Link>
                               </div>
-                            </td>
-                            <td className='px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500'>
-                              <span className='text-gray-900 font-medium'>
-                                $20,000{' '}
-                              </span>
-                              USD
                             </td>
                             <td className='hidden px-6 py-4 whitespace-nowrap text-sm text-gray-500 md:block'>
                               <span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 capitalize'>

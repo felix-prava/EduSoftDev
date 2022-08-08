@@ -127,6 +127,7 @@ const ModuleItem = ({
                 key={problem._id}
                 problem={problem}
                 userExp={user.exp}
+                module={moduleName}
               />
             ))}
           </div>

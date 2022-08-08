@@ -8,10 +8,11 @@ import {
   addAnswer,
   deleteAnswer,
 } from '../../actions/learning';
+import Spinner from '../layout/Spinner';
 import { setAlert } from '../../actions/alert';
 
 const EditQuiz = ({
-  learning: { learningMaterial },
+  learning: { learningMaterial, loading },
   getLearningMaterial,
   updateLearningMaterial,
   addAnswer,
@@ -106,7 +107,9 @@ const EditQuiz = ({
     }
   }, [getLearningMaterial, learningMaterial, quizId]);
 
-  return (
+  return loading || learningMaterial === null ? (
+    <Spinner />
+  ) : (
     <Fragment>
       <div className='container mt-8'>
         <form
