@@ -6,9 +6,10 @@ import {
   getLearningMaterial,
   updateLearningMaterial,
 } from '../../actions/learning';
+import Spinner from '../layout/Spinner';
 
 const EditLesson = ({
-  learning: { learningMaterial },
+  learning: { learningMaterial, loading },
   getLearningMaterial,
   updateLearningMaterial,
 }) => {
@@ -50,7 +51,9 @@ const EditLesson = ({
     }
   }, [getLearningMaterial, learningMaterial, lessonId]);
 
-  return (
+  return loading || learningMaterial === null ? (
+    <Spinner />
+  ) : (
     <Fragment>
       <div className='container mt-8'>
         <form

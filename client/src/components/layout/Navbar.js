@@ -50,10 +50,28 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
     </Link>
   );
 
+  const modulesMobile = (
+    <Link
+      to='/modules'
+      className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
+    >
+      Modules
+    </Link>
+  );
+
   const articles = (
     <Link
       to='/articles'
       className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+    >
+      IT Articles
+    </Link>
+  );
+
+  const articlesMobile = (
+    <Link
+      to='/articles'
+      className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
     >
       IT Articles
     </Link>
@@ -67,13 +85,6 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
         aria-current='page'
       >
         Home
-      </Link>
-
-      <Link
-        to='#'
-        className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
-      >
-        Team
       </Link>
 
       {modules}
@@ -162,6 +173,102 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
     </Fragment>
   );
 
+  const normalUserMobileLinks = (
+    <Fragment>
+      <Link
+        to='/home'
+        className='bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium'
+        aria-current='page'
+      >
+        Home
+      </Link>
+
+      {modulesMobile}
+      {articlesMobile}
+
+      <Link
+        to='#'
+        onClick={logoutUser}
+        className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
+      >
+        Logout
+      </Link>
+    </Fragment>
+  );
+
+  const mentorMobileLinks = (
+    <Fragment>
+      <Link
+        to='/home'
+        className='bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium'
+        aria-current='page'
+      >
+        Home
+      </Link>
+
+      {modulesMobile}
+      {articlesMobile}
+    </Fragment>
+  );
+
+  const adminMobileLinks = (
+    <Fragment>
+      <Link
+        to='/home'
+        className='bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium'
+        aria-current='page'
+      >
+        Home
+      </Link>
+
+      {modulesMobile}
+
+      <Link
+        to='/admin/profiles'
+        className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
+      >
+        Profiles
+      </Link>
+
+      {articlesMobile}
+    </Fragment>
+  );
+
+  const guestMobileLinks = (
+    <Fragment>
+      <Link
+        to='/'
+        className='bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium'
+        aria-current='page'
+      >
+        Home
+      </Link>
+
+      <Link
+        to='/register'
+        className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
+      >
+        Register
+      </Link>
+
+      <Link
+        to='/login'
+        className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
+      >
+        Login
+      </Link>
+
+      {articlesMobile}
+
+      <Link
+        to='/about-us'
+        className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
+      >
+        About Us
+      </Link>
+    </Fragment>
+  );
+
   function displayNavbarLinks(userRole) {
     if (userRole === 'normal') {
       return normalUserLinks;
@@ -170,6 +277,16 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
       return mentorLinks;
     }
     return adminLinks;
+  }
+
+  function displayNavbarMobileLinks(userRole) {
+    if (userRole === 'normal') {
+      return normalUserMobileLinks;
+    }
+    if (userRole === 'mentor') {
+      return mentorMobileLinks;
+    }
+    return adminMobileLinks;
   }
 
   return (
@@ -386,35 +503,9 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
         {/*<!-- Mobile menu, show/hide based on menu state. -->*/}
         <div className='sm:hidden hidden' id='mobile-menu'>
           <div className='px-2 pt-2 pb-3 space-y-1'>
-            {/*<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->*/}
-            <Link
-              to='/home'
-              className='bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium'
-              aria-current='page'
-            >
-              Home
-            </Link>
-
-            <Link
-              to='#'
-              className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
-            >
-              Team
-            </Link>
-
-            <Link
-              to='#'
-              className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
-            >
-              Projects
-            </Link>
-
-            <Link
-              to='#'
-              className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
-            >
-              Calendar
-            </Link>
+            {isAuthenticated
+              ? user && displayNavbarMobileLinks(user.role)
+              : guestMobileLinks}
           </div>
         </div>
       </nav>
