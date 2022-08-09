@@ -3,10 +3,11 @@ import { Link, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
-import { getLearningMaterial } from '../../actions/learning';
+import { getLearningMaterial, completeLesson } from '../../actions/learning';
 
 const Lesson = ({
   getLearningMaterial,
+  completeLesson,
   learning: { learningMaterial, loading },
 }) => {
   const { module, lessonId } = useParams();
@@ -40,6 +41,7 @@ const Lesson = ({
             </Link>
             <button
               type='button'
+              onClick={() => completeLesson(lessonId)}
               className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
             >
               Lesson Learned
@@ -54,6 +56,7 @@ const Lesson = ({
 Lesson.propTypes = {
   learning: PropTypes.object.isRequired,
   getLearningMaterial: PropTypes.func.isRequired,
+  completeLesson: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -62,4 +65,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   getLearningMaterial,
+  completeLesson,
 })(Lesson);
