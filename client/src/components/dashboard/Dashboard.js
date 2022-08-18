@@ -4,9 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 
-const Dashboard = ({
-  auth: { user, loading, solvedProblems, lessonsLearned, quizzesSolved },
-}) => {
+const Dashboard = ({ auth: { user, loading } }) => {
   return loading || user === null ? (
     <Spinner />
   ) : (
@@ -106,7 +104,9 @@ const Dashboard = ({
                             </dt>
                             <dd>
                               <div className='text-lg font-medium text-gray-900'>
-                                {(solvedProblems && solvedProblems.length) || 0}
+                                {(user.solvedProblems &&
+                                  user.solvedProblems.length) ||
+                                  0}
                               </div>
                             </dd>
                           </dl>
@@ -154,7 +154,9 @@ const Dashboard = ({
                             </dt>
                             <dd>
                               <div className='text-lg font-medium text-gray-900'>
-                                {(lessonsLearned && lessonsLearned.length) || 0}
+                                {(user.lessonsLearned &&
+                                  user.lessonsLearned.length) ||
+                                  0}
                               </div>
                             </dd>
                           </dl>
@@ -200,7 +202,9 @@ const Dashboard = ({
                             </dt>
                             <dd>
                               <div className='text-lg font-medium text-gray-900'>
-                                {(quizzesSolved && quizzesSolved.length) || 0}
+                                {(user.quizzesSolved &&
+                                  user.quizzesSolved.length) ||
+                                  0}
                               </div>
                             </dd>
                           </dl>
