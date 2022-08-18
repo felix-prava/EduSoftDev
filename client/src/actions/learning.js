@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { setAlert } from './alert';
+import { loadUser } from './auth';
 import {
   GET_MODULE_PROBLEMS,
   GET_LEARNING_MATERIAL,
@@ -332,20 +333,36 @@ export const deleteAnswer =
     }
   };
 
-// Get profile by userId
-/* export const getProfileById = (userId) => async (dispatch) => {
+// User completes a lesson
+export const completeLesson = (lessonId) => async (dispatch) => {
   try {
-    const res = await axios.get(`/api/profiles/user/${userId}`);
+    await axios.post(
+      `/api/learning-materials/lessons/${lessonId}/lesson-learned`
+    );
 
-    dispatch({
-      type: GET_PROFILE,
-      payload: res.data,
-    });
+    dispatch(setAlert('Lesson Learned', 'success', 3000, false));
+    dispatch(loadUser());
+    // MAYBE update solvingUsers for this lesson
   } catch (err) {
-    dispatch({ type: CLEAR_PROFILE });
-    dispatch({
-      type: PROFILE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
-    });
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'error')));
+    }
   }
-}; */
+};
+
+// User solves a quiz
+export const solveQuiz = (quizId) => async (dispatch) => {
+  try {
+    await axios.post(`/api/learning-materials/quizzes/${quizId}/quiz-solved`);
+
+    dispatch(setAlert('Quiz Completed', 'success', 3000, false));
+    dispatch(loadUser());
+    // MAYBE update solvingUsers for this quiz
+  } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'error')));
+    }
+  }
+};
