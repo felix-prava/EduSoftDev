@@ -186,4 +186,57 @@ router.delete(
   }
 );
 
+// @route   POST /api/learning-materials/quizzes/:quiz_id/quiz-solved
+// @desc    Complete a quiz
+// @access  Private
+router.post('/:quiz_id/quiz-solved', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select('-password');
+    if (!user) {
+      return res.status(400).json({ error: [{ msg: 'User does not exists' }] });
+    }
+    const quiz = await LearningMaterial.findById(req.params.quiz_id);
+    if (!quiz) {
+      return res.status(404).json({ msg: 'Quiz not found' });
+    }
+
+    // Check if the user has already solved the quiz
+    if (
+      !(
+        user.lessonsLearned.filter(
+          (lesson_learned) =>
+            lesson_learned.lesson.toString() === req.params.quiz_id
+        ).length > 0
+      )
+    ) {
+      user.lessonsLearned.unshift({ lesson: req.params.quiz_id });
+    }
+
+    // Check if the quiz has already been solved by the user
+    if (
+      !(
+        quiz.solvingUsers.filter(
+          (solving_user) => solving_user.user.toString() === req.user.id
+        ).length > 0
+      )
+    ) {
+      quiz.solvingUsers.unshift({ user: req.user.id });
+    }
+
+    await user.save();
+    await quiz.save();
+
+    res.json({
+      lessonsLearned: user.lessonsLearned,
+      solvingUsers: lesson.solvingUsers,
+    });
+  } catch (err) {
+    if (err.kind == 'ObjectId') {
+      return res.status(404).json({ msg: 'Quiz not found' });
+    }
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 module.exports = router;

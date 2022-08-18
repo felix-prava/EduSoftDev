@@ -333,7 +333,7 @@ export const deleteAnswer =
     }
   };
 
-// User completed a lesson
+// User completes a lesson
 export const completeLesson = (lessonId) => async (dispatch) => {
   try {
     await axios.post(
@@ -343,6 +343,22 @@ export const completeLesson = (lessonId) => async (dispatch) => {
     dispatch(setAlert('Lesson Learned', 'success', 3000, false));
     dispatch(loadUser());
     // MAYBE update solvingUsers for this lesson
+  } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'error')));
+    }
+  }
+};
+
+// User solves a quiz
+export const solveQuiz = (quizId) => async (dispatch) => {
+  try {
+    await axios.post(`/api/learning-materials/quizzes/${quizId}/quiz-solved`);
+
+    dispatch(setAlert('Quiz Completed', 'success', 3000, false));
+    dispatch(loadUser());
+    // MAYBE update solvingUsers for this quiz
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
