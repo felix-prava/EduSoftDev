@@ -5,9 +5,10 @@ export const setAlert =
   (msg, alertType, timeout = 8500, scrollUp = 'true') =>
   (dispatch) => {
     const id = uuid();
+    const path = window.location.pathname;
     dispatch({
       type: SET_ALERT,
-      payload: { msg, alertType, id },
+      payload: { msg, alertType, id, path },
     });
     if (scrollUp) {
       window.scrollTo(0, 0);

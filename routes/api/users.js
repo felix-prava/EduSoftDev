@@ -40,13 +40,16 @@ router.post(
       if (user) {
         return res
           .status(400)
-          .json({ errors: [{ msg: 'User Already Exists' }] });
+          .json({ errors: [{ msg: 'Email is already used' }] });
       }
 
       user = await User.findOne({ username });
 
+      // TODO Should allow users with the same username??
       if (user) {
-        return res.status(400).json({ errors: [{ msg: 'Username Is Taken' }] });
+        return res
+          .status(400)
+          .json({ errors: [{ msg: 'Username is already used' }] });
       }
 
       const avatar = gravatar.url(email, {
