@@ -352,9 +352,19 @@ export const completeLesson = (lessonId) => async (dispatch) => {
 };
 
 // User solves a quiz
-export const solveQuiz = (quizId) => async (dispatch) => {
+export const solveQuiz = (quizId, answers) => async (dispatch) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
   try {
-    await axios.post(`/api/learning-materials/quizzes/${quizId}/quiz-solved`);
+    await axios.post(
+      `/api/learning-materials/quizzes/${quizId}/quiz-solved`,
+      answers,
+      config
+    );
 
     dispatch(setAlert('Quiz Completed', 'success', 3000, false));
     dispatch(loadUser());
