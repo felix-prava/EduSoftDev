@@ -66,7 +66,7 @@ router.put(
 
     try {
       const quiz = await LearningMaterial.findById(req.params.quiz_id);
-      if (!quiz) {
+      if (!quiz || quiz.type !== 'Quiz') {
         return res.status(404).json({ msg: 'Quiz not found' });
       }
 
@@ -112,7 +112,7 @@ router.post('/:quiz_id/quiz-solved', auth, async (req, res) => {
       return res.status(400).json({ error: [{ msg: 'User does not exists' }] });
     }
     const quiz = await LearningMaterial.findById(req.params.quiz_id);
-    if (!quiz) {
+    if (!quiz || quiz.type !== 'Quiz') {
       return res.status(404).json({ msg: 'Quiz not found' });
     }
 
@@ -206,7 +206,7 @@ router.post(
   async (req, res) => {
     try {
       const quiz = await LearningMaterial.findById(req.params.quiz_id);
-      if (!quiz) {
+      if (!quiz || quiz.type !== 'Quiz') {
         return res.status(404).json({ msg: 'Quiz not found' });
       }
 
@@ -243,7 +243,7 @@ router.delete(
   async (req, res) => {
     try {
       const quiz = await LearningMaterial.findById(req.params.quiz_id);
-      if (!quiz) {
+      if (!quiz || quiz.type !== 'Quiz') {
         return res.status(404).json({ msg: 'Quiz not found' });
       }
 
