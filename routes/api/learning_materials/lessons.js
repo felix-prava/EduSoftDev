@@ -44,7 +44,7 @@ router.put(
 
     try {
       const lesson = await LearningMaterial.findById(req.params.lesson_id);
-      if (!lesson) {
+      if (!lesson || lesson.type !== 'Lesson') {
         return res.status(404).json({ msg: 'Lesson not found' });
       }
 
@@ -86,7 +86,7 @@ router.post('/:lesson_id/lesson-learned', auth, async (req, res) => {
       return res.status(400).json({ error: [{ msg: 'User does not exists' }] });
     }
     const lesson = await LearningMaterial.findById(req.params.lesson_id);
-    if (!lesson) {
+    if (!lesson || lesson.type !== 'Lesson') {
       return res.status(404).json({ msg: 'Lesson not found' });
     }
 

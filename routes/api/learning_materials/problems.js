@@ -47,7 +47,7 @@ router.put(
 
     try {
       const problem = await LearningMaterial.findById(req.params.problem_id);
-      if (!problem) {
+      if (!problem || problem.type !== 'Problem') {
         return res.status(404).json({ msg: 'Problem not found' });
       }
 
@@ -95,7 +95,7 @@ router.post(
   async (req, res) => {
     try {
       const problem = await LearningMaterial.findById(req.params.problem_id);
-      if (!problem) {
+      if (!problem || problem.type !== 'Problem') {
         return res.status(404).json({ msg: 'Problem not found' });
       }
 
@@ -172,7 +172,7 @@ router.delete(
   async (req, res) => {
     try {
       const problem = await LearningMaterial.findById(req.params.problem_id);
-      if (!problem) {
+      if (!problem || problem.type !== 'Problem') {
         return res.status(404).json({ msg: 'Problem not found' });
       }
       let tests = problem.tests;
@@ -210,7 +210,7 @@ router.delete(
   async (req, res) => {
     try {
       const problem = await LearningMaterial.findById(req.params.problem_id);
-      if (!problem) {
+      if (!problem || problem.type !== 'Problem') {
         return res.status(404).json({ msg: 'Problem not found' });
       }
       let examples = problem.examples;
@@ -250,7 +250,7 @@ router.delete(
   async (req, res) => {
     try {
       const problem = await LearningMaterial.findById(req.params.problem_id);
-      if (!problem) {
+      if (!problem || problem.type !== 'Problem') {
         return res.status(404).json({ msg: 'Problem not found' });
       }
       let hints = problem.hints;
