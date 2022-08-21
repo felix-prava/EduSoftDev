@@ -202,8 +202,8 @@ const Dashboard = ({ auth: { user, loading } }) => {
                             </dt>
                             <dd>
                               <div className='text-lg font-medium text-gray-900'>
-                                {(user.quizzesSolved &&
-                                  user.quizzesSolved.length) ||
+                                {(user.solvedQuizzes &&
+                                  user.solvedQuizzes.length) ||
                                   0}
                               </div>
                             </dd>
