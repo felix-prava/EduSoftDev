@@ -3,10 +3,10 @@ const router = express.Router();
 const auth = require('../../../middleware/auth');
 const checkRole = require('../../../middleware/checkRole');
 const { check, validationResult } = require('express-validator');
-const checkQuizAnswers = require('../../../middleware/checkQuizAnswers');
 const {
   filterFailedQuizzes,
   failedQuizzesContainsCurrentQuiz,
+  checkQuizAnswers,
 } = require('../../../utils/helpers');
 
 const LearningMaterial = require('../../../models/LearningMaterial');
