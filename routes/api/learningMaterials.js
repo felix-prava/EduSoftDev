@@ -198,9 +198,6 @@ router.post(
       'waitingMinutes',
       'The number of minutes a user must wait before retaking the quiz must be a positive integer'
     ).isInt({ gt: 0 }),
-    check('failedQuizMessage', 'A message for a failed quiz is required')
-      .not()
-      .isEmpty(),
   ],
   async (req, res) => {
     const errors = validationResult(req);

@@ -3,17 +3,19 @@ import { Link, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
-import { getLearningMaterial } from '../../actions/learning';
+import { getLearningMaterial, solveQuiz } from '../../actions/learning';
+import { setAlert } from '../../actions/alert';
 
 const Quiz = ({
-  getLearningMaterial,
   learning: { learningMaterial, loading },
+  getLearningMaterial,
+  solveQuiz,
+  setAlert,
 }) => {
   const { module, quizId } = useParams();
 
   let answers = [];
   let userAnswers = [];
-  let rightAnswersCount = 0;
 
   useEffect(() => {
     getLearningMaterial(quizId);
@@ -27,8 +29,7 @@ const Quiz = ({
         wrongAnswer: true,
       });
     }
-    rightAnswersCount = learningMaterial.rightAnswers.length;
-    for (let i = 0; i < rightAnswersCount; i++) {
+    for (let i = 0; i < learningMaterial.rightAnswers.length; i++) {
       answers.push({
         body: learningMaterial.rightAnswers[i].body,
         id: learningMaterial.rightAnswers[i]._id,
@@ -111,7 +112,14 @@ const Quiz = ({
                 </button>
               </Link>
               <button
-                type='submit'
+                type='button'
+                onClick={() => {
+                  if (userAnswers.length === 0) {
+                    setAlert('You must select at least one option', 'error');
+                    return;
+                  }
+                  solveQuiz(quizId, userAnswers);
+                }}
                 className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
               >
                 Finish Quiz
@@ -127,6 +135,8 @@ const Quiz = ({
 Quiz.propTypes = {
   learning: PropTypes.object.isRequired,
   getLearningMaterial: PropTypes.func.isRequired,
+  solveQuiz: PropTypes.func.isRequired,
+  setAlert: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -135,4 +145,6 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   getLearningMaterial,
+  solveQuiz,
+  setAlert,
 })(Quiz);
