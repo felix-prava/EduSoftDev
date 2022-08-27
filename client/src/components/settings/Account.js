@@ -4,12 +4,17 @@ import { connect } from 'react-redux';
 import { deleteAccount } from '../../actions/profile';
 import { updateUser } from '../../actions/auth';
 import { setAlert } from '../../actions/alert';
+import Modal from '../layout/Modal';
 
 const Account = ({ auth: { user }, updateUser, deleteAccount, setAlert }) => {
   const [formData, setFormData] = useState({
     username: '',
     preferredName: '',
   });
+  const [modal, setModal] = useState(false);
+  const modalDeleteAccountTitle = 'Delete Account';
+  const modalDeleteAccountDescription =
+    'Are you sure you want to delete the account? It will be permanently removed, this action cannot be undone.';
 
   const { username, preferredName } = formData;
 
@@ -164,7 +169,7 @@ const Account = ({ auth: { user }, updateUser, deleteAccount, setAlert }) => {
                 <div className='py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8'>
                   <div className='overflow-hidden py-2'>
                     <button
-                      onClick={() => deleteAccount(user._id)}
+                      onClick={() => setModal(!modal)}
                       className='bg-red-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center ml-4 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600'
                     >
                       Delete Your Account
@@ -176,6 +181,13 @@ const Account = ({ auth: { user }, updateUser, deleteAccount, setAlert }) => {
           </div>
         </section>
       </div>
+      {modal && (
+        <Modal
+          modalData={[modalDeleteAccountTitle, modalDeleteAccountDescription]}
+          hideModal={() => setModal(false)}
+          action={() => deleteAccount(user._id)}
+        />
+      )}
     </Fragment>
   );
 };
