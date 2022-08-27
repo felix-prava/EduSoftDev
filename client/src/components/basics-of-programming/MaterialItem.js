@@ -2,14 +2,14 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { deleteLearningMaterial } from '../../actions/learning';
 
 const MaterialItem = ({
   auth: { user },
   problem: { _id, name, type, expNeeded, expGained, expMax, shortDescription },
   userExp,
   module,
-  deleteLearningMaterial,
+  toggleModal,
+  setModalData,
 }) => {
   const materialType =
     type === 'Problem' ? 'problems' : type === 'Lesson' ? 'lessons' : 'quizzes';
@@ -75,7 +75,17 @@ const MaterialItem = ({
                     <button
                       onClick={(e) => {
                         e.preventDefault();
-                        deleteLearningMaterial(_id, type);
+                        setModalData([
+                          'Delete ' + type,
+                          'Are you sure you want to delete this ' +
+                            type.charAt(0).toLowerCase() +
+                            type.slice(1) +
+                            '? It will be permanently removed from the database. This action cannot be undone.',
+                          _id,
+                          type,
+                        ]);
+                        toggleModal();
+                        //deleteLearningMaterial(_id, type);
                       }}
                       className='float-right mt-2 bg-red-600 border border-transparent rounded-md shadow-sm py-1 px-3 flex items-center inline-flex justify-center ml-4 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600'
                     >
@@ -149,13 +159,10 @@ const MaterialItem = ({
 
 MaterialItem.propTypes = {
   auth: PropTypes.object.isRequired,
-  deleteLearningMaterial: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { deleteLearningMaterial })(
-  MaterialItem
-);
+export default connect(mapStateToProps, {})(MaterialItem);
