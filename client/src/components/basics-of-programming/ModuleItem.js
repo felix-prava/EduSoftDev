@@ -37,7 +37,7 @@ const ModuleItem = ({
   let displayErrorPage = false;
 
   const [modal, setModal] = useState(false);
-  const [modalData, setModalData] = useState(['a', 'b']);
+  const [modalData, setModalData] = useState([]);
 
   useEffect(() => {
     getAllMaterials(`${moduleName}`);

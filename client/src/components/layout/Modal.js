@@ -17,7 +17,7 @@ const Modal = ({ modalData, hideModal, action }) => {
               <div className='hidden sm:block absolute top-0 right-0 pt-4 pr-4'>
                 <button
                   type='button'
-                  onClick={() => hideModal()}
+                  onClick={hideModal}
                   className='bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                 >
                   <span className='sr-only'>Close</span>
@@ -79,11 +79,11 @@ const Modal = ({ modalData, hideModal, action }) => {
                   }}
                   className='w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm'
                 >
-                  Deactivate
+                  Delete
                 </button>
                 <button
                   type='button'
-                  onClick={() => hideModal()}
+                  onClick={hideModal}
                   className='mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm'
                 >
                   Cancel
