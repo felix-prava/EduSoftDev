@@ -232,7 +232,15 @@ export const deleteAccount = (userId) => async (dispatch) => {
       type: ACCOUNT_DELETED,
     });
 
-    dispatch(setAlert('Your account has been permanantly deleted', 'error'));
+    dispatch(
+      setAlert(
+        'Your account has been permanantly deleted',
+        'error',
+        6000,
+        true,
+        true
+      )
+    );
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
