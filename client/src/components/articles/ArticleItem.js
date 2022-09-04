@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { addLike, addDislike, deleteArticle } from '../../actions/article';
+import { addLike, addDislike } from '../../actions/article';
 import { setAlert } from '../../actions/alert';
 import { displayDate } from '../../utils/helpers';
 
@@ -23,9 +23,14 @@ const ArticleItem = ({
   },
   addLike,
   addDislike,
-  deleteArticle,
   setAlert,
+  toggleModal,
+  setModalData,
 }) => {
+  const modalDeleteArticleTitle = 'Delete Article';
+  const modalDeleteArticleDescription =
+    'Are you sure you want to delete this article? It will be permanently removed from the database. This action cannot be undone.';
+
   function likeArticle(articleId) {
     if (auth.isAuthenticated) {
       addLike(articleId);
@@ -110,7 +115,14 @@ const ArticleItem = ({
                 auth.user.role === 'admin' ||
                 auth.user.role === 'mentor') && (
                 <button
-                  onClick={(e) => deleteArticle(_id)}
+                  onClick={() => {
+                    setModalData([
+                      modalDeleteArticleTitle,
+                      modalDeleteArticleDescription,
+                      _id,
+                    ]);
+                    toggleModal();
+                  }}
                   className='bg-red-600 border border-transparent rounded-md shadow-sm py-1 px-3 flex items-center inline-flex justify-center ml-4 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600'
                 >
                   <svg
@@ -164,7 +176,6 @@ ArticleItem.propTypes = {
   auth: PropTypes.object.isRequired,
   addLike: PropTypes.func.isRequired,
   addDislike: PropTypes.func.isRequired,
-  deleteArticle: PropTypes.func.isRequired,
   setAlert: PropTypes.func.isRequired,
 };
 
@@ -175,6 +186,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   addLike,
   addDislike,
-  deleteArticle,
   setAlert,
 })(ArticleItem);

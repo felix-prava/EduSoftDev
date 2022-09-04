@@ -1,19 +1,24 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getArticles } from '../../actions/article';
+import { getArticles, deleteArticle } from '../../actions/article';
 import Spinner from '../layout/Spinner';
 import ArticleItem from './ArticleItem';
+import Modal from '../layout/Modal';
 
 const Articles = ({
   auth: { isAuthenticated },
   article: { articles, loading },
   getArticles,
+  deleteArticle,
 }) => {
   useEffect(() => {
     getArticles();
   }, [getArticles]);
+
+  const [modal, setModal] = useState(false);
+  const [modalData, setModalData] = useState([]);
 
   return (
     <Fragment>
@@ -41,12 +46,24 @@ const Articles = ({
               </div>
               <div className='mt-6 pt-10 grid gap-16 lg:grid-cols-2 lg:gap-x-5 lg:gap-y-12'>
                 {articles.map((article) => (
-                  <ArticleItem key={article._id} article={article} />
+                  <ArticleItem
+                    key={article._id}
+                    article={article}
+                    toggleModal={() => setModal(!modal)}
+                    setModalData={setModalData}
+                  />
                 ))}
               </div>
             </div>
           </div>
         </Fragment>
+      )}
+      {modal && (
+        <Modal
+          modalData={modalData}
+          hideModal={() => setModal(false)}
+          action={() => deleteArticle(modalData[2])}
+        />
       )}
     </Fragment>
   );
@@ -56,6 +73,7 @@ Articles.propTypes = {
   auth: PropTypes.object.isRequired,
   article: PropTypes.object.isRequired,
   getArticles: PropTypes.func.isRequired,
+  deleteArticle: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -63,4 +81,6 @@ const mapStateToProps = (state) => ({
   article: state.article,
 });
 
-export default connect(mapStateToProps, { getArticles })(Articles);
+export default connect(mapStateToProps, { getArticles, deleteArticle })(
+  Articles
+);
