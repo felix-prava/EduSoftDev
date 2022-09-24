@@ -1,10 +1,12 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link, useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getAllMaterials } from '../../actions/learning';
+import { deleteLearningMaterial } from '../../actions/learning';
 import MaterialItem from './MaterialItem';
 import Spinner from '../layout/Spinner';
+import Modal from '../layout/Modal';
 import PageNotFound from '../layout/PageNotFound';
 import {
   INTRODUCTION_TITLE,
@@ -27,11 +29,15 @@ const ModuleItem = ({
   auth: { user },
   learning: { loading, problems },
   getAllMaterials,
+  deleteLearningMaterial,
 }) => {
   let { module: moduleName } = useParams();
   let title = null;
   let description = null;
   let displayErrorPage = false;
+
+  const [modal, setModal] = useState(false);
+  const [modalData, setModalData] = useState([]);
 
   useEffect(() => {
     getAllMaterials(`${moduleName}`);
@@ -128,11 +134,20 @@ const ModuleItem = ({
                 problem={problem}
                 userExp={user.exp}
                 module={moduleName}
+                toggleModal={() => setModal(!modal)}
+                setModalData={setModalData}
               />
             ))}
           </div>
         </div>
       </div>
+      {modal && (
+        <Modal
+          modalData={modalData}
+          hideModal={() => setModal(false)}
+          action={() => deleteLearningMaterial(modalData[2], modalData[3])}
+        />
+      )}
     </Fragment>
   );
 };
@@ -141,6 +156,7 @@ ModuleItem.propTypes = {
   auth: PropTypes.object.isRequired,
   learning: PropTypes.object.isRequired,
   getAllMaterials: PropTypes.func.isRequired,
+  deleteLearningMaterial: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -148,4 +164,7 @@ const mapStateToProps = (state) => ({
   learning: state.learning,
 });
 
-export default connect(mapStateToProps, { getAllMaterials })(ModuleItem);
+export default connect(mapStateToProps, {
+  getAllMaterials,
+  deleteLearningMaterial,
+})(ModuleItem);

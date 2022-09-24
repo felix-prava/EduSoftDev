@@ -12,7 +12,7 @@ const Alert = ({ alerts, removeAlert }) => {
     alerts !== null &&
     alerts.length > 0 &&
     alerts.map((alert) => {
-      if (location.pathname !== alert.path) {
+      if (location.pathname !== alert.path && alert.path !== 'alwaysVisible') {
         return <Fragment key={alert.id}></Fragment>;
       }
 

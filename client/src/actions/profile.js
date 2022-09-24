@@ -222,24 +222,30 @@ export const deleteEducation = (expId, userId) => async (dispatch) => {
 
 // Delete account & profile
 export const deleteAccount = (userId) => async (dispatch) => {
-  if (window.confirm('Are you sure? This can NOT be undone!')) {
-    try {
-      await axios.delete(`/api/profiles/${userId}`);
+  try {
+    await axios.delete(`/api/profiles/${userId}`);
 
-      dispatch({
-        type: CLEAR_PROFILE,
-      });
-      dispatch({
-        type: ACCOUNT_DELETED,
-      });
+    dispatch({
+      type: CLEAR_PROFILE,
+    });
+    dispatch({
+      type: ACCOUNT_DELETED,
+    });
 
-      dispatch(setAlert('Your account has been permanantly deleted', 'error'));
-    } catch (err) {
-      dispatch({
-        type: PROFILE_ERROR,
-        payload: { msg: err.response.statusText, status: err.response.status },
-      });
-    }
+    dispatch(
+      setAlert(
+        'Your account has been permanantly deleted',
+        'error',
+        6000,
+        true,
+        true
+      )
+    );
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
   }
 };
 
