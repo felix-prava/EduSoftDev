@@ -16,26 +16,25 @@ export default class TextEditor extends Component {
     });
   };
 
-  currentState = null;
+  currentState = '<p></p>\n';
   /* uploadCallback() {
     return new Promise((resolve, reject) => {
-      resolve({ data: { link: 'http://dummy_image_src.com' } });
+      resolve({ data: { link: 'http://image_src.com' } });
     });
   } */
-  render() {
-    console.log(this.props);
-    const { editorState } = this.state;
 
-    if (this.currentState !== editorState.getCurrentContent()) {
-      this.currentState = editorState.getCurrentContent();
-      console.log(convertToRaw(editorState.getCurrentContent()));
+  render() {
+    const { editorState } = this.state;
+    const newState = draftToHtml(convertToRaw(editorState.getCurrentContent()));
+    if (this.currentState !== newState) {
+      console.log(this.currentState);
+      console.log(newState);
+      this.currentState = newState;
       this.props.setFormData({
         ...this.props.formData,
-        body: draftToHtml(convertToRaw(editorState.getCurrentContent())),
+        body: newState,
       });
     }
-
-    // console.log(draftToHtml(convertToRaw(editorState.getCurrentContent())));
 
     return (
       <Fragment>
@@ -49,10 +48,6 @@ export default class TextEditor extends Component {
             // toolbar={{ image: { uploadCallback: this.uploadCallback } }}
           />
         </div>
-        <textarea
-          disabled
-          value={draftToHtml(convertToRaw(editorState.getCurrentContent()))}
-        ></textarea>
       </Fragment>
     );
   }
