@@ -193,14 +193,14 @@ export default function Landing() {
         <div className='relative bg-white'>
           <div className='flex justify-between items-center max-w-7xl mx-auto px-4 py-6 sm:px-6 md:justify-start md:space-x-10 lg:px-8'>
             <div className='flex justify-start lg:w-0 lg:flex-1'>
-              <a href='#'>
+              <Link to='#'>
                 <span className='sr-only'>Workflow</span>
                 <img
                   className='h-8 w-auto sm:h-10'
                   src='https://tailwindui.com/img/logos/workflow-mark-purple-600-to-indigo-600.svg'
                   alt=''
                 />
-              </a>
+              </Link>
             </div>
             <div className='-mr-2 -my-2 md:hidden'>
               <button
@@ -270,8 +270,8 @@ export default function Landing() {
                   <div className='absolute z-10 -ml-4 mt-3 transform w-screen max-w-md lg:max-w-2xl lg:ml-0 lg:left-1/2 lg:-translate-x-1/2'>
                     <div className='rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden'>
                       <div className='relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8 lg:grid-cols-2'>
-                        <a
-                          href='#'
+                        <Link
+                          to='#'
                           className='-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50'
                         >
                           <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 text-white sm:h-12 sm:w-12'>
@@ -301,9 +301,9 @@ export default function Landing() {
                               is coming from.
                             </p>
                           </div>
-                        </a>
-                        <a
-                          href='#'
+                        </Link>
+                        <Link
+                          to='#'
                           className='-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50'
                         >
                           <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 text-white sm:h-12 sm:w-12'>
@@ -333,9 +333,9 @@ export default function Landing() {
                               meaningful way.
                             </p>
                           </div>
-                        </a>
-                        <a
-                          href='#'
+                        </Link>
+                        <Link
+                          to='#'
                           className='-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50'
                         >
                           <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 text-white sm:h-12 sm:w-12'>
@@ -364,9 +364,9 @@ export default function Landing() {
                               Your customers' data will be safe and secure.
                             </p>
                           </div>
-                        </a>
-                        <a
-                          href='#'
+                        </Link>
+                        <Link
+                          to='#'
                           className='-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50'
                         >
                           <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 text-white sm:h-12 sm:w-12'>
@@ -396,33 +396,33 @@ export default function Landing() {
                               using.
                             </p>
                           </div>
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <a
-                href='#'
+              <Link
+                to='#'
                 className='text-base font-medium text-gray-500 hover:text-gray-900'
               >
                 {' '}
                 Pricing{' '}
-              </a>
-              <a
-                href='#'
+              </Link>
+              <Link
+                to='#'
                 className='text-base font-medium text-gray-500 hover:text-gray-900'
               >
                 {' '}
                 Partners{' '}
-              </a>
-              <a
-                href='#'
+              </Link>
+              <Link
+                to='#'
                 className='text-base font-medium text-gray-500 hover:text-gray-900'
               >
                 {' '}
                 Company{' '}
-              </a>
+              </Link>
             </nav>
             <div className='hidden md:flex items-center justify-end md:flex-1 lg:w-0'>
               <Link
@@ -493,8 +493,8 @@ export default function Landing() {
                 </div>
                 <div className='mt-6 '>
                   <nav className='grid grid-cols-1 gap-7'>
-                    <a
-                      href='#'
+                    <Link
+                      to='#'
                       className='-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50'
                     >
                       <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 text-white'>
@@ -518,9 +518,9 @@ export default function Landing() {
                       <div className='ml-4 text-base font-medium text-gray-900'>
                         Inbox
                       </div>
-                    </a>
-                    <a
-                      href='#'
+                    </Link>
+                    <Link
+                      to='#'
                       className='-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50'
                     >
                       <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 text-white'>
@@ -544,9 +544,9 @@ export default function Landing() {
                       <div className='ml-4 text-base font-medium text-gray-900'>
                         Messaging
                       </div>
-                    </a>
-                    <a
-                      href='#'
+                    </Link>
+                    <Link
+                      to='#'
                       className='-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50'
                     >
                       <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 text-white'>
@@ -570,9 +570,9 @@ export default function Landing() {
                       <div className='ml-4 text-base font-medium text-gray-900'>
                         Live Chat2
                       </div>
-                    </a>
-                    <a
-                      href='#'
+                    </Link>
+                    <Link
+                      to='#'
                       className='-m-3 p-3 flex items-center rounded-lg hover:bg-gray-50'
                     >
                       <div className='flex-shrink-0 flex items-center justify-center h-10 w-10 rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 text-white'>
@@ -596,30 +596,30 @@ export default function Landing() {
                       <div className='ml-4 text-base font-medium text-gray-900'>
                         Knowledge Base
                       </div>
-                    </a>
+                    </Link>
                   </nav>
                 </div>
               </div>
               <div className='py-6 px-5'>
                 <div className='grid grid-cols-2 gap-4'>
-                  <a
-                    href='#'
+                  <Link
+                    to='#'
                     className='text-base font-medium text-gray-900 hover:text-gray-700'
                   >
                     Pricing
-                  </a>
-                  <a
-                    href='#'
+                  </Link>
+                  <Link
+                    to='#'
                     className='text-base font-medium text-gray-900 hover:text-gray-700'
                   >
                     Partners2
-                  </a>
-                  <a
-                    href='#'
+                  </Link>
+                  <Link
+                    to='#'
                     className='text-base font-medium text-gray-900 hover:text-gray-700'
                   >
                     Company
-                  </a>
+                  </Link>
                 </div>
                 <div className='mt-6'>
                   <Link
@@ -675,12 +675,12 @@ export default function Landing() {
                     >
                       Get started
                     </Link>
-                    <a
-                      href='#'
+                    <Link
+                      to='#'
                       className='flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-500 bg-opacity-60 hover:bg-opacity-70 sm:px-8'
                     >
                       Live demo
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -956,12 +956,12 @@ export default function Landing() {
               </span>
             </h2>
             <div className='mt-6 space-y-4 sm:space-y-0 sm:flex sm:space-x-5'>
-              <a
-                href='#'
+              <Link
+                to='#'
                 className='flex items-center justify-center bg-gradient-to-r from-purple-600 to-indigo-600 bg-origin-border px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white hover:from-purple-700 hover:to-indigo-700'
               >
                 Learn more
-              </a>
+              </Link>
               <Link
                 to='/register'
                 className='flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-indigo-800 bg-indigo-50 hover:bg-indigo-100'
@@ -985,7 +985,7 @@ export default function Landing() {
                   <h3 className='text-sm font-semibold text-gray-400 tracking-wider uppercase'>
                     Solutions
                   </h3>
-                  <ul role='list' className='mt-4 space-y-4'>
+                  <ul className='mt-4 space-y-4'>
                     {footerNavigation.solutions.map((item) => (
                       <li key={item.name}>
                         <a
@@ -1002,7 +1002,7 @@ export default function Landing() {
                   <h3 className='text-sm font-semibold text-gray-400 tracking-wider uppercase'>
                     Support
                   </h3>
-                  <ul role='list' className='mt-4 space-y-4'>
+                  <ul className='mt-4 space-y-4'>
                     {footerNavigation.support.map((item) => (
                       <li key={item.name}>
                         <a
@@ -1021,7 +1021,7 @@ export default function Landing() {
                   <h3 className='text-sm font-semibold text-gray-400 tracking-wider uppercase'>
                     Company
                   </h3>
-                  <ul role='list' className='mt-4 space-y-4'>
+                  <ul className='mt-4 space-y-4'>
                     {footerNavigation.company.map((item) => (
                       <li key={item.name}>
                         <a
@@ -1038,7 +1038,7 @@ export default function Landing() {
                   <h3 className='text-sm font-semibold text-gray-400 tracking-wider uppercase'>
                     Legal
                   </h3>
-                  <ul role='list' className='mt-4 space-y-4'>
+                  <ul className='mt-4 space-y-4'>
                     {footerNavigation.legal.map((item) => (
                       <li key={item.name}>
                         <a
