@@ -15,6 +15,8 @@ export default class TextEditor extends Component {
       editorState,
     });
   };
+
+  currentState = null;
   /* uploadCallback() {
     return new Promise((resolve, reject) => {
       resolve({ data: { link: 'http://dummy_image_src.com' } });
@@ -23,7 +25,17 @@ export default class TextEditor extends Component {
   render() {
     console.log(this.props);
     const { editorState } = this.state;
-    console.log(draftToHtml(convertToRaw(editorState.getCurrentContent())));
+
+    if (this.currentState !== editorState.getCurrentContent()) {
+      this.currentState = editorState.getCurrentContent();
+      console.log(convertToRaw(editorState.getCurrentContent()));
+      this.props.setFormData({
+        ...this.props.formData,
+        body: draftToHtml(convertToRaw(editorState.getCurrentContent())),
+      });
+    }
+
+    // console.log(draftToHtml(convertToRaw(editorState.getCurrentContent())));
 
     return (
       <Fragment>
