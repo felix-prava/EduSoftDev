@@ -13,7 +13,6 @@ const TextEditor = ({ setFormData, formData, className }) => {
     setState(editorState);
   };
 
-  const currentState = '<p></p>\n';
   const editorState = state;
   const newState = draftToHtml(convertToRaw(editorState.getCurrentContent()));
 
@@ -24,13 +23,11 @@ const TextEditor = ({ setFormData, formData, className }) => {
   } */
 
   useEffect(() => {
-    if (currentState !== newState) {
-      setFormData({
-        ...formData,
-        body: newState,
-      });
-    }
-  }, [currentState, newState]);
+    setFormData({
+      ...formData,
+      body: newState,
+    });
+  }, [newState]);
 
   return (
     <Fragment>
