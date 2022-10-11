@@ -1,59 +1,54 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { Component, Fragment } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState, convertToRaw } from 'draft-js';
 
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import draftToHtml from 'draftjs-to-html';
 
-const TextEditor2 = ({ setFormData, formData, className }) => {
-  const [state, setState] = useState(EditorState.createEmpty());
-  const onEditorStateChange = (editorState) => {
-    setState(editorState);
+export default class TextEditor2 extends Component {
+  state = {
+    editorState: EditorState.createEmpty(),
   };
 
-  const currentState = '<p></p>\n';
-  const editorState = state;
-  const newState = draftToHtml(convertToRaw(editorState.getCurrentContent()));
+  onEditorStateChange = (editorState) => {
+    this.setState({
+      editorState,
+    });
+  };
 
-  /* function uploadCallback() {
+  currentState = '<p></p>\n';
+  /* uploadCallback() {
     return new Promise((resolve, reject) => {
       resolve({ data: { link: 'http://image_src.com' } });
     });
   } */
 
-  useEffect(() => {
-    if (currentState !== newState) {
-      setFormData({
-        ...formData,
+  render() {
+    const { editorState } = this.state;
+    const newState = draftToHtml(convertToRaw(editorState.getCurrentContent()));
+    if (this.currentState !== newState) {
+      console.log(this.currentState);
+      console.log(newState);
+      this.currentState = newState;
+      this.props.setFormData({
+        ...this.props.formData,
         body: newState,
       });
     }
-  }, [currentState, newState]);
 
-  return (
-    <Fragment>
-      <div className={className}>
-        <Editor
-          editorState={state}
-          toolbarClassName='toolbarClassName'
-          wrapperClassName='wrapperClassName'
-          editorClassName='editorClassName'
-          onEditorStateChange={onEditorStateChange}
-          // toolbar={{ image: { uploadCallback: uploadCallback } }}
-        />
-      </div>
-    </Fragment>
-  );
-};
-
-TextEditor2.propTypes = {
-  alerts: PropTypes.array.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  alerts: state.alert,
-});
-
-export default connect(mapStateToProps, {})(TextEditor2);
+    return (
+      <Fragment>
+        <div className={this.props.className}>
+          <Editor
+            editorState={editorState}
+            toolbarClassName='toolbarClassName'
+            wrapperClassName='wrapperClassName'
+            editorClassName='editorClassName'
+            onEditorStateChange={this.onEditorStateChange}
+            // toolbar={{ image: { uploadCallback: this.uploadCallback } }}
+          />
+        </div>
+      </Fragment>
+    );
+  }
+}
