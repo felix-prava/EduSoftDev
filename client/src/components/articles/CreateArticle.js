@@ -15,10 +15,8 @@ const CreateArticle = ({ addArticle }) => {
   const { subject, body, description } = formData;
   const childCompRef = useRef();
 
-  const onChange = (e) => {
+  const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    console.log(formData);
-  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -75,12 +73,6 @@ const CreateArticle = ({ addArticle }) => {
                     Body{' '}
                   </label>
                   <div className='mt-1'>
-                    <button
-                      type='button'
-                      onClick={() => childCompRef.current.showAlert()}
-                    >
-                      Click Me
-                    </button>
                     <TextEditor
                       ref={childCompRef}
                       setFormData={setFormData}
