@@ -1,5 +1,6 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import TextEditor from '../layout/TextEditor';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addArticle } from '../../actions/article';
@@ -12,6 +13,7 @@ const CreateArticle = ({ addArticle }) => {
   });
 
   const { subject, body, description } = formData;
+  const childCompRef = useRef();
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -21,6 +23,7 @@ const CreateArticle = ({ addArticle }) => {
     addArticle(formData);
     if (subject !== '' && body !== '') {
       setFormData({ subject: '', body: '', description: '' });
+      childCompRef.current.setEmptyEditor();
     }
   };
 
@@ -70,13 +73,13 @@ const CreateArticle = ({ addArticle }) => {
                     Body{' '}
                   </label>
                   <div className='mt-1'>
-                    <textarea
-                      name='body'
-                      value={body}
-                      onChange={(e) => onChange(e)}
-                      rows='3'
+                    <TextEditor
+                      ref={childCompRef}
+                      setFormData={setFormData}
+                      formData={formData}
+                      fieldName='body'
                       className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md'
-                    ></textarea>
+                    />
                   </div>
                 </div>
               </div>

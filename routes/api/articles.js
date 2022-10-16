@@ -16,6 +16,7 @@ router.post(
     auth,
     [
       check('subject', 'Subject is required').not().isEmpty(),
+      check('body', 'Body is required').not().equals('<p></p>\n'),
       check('body', 'Body is required').not().isEmpty(),
     ],
   ],
@@ -56,6 +57,7 @@ router.put(
     auth,
     [
       check('subject', 'Subject is required').not().isEmpty(),
+      check('body', 'Body is required').not().equals('<p></p>\n'),
       check('body', 'Body is required').not().isEmpty(),
     ],
   ],
