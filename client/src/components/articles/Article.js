@@ -2,8 +2,9 @@ import React, { Fragment, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Spinner from '../layout/Spinner';
 import AddComment from './AddComment';
+import Spinner from '../layout/Spinner';
+import PageNotFound from '../layout/PageNotFound';
 import {
   getArticle,
   addLike,
@@ -17,7 +18,7 @@ import { displayDate } from '../../utils/helpers';
 const Article = ({
   getArticle,
   auth,
-  article: { article, loading },
+  article: { article, loading, error },
   addLike,
   addDislike,
   deleteArticle,
@@ -53,6 +54,10 @@ const Article = ({
   }
 
   const commentsMargin = auth.isAuthenticated ? 'pb-4' : 'mt-28 pt-8 pb-4';
+
+  if (error && error.msg === 'Not Found') {
+    return <PageNotFound />;
+  }
 
   return loading || article === null ? (
     <Spinner />
