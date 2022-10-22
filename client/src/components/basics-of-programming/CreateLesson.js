@@ -3,6 +3,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addLearningMaterial } from '../../actions/learning';
+import TextEditor from '../layout/TextEditor';
 
 const CreateLesson = ({ addLearningMaterial }) => {
   const { module } = useParams();
@@ -140,13 +141,13 @@ const CreateLesson = ({ addLearningMaterial }) => {
                     Body{' '}
                   </label>
                   <div className='mt-1'>
-                    <textarea
-                      name='body'
-                      value={body}
-                      onChange={(e) => onChange(e)}
-                      rows='3'
-                      className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md'
-                    ></textarea>
+                    <div className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md'>
+                      <TextEditor
+                        setFormData={setFormData}
+                        formData={formData}
+                        fieldName='body'
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
