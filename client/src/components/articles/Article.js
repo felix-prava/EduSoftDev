@@ -63,7 +63,12 @@ const Article = ({
           <h2 className='text-3xl text-center tracking-tight font-extrabold text-gray-900 sm:text-4xl'>
             {article.subject}
           </h2>
-          <p className='mt-10 text-base text-gray-500'>{article.body}</p>
+          <div
+            className='mt-10 text-base'
+            dangerouslySetInnerHTML={{
+              __html: article.body,
+            }}
+          />
 
           <div className='mr-8 float-right'>
             <div className='mt-6 flex space-x-3 '>

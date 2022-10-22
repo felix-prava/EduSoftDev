@@ -1,10 +1,16 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import TextEditor from '../layout/TextEditor';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { updateArticle, getArticle } from '../../actions/article';
+import Spinner from '../layout/Spinner';
 
-const EditArticle = ({ article: { article }, updateArticle, getArticle }) => {
+const EditArticle = ({
+  article: { article, loading },
+  updateArticle,
+  getArticle,
+}) => {
   const [formData, setFormData] = useState({
     subject: '',
     description: '',
@@ -26,14 +32,16 @@ const EditArticle = ({ article: { article }, updateArticle, getArticle }) => {
     if (!article) getArticle(id);
     if (article) {
       setFormData({
-        subject: article.subject,
-        description: article.description,
-        body: article.body,
+        subject: article.subject || '',
+        description: article.description || '',
+        body: article.body || '',
       });
     }
   }, [getArticle, article, id]);
 
-  return (
+  return loading || article === null ? (
+    <Spinner />
+  ) : (
     <Fragment>
       <div className='container mt-8'>
         <form
@@ -79,13 +87,14 @@ const EditArticle = ({ article: { article }, updateArticle, getArticle }) => {
                     Body{' '}
                   </label>
                   <div className='mt-1'>
-                    <textarea
-                      name='body'
-                      value={body}
-                      onChange={(e) => onChange(e)}
-                      rows='3'
-                      className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md'
-                    ></textarea>
+                    <div className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md'>
+                      <TextEditor
+                        setFormData={setFormData}
+                        formData={formData}
+                        fieldName='body'
+                        fieldValue={body}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>

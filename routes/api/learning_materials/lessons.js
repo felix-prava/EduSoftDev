@@ -25,6 +25,7 @@ router.put(
       gt: 0,
     }),
     check('body', 'Body is required').not().isEmpty(),
+    check('body', 'Body is required').not().equals('<p></p>\n'),
     check('shortDescription', 'Short description is required').not().isEmpty(),
   ],
   async (req, res) => {

@@ -7,18 +7,18 @@ import React, {
 } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState, convertToRaw } from 'draft-js';
-
+import { stateFromHTML } from 'draft-js-import-html';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import draftToHtml from 'draftjs-to-html';
 
 const TextEditor = forwardRef(
-  ({ setFormData, formData, fieldName, className }, ref) => {
+  ({ setFormData, formData, fieldName, fieldValue }, ref) => {
     const [state, setState] = useState(EditorState.createEmpty());
     const onEditorStateChange = (editorState) => {
       setState(editorState);
     };
 
-    const editorState = state;
+    let editorState = state;
     const newState = draftToHtml(convertToRaw(editorState.getCurrentContent()));
 
     /* function uploadCallback() {
@@ -26,6 +26,15 @@ const TextEditor = forwardRef(
       resolve({ data: { link: 'http://image_src.com' } });
     });
   } */
+    const variable24 = fieldValue !== '';
+    useEffect(() => {
+      if (variable24) {
+        if (typeof fieldValue !== 'undefined') {
+          setState(EditorState.createWithContent(stateFromHTML(fieldValue)));
+          editorState = state;
+        }
+      }
+    }, [variable24]);
 
     useEffect(() => {
       setFormData({
@@ -42,16 +51,14 @@ const TextEditor = forwardRef(
 
     return (
       <Fragment>
-        <div className={className}>
-          <Editor
-            editorState={state}
-            toolbarClassName='toolbarClassName'
-            wrapperClassName='wrapperClassName'
-            editorClassName='editorClassName'
-            onEditorStateChange={onEditorStateChange}
-            // toolbar={{ image: { uploadCallback: uploadCallback } }}
-          />
-        </div>
+        <Editor
+          editorState={state}
+          toolbarClassName='toolbarClassName'
+          wrapperClassName='wrapperClassName'
+          editorClassName='editorClassName'
+          onEditorStateChange={onEditorStateChange}
+          // toolbar={{ image: { uploadCallback: uploadCallback } }}
+        />
       </Fragment>
     );
   }
