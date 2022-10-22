@@ -12,7 +12,7 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import draftToHtml from 'draftjs-to-html';
 
 const TextEditor = forwardRef(
-  ({ setFormData, formData, fieldName, fieldValue, className }, ref) => {
+  ({ setFormData, formData, fieldName, fieldValue }, ref) => {
     const [state, setState] = useState(EditorState.createEmpty());
     const onEditorStateChange = (editorState) => {
       setState(editorState);
@@ -51,16 +51,14 @@ const TextEditor = forwardRef(
 
     return (
       <Fragment>
-        <div className={className}>
-          <Editor
-            editorState={state}
-            toolbarClassName='toolbarClassName'
-            wrapperClassName='wrapperClassName'
-            editorClassName='editorClassName'
-            onEditorStateChange={onEditorStateChange}
-            // toolbar={{ image: { uploadCallback: uploadCallback } }}
-          />
-        </div>
+        <Editor
+          editorState={state}
+          toolbarClassName='toolbarClassName'
+          wrapperClassName='wrapperClassName'
+          editorClassName='editorClassName'
+          onEditorStateChange={onEditorStateChange}
+          // toolbar={{ image: { uploadCallback: uploadCallback } }}
+        />
       </Fragment>
     );
   }

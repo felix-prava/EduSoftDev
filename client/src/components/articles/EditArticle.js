@@ -81,14 +81,15 @@ const EditArticle = ({ article: { article }, updateArticle, getArticle }) => {
                     Body{' '}
                   </label>
                   <div className='mt-1'>
-                    <TextEditor
-                      ref={childCompRef}
-                      setFormData={setFormData}
-                      formData={formData}
-                      fieldName='body'
-                      fieldValue={body}
-                      className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md'
-                    />
+                    <div className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md'>
+                      <TextEditor
+                        ref={childCompRef}
+                        setFormData={setFormData}
+                        formData={formData}
+                        fieldName='body'
+                        fieldValue={body}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
