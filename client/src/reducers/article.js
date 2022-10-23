@@ -27,24 +27,28 @@ export default function ArticleReducer(state = initialState, action) {
         ...state,
         articles: payload,
         loading: false,
+        error: {},
       };
     case GET_ARTICLE:
       return {
         ...state,
         article: payload,
         loading: false,
+        error: {},
       };
     case ADD_ARTICLE:
       return {
         ...state,
         articles: [payload, ...state.articles],
         loading: false,
+        error: {},
       };
     case UPDATE_ARTICLE:
       return {
         ...state,
         article: payload,
         loading: false,
+        error: {},
       };
     case ARTICLE_ERROR:
       return {
@@ -72,12 +76,15 @@ export default function ArticleReducer(state = initialState, action) {
             : article
         ),
         article: returnedArticle,
+        loading: false,
+        error: {},
       };
     case ADD_COMMENT:
       return {
         ...state,
         article: { ...state.article, comments: payload },
         loading: false,
+        error: {},
       };
     case REMOVE_COMMENT:
       return {
@@ -89,12 +96,14 @@ export default function ArticleReducer(state = initialState, action) {
           ),
         },
         loading: false,
+        error: {},
       };
     case DELETE_ARTICLE:
       return {
         ...state,
         articles: state.articles.filter((article) => article._id !== payload),
         loading: false,
+        error: {},
       };
     default:
       return state;

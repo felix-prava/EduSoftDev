@@ -4,10 +4,11 @@ import TextEditor from '../layout/TextEditor';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { updateArticle, getArticle } from '../../actions/article';
+import PageNotFound from '../layout/PageNotFound';
 import Spinner from '../layout/Spinner';
 
 const EditArticle = ({
-  article: { article, loading },
+  article: { article, loading, error },
   updateArticle,
   getArticle,
 }) => {
@@ -38,6 +39,10 @@ const EditArticle = ({
       });
     }
   }, [getArticle, article, id]);
+
+  if (error && error.msg === 'Not Found') {
+    return <PageNotFound />;
+  }
 
   return loading || article === null ? (
     <Spinner />
