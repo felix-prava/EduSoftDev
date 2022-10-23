@@ -368,7 +368,7 @@ export const solveQuiz = (quizId, answers) => async (dispatch) => {
 
     dispatch(setAlert('Quiz Completed', 'success', 3000, false));
     dispatch(loadUser());
-    // MAYBE update solvingUsers for this quiz
+    // TODO MAYBE update solvingUsers for this quiz
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {

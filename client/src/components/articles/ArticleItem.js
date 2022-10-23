@@ -40,7 +40,7 @@ const ArticleItem = ({
     }
   }
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   function showArticle(articleId) {
     navigate(`/articles/${articleId}`);
   }
