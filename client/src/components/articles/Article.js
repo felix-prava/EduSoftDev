@@ -2,8 +2,9 @@ import React, { Fragment, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Spinner from '../layout/Spinner';
 import AddComment from './AddComment';
+import Spinner from '../layout/Spinner';
+import PageNotFound from '../layout/PageNotFound';
 import {
   getArticle,
   addLike,
@@ -17,7 +18,7 @@ import { displayDate } from '../../utils/helpers';
 const Article = ({
   getArticle,
   auth,
-  article: { article, loading },
+  article: { article, loading, error },
   addLike,
   addDislike,
   deleteArticle,
@@ -47,12 +48,16 @@ const Article = ({
     }
   }
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   function editArticle(articleId) {
     navigate(`/articles/edit/${articleId}`);
   }
 
   const commentsMargin = auth.isAuthenticated ? 'pb-4' : 'mt-28 pt-8 pb-4';
+
+  if (error && error.msg === 'Not Found') {
+    return <PageNotFound />;
+  }
 
   return loading || article === null ? (
     <Spinner />
@@ -128,7 +133,7 @@ const Article = ({
                       </svg>
                     </button>
                     <button
-                      onClick={() => deleteArticle(article._id)}
+                      onClick={() => deleteArticle(article._id, navigate, true)}
                       className='bg-red-600 border border-transparent rounded-md shadow-sm py-1 px-3 flex items-center inline-flex justify-center ml-4 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600'
                     >
                       <svg

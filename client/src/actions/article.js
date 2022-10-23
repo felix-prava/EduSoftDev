@@ -95,22 +95,27 @@ export const addDislike =
   };
 
 // Delete an article
-export const deleteArticle = (articleId) => async (dispatch) => {
-  try {
-    await axios.delete(`/api/articles/${articleId}`);
+export const deleteArticle =
+  (articleId, navigate, redirectUser = false) =>
+  async (dispatch) => {
+    try {
+      await axios.delete(`/api/articles/${articleId}`);
 
-    dispatch({
-      type: DELETE_ARTICLE,
-      payload: articleId,
-    });
-    dispatch(setAlert('Article Deleted', 'success'));
-  } catch (err) {
-    dispatch({
-      type: ARTICLE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
-    });
-  }
-};
+      dispatch({
+        type: DELETE_ARTICLE,
+        payload: articleId,
+      });
+      if (redirectUser) {
+        navigate('/articles');
+      }
+      dispatch(setAlert('Article Deleted', 'success'));
+    } catch (err) {
+      dispatch({
+        type: ARTICLE_ERROR,
+        payload: { msg: err.response.statusText, status: err.response.status },
+      });
+    }
+  };
 
 // Add an article
 export const addArticle = (formData) => async (dispatch) => {
