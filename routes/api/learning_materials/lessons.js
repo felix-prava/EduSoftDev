@@ -101,6 +101,9 @@ router.post('/:lesson_id/lesson-learned', auth, async (req, res) => {
       )
     ) {
       user.lessonsLearned.unshift({ lesson: req.params.lesson_id });
+      const maxExp = lesson.expMax
+      const gainedExp = user.exp + lesson.expGained
+      user.exp = (gainedExp > maxExp ? maxExp : gainedExp)
     }
 
     // Check if the lesson has already been completed by the user

@@ -43,7 +43,7 @@ const MaterialItem = ({
         </div>
         <div className='flex-1 bg-white p-6 flex flex-col justify-between'>
           <div className='flex-1'>
-            {userExp > expNeeded ||
+            {userExp >= expNeeded ||
             (user && (user.role === 'admin' || user.role === 'mentor')) ? (
               <Fragment>
                 <Link to={materialPath} className='block mt-2'>
