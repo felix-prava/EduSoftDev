@@ -20,9 +20,9 @@ const MyProfile = ({
     return <Spinner />;
   }
 
-  const solvedProblems = user.solvedProblems && user.solvedProblems.length || 0
-  const lessonsLearned = user.lessonsLearned && user.lessonsLearned.length || 0
-  const solvedQuizzes = user.solvedQuizzes && user.solvedQuizzes.length || 0
+  const solvedProblems = (user.solvedProblems && user.solvedProblems.length) || 0
+  const lessonsLearned = (user.lessonsLearned && user.lessonsLearned.length) || 0
+  const solvedQuizzes  = (user.solvedQuizzes && user.solvedQuizzes.length) || 0
 
   return (
     <Fragment>
