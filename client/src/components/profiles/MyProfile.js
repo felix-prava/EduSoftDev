@@ -20,6 +20,10 @@ const MyProfile = ({
     return <Spinner />;
   }
 
+  const solvedProblems = user.solvedProblems && user.solvedProblems.length || 0
+  const lessonsLearned = user.lessonsLearned && user.lessonsLearned.length || 0
+  const solvedQuizzes = user.solvedQuizzes && user.solvedQuizzes.length || 0
+
   return (
     <Fragment>
       {' '}
@@ -196,6 +200,50 @@ const MyProfile = ({
                               <p>{user.email}</p>
                             </div>
                           </div>
+                          <div className='mt-6 flex'>
+                            <div className='flex-shrink-0 text-gray-600 hover:text-gray-800'>
+                              <svg
+                                  xmlns='http://www.w3.org/2000/svg'
+                                  className='h-6 w-6'
+                                  fill='none'
+                                  viewBox='0 0 24 24'
+                                  stroke='currentColor'
+                                  strokeWidth='2'
+                                >
+                                  <path
+                                    strokeLinecap='round'
+                                    strokeLinejoin='round'
+                                    d='M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z'
+                                  />
+                                </svg>
+                            </div>
+                            <div className='ml-3 text-base text-gray-500 hover:text-gray-700'>
+                              <p>{user.exp} exp points</p>
+                            </div>
+                          </div>
+                          <div className='mt-6 flex'>
+                            <div className='flex-shrink-0 text-gray-600 hover:text-gray-800'>
+                              <svg
+                                xmlns='http://www.w3.org/2000/svg'
+                                className='h-6 w-6'
+                                fill='none'
+                                viewBox='0 0 24 24'
+                                stroke='currentColor'
+                                strokeWidth='2'
+                              >
+                                <path d='M12 14l9-5-9-5-9 5 9 5z' />
+                                <path d='M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z' />
+                                <path
+                                  strokeLinecap='round'
+                                  strokeLinejoin='round'
+                                  d='M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222'
+                                />
+                              </svg>
+                            </div>
+                            <div className='ml-3 text-base text-gray-500 hover:text-gray-700'>
+                              <p>{lessonsLearned} Lessons learned</p>
+                            </div>
+                          </div>
                         </div>
                       </div>
                       <div className='sm:mt-16 md:mt-0'>
@@ -232,6 +280,48 @@ const MyProfile = ({
                                   Edit General Info
                                 </button>
                               </Link>
+                            </div>
+                          </div>
+                          <div className='mt-5 flex'>
+                            <div className='flex-shrink-0 text-gray-600 hover:text-gray-800'>
+                              <svg
+                                xmlns='http://www.w3.org/2000/svg'
+                                className='h-6 w-6'
+                                fill='none'
+                                viewBox='0 0 24 24'
+                                stroke='currentColor'
+                                strokeWidth='2'
+                              >
+                                <path
+                                  strokeLinecap='round'
+                                  strokeLinejoin='round'
+                                  d='M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z'
+                                />
+                              </svg>
+                            </div>
+                            <div className='ml-3 text-base text-gray-500 hover:text-gray-700'>
+                              <p>{solvedProblems} solved problems</p>
+                            </div>
+                          </div>
+                          <div className='mt-6 flex'>
+                            <div className='flex-shrink-0 text-gray-600 hover:text-gray-800'>
+                              <svg
+                                xmlns='http://www.w3.org/2000/svg'
+                                className='h-6 w-6'
+                                fill='none'
+                                viewBox='0 0 24 24'
+                                stroke='currentColor'
+                                strokeWidth='2'
+                              >
+                                <path
+                                  strokeLinecap='round'
+                                  strokeLinejoin='round'
+                                  d='M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4'
+                                />
+                              </svg>
+                            </div>
+                            <div className='ml-3 text-base text-gray-500 hover:text-gray-700'>
+                              <p>{solvedQuizzes} quizzes completed</p>
                             </div>
                           </div>
                         </div>
