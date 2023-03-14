@@ -68,7 +68,7 @@ const Modules = ({ auth: { loading, user } }) => {
                     <p className='text-xl font-semibold text-gray-900'>
                       If Else - Conditional Statments
                     </p>
-                    {!loading && user && user.exp > expNeededForIfElseModule ? (
+                    {!loading && user && user.exp >= expNeededForIfElseModule ? (
                       <p className='mt-3 text-base text-gray-500'>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Velit facilis asperiores porro quaerat doloribus,
@@ -114,7 +114,7 @@ const Modules = ({ auth: { loading, user } }) => {
                     </p>
                     {!loading &&
                     user &&
-                    user.exp > expNeededForWhileForLoopsModule ? (
+                    user.exp >= expNeededForWhileForLoopsModule ? (
                       <p className='mt-3 text-base text-gray-500'>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Velit facilis asperiores porro quaerat doloribus,
@@ -162,7 +162,7 @@ const Modules = ({ auth: { loading, user } }) => {
                     </p>
                     {!loading &&
                     user &&
-                    user.exp > expNeededForArraysFunctionsModule ? (
+                    user.exp >= expNeededForArraysFunctionsModule ? (
                       <p className='mt-3 text-base text-gray-500'>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Velit facilis asperiores porro quaerat doloribus,
@@ -210,7 +210,7 @@ const Modules = ({ auth: { loading, user } }) => {
                     </p>
                     {!loading &&
                     user &&
-                    user.exp > expNeededForMatrixStringsModule ? (
+                    user.exp >= expNeededForMatrixStringsModule ? (
                       <p className='mt-3 text-base text-gray-500'>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Velit facilis asperiores porro quaerat doloribus,
@@ -258,7 +258,7 @@ const Modules = ({ auth: { loading, user } }) => {
                     </p>
                     {!loading &&
                     user &&
-                    user.exp > expNeededForDatabaseAndOOPModule ? (
+                    user.exp >= expNeededForDatabaseAndOOPModule ? (
                       <p className='mt-3 text-base text-gray-500'>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Velit facilis asperiores porro quaerat doloribus,
@@ -309,7 +309,7 @@ const Modules = ({ auth: { loading, user } }) => {
                     </p>
                     {!loading &&
                     user &&
-                    user.exp > expNeededForBacktrackingRecursionModule ? (
+                    user.exp >= expNeededForBacktrackingRecursionModule ? (
                       <p className='mt-3 text-base text-gray-500'>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Velit facilis asperiores porro quaerat doloribus,

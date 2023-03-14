@@ -258,7 +258,7 @@ const Dashboard = ({ auth: { user, loading } }) => {
                           </svg>
                           <span className='flex flex-col text-gray-500 text-sm truncate'>
                             <span className='truncate'>
-                              Payment to Molly Sanders
+                              Add 2 numbers and display their sum
                             </span>
                             <span className='py-2'>
                               <span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 capitalize'>
@@ -266,7 +266,7 @@ const Dashboard = ({ auth: { user, loading } }) => {
                                 success{' '}
                               </span>
                             </span>
-                            <time dateTime='2020-07-11'>July 11, 2020</time>
+                            <time dateTime='2020-07-11'>July 11, 2022</time>
                           </span>
                         </span>
                         {/* Heroicon name: solid/chevron-right */}
@@ -333,7 +333,7 @@ const Dashboard = ({ auth: { user, loading } }) => {
                                     />
                                   </svg>
                                   <p className='text-gray-500 truncate group-hover:text-gray-900'>
-                                    Payment to Molly Sanders
+                                    Add 2 numbers and display their sum
                                   </p>
                                 </Link>
                               </div>
@@ -345,7 +345,7 @@ const Dashboard = ({ auth: { user, loading } }) => {
                               </span>
                             </td>
                             <td className='px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500'>
-                              <time dateTime='2020-07-11'>July 11, 2020</time>
+                              <time dateTime='2020-07-11'>July 11, 2022</time>
                             </td>
                           </tr>
 
