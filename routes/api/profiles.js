@@ -32,12 +32,10 @@ router.get('/me', auth, async (req, res) => {
 });
 
 // @route   POST /api/profiles/:user_id
-// @desc    Create or update a user profile
+// @desc    Update a user's profile
 // @access  Private
 router.post(
-  '/:user_id',
-  [auth, [check('status', 'Status is required').not().isEmpty()]],
-  async (req, res) => {
+  '/:user_id', auth, async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -70,7 +68,7 @@ router.post(
     } = req.body;
 
     // Build profile objects
-    const profileFields = {};
+    let profileFields = {};
     profileFields.user = req.params.user_id;
     if (status) profileFields.status = status;
     if (bio) profileFields.bio = bio;
@@ -103,11 +101,6 @@ router.post(
 
         return res.json(profile);
       }
-
-      // Create profile
-      profile = new Profile(profileFields);
-      await profile.save();
-
       res.json(profile);
     } catch (err) {
       console.error(err.message);
