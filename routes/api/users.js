@@ -9,6 +9,7 @@ const auth = require('../../middleware/auth');
 const compareUsers = require('../../middleware/compareUsers');
 
 const User = require('../../models/User');
+const Profile = require('../../models/Profile');
 
 // @route   POST /api/users
 // @desc    Register user
@@ -75,6 +76,13 @@ router.post(
       user.password = await bcrypt.hash(password, salt);
 
       await user.save();
+      
+      // Create an empty profile
+      let profileFields = {}
+      profileFields.user = user.id;
+      profileFields.social = {}
+      profile = new Profile(profileFields);
+      await profile.save();
 
       const payload = {
         user: {

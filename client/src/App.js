@@ -20,7 +20,6 @@ import PrivateRoute from './components/routing/PrivateRoute';
 // Profiles
 import MyProfile from './components/profiles/MyProfile';
 import UserProfile from './components/profiles/UserProfile';
-import CreateProfile from './components/profiles/CreateProfile';
 import EditProfile from './components/profiles/EditProfile';
 import EditGeneralInfo from './components/profiles/EditGeneralInfo';
 import AddExperience from './components/profiles/AddExperience';
@@ -113,15 +112,6 @@ const App = () => {
               element={
                 <PrivateRoute>
                   <UserProfile />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              exact
-              path='/create-profile'
-              element={
-                <PrivateRoute>
-                  <CreateProfile />
                 </PrivateRoute>
               }
             />
