@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addLearningMaterial } from '../../actions/learning';
 import { setAlert } from '../../actions/alert';
+import TextEditor from '../layout/TextEditor';
 
 const CreateProblem = ({ addLearningMaterial, setAlert }) => {
   const { module } = useParams();
@@ -27,7 +28,6 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
     expNeeded,
     expGained,
     expMax,
-    body,
     shortDescription,
     tests,
     examples,
@@ -236,13 +236,11 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
                     Body{' '}
                   </label>
                   <div className='mt-1'>
-                    <textarea
-                      name='body'
-                      value={body}
-                      onChange={(e) => onChange(e)}
-                      rows='3'
-                      className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md'
-                    ></textarea>
+                    <TextEditor
+                      setFormData={setFormData}
+                      formData={formData}
+                      fieldName='body'
+                    />
                   </div>
                 </div>
               </div>

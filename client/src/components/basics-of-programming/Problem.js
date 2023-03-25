@@ -38,9 +38,12 @@ const Problem = ({
           <h2 className='text-3xl text-center tracking-tight font-extrabold text-gray-900 sm:text-4xl'>
             {learningMaterial.name}
           </h2>
-          <p className='mt-10 text-base text-gray-500'>
-            {learningMaterial.body}
-          </p>
+          <div
+            className='mt-10 text-base'
+            dangerouslySetInnerHTML={{
+              __html: learningMaterial.body,
+            }}
+          />
         </div>
         <div className='mt-2 block'>
           <ul className='divide-y divide-gray-200'>
