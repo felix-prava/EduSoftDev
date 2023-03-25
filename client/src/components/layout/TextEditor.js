@@ -26,15 +26,15 @@ const TextEditor = forwardRef(
       resolve({ data: { link: 'http://image_src.com' } });
     });
   } */
-    const variable24 = fieldValue !== '';
+    const initialValueIsSet = fieldValue !== '';
     useEffect(() => {
-      if (variable24) {
+      if (initialValueIsSet) {
         if (typeof fieldValue !== 'undefined') {
           setState(EditorState.createWithContent(stateFromHTML(fieldValue)));
           editorState = state;
         }
       }
-    }, [variable24]);
+    }, [initialValueIsSet]);
 
     useEffect(() => {
       setFormData({

@@ -60,11 +60,12 @@ const Quiz = ({
         <form className='space-y-8 divide-y divide-gray-200'>
           <div className='space-y-8 divide-y divide-gray-200 sm:space-y-5'>
             <div className='divide-y divide-gray-200 pt-8 space-y-6 sm:pt-10 sm:space-y-5'>
-              <div>
-                <p className='mt-1 max-w-2xl text-sm text-gray-500'>
-                  {learningMaterial.body}
-                </p>
-              </div>
+              <div
+                className='mt-10 text-base'
+                dangerouslySetInnerHTML={{
+                  __html: learningMaterial.body,
+                }}
+              />
               <div className='space-y-6 sm:space-y-5 divide-y divide-gray-200'>
                 <div className='pt-6 sm:pt-5'>
                   <div role='group' aria-labelledby='label-email'>
