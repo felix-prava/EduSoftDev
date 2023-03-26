@@ -90,98 +90,98 @@ const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
 
   return (
     <Fragment>
-      <div className='container mt-8'>
+      <div className="container mt-8">
         <form
-          className='space-y-8 divide-y divide-gray-200'
+          className="space-y-8 divide-y divide-gray-200"
           onSubmit={(e) => onSubmit(e)}
         >
-          <div className='space-y-8 divide-y divide-gray-200'>
+          <div className="space-y-8 divide-y divide-gray-200">
             <div>
               <div>
-                <h3 className='text-2xl font-bold leading-6 font-medium text-gray-900 sm:text-2xl'>
+                <h3 className="text-2xl font-bold leading-6 font-medium text-gray-900 sm:text-2xl">
                   Create a new quiz
                 </h3>
               </div>
 
-              <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
-                <div className='sm:col-span-6'>
+              <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                <div className="sm:col-span-6">
                   <label
-                    htmlFor='name'
-                    className='block text-sm font-medium text-gray-700'
+                    htmlFor="name"
+                    className="block text-sm font-medium text-gray-700"
                   >
                     {' '}
                     What's the title of this lesson?{' '}
                   </label>
-                  <div className='mt-1'>
+                  <div className="mt-1">
                     <input
-                      type='text'
-                      name='name'
+                      type="text"
+                      name="name"
                       value={name}
                       onChange={(e) => onChange(e)}
-                      className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                      className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
                 </div>
               </div>
 
-              <div className='space-y-8 divide-y divide-gray-200'>
-                <div className='pt-8'>
-                  <div className='grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
-                    <div className='sm:col-span-2'>
+              <div className="space-y-8 divide-y divide-gray-200">
+                <div className="pt-8">
+                  <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                    <div className="sm:col-span-2">
                       <label
-                        htmlFor='expNeeded'
-                        className='block text-sm font-medium text-gray-700'
+                        htmlFor="expNeeded"
+                        className="block text-sm font-medium text-gray-700"
                       >
                         {' '}
                         Experience Needed{' '}
                       </label>
-                      <div className='mt-1'>
+                      <div className="mt-1">
                         <input
-                          type='number'
-                          step='any'
-                          name='expNeeded'
+                          type="number"
+                          step="any"
+                          name="expNeeded"
                           value={expNeeded}
                           onChange={(e) => onChange(e)}
-                          className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                          className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                         />
                       </div>
                     </div>
 
-                    <div className='sm:col-span-2'>
+                    <div className="sm:col-span-2">
                       <label
-                        htmlFor='expGained'
-                        className='block text-sm font-medium text-gray-700'
+                        htmlFor="expGained"
+                        className="block text-sm font-medium text-gray-700"
                       >
                         {' '}
                         Experience Gained{' '}
                       </label>
-                      <div className='mt-1'>
+                      <div className="mt-1">
                         <input
-                          type='number'
-                          step='any'
-                          name='expGained'
+                          type="number"
+                          step="any"
+                          name="expGained"
                           value={expGained}
                           onChange={(e) => onChange(e)}
-                          className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                          className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                         />
                       </div>
                     </div>
 
-                    <div className='sm:col-span-2'>
+                    <div className="sm:col-span-2">
                       <label
-                        htmlFor='expMax'
-                        className='block text-sm font-medium text-gray-700'
+                        htmlFor="expMax"
+                        className="block text-sm font-medium text-gray-700"
                       >
                         {' '}
                         Max Experience{' '}
                       </label>
-                      <div className='mt-1'>
+                      <div className="mt-1">
                         <input
-                          type='number'
-                          name='expMax'
+                          type="number"
+                          name="expMax"
                           value={expMax}
                           onChange={(e) => onChange(e)}
-                          className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                          className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                         />
                       </div>
                     </div>
@@ -189,21 +189,21 @@ const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
                 </div>
               </div>
 
-              <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
-                <div className='sm:col-span-6'>
+              <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                <div className="sm:col-span-6">
                   <label
-                    htmlFor='body'
-                    className='block text-sm font-medium text-gray-700'
+                    htmlFor="body"
+                    className="block text-sm font-medium text-gray-700"
                   >
                     {' '}
                     Body{' '}
                   </label>
-                  <div className='mt-1'>
-                    <div className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md'>
+                  <div className="mt-1">
+                    <div className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md">
                       <TextEditor
                         setFormData={setFormData}
                         formData={formData}
-                        fieldName='body'
+                        fieldName="body"
                       />
                     </div>
                   </div>
@@ -212,65 +212,65 @@ const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
             </div>
 
             <div>
-              <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
-                <div className='sm:col-span-6'>
+              <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                <div className="sm:col-span-6">
                   <label
-                    htmlFor='shortDescription'
-                    className='block text-sm font-medium text-gray-700'
+                    htmlFor="shortDescription"
+                    className="block text-sm font-medium text-gray-700"
                   >
                     {' '}
                     Short description{' '}
                   </label>
-                  <div className='mt-1'>
+                  <div className="mt-1">
                     <input
-                      type='text'
-                      name='shortDescription'
+                      type="text"
+                      name="shortDescription"
                       value={shortDescription}
                       onChange={(e) => onChange(e)}
-                      className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                      className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className='space-y-8 divide-y divide-gray-200'>
-              <div className='pt-8'>
-                <div className='grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
-                  <div className='sm:col-span-3'>
+            <div className="space-y-8 divide-y divide-gray-200">
+              <div className="pt-8">
+                <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                  <div className="sm:col-span-3">
                     <label
-                      htmlFor='failedQuizMessage'
-                      className='block text-sm font-medium text-gray-700'
+                      htmlFor="failedQuizMessage"
+                      className="block text-sm font-medium text-gray-700"
                     >
                       {' '}
                       Message for Failed Quiz{' '}
                     </label>
-                    <div className='mt-1'>
+                    <div className="mt-1">
                       <input
-                        type='text'
-                        name='failedQuizMessage'
+                        type="text"
+                        name="failedQuizMessage"
                         value={failedQuizMessage}
                         onChange={(e) => onChange(e)}
-                        className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
                   </div>
 
-                  <div className='sm:col-span-3'>
+                  <div className="sm:col-span-3">
                     <label
-                      htmlFor='waitingMinutes'
-                      className='block text-sm font-medium text-gray-700'
+                      htmlFor="waitingMinutes"
+                      className="block text-sm font-medium text-gray-700"
                     >
                       {' '}
                       Waiting Minutes{' '}
                     </label>
-                    <div className='mt-1'>
+                    <div className="mt-1">
                       <input
-                        type='number'
-                        name='waitingMinutes'
+                        type="number"
+                        name="waitingMinutes"
                         value={waitingMinutes}
                         onChange={(e) => onChange(e)}
-                        className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
                   </div>
@@ -281,32 +281,32 @@ const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
             <div>
               <div>
                 <h1
-                  id='wrong-answers-header'
-                  className='mt-6 font-xl font-bold leading-6 font-medium text-gray-900 sm:text-xl'
+                  id="wrong-answers-header"
+                  className="mt-6 font-xl font-bold leading-6 font-medium text-gray-900 sm:text-xl"
                 >
                   Wrong Answers
                 </h1>
               </div>
-              <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
-                <div className='sm:col-span-6'>
-                  <label className='block text-sm font-medium text-gray-700'>
+              <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                <div className="sm:col-span-6">
+                  <label className="block text-sm font-medium text-gray-700">
                     {' '}
                     Wrong Answer{' '}
                   </label>
-                  <div className='mt-1'>
+                  <div className="mt-1">
                     <input
-                      type='text'
-                      id='wrong-answer-field'
-                      className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                      type="text"
+                      id="wrong-answer-field"
+                      className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
                 </div>
               </div>
-              <div className='mt-6 flex justify-end mb-8'>
+              <div className="mt-6 flex justify-end mb-8">
                 <button
-                  type='button'
+                  type="button"
                   onClick={addWrongAnswer}
-                  className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
+                  className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   Add Wrong Answer
                 </button>
@@ -316,32 +316,32 @@ const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
             <div>
               <div>
                 <h1
-                  id='right-answers-header'
-                  className='mt-6 font-xl font-bold leading-6 font-medium text-gray-900 sm:text-xl'
+                  id="right-answers-header"
+                  className="mt-6 font-xl font-bold leading-6 font-medium text-gray-900 sm:text-xl"
                 >
                   Right Answers
                 </h1>
               </div>
-              <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
-                <div className='sm:col-span-6'>
-                  <label className='block text-sm font-medium text-gray-700'>
+              <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                <div className="sm:col-span-6">
+                  <label className="block text-sm font-medium text-gray-700">
                     {' '}
                     Right Answer{' '}
                   </label>
-                  <div className='mt-1'>
+                  <div className="mt-1">
                     <input
-                      type='text'
-                      id='right-answer-field'
-                      className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                      type="text"
+                      id="right-answer-field"
+                      className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
                 </div>
               </div>
-              <div className='mt-6 flex justify-end mb-8'>
+              <div className="mt-6 flex justify-end mb-8">
                 <button
-                  type='button'
+                  type="button"
                   onClick={addRightAnswer}
-                  className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
+                  className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   Add Right Answer
                 </button>
@@ -349,19 +349,19 @@ const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
             </div>
           </div>
 
-          <div className='pt-5'>
-            <div className='flex justify-end mb-8'>
+          <div className="pt-5">
+            <div className="flex justify-end mb-8">
               <Link to={`/modules/${module}`}>
                 <button
-                  type='button'
-                  className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
+                  type="button"
+                  className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   Cancel
                 </button>
               </Link>
               <button
-                type='submit'
-                className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
+                type="submit"
+                className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Save
               </button>

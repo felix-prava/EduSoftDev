@@ -127,98 +127,98 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
 
   return (
     <Fragment>
-      <div className='container mt-8'>
+      <div className="container mt-8">
         <form
-          className='space-y-8 divide-y divide-gray-200'
+          className="space-y-8 divide-y divide-gray-200"
           onSubmit={(e) => onSubmit(e)}
         >
-          <div className='space-y-8 divide-y divide-gray-200'>
+          <div className="space-y-8 divide-y divide-gray-200">
             <div>
               <div>
-                <h3 className='text-2xl font-bold leading-6 font-medium text-gray-900 sm:text-2xl'>
+                <h3 className="text-2xl font-bold leading-6 font-medium text-gray-900 sm:text-2xl">
                   Create a new problem
                 </h3>
               </div>
 
-              <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
-                <div className='sm:col-span-6'>
+              <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                <div className="sm:col-span-6">
                   <label
-                    htmlFor='name'
-                    className='block text-sm font-medium text-gray-700'
+                    htmlFor="name"
+                    className="block text-sm font-medium text-gray-700"
                   >
                     {' '}
                     What's the name of the problem?{' '}
                   </label>
-                  <div className='mt-1'>
+                  <div className="mt-1">
                     <input
-                      type='text'
-                      name='name'
+                      type="text"
+                      name="name"
                       value={name}
                       onChange={(e) => onChange(e)}
-                      className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                      className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
                 </div>
               </div>
 
-              <div className='space-y-8 divide-y divide-gray-200'>
-                <div className='pt-8'>
-                  <div className='grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
-                    <div className='sm:col-span-2'>
+              <div className="space-y-8 divide-y divide-gray-200">
+                <div className="pt-8">
+                  <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                    <div className="sm:col-span-2">
                       <label
-                        htmlFor='expNeeded'
-                        className='block text-sm font-medium text-gray-700'
+                        htmlFor="expNeeded"
+                        className="block text-sm font-medium text-gray-700"
                       >
                         {' '}
                         Experience Needed{' '}
                       </label>
-                      <div className='mt-1'>
+                      <div className="mt-1">
                         <input
-                          type='number'
-                          step='any'
-                          name='expNeeded'
+                          type="number"
+                          step="any"
+                          name="expNeeded"
                           value={expNeeded}
                           onChange={(e) => onChange(e)}
-                          className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                          className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                         />
                       </div>
                     </div>
 
-                    <div className='sm:col-span-2'>
+                    <div className="sm:col-span-2">
                       <label
-                        htmlFor='expGained'
-                        className='block text-sm font-medium text-gray-700'
+                        htmlFor="expGained"
+                        className="block text-sm font-medium text-gray-700"
                       >
                         {' '}
                         Experience Gained{' '}
                       </label>
-                      <div className='mt-1'>
+                      <div className="mt-1">
                         <input
-                          type='number'
-                          step='any'
-                          name='expGained'
+                          type="number"
+                          step="any"
+                          name="expGained"
                           value={expGained}
                           onChange={(e) => onChange(e)}
-                          className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                          className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                         />
                       </div>
                     </div>
 
-                    <div className='sm:col-span-2'>
+                    <div className="sm:col-span-2">
                       <label
-                        htmlFor='expMax'
-                        className='block text-sm font-medium text-gray-700'
+                        htmlFor="expMax"
+                        className="block text-sm font-medium text-gray-700"
                       >
                         {' '}
                         Max Experience{' '}
                       </label>
-                      <div className='mt-1'>
+                      <div className="mt-1">
                         <input
-                          type='number'
-                          name='expMax'
+                          type="number"
+                          name="expMax"
                           value={expMax}
                           onChange={(e) => onChange(e)}
-                          className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                          className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                         />
                       </div>
                     </div>
@@ -226,20 +226,20 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
                 </div>
               </div>
 
-              <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
-                <div className='sm:col-span-6'>
+              <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                <div className="sm:col-span-6">
                   <label
-                    htmlFor='body'
-                    className='block text-sm font-medium text-gray-700'
+                    htmlFor="body"
+                    className="block text-sm font-medium text-gray-700"
                   >
                     {' '}
                     Body{' '}
                   </label>
-                  <div className='mt-1'>
+                  <div className="mt-1">
                     <TextEditor
                       setFormData={setFormData}
                       formData={formData}
-                      fieldName='body'
+                      fieldName="body"
                     />
                   </div>
                 </div>
@@ -247,22 +247,22 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
             </div>
 
             <div>
-              <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
-                <div className='sm:col-span-6'>
+              <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                <div className="sm:col-span-6">
                   <label
-                    htmlFor='shortDescription'
-                    className='block text-sm font-medium text-gray-700'
+                    htmlFor="shortDescription"
+                    className="block text-sm font-medium text-gray-700"
                   >
                     {' '}
                     Short description{' '}
                   </label>
-                  <div className='mt-1'>
+                  <div className="mt-1">
                     <input
-                      type='text'
-                      name='shortDescription'
+                      type="text"
+                      name="shortDescription"
                       value={shortDescription}
                       onChange={(e) => onChange(e)}
-                      className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                      className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
                 </div>
@@ -272,66 +272,66 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
             <div>
               <div>
                 <h1
-                  id='tests-header'
-                  className='mt-6 font-xl font-bold leading-6 font-medium text-gray-900 sm:text-xl'
+                  id="tests-header"
+                  className="mt-6 font-xl font-bold leading-6 font-medium text-gray-900 sm:text-xl"
                 >
                   Tests
                 </h1>
               </div>
-              <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-7'>
-                <div className='sm:col-span-3'>
+              <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-7">
+                <div className="sm:col-span-3">
                   <label
-                    htmlFor='testInput'
-                    className='block text-sm font-medium text-gray-700'
+                    htmlFor="testInput"
+                    className="block text-sm font-medium text-gray-700"
                   >
                     {' '}
                     Input{' '}
                   </label>
-                  <div className='mt-1'>
+                  <div className="mt-1">
                     <textarea
-                      type='text'
-                      id='test-input-field'
-                      className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                      type="text"
+                      id="test-input-field"
+                      className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
                 </div>
 
-                <div className='sm:col-span-3'>
+                <div className="sm:col-span-3">
                   <label
-                    htmlFor='testOutput'
-                    className='block text-sm font-medium text-gray-700'
+                    htmlFor="testOutput"
+                    className="block text-sm font-medium text-gray-700"
                   >
                     {' '}
                     Output{' '}
                   </label>
-                  <div className='mt-1'>
+                  <div className="mt-1">
                     <textarea
-                      type='text'
-                      id='test-output-field'
-                      className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                      type="text"
+                      id="test-output-field"
+                      className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
                 </div>
 
-                <div className='sm:col-span-1'>
-                  <label className='block text-sm font-medium text-gray-700'>
+                <div className="sm:col-span-1">
+                  <label className="block text-sm font-medium text-gray-700">
                     Show Test
                   </label>
-                  <div className='mt-1'>
+                  <div className="mt-1">
                     <input
-                      aria-describedby='comments-description'
-                      id='show-test-checkbox'
-                      type='checkbox'
-                      className='focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded'
+                      aria-describedby="comments-description"
+                      id="show-test-checkbox"
+                      type="checkbox"
+                      className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                     />
                   </div>
                 </div>
               </div>
-              <div className='mt-6 flex justify-end mb-8'>
+              <div className="mt-6 flex justify-end mb-8">
                 <button
-                  type='button'
+                  type="button"
                   onClick={addTest}
-                  className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
+                  className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   Add Test
                 </button>
@@ -341,52 +341,52 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
             <div>
               <div>
                 <h1
-                  id='examples-header'
-                  className='mt-6 font-xl font-bold leading-6 font-medium text-gray-900 sm:text-xl'
+                  id="examples-header"
+                  className="mt-6 font-xl font-bold leading-6 font-medium text-gray-900 sm:text-xl"
                 >
                   Examples
                 </h1>
               </div>
-              <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
-                <div className='sm:col-span-3'>
+              <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                <div className="sm:col-span-3">
                   <label
-                    htmlFor='exampleInput'
-                    className='block text-sm font-medium text-gray-700'
+                    htmlFor="exampleInput"
+                    className="block text-sm font-medium text-gray-700"
                   >
                     {' '}
                     Input{' '}
                   </label>
-                  <div className='mt-1'>
+                  <div className="mt-1">
                     <textarea
-                      type='text'
-                      id='example-input-field'
-                      className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                      type="text"
+                      id="example-input-field"
+                      className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
                 </div>
 
-                <div className='sm:col-span-3'>
+                <div className="sm:col-span-3">
                   <label
-                    htmlFor='exampleOutput'
-                    className='block text-sm font-medium text-gray-700'
+                    htmlFor="exampleOutput"
+                    className="block text-sm font-medium text-gray-700"
                   >
                     {' '}
                     Output{' '}
                   </label>
-                  <div className='mt-1'>
+                  <div className="mt-1">
                     <textarea
-                      type='text'
-                      id='example-output-field'
-                      className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                      type="text"
+                      id="example-output-field"
+                      className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
                 </div>
               </div>
-              <div className='mt-6 flex justify-end mb-8'>
+              <div className="mt-6 flex justify-end mb-8">
                 <button
-                  type='button'
+                  type="button"
                   onClick={addExample}
-                  className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
+                  className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   Add Example
                 </button>
@@ -396,35 +396,35 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
             <div>
               <div>
                 <h1
-                  id='hints-header'
-                  className='mt-6 font-xl font-bold leading-6 font-medium text-gray-900 sm:text-xl'
+                  id="hints-header"
+                  className="mt-6 font-xl font-bold leading-6 font-medium text-gray-900 sm:text-xl"
                 >
                   Hints
                 </h1>
               </div>
-              <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
-                <div className='sm:col-span-6'>
+              <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                <div className="sm:col-span-6">
                   <label
-                    htmlFor='hint'
-                    className='block text-sm font-medium text-gray-700'
+                    htmlFor="hint"
+                    className="block text-sm font-medium text-gray-700"
                   >
                     {' '}
                     Hint{' '}
                   </label>
-                  <div className='mt-1'>
+                  <div className="mt-1">
                     <input
-                      type='text'
-                      id='hint-field'
-                      className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
+                      type="text"
+                      id="hint-field"
+                      className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
                 </div>
               </div>
-              <div className='mt-6 flex justify-end mb-8'>
+              <div className="mt-6 flex justify-end mb-8">
                 <button
-                  type='button'
+                  type="button"
                   onClick={addHint}
-                  className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
+                  className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   Add Hint
                 </button>
@@ -432,19 +432,19 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
             </div>
           </div>
 
-          <div className='pt-5'>
-            <div className='flex justify-end mb-8'>
+          <div className="pt-5">
+            <div className="flex justify-end mb-8">
               <Link to={`/modules/${module}`}>
                 <button
-                  type='button'
-                  className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
+                  type="button"
+                  className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   Cancel
                 </button>
               </Link>
               <button
-                type='submit'
-                className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
+                type="submit"
+                className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Save
               </button>

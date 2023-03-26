@@ -300,7 +300,7 @@ const UserProfile = ({
                       />
                     )}
                   </div>
-                  {profile.githubUsername && (
+                  {profile && profile.githubUsername && (
                     <div className='space-y-5 sm:space-y-4 mb-6'>
                       <h2 className='text-3xl font-extrabold tracking-tight sm:text-4xl'>
                         Github Repos
