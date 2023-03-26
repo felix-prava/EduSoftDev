@@ -6,6 +6,7 @@ import Spinner from '../layout/Spinner';
 import { getCurrentUserProfile } from '../../actions/profile';
 import Experience from './Experience';
 import Education from './Education';
+import GithubRepos from './GithubRepos';
 
 const MyProfile = ({
   getCurrentUserProfile,
@@ -333,6 +334,14 @@ const MyProfile = ({
                       />
                     )}
                   </div>
+                  {profile.githubUsername && (
+                    <div className='space-y-5 sm:space-y-4 mb-6'>
+                      <h2 className='text-3xl font-extrabold tracking-tight sm:text-4xl'>
+                        Github Repos
+                      </h2>
+                      <GithubRepos username={profile.githubUsername} />
+                    </div>
+                  )}
                 </Fragment>
               )}
             </div>
