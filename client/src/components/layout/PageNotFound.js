@@ -1,8 +1,11 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const PageNotFound = ({}) => {
   const randomNum = Math.random();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const redirectPath = isAuthenticated ? '/home' : '/';
 
   const renderDiv = () => {
     if (randomNum < 0.5) {
@@ -32,7 +35,7 @@ const PageNotFound = ({}) => {
                 </p>
                 <div className='mt-10'>
                   <Link
-                    to='/'
+                    to={redirectPath}
                     className='text-sm font-semibold leading-7 text-indigo-600'
                   >
                     <span aria-hidden='true'>&larr;</span> Back to home
@@ -94,7 +97,7 @@ const PageNotFound = ({}) => {
               </p>
               <div className='mt-10 flex justify-center'>
                 <Link
-                  to='/'
+                  to={redirectPath}
                   className='text-sm font-semibold leading-7 text-white'
                 >
                   <span aria-hidden='true'>&larr;</span> Back to home
