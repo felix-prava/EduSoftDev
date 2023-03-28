@@ -53,9 +53,9 @@ const TextEditor = forwardRef(
       <Fragment>
         <Editor
           editorState={state}
-          toolbarClassName="toolbarClassName"
-          wrapperClassName="wrapperClassName"
-          editorClassName="editorClassName"
+          toolbarClassName='toolbarClassName'
+          wrapperClassName='wrapperClassName'
+          editorClassName='editorClassName'
           onEditorStateChange={onEditorStateChange}
           // toolbar={{ image: { uploadCallback: uploadCallback } }}
         />
