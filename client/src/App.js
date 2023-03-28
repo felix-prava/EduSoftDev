@@ -287,7 +287,7 @@ const App = () => {
             />
 
             {/* Page not Found */}
-            <Route exact path='/:anything' element={<PageNotFound />} />
+            <Route exact path='*' element={<PageNotFound />} />
           </Fragment>
         </Routes>
       </Router>

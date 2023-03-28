@@ -21,9 +21,11 @@ const MyProfile = ({
     return <Spinner />;
   }
 
-  const solvedProblems = (user.solvedProblems && user.solvedProblems.length) || 0
-  const lessonsLearned = (user.lessonsLearned && user.lessonsLearned.length) || 0
-  const solvedQuizzes  = (user.solvedQuizzes && user.solvedQuizzes.length) || 0
+  const solvedProblems =
+    (user.solvedProblems && user.solvedProblems.length) || 0;
+  const lessonsLearned =
+    (user.lessonsLearned && user.lessonsLearned.length) || 0;
+  const solvedQuizzes = (user.solvedQuizzes && user.solvedQuizzes.length) || 0;
 
   return (
     <Fragment>
@@ -175,19 +177,19 @@ const MyProfile = ({
                           <div className='mt-6 flex'>
                             <div className='flex-shrink-0 text-gray-600 hover:text-gray-800'>
                               <svg
-                                  xmlns='http://www.w3.org/2000/svg'
-                                  className='h-6 w-6'
-                                  fill='none'
-                                  viewBox='0 0 24 24'
-                                  stroke='currentColor'
-                                  strokeWidth='2'
-                                >
-                                  <path
-                                    strokeLinecap='round'
-                                    strokeLinejoin='round'
-                                    d='M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z'
-                                  />
-                                </svg>
+                                xmlns='http://www.w3.org/2000/svg'
+                                className='h-6 w-6'
+                                fill='none'
+                                viewBox='0 0 24 24'
+                                stroke='currentColor'
+                                strokeWidth='2'
+                              >
+                                <path
+                                  strokeLinecap='round'
+                                  strokeLinejoin='round'
+                                  d='M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z'
+                                />
+                              </svg>
                             </div>
                             <div className='ml-3 text-base text-gray-500 hover:text-gray-700'>
                               <p>{user.exp} exp points</p>
@@ -334,7 +336,7 @@ const MyProfile = ({
                       />
                     )}
                   </div>
-                  {profile.githubUsername && (
+                  {profile && profile.githubUsername && (
                     <div className='space-y-5 sm:space-y-4 mb-6'>
                       <h2 className='text-3xl font-extrabold tracking-tight sm:text-4xl'>
                         Github Repos

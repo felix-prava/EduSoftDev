@@ -19,8 +19,7 @@ const CreateLesson = ({ addLearningMaterial }) => {
     shortDescription: '',
   });
 
-  const { name, expNeeded, expGained, expMax, shortDescription } =
-    formData;
+  const { name, expNeeded, expGained, expMax, shortDescription } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });

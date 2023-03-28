@@ -1,3 +1,11 @@
+.rich-text-body p:not(:empty) {
+  margin: 1em 0;
+}
+
+.rich-text-body p:empty {
+  margin: 3em 0;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

@@ -76,11 +76,11 @@ router.post(
       user.password = await bcrypt.hash(password, salt);
 
       await user.save();
-      
+
       // Create an empty profile
-      let profileFields = {}
+      let profileFields = {};
       profileFields.user = user.id;
-      profileFields.social = {}
+      profileFields.social = {};
       profile = new Profile(profileFields);
       await profile.save();
 
