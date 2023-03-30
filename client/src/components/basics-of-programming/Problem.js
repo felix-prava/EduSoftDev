@@ -3,7 +3,8 @@ import { Link, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
-import { getLearningMaterial } from '../../actions/learning';
+import { getLearningMaterial, solveProblem } from '../../actions/learning';
+import { setAlert } from '../../actions/alert';
 
 function toggleHint(hintId, index) {
   let downArrow = document.getElementById(`down-arrow-${hintId}`);
@@ -20,8 +21,10 @@ function toggleHint(hintId, index) {
 }
 
 const Problem = ({
-  getLearningMaterial,
   learning: { learningMaterial, loading },
+  getLearningMaterial,
+  solveProblem,
+  setAlert,
 }) => {
   const { module, problemId } = useParams();
 
@@ -161,6 +164,15 @@ const Problem = ({
             </Link>
             <button
               type='button'
+              onClick={() => {
+                let solutionBody =
+                  document.getElementById('solution-body').value;
+                if (solutionBody === '') {
+                  setAlert("You can't send an empty solution", 'error');
+                  return;
+                }
+                solveProblem(problemId, solutionBody);
+              }}
               className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
             >
               Send Solution
@@ -175,6 +187,8 @@ const Problem = ({
 Problem.propTypes = {
   learning: PropTypes.object.isRequired,
   getLearningMaterial: PropTypes.func.isRequired,
+  solveProblem: PropTypes.func.isRequired,
+  setAlert: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -183,4 +197,6 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   getLearningMaterial,
+  solveProblem,
+  setAlert,
 })(Problem);
