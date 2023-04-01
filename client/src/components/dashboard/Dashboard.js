@@ -1,10 +1,15 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
+import { getUserSolutions } from '../../actions/solution';
 
-const Dashboard = ({ auth: { user, loading } }) => {
+const Dashboard = ({ auth: { user, loading }, getUserSolutions }) => {
+  useEffect(() => {
+    getUserSolutions(user._id);
+  }, [getUserSolutions]);
+
   return loading || user === null ? (
     <Spinner />
   ) : (
@@ -370,6 +375,7 @@ Dashboard.propTypes = {
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  getUserSolutions: PropTypes.func.isRequired,
 });
 
-export default connect(mapStateToProps)(Dashboard);
+export default connect(mapStateToProps, { getUserSolutions })(Dashboard);

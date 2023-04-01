@@ -42,4 +42,24 @@ router.post(
   }
 );
 
+// @route   GET /api/solutions/users/:user_id
+// @desc    Get a user's solutions
+// @access  Private
+router.get('/users/:user_id', async (req, res) => {
+  try {
+    const solutions = await Solution.find({
+      user: req.params.user_id,
+    }).populate('problem', 'name');
+    res.json(solutions);
+  } catch (err) {
+    if (err.kind == 'ObjectId') {
+      return res
+        .status(404)
+        .json({ msg: 'No solutions found for this user_id' });
+    }
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 module.exports = router;

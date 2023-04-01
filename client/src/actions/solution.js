@@ -4,7 +4,7 @@ import { GET_USER_SOLUTIONS, SOLUTION_ERROR } from './types';
 // Get user solutions
 export const getUserSolutions = (userId) => async (dispatch) => {
   try {
-    const res = await axios.get(`/api/solutions/${userId}`);
+    const res = await axios.get(`/api/solutions/users/${userId}`);
 
     dispatch({
       type: GET_USER_SOLUTIONS,
@@ -13,7 +13,7 @@ export const getUserSolutions = (userId) => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: SOLUTION_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
+      payload: { msg: err.response.data.msg, status: err.response.status },
     });
   }
 };
