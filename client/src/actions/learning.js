@@ -387,7 +387,7 @@ export const solveProblem = (problemId, solution) => async (dispatch) => {
 
   try {
     await axios.post(
-      `/api/learning-materials/solutions/${problemId}/add-solution`,
+      `/api/solutions/${problemId}/add-solution`,
       { code: solution },
       config
     );

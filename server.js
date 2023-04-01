@@ -28,10 +28,7 @@ app.use(
   '/api/learning-materials/quizzes',
   require('./routes/api/learning_materials/quizzes')
 );
-app.use(
-  '/api/learning-materials/solutions',
-  require('./routes/api/learning_materials/solutions')
-);
+app.use('/api/solutions', require('./routes/api/solutions'));
 app.use('/api/learning-materials', require('./routes/api/learningMaterials'));
 
 const PORT = process.env.PORT || 3200;

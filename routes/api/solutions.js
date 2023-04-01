@@ -1,13 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const auth = require('../../../middleware/auth');
-const checkRole = require('../../../middleware/checkRole');
+const auth = require('../../middleware/auth');
 const { check, validationResult } = require('express-validator');
 
-const LearningMaterial = require('../../../models/LearningMaterial');
-const Solution = require('../../../models/Solution');
+const LearningMaterial = require('../../models/LearningMaterial');
+const Solution = require('../../models/Solution');
 
-// @route   POST /api/learning-materials/solutions/:problem_id/add-solution
+// @route   POST /api/solutions/:problem_id/add-solution
 // @desc    Add a solution to a problem
 // @access  Private
 router.post(
