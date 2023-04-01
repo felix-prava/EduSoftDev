@@ -2,15 +2,22 @@ import React, { Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import NormalSolutionItem from '../solutions/NormalSolutionItem';
+import SmallSolutionItem from '../solutions/SmallSolutionItem';
 import Spinner from '../layout/Spinner';
 import { getUserSolutions } from '../../actions/solution';
 
-const Dashboard = ({ auth: { user, loading }, getUserSolutions }) => {
+const Dashboard = ({
+  auth: { user, loading },
+  solution: { solutions, loading: solutionsLoading },
+  getUserSolutions,
+}) => {
   useEffect(() => {
-    getUserSolutions(user._id);
-  }, [getUserSolutions]);
+    getUserSolutions(user && user._id);
+  }, [user, getUserSolutions]);
 
-  return loading || user === null ? (
+  console.log(solutions);
+  return loading || solutionsLoading || user === null ? (
     <Spinner />
   ) : (
     <Fragment>
@@ -240,59 +247,9 @@ const Dashboard = ({ auth: { user, loading }, getUserSolutions }) => {
               {/* Activity list (smallest breakpoint only) */}
               <div className='shadow sm:hidden'>
                 <ul className='mt-2 divide-y divide-gray-200 overflow-hidden shadow sm:hidden'>
-                  <li>
-                    <Link
-                      to='#'
-                      className='block px-4 py-4 bg-white hover:bg-gray-50'
-                    >
-                      <span className='flex items-center space-x-4'>
-                        <span className='flex-1 flex space-x-2 truncate'>
-                          {/* Heroicon name: solid/cash */}
-                          <svg
-                            className='flex-shrink-0 h-5 w-5 text-gray-400'
-                            xmlns='http://www.w3.org/2000/svg'
-                            viewBox='0 0 20 20'
-                            fill='currentColor'
-                            aria-hidden='true'
-                          >
-                            <path
-                              fillRule='evenodd'
-                              d='M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z'
-                              clipRule='evenodd'
-                            />
-                          </svg>
-                          <span className='flex flex-col text-gray-500 text-sm truncate'>
-                            <span className='truncate'>
-                              Add 2 numbers and display their sum
-                            </span>
-                            <span className='py-2'>
-                              <span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 capitalize'>
-                                {' '}
-                                success{' '}
-                              </span>
-                            </span>
-                            <time dateTime='2020-07-11'>July 11, 2022</time>
-                          </span>
-                        </span>
-                        {/* Heroicon name: solid/chevron-right */}
-                        <svg
-                          className='flex-shrink-0 h-5 w-5 text-gray-400'
-                          xmlns='http://www.w3.org/2000/svg'
-                          viewBox='0 0 20 20'
-                          fill='currentColor'
-                          aria-hidden='true'
-                        >
-                          <path
-                            fillRule='evenodd'
-                            d='M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z'
-                            clipRule='evenodd'
-                          />
-                        </svg>
-                      </span>
-                    </Link>
-                  </li>
-
-                  {/* More transactions... */}
+                  {solutions.map((solution) => (
+                    <SmallSolutionItem key={solution._id} solution={solution} />
+                  ))}
                 </ul>
               </div>
 
@@ -307,8 +264,11 @@ const Dashboard = ({ auth: { user, loading }, getUserSolutions }) => {
                             <th className='px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
                               Problem
                             </th>
-                            <th className='hidden px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider md:block'>
+                            <th className='px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
                               Status
+                            </th>
+                            <th className='px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+                              Score
                             </th>
                             <th className='px-6 py-3 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider'>
                               Date
@@ -316,45 +276,12 @@ const Dashboard = ({ auth: { user, loading }, getUserSolutions }) => {
                           </tr>
                         </thead>
                         <tbody className='bg-white divide-y divide-gray-200'>
-                          <tr className='bg-white'>
-                            <td className='max-w-0 w-full px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-                              <div className='flex'>
-                                <Link
-                                  to='#'
-                                  className='group inline-flex space-x-2 truncate text-sm'
-                                >
-                                  {/* Heroicon name: solid/cash */}
-                                  <svg
-                                    className='flex-shrink-0 h-5 w-5 text-gray-400 group-hover:text-gray-500'
-                                    xmlns='http://www.w3.org/2000/svg'
-                                    viewBox='0 0 20 20'
-                                    fill='currentColor'
-                                    aria-hidden='true'
-                                  >
-                                    <path
-                                      fillRule='evenodd'
-                                      d='M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z'
-                                      clipRule='evenodd'
-                                    />
-                                  </svg>
-                                  <p className='text-gray-500 truncate group-hover:text-gray-900'>
-                                    Add 2 numbers and display their sum
-                                  </p>
-                                </Link>
-                              </div>
-                            </td>
-                            <td className='hidden px-6 py-4 whitespace-nowrap text-sm text-gray-500 md:block'>
-                              <span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 capitalize'>
-                                {' '}
-                                success{' '}
-                              </span>
-                            </td>
-                            <td className='px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500'>
-                              <time dateTime='2020-07-11'>July 11, 2022</time>
-                            </td>
-                          </tr>
-
-                          {/* More transactions... */}
+                          {solutions.map((solution) => (
+                            <NormalSolutionItem
+                              key={solution._id}
+                              solution={solution}
+                            />
+                          ))}
                         </tbody>
                       </table>
                     </div>
@@ -371,10 +298,12 @@ const Dashboard = ({ auth: { user, loading }, getUserSolutions }) => {
 
 Dashboard.propTypes = {
   auth: PropTypes.object.isRequired,
+  solution: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  solution: state.solution,
   getUserSolutions: PropTypes.func.isRequired,
 });
 
