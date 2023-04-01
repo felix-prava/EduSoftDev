@@ -61,7 +61,7 @@ const Quiz = ({
           <div className='space-y-8 divide-y divide-gray-200 sm:space-y-5'>
             <div className='divide-y divide-gray-200 pt-8 space-y-6 sm:pt-10 sm:space-y-5'>
               <div
-                className='mt-10 text-base'
+                className='mt-10 text-base rich-text-body'
                 dangerouslySetInnerHTML={{
                   __html: learningMaterial.body,
                 }}

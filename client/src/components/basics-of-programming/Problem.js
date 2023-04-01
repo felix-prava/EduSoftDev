@@ -39,7 +39,7 @@ const Problem = ({
             {learningMaterial.name}
           </h2>
           <div
-            className='mt-10 text-base'
+            className='mt-10 text-base rich-text-body'
             dangerouslySetInnerHTML={{
               __html: learningMaterial.body,
             }}

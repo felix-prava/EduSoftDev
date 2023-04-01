@@ -69,7 +69,7 @@ const Article = ({
             {article.subject}
           </h2>
           <div
-            className='mt-10 text-base'
+            className='mt-10 text-base rich-text-body'
             dangerouslySetInnerHTML={{
               __html: article.body,
             }}

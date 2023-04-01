@@ -34,80 +34,78 @@ router.get('/me', auth, async (req, res) => {
 // @route   POST /api/profiles/:user_id
 // @desc    Update a user's profile
 // @access  Private
-router.post(
-  '/:user_id', auth, async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
+router.post('/:user_id', auth, async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
 
-    try {
-      const userExists = await User.exists({ _id: req.params.user_id });
-      if (!userExists) {
-        return res.status(400).send('User does not exists');
-      }
-    } catch {
+  try {
+    const userExists = await User.exists({ _id: req.params.user_id });
+    if (!userExists) {
       return res.status(400).send('User does not exists');
     }
+  } catch {
+    return res.status(400).send('User does not exists');
+  }
 
-    const checkStatus = await compareUsers(req.user.id, req.params.user_id);
-    if (checkStatus == 401 || checkStatus == 500)
-      return res
-        .status(checkStatus)
-        .json({ msg: checkStatus == 401 ? 'Unauthorized' : 'Server Error' });
+  const checkStatus = await compareUsers(req.user.id, req.params.user_id);
+  if (checkStatus == 401 || checkStatus == 500)
+    return res
+      .status(checkStatus)
+      .json({ msg: checkStatus == 401 ? 'Unauthorized' : 'Server Error' });
 
-    const {
-      status,
-      bio,
-      githubUsername,
-      linkedin,
-      youtube,
-      facebook,
-      instagram,
-      twitter,
-    } = req.body;
+  const {
+    status,
+    bio,
+    githubUsername,
+    linkedin,
+    youtube,
+    facebook,
+    instagram,
+    twitter,
+  } = req.body;
 
-    // Build profile objects
-    let profileFields = {};
-    profileFields.user = req.params.user_id;
-    if (status) profileFields.status = status;
-    if (bio) profileFields.bio = bio;
-    if (githubUsername) profileFields.githubUsername = githubUsername;
-    /* if (skills) {
+  // Build profile objects
+  let profileFields = {};
+  profileFields.user = req.params.user_id;
+  if (status) profileFields.status = status;
+  if (bio) profileFields.bio = bio;
+  if (githubUsername) profileFields.githubUsername = githubUsername;
+  /* if (skills) {
       profileFields.skills = skills.split(',').map((skill) => skill.trim());
     } */
 
-    // Build social object
-    profileFields.social = {};
-    if (linkedin) profileFields.social.linkedin = linkedin;
-    if (youtube) profileFields.social.youtube = youtube;
-    if (facebook) profileFields.social.facebook = facebook;
-    if (instagram) profileFields.social.instagram = instagram;
-    if (twitter) profileFields.social.twitter = twitter;
+  // Build social object
+  profileFields.social = {};
+  if (linkedin) profileFields.social.linkedin = linkedin;
+  if (youtube) profileFields.social.youtube = youtube;
+  if (facebook) profileFields.social.facebook = facebook;
+  if (instagram) profileFields.social.instagram = instagram;
+  if (twitter) profileFields.social.twitter = twitter;
 
-    try {
-      let profile = await Profile.findOne({ user: req.params.user_id });
+  try {
+    let profile = await Profile.findOne({ user: req.params.user_id });
 
-      if (profile) {
-        profileFields.date = profile.date;
-        profileFields.experience = profile.experience;
-        profileFields.education = profile.education;
-        // Update profile
-        profile = await Profile.findOneAndReplace(
-          { user: req.params.user_id },
-          profileFields,
-          { new: true } // return the document after update was applied
-        );
+    if (profile) {
+      profileFields.date = profile.date;
+      profileFields.experience = profile.experience;
+      profileFields.education = profile.education;
+      // Update profile
+      profile = await Profile.findOneAndReplace(
+        { user: req.params.user_id },
+        profileFields,
+        { new: true } // return the document after update was applied
+      );
 
-        return res.json(profile);
-      }
-      res.json(profile);
-    } catch (err) {
-      console.error(err.message);
-      res.status(500).send('Server Error');
+      return res.json(profile);
     }
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
   }
-);
+});
 
 // @route   GET /api/profiles
 // @desc    Get all profiles
