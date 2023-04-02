@@ -17,7 +17,7 @@ const NormalSolutionItem = ({
         <td className='max-w-0 w-full px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
           <div className='flex'>
             <Link
-              to='#'
+              to={`/${problem.module}/problems/${problem._id}`}
               className='group inline-flex space-x-2 truncate text-sm'
             >
               {/* Heroicon name: solid/cash */}
@@ -41,22 +41,32 @@ const NormalSolutionItem = ({
           </div>
         </td>
         <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-          <span
-            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusClassColour(
-              status
-            )} capitalize`}
+          <Link
+            to={`/solutions/${_id}`}
+            className='group inline-flex space-x-2 truncate text-sm'
           >
-            {status}
-          </span>
+            <span
+              className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusClassColour(
+                status
+              )} capitalize`}
+            >
+              {status}
+            </span>
+          </Link>
         </td>
         <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-          <span
-            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${scoreClassColour(
-              score
-            )} capitalize`}
+          <Link
+            to={`/solutions/${_id}`}
+            className='group inline-flex space-x-2 truncate text-sm'
           >
-            {score}
-          </span>
+            <span
+              className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${scoreClassColour(
+                score
+              )} capitalize`}
+            >
+              {score}
+            </span>
+          </Link>
         </td>
         <td className='px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500'>
           <time dateTime={date}> {displayDate(date)}</time>

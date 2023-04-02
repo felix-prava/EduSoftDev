@@ -8,7 +8,7 @@ const SmallSolutionItem = ({ solution: { _id, problem, status, date } }) => {
   return (
     <Fragment>
       <li id={_id}>
-        <Link to='#' className='block px-4 py-4 bg-white hover:bg-gray-50'>
+        <div className='block px-4 py-4 bg-white hover:bg-gray-50'>
           <span className='flex items-center space-x-4'>
             <span className='flex-1 flex space-x-2 truncate'>
               <svg
@@ -25,15 +25,22 @@ const SmallSolutionItem = ({ solution: { _id, problem, status, date } }) => {
                 />
               </svg>
               <span className='flex flex-col text-gray-500 text-sm truncate'>
-                <span className='truncate'>{problem.name}</span>
+                <Link to={`/${problem.module}/problems/${problem._id}`}>
+                  <span className='truncate'>{problem.name}</span>
+                </Link>
                 <span className='py-2'>
-                  <span
-                    className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusClassColour(
-                      status
-                    )} capitalize`}
+                  <Link
+                    to={`/solutions/${_id}`}
+                    className='group inline-flex space-x-2 truncate text-sm'
                   >
-                    {status}
-                  </span>
+                    <span
+                      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusClassColour(
+                        status
+                      )} capitalize`}
+                    >
+                      {status}
+                    </span>
+                  </Link>
                 </span>
                 <time dateTime={date}> {displayDate(date)}</time>
               </span>
@@ -52,7 +59,7 @@ const SmallSolutionItem = ({ solution: { _id, problem, status, date } }) => {
               />
             </svg>
           </span>
-        </Link>
+        </div>
       </li>
     </Fragment>
   );

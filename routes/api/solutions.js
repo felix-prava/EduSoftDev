@@ -50,7 +50,7 @@ router.get('/users/:user_id', async (req, res) => {
     const solutions = await Solution.find({
       user: req.params.user_id,
     })
-      .populate('problem', 'name')
+      .populate('problem', ['name', 'module'])
       .sort({ date: -1 })
       .limit(100);
     res.json(solutions);

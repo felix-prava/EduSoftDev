@@ -51,7 +51,7 @@ const Quiz = ({
     <Spinner />
   ) : (
     <Fragment>
-      <div className='container mt-10 ml-4'>
+      <div className='container mt-10'>
         <div className='mt-2 block'>
           <h2 className='text-3xl text-center tracking-tight font-extrabold text-gray-900 sm:text-4xl'>
             {learningMaterial.name}
