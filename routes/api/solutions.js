@@ -49,7 +49,10 @@ router.get('/users/:user_id', async (req, res) => {
   try {
     const solutions = await Solution.find({
       user: req.params.user_id,
-    }).populate('problem', 'name');
+    })
+      .populate('problem', 'name')
+      .sort({ date: -1 })
+      .limit(100);
     res.json(solutions);
   } catch (err) {
     if (err.kind == 'ObjectId') {
