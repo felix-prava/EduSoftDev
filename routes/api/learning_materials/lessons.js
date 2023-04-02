@@ -110,11 +110,11 @@ router.post('/:lesson_id/lesson-learned', auth, async (req, res) => {
     if (
       !(
         lesson.solvingUsers.filter(
-          (solving_user) => solving_user.user.toString() === req.user.id
+          (solving_user) => solving_user.toString() === req.user.id
         ).length > 0
       )
     ) {
-      lesson.solvingUsers.unshift({ user: req.user.id });
+      lesson.solvingUsers.unshift(req.user.id);
     }
 
     await user.save();

@@ -164,20 +164,20 @@ router.post('/:quiz_id/quiz-solved', auth, async (req, res) => {
       )
     ) {
       user.solvedQuizzes.unshift({ quiz: req.params.quiz_id });
-      const maxExp = quiz.expMax
-      const gainedExp = user.exp + quiz.expGained
-      user.exp = (gainedExp > maxExp ? maxExp : gainedExp)
+      const maxExp = quiz.expMax;
+      const gainedExp = user.exp + quiz.expGained;
+      user.exp = gainedExp > maxExp ? maxExp : gainedExp;
     }
 
     // Check if the quiz has already been solved by the user
     if (
       !(
         quiz.solvingUsers.filter(
-          (solving_user) => solving_user.user.toString() === req.user.id
+          (solving_user) => solving_user.toString() === req.user.id
         ).length > 0
       )
     ) {
-      quiz.solvingUsers.unshift({ user: req.user.id });
+      quiz.solvingUsers.unshift(req.user.id);
     }
 
     await user.save();
