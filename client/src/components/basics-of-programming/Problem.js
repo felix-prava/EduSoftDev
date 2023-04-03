@@ -3,7 +3,8 @@ import { Link, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
-import { getLearningMaterial } from '../../actions/learning';
+import { getLearningMaterial, solveProblem } from '../../actions/learning';
+import { setAlert } from '../../actions/alert';
 
 function toggleHint(hintId, index) {
   let downArrow = document.getElementById(`down-arrow-${hintId}`);
@@ -20,8 +21,10 @@ function toggleHint(hintId, index) {
 }
 
 const Problem = ({
-  getLearningMaterial,
   learning: { learningMaterial, loading },
+  getLearningMaterial,
+  solveProblem,
+  setAlert,
 }) => {
   const { module, problemId } = useParams();
 
@@ -33,7 +36,7 @@ const Problem = ({
     <Spinner />
   ) : (
     <Fragment>
-      <div className='container mt-10 ml-4'>
+      <div className='container mt-10'>
         <div className='mt-2 block'>
           <h2 className='text-3xl text-center tracking-tight font-extrabold text-gray-900 sm:text-4xl'>
             {learningMaterial.name}
@@ -74,7 +77,7 @@ const Problem = ({
         </div>
 
         <div className='mt-16 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
-          <div className='sm:col-span-6'>
+          <div className='sm:col-span-6 mr-4'>
             <label className='block text-sm font-medium text-gray-700'>
               {' '}
               Add Your Solution{' '}
@@ -161,7 +164,16 @@ const Problem = ({
             </Link>
             <button
               type='button'
-              className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
+              onClick={() => {
+                let solutionBody =
+                  document.getElementById('solution-body').value;
+                if (solutionBody === '') {
+                  setAlert("You can't send an empty solution", 'error');
+                  return;
+                }
+                solveProblem(problemId, solutionBody);
+              }}
+              className='ml-3 mr-2 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
             >
               Send Solution
             </button>
@@ -175,6 +187,8 @@ const Problem = ({
 Problem.propTypes = {
   learning: PropTypes.object.isRequired,
   getLearningMaterial: PropTypes.func.isRequired,
+  solveProblem: PropTypes.func.isRequired,
+  setAlert: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -183,4 +197,6 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   getLearningMaterial,
+  solveProblem,
+  setAlert,
 })(Problem);

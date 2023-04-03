@@ -36,7 +36,7 @@ export const getAllMaterials = (moduleName) => async (dispatch) => {
   }
 };
 
-// Get problems, quizzes and lessons by module
+// Get problem, quiz or lessons by id
 export const getLearningMaterial = (learningMaterialId) => async (dispatch) => {
   try {
     const res = await axios.get(
@@ -369,6 +369,32 @@ export const solveQuiz = (quizId, answers) => async (dispatch) => {
     dispatch(setAlert('Quiz Completed', 'success', 3000, false));
     dispatch(loadUser());
     // TODO MAYBE update solvingUsers for this quiz
+  } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'error')));
+    }
+  }
+};
+
+// User solves a problem
+export const solveProblem = (problemId, solution) => async (dispatch) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+    await axios.post(
+      `/api/solutions/${problemId}/add-solution`,
+      { code: solution },
+      config
+    );
+
+    dispatch(setAlert('Solution Added', 'success', 3000, false));
+    dispatch(loadUser());
+    // TODO MAYBE update solvingUsers for this problem
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
