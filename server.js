@@ -9,7 +9,7 @@ connectDB();
 // Init Middleware
 app.use(express.json({ extended: false }));
 
-app.get('/', (req, res) => res.send('API Running..'));
+app.get('/', (_, res) => res.send('API Running..'));
 
 // Define routes
 app.use('/api/users', require('./routes/api/users'));
@@ -28,6 +28,7 @@ app.use(
   '/api/learning-materials/quizzes',
   require('./routes/api/learning_materials/quizzes')
 );
+app.use('/api/solutions', require('./routes/api/solutions'));
 app.use('/api/learning-materials', require('./routes/api/learningMaterials'));
 
 const PORT = process.env.PORT || 3200;

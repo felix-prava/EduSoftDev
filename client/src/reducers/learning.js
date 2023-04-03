@@ -31,6 +31,7 @@ export default function LearningMaterialsReducer(state = initialState, action) {
         ...state,
         learningMaterial: payload,
         loading: false,
+        error: {},
       };
     case GET_MODULE_PROBLEMS:
       return {
@@ -38,6 +39,7 @@ export default function LearningMaterialsReducer(state = initialState, action) {
         learningMaterial: null,
         problems: payload,
         loading: false,
+        error: {},
       };
     case DELETE_LEARNING_MATERIAL:
       return {
@@ -46,6 +48,7 @@ export default function LearningMaterialsReducer(state = initialState, action) {
           (learningMaterial) => learningMaterial._id !== payload
         ),
         loading: false,
+        error: {},
       };
     case ADD_TEST:
       return {
@@ -55,6 +58,7 @@ export default function LearningMaterialsReducer(state = initialState, action) {
           tests: payload,
         },
         loading: false,
+        error: {},
       };
     case ADD_EXAMPLE:
       return {
@@ -64,6 +68,7 @@ export default function LearningMaterialsReducer(state = initialState, action) {
           examples: payload,
         },
         loading: false,
+        error: {},
       };
     case ADD_HINT:
       return {
@@ -73,6 +78,7 @@ export default function LearningMaterialsReducer(state = initialState, action) {
           hints: payload,
         },
         loading: false,
+        error: {},
       };
     case ADD_ANSWER: {
       let wrongAnswers = state.learningMaterial.wrongAnswers;
@@ -90,6 +96,7 @@ export default function LearningMaterialsReducer(state = initialState, action) {
           rightAnswers: rightAnswers,
         },
         loading: false,
+        error: {},
       };
     }
     case REMOVE_TEST:
@@ -102,6 +109,7 @@ export default function LearningMaterialsReducer(state = initialState, action) {
           ),
         },
         loading: false,
+        error: {},
       };
     case REMOVE_EXAMPLE:
       return {
@@ -113,6 +121,7 @@ export default function LearningMaterialsReducer(state = initialState, action) {
           ),
         },
         loading: false,
+        error: {},
       };
     case REMOVE_HINT:
       return {
@@ -124,6 +133,7 @@ export default function LearningMaterialsReducer(state = initialState, action) {
           ),
         },
         loading: false,
+        error: {},
       };
     case REMOVE_ANSWER: {
       let wrongAnswers = state.learningMaterial.wrongAnswers;
@@ -145,6 +155,7 @@ export default function LearningMaterialsReducer(state = initialState, action) {
           rightAnswers: rightAnswers,
         },
         loading: false,
+        error: {},
       };
     }
     case LEARNING_ERROR:
