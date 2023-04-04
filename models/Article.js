@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const ArticleSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'users',
+    ref: 'user',
   },
   subject: {
     type: String,
@@ -29,7 +29,11 @@ const ArticleSchema = new mongoose.Schema({
     {
       user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'users',
+        ref: 'user',
+      },
+      date: {
+        type: Date,
+        default: Date.now,
       },
     },
   ],
@@ -37,7 +41,11 @@ const ArticleSchema = new mongoose.Schema({
     {
       user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'users',
+        ref: 'user',
+      },
+      date: {
+        type: Date,
+        default: Date.now,
       },
     },
   ],
@@ -45,7 +53,7 @@ const ArticleSchema = new mongoose.Schema({
     {
       user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'users',
+        ref: 'user',
       },
       body: {
         type: String,

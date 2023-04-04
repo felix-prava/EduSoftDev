@@ -87,7 +87,7 @@ const LearningMaterialSchema = new mongoose.Schema({
     {
       user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'users',
+        ref: 'user',
       },
       body: {
         type: String,
@@ -104,10 +104,8 @@ const LearningMaterialSchema = new mongoose.Schema({
   ],
   solvingUsers: [
     {
-      user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'users',
-      },
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'user',
     },
   ],
   date: {

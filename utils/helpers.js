@@ -12,9 +12,8 @@ function filterFailedQuizzes(failedQuizzes) {
   return failedQuizzes.filter(
     (quiz) =>
       !(
-        new Date(
-          quiz.failedQuizDate.getTime() + 1000 * 60 * quiz.waitingMinutes
-        ) < Date.now()
+        new Date(quiz.date.getTime() + 1000 * 60 * quiz.waitingMinutes) <
+        Date.now()
       )
   );
 }
