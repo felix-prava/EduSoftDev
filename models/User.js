@@ -43,6 +43,10 @@ const UserSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'learning_material',
       },
+      date: {
+        type: Date,
+        default: Date.now,
+      },
     },
   ],
   lessonsLearned: [
@@ -50,6 +54,10 @@ const UserSchema = new mongoose.Schema({
       lesson: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'learning_material',
+      },
+      date: {
+        type: Date,
+        default: Date.now,
       },
     },
   ],
@@ -59,6 +67,10 @@ const UserSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'learning_material',
       },
+      date: {
+        type: Date,
+        default: Date.now,
+      },
     },
   ],
   failedQuizzes: [
@@ -67,7 +79,7 @@ const UserSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'learning_material',
       },
-      failedQuizDate: {
+      date: {
         type: Date,
         default: Date.now,
       },
