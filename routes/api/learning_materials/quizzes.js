@@ -44,6 +44,22 @@ router.put(
       'waitingMinutes',
       'The number of minutes a user must wait before retaking the quiz must be a positive integer'
     ).isInt({ gt: 0 }),
+    check('expMax')
+      .optional()
+      .custom((value, { req }) => {
+        if (value === '') {
+          return true;
+        }
+        if (
+          isNaN(value) ||
+          (value && req.body.expNeeded && value <= req.body.expNeeded)
+        ) {
+          throw new Error(
+            'Maximum experience must be greater than experience needed'
+          );
+        }
+        return true;
+      }),
   ],
   async (req, res) => {
     const errors = validationResult(req);

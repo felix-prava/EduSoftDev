@@ -16,7 +16,6 @@ const Dashboard = ({
     getUserSolutions(user && user._id);
   }, [user, getUserSolutions]);
 
-  console.log(solutions);
   return loading || solutionsLoading || user === null ? (
     <Spinner />
   ) : (
