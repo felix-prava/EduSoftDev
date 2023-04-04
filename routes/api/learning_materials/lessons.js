@@ -27,6 +27,22 @@ router.put(
     check('body', 'Body is required').not().isEmpty(),
     check('body', 'Body is required').not().equals('<p></p>\n'),
     check('shortDescription', 'Short description is required').not().isEmpty(),
+    check('expMax')
+      .optional()
+      .custom((value, { req }) => {
+        if (value === '') {
+          return true;
+        }
+        if (
+          isNaN(value) ||
+          (value && req.body.expNeeded && value <= req.body.expNeeded)
+        ) {
+          throw new Error(
+            'Maximum experience must be greater than experience needed'
+          );
+        }
+        return true;
+      }),
   ],
   async (req, res) => {
     const errors = validationResult(req);

@@ -63,6 +63,22 @@ router.post(
     }),
     check('body', 'Body is required').not().isEmpty(),
     check('shortDescription', 'Short description is required').not().isEmpty(),
+    check('expMax')
+      .optional()
+      .custom((value, { req }) => {
+        if (value === '') {
+          return true;
+        }
+        if (
+          isNaN(value) ||
+          (value && req.body.expNeeded && value <= req.body.expNeeded)
+        ) {
+          throw new Error(
+            'Maximum experience must be greater than experience needed'
+          );
+        }
+        return true;
+      }),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -128,6 +144,22 @@ router.post(
     check('body', 'Body is required').not().isEmpty(),
     check('body', 'Body is required').not().equals('<p></p>\n'),
     check('shortDescription', 'Short description is required').not().isEmpty(),
+    check('expMax')
+      .optional()
+      .custom((value, { req }) => {
+        if (value === '') {
+          return true;
+        }
+        if (
+          isNaN(value) ||
+          (value && req.body.expNeeded && value <= req.body.expNeeded)
+        ) {
+          throw new Error(
+            'Maximum experience must be greater than experience needed'
+          );
+        }
+        return true;
+      }),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -199,6 +231,22 @@ router.post(
       'waitingMinutes',
       'The number of minutes a user must wait before retaking the quiz must be a positive integer'
     ).isInt({ gt: 0 }),
+    check('expMax')
+      .optional()
+      .custom((value, { req }) => {
+        if (value === '') {
+          return true;
+        }
+        if (
+          isNaN(value) ||
+          (value && req.body.expNeeded && value <= req.body.expNeeded)
+        ) {
+          throw new Error(
+            'Maximum experience must be greater than experience needed'
+          );
+        }
+        return true;
+      }),
   ],
   async (req, res) => {
     const errors = validationResult(req);
