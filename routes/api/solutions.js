@@ -83,56 +83,48 @@ router.get('/execute/:solution_id', async (req, res) => {
     let totalTests = solution.problem.tests.length;
     let compilationError = null;
 
-    const promises = solution.problem.tests.map((test) => {
+    for (const test of solution.problem.tests) {
       const data = {
         code: solution.code,
         language: 'cpp',
         input: test.input,
       };
 
-      return axios
-        .post(COMPILER_API_URL, data)
-        .then((response) => {
-          if (response.data['error'] === '' && response.data['output'] === '') {
-            return new Promise((resolve, reject) => {
-              setTimeout(() => {
-                axios
-                  .post(COMPILER_API_URL, data)
-                  .then((response) => {
-                    resolve(response);
-                  })
-                  .catch((error) => {
-                    reject(error);
-                  });
-              }, 1000); // Wait for 1 second before retrying the test
-            });
+      try {
+        const response = await axios.post(COMPILER_API_URL, data);
+        if (response.data['error'] === '' && response.data['output'] === '') {
+          // If the response has no error or output, retry the test after 1 second
+          await new Promise((resolve, reject) => {
+            setTimeout(() => {
+              axios
+                .post(COMPILER_API_URL, data)
+                .then((response) => {
+                  resolve(response);
+                })
+                .catch((error) => {
+                  reject(error);
+                });
+            }, 1000);
+          });
+        } else {
+          if (response.data['error'] !== '') {
+            compilationError = response.data['error'];
           } else {
-            if (response.data['error'] !== '') {
-              compilationError = response.data['error'];
-            } else {
-              if (response.data['output'] === test.output) {
-                passedTests++;
-              }
+            if (response.data['output'] === test.output) {
+              passedTests++;
             }
           }
-          return response;
-        })
-        .catch((error) => {
-          console.error(error);
-          throw error;
-        });
-    });
-
-    Promise.all(promises)
-      .then((_) => {
-        // Update solution
-        let newScore = calculateScore(passedTests, totalTests);
-        updateSolution(solution, newScore, compilationError);
-        solution.save();
-      })
-      .catch((error) => {
+        }
+      } catch (error) {
         console.error(error);
-      });
+        throw error;
+      }
+    }
+
+    // Update solution
+    const newScore = calculateScore(passedTests, totalTests);
+    updateSolution(solution, newScore, compilationError);
+    await solution.save();
 
     res.status(200).json('OK');
   } catch (err) {
