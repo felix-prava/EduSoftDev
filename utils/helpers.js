@@ -25,8 +25,24 @@ function failedQuizzesContainsCurrentQuiz(failedQuizzes, quizId) {
   return false;
 }
 
+function calculateScore(passedTests, totalTests) {
+  const percentage = (passedTests / totalTests) * 100;
+  return parseFloat(percentage.toFixed(2)); // limit to 2 decimal places
+}
+
+function updateSolution(solution, newScore, compilationError) {
+  if (compilationError !== null) {
+    solution.status = compilationError;
+  } else {
+    solution.score = newScore;
+    solution.status = newScore === 100 ? 'accepted' : 'incorrect';
+  }
+}
+
 module.exports = {
   filterFailedQuizzes,
   checkQuizAnswers,
   failedQuizzesContainsCurrentQuiz,
+  calculateScore,
+  updateSolution,
 };
