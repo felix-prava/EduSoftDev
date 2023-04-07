@@ -13,10 +13,6 @@ router.post(
   '/:problem_id/add-solution',
   [auth, check('code', 'Body is required').not().isEmpty()],
   async (req, res) => {
-    const errors = validationResult(req);
-    console.log(errors);
-    console.log(req.body);
-
     const user = await User.findById(req.user.id).select('-password');
     if (!user) {
       return res.status(400).json({ error: [{ msg: 'User does not exists' }] });

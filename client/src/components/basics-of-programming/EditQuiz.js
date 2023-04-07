@@ -121,7 +121,7 @@ const EditQuiz = ({
             <div>
               <div>
                 <h3 className='text-2xl font-bold leading-6 font-medium text-gray-900 sm:text-2xl'>
-                  Edit lesson
+                  Edit quiz
                 </h3>
               </div>
 

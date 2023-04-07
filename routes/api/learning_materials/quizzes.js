@@ -44,6 +44,22 @@ router.put(
       'waitingMinutes',
       'The number of minutes a user must wait before retaking the quiz must be a positive integer'
     ).isInt({ gt: 0 }),
+    check('expMax')
+      .optional()
+      .custom((value, { req }) => {
+        if (value === '') {
+          return true;
+        }
+        if (
+          isNaN(value) ||
+          (value && req.body.expNeeded && value <= req.body.expNeeded)
+        ) {
+          throw new Error(
+            'Maximum experience must be greater than experience needed'
+          );
+        }
+        return true;
+      }),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -164,20 +180,20 @@ router.post('/:quiz_id/quiz-solved', auth, async (req, res) => {
       )
     ) {
       user.solvedQuizzes.unshift({ quiz: req.params.quiz_id });
-      const maxExp = quiz.expMax
-      const gainedExp = user.exp + quiz.expGained
-      user.exp = (gainedExp > maxExp ? maxExp : gainedExp)
+      const maxExp = quiz.expMax;
+      const gainedExp = user.exp + quiz.expGained;
+      user.exp = gainedExp > maxExp ? maxExp : gainedExp;
     }
 
     // Check if the quiz has already been solved by the user
     if (
       !(
         quiz.solvingUsers.filter(
-          (solving_user) => solving_user.user.toString() === req.user.id
+          (solving_user) => solving_user.toString() === req.user.id
         ).length > 0
       )
     ) {
-      quiz.solvingUsers.unshift({ user: req.user.id });
+      quiz.solvingUsers.unshift(req.user.id);
     }
 
     await user.save();

@@ -27,6 +27,22 @@ router.put(
     check('body', 'Body is required').not().isEmpty(),
     check('body', 'Body is required').not().equals('<p></p>\n'),
     check('shortDescription', 'Short description is required').not().isEmpty(),
+    check('expMax')
+      .optional()
+      .custom((value, { req }) => {
+        if (value === '') {
+          return true;
+        }
+        if (
+          isNaN(value) ||
+          (value && req.body.expNeeded && value <= req.body.expNeeded)
+        ) {
+          throw new Error(
+            'Maximum experience must be greater than experience needed'
+          );
+        }
+        return true;
+      }),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -110,11 +126,11 @@ router.post('/:lesson_id/lesson-learned', auth, async (req, res) => {
     if (
       !(
         lesson.solvingUsers.filter(
-          (solving_user) => solving_user.user.toString() === req.user.id
+          (solving_user) => solving_user.toString() === req.user.id
         ).length > 0
       )
     ) {
-      lesson.solvingUsers.unshift({ user: req.user.id });
+      lesson.solvingUsers.unshift(req.user.id);
     }
 
     await user.save();
