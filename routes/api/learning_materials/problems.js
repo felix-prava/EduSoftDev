@@ -133,6 +133,64 @@ router.post(
   }
 );
 
+// @route   POST /api/learning-materials/problems/:problem_id/:user_id/problem-solved
+// @desc    Complete a problem
+// @access  Public
+router.post('/:problem_id/:user_id/problem-solved', async (req, res) => {
+  try {
+    user_id = req.params.user_id;
+    const user = await User.findById(user_id).select('-password');
+
+    if (!user) {
+      return res.status(400).json({ error: [{ msg: 'User does not exists' }] });
+    }
+    const problem = await LearningMaterial.findById(req.params.problem_id);
+    if (!problem || problem.type !== 'Problem') {
+      return res.status(404).json({ msg: 'Problem not found' });
+    }
+
+    // Check if the user has already solved the problem
+    if (
+      !(
+        user.solvedProblems.filter(
+          (solved_problem) =>
+            solved_problem.problem.toString() === req.params.problem_id
+        ).length > 0
+      )
+    ) {
+      user.solvedProblems.unshift({ problem: req.params.problem_id });
+      const maxExp = problem.expMax;
+      const gainedExp = user.exp + problem.expGained;
+      user.exp = gainedExp > maxExp ? maxExp : gainedExp;
+    }
+
+    // Check if the problem has already been solved by the user
+    if (
+      !(
+        problem.solvingUsers.filter(
+          (solving_user) => solving_user.toString() === user_id
+        ).length > 0
+      )
+    ) {
+      problem.solvingUsers.unshift(user_id);
+    }
+
+    await user.save();
+    await problem.save();
+
+    res.json({
+      solvedProblems: user.solvedProblems,
+      solvingUsers: problem.solvingUsers,
+    });
+  } catch (err) {
+    if (err.kind == 'ObjectId') {
+      return res.status(404).json({ msg: 'Problem not found' });
+    }
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 // @route   POST /api/learning-materials/problems/:problem_id/:request_type
 // @desc    Add a test or an example to a problem
 // @access  Private

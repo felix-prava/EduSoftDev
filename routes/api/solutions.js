@@ -36,7 +36,9 @@ router.post(
       await solution.save();
 
       // Start compilation and execution of the solution
-      http.get(`http://localhost:3200/api/solutions/execute/${solution._id}`); // TODO Update URL
+      http.get(
+        `${req.protocol}://${req.hostname}:3200/api/solutions/execute/${solution._id}`
+      );
       res.json(solution);
     } catch (err) {
       res.status(500).json({ error: [{ msg: 'Server error' }] });
@@ -124,6 +126,16 @@ router.get('/execute/:solution_id', async (req, res) => {
     // Update solution
     const newScore = calculateScore(passedTests, totalTests);
     updateSolution(solution, newScore, compilationError);
+    if (solution.status === 'accepted') {
+      axios
+        .post(
+          `${req.protocol}://${req.hostname}:3200/api/learning-materials/problems/${solution.problem._id}/${solution.user._id}/problem-solved`,
+          {}
+        )
+        .catch((error) => {
+          console.error(error);
+        });
+    }
     await solution.save();
 
     res.status(200).json('OK');

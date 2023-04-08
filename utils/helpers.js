@@ -27,7 +27,7 @@ function failedQuizzesContainsCurrentQuiz(failedQuizzes, quizId) {
 
 function calculateScore(passedTests, totalTests) {
   const percentage = (passedTests / totalTests) * 100;
-  return parseFloat(percentage.toFixed(2)); // limit to 2 decimal places
+  return parseFloat(percentage.toFixed(2));
 }
 
 function updateSolution(solution, newScore, compilationError) {
