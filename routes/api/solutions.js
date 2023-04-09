@@ -6,6 +6,7 @@ const http = require('http');
 const axios = require('axios');
 const { calculateScore, updateSolution } = require('../../utils/helpers');
 const COMPILER_API_URL = 'https://api.codex.jaagrav.in';
+const config = require('config');
 
 const LearningMaterial = require('../../models/LearningMaterial');
 const Solution = require('../../models/Solution');
@@ -130,7 +131,12 @@ router.get('/execute/:solution_id', async (req, res) => {
       axios
         .post(
           `${req.protocol}://${req.hostname}:3200/api/learning-materials/problems/${solution.problem._id}/${solution.user._id}/problem-solved`,
-          {}
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${config.get('privateRouteKey')}`,
+            },
+          }
         )
         .catch((error) => {
           console.error(error);
