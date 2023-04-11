@@ -131,6 +131,7 @@ router.put('/:user_id', auth, async (req, res) => {
       lastName,
       preferredName,
       username,
+      language,
       email,
       password,
       oldPassword,
@@ -155,6 +156,7 @@ router.put('/:user_id', auth, async (req, res) => {
       }
       userFields.username = username;
     }
+    if (language) userFields.language = language;
     if (email && user.email !== email) {
       try {
         const userExists = await User.exists({ email });

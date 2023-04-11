@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useLocation, Link } from 'react-router-dom';
 import Account from '../settings/Account';
 import Password from '../settings/Password';
+import Appearance from '../settings/Appearance';
 
-const SettingsSidebar = ({ auth: { user } }) => {
+const SettingsSidebar = ({}) => {
   const menuItemClass =
     'text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium';
   const selectedMenuItemClass =
@@ -30,6 +30,13 @@ const SettingsSidebar = ({ auth: { user } }) => {
       settingsMenu = (
         <Fragment>
           <Password />
+        </Fragment>
+      );
+      break;
+    case '/settings/appearance':
+      settingsMenu = (
+        <Fragment>
+          <Appearance />
         </Fragment>
       );
       break;
@@ -236,12 +243,4 @@ const SettingsSidebar = ({ auth: { user } }) => {
   );
 };
 
-SettingsSidebar.propTypes = {
-  auth: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-});
-
-export default connect(mapStateToProps)(SettingsSidebar);
+export default connect(null, {})(SettingsSidebar);
