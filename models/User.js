@@ -37,6 +37,10 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     default: 1,
   },
+  language: {
+    type: String,
+    default: 'en',
+  },
   solvedProblems: [
     {
       problem: {
