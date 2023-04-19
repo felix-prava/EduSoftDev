@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logoutUser } from '../../actions/auth';
 import { useLocation } from 'react-router-dom';
+import { navbarTranslation } from './Translations';
 
 const toggleProfileDropdown = function () {
   const profileDropdown = document.getElementById('profile-dropdown-options');
@@ -41,12 +42,25 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
     return <Fragment></Fragment>;
   }
 
+  const language = user ? user.language : 'en';
+  const homeLabel = navbarTranslation.home[language];
+  const profilesLabel = navbarTranslation.profiles[language];
+  const modulesLabel = navbarTranslation.modules[language];
+  const articlesLabel = navbarTranslation.articles[language];
+  const registerLabel = navbarTranslation.register[language];
+  const aboutUsLabel = navbarTranslation.aboutUs[language];
+  const loginLabel = navbarTranslation.login[language];
+  const logoutLabel = navbarTranslation.logout[language];
+  const signOutLabel = navbarTranslation.signOut[language];
+  const settingsLabel = navbarTranslation.settings[language];
+  const myProfileLabel = navbarTranslation.myProfile[language];
+
   const modules = (
     <Link
       to='/modules'
       className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
     >
-      Modules
+      {modulesLabel}
     </Link>
   );
 
@@ -55,7 +69,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
       to='/modules'
       className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
     >
-      Modules
+      {modulesLabel}
     </Link>
   );
 
@@ -64,7 +78,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
       to='/articles'
       className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
     >
-      IT Articles
+      {articlesLabel}
     </Link>
   );
 
@@ -73,7 +87,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
       to='/articles'
       className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
     >
-      IT Articles
+      {articlesLabel}
     </Link>
   );
 
@@ -84,7 +98,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
         className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'
         aria-current='page'
       >
-        Home
+        {homeLabel}
       </Link>
 
       {modules}
@@ -95,7 +109,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
         onClick={logoutUser}
         className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
       >
-        Logout
+        {logoutLabel}
       </Link>
     </Fragment>
   );
@@ -107,7 +121,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
         className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'
         aria-current='page'
       >
-        Home
+        {homeLabel}
       </Link>
 
       {modules}
@@ -122,7 +136,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
         className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'
         aria-current='page'
       >
-        Home
+        {homeLabel}
       </Link>
 
       {modules}
@@ -131,7 +145,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
         to='/admin/profiles'
         className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
       >
-        Profiles
+        {profilesLabel}
       </Link>
 
       {articles}
@@ -145,21 +159,21 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
         className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'
         aria-current='page'
       >
-        Home
+        {homeLabel}
       </Link>
 
       <Link
         to='/register'
         className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
       >
-        Register
+        {registerLabel}
       </Link>
 
       <Link
         to='/login'
         className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
       >
-        Login
+        {loginLabel}
       </Link>
 
       {articles}
@@ -168,7 +182,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
         to='/about-us'
         className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
       >
-        About Us
+        {aboutUsLabel}
       </Link>
     </Fragment>
   );
@@ -180,7 +194,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
         className='bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium'
         aria-current='page'
       >
-        Home
+        {homeLabel}
       </Link>
 
       {modulesMobile}
@@ -191,7 +205,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
         onClick={logoutUser}
         className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
       >
-        Logout
+        {logoutLabel}
       </Link>
     </Fragment>
   );
@@ -203,7 +217,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
         className='bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium'
         aria-current='page'
       >
-        Home
+        {homeLabel}
       </Link>
 
       {modulesMobile}
@@ -218,7 +232,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
         className='bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium'
         aria-current='page'
       >
-        Home
+        {homeLabel}
       </Link>
 
       {modulesMobile}
@@ -227,7 +241,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
         to='/admin/profiles'
         className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
       >
-        Profiles
+        {profilesLabel}
       </Link>
 
       {articlesMobile}
@@ -241,21 +255,21 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
         className='bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium'
         aria-current='page'
       >
-        Home
+        {homeLabel}
       </Link>
 
       <Link
         to='/register'
         className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
       >
-        Register
+        {registerLabel}
       </Link>
 
       <Link
         to='/login'
         className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
       >
-        Login
+        {loginLabel}
       </Link>
 
       {articlesMobile}
@@ -264,7 +278,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
         to='/about-us'
         className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
       >
-        About Us
+        {aboutUsLabel}
       </Link>
     </Fragment>
   );
@@ -471,7 +485,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
                         tabIndex='-1'
                         id='user-menu-item-0'
                       >
-                        My Profile
+                        {myProfileLabel}
                       </Link>
                       <Link
                         to='/settings/account'
@@ -480,7 +494,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
                         tabIndex='-1'
                         id='user-menu-item-1'
                       >
-                        Settings
+                        {settingsLabel}
                       </Link>
                       <Link
                         to='#'
@@ -490,7 +504,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
                         tabIndex='-1'
                         id='user-menu-item-2'
                       >
-                        Sign out
+                        {signOutLabel}
                       </Link>
                     </div>
                   </div>
