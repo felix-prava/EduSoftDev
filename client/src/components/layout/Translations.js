@@ -1,3 +1,10 @@
+export const universalTranslations = {
+  delete: {
+    en: 'Delete',
+    ro: 'Sterge',
+  },
+};
+
 export const navbarTranslation = {
   home: {
     en: 'Home',
@@ -42,5 +49,63 @@ export const navbarTranslation = {
   myProfile: {
     en: 'My Profile',
     ro: 'Profilul Meu',
+  },
+};
+
+export const profilesTranslation = {
+  userProfiles: {
+    en: 'User Profiles',
+    ro: 'Profilurile Userilor',
+  },
+  noProfiles: {
+    en: 'No profiles found',
+    ro: 'Nu s-au gasit profiluri',
+  },
+};
+
+export const myProfileTranslation = {
+  myProfile: {
+    en: 'My Profile',
+    ro: 'Profilul Meu',
+  },
+  generalInfo: {
+    en: 'General Info',
+    ro: 'Informatii Generale',
+  },
+  editProfile: {
+    en: 'Edit Profile',
+    ro: 'Editare Profil',
+  },
+  editGeneralInfo: {
+    en: 'Edit General Info',
+    ro: 'Editare Informatii Generale',
+  },
+  addExperience: {
+    en: 'Add Experience',
+    ro: 'Adauga Experienta',
+  },
+  addEducation: {
+    en: 'Add Education',
+    ro: 'Adauga Educatie',
+  },
+  experience: {
+    en: 'Experience',
+    ro: 'Experienta',
+  },
+  noExperience: {
+    en: 'You have not added any professional experience yet.',
+    ro: 'Inca nu ai adaugat nimic la profilul de experienta.',
+  },
+  education: {
+    en: 'Education',
+    ro: 'Educatie',
+  },
+  noEducation: {
+    en: 'You have not added any education yet.',
+    ro: 'Inca nu ai adaugat nimic la profilul de educatie.',
+  },
+  githubRepos: {
+    en: 'Github Repos',
+    ro: 'Repo-uri de Github',
   },
 };
