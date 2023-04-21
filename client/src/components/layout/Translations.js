@@ -116,4 +116,8 @@ export const myProfileTranslation = {
     en: 'Github Repos',
     ro: 'Repo-uri de Github',
   },
+  problemsSolved: {
+    en: 'solved problems',
+    ro: 'probleme rezolvate',
+  },
 };
