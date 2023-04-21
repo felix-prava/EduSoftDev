@@ -1,14 +1,18 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { profilesTranslation } from '../layout/Translations';
 
 const ProfileItem = ({
+  language,
   profile: {
     user: { _id, firstName, lastName, email, username, avatar },
     status,
     social,
   },
 }) => {
+  const viewProfileLabel = profilesTranslation.viewProfile[language];
+
   let facebook = null,
     instagram = null,
     twitter = null,
@@ -40,7 +44,7 @@ const ProfileItem = ({
               <p className='text-base text-indigo-400'>{username}</p>
               <Link to={`/profiles/${_id}`}>
                 <button className='mt-2 group relative py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
-                  View Profile
+                  {viewProfileLabel}
                 </button>
               </Link>
             </div>

@@ -1,7 +1,11 @@
 export const universalTranslations = {
-  delete: {
+  deleteButton: {
     en: 'Delete',
     ro: 'Sterge',
+  },
+  saveButton: {
+    en: 'Save',
+    ro: 'Salveaza',
   },
 };
 
@@ -60,6 +64,10 @@ export const profilesTranslation = {
   noProfiles: {
     en: 'No profiles found',
     ro: 'Nu s-au gasit profiluri',
+  },
+  viewProfile: {
+    en: 'View Profile',
+    ro: 'Vezi Profil',
   },
 };
 

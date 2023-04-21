@@ -38,7 +38,11 @@ const Profiles = ({
                 <Fragment>
                   <ul className='space-y-4 sm:grid sm:grid-cols-2 sm:gap-6 sm:space-y-0 lg:grid-cols-3 lg:gap-8'>
                     {profiles.map((profile) => (
-                      <ProfileItem key={profile._id} profile={profile} />
+                      <ProfileItem
+                        key={profile._id}
+                        profile={profile}
+                        language={user ? user.language : 'en'}
+                      />
                     ))}
                   </ul>
                 </Fragment>
