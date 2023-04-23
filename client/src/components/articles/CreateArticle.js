@@ -4,8 +4,12 @@ import TextEditor from '../layout/TextEditor';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addArticle } from '../../actions/article';
+import {
+  universalTranslations,
+  articlesTranslations,
+} from '../layout/Translations';
 
-const CreateArticle = ({ addArticle }) => {
+const CreateArticle = ({ auth: { user }, addArticle }) => {
   const [formData, setFormData] = useState({
     subject: '',
     description: '',
@@ -27,6 +31,15 @@ const CreateArticle = ({ addArticle }) => {
     }
   };
 
+  const language = user ? user.language : 'en';
+  const bodyLabel = universalTranslations.body[language];
+  const shortDescriptionLabel =
+    universalTranslations.shortDescription[language];
+  const backButtonLabel = universalTranslations.backButton[language];
+  const saveButtonLabel = universalTranslations.saveButton[language];
+  const createArticleLabel = articlesTranslations.createArticle[language];
+  const whatIsAboutLabel = articlesTranslations.whatIsAbout[language];
+
   return (
     <Fragment>
       <div className='container mt-8'>
@@ -38,7 +51,7 @@ const CreateArticle = ({ addArticle }) => {
             <div>
               <div>
                 <h3 className='text-2xl font-bold leading-6 font-medium text-gray-900 sm:text-2xl'>
-                  Create an article
+                  {createArticleLabel}
                 </h3>
               </div>
 
@@ -48,8 +61,7 @@ const CreateArticle = ({ addArticle }) => {
                     htmlFor='subject'
                     className='block text-sm font-medium text-gray-700'
                   >
-                    {' '}
-                    What's this article about?{' '}
+                    {whatIsAboutLabel}
                   </label>
                   <div className='mt-1'>
                     <input
@@ -69,8 +81,7 @@ const CreateArticle = ({ addArticle }) => {
                     htmlFor='body'
                     className='block text-sm font-medium text-gray-700'
                   >
-                    {' '}
-                    Body{' '}
+                    {bodyLabel}
                   </label>
                   <div className='mt-1'>
                     <div className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md'>
@@ -93,8 +104,7 @@ const CreateArticle = ({ addArticle }) => {
                     htmlFor='description'
                     className='block text-sm font-medium text-gray-700'
                   >
-                    {' '}
-                    Short description{' '}
+                    {shortDescriptionLabel}
                   </label>
                   <div className='mt-1'>
                     <input
@@ -117,14 +127,14 @@ const CreateArticle = ({ addArticle }) => {
                   type='button'
                   className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
                 >
-                  Cancel
+                  {backButtonLabel}
                 </button>
               </Link>
               <button
                 type='submit'
                 className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
               >
-                Save
+                {saveButtonLabel}
               </button>
             </div>
           </div>
@@ -135,7 +145,12 @@ const CreateArticle = ({ addArticle }) => {
 };
 
 CreateArticle.propTypes = {
+  auth: PropTypes.object.isRequired,
   addArticle: PropTypes.func.isRequired,
 };
 
-export default connect(null, { addArticle })(CreateArticle);
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { addArticle })(CreateArticle);

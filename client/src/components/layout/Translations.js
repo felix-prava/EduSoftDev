@@ -7,6 +7,30 @@ export const universalTranslations = {
     en: 'Save',
     ro: 'Salveaza',
   },
+  cancelButton: {
+    en: 'Cancel',
+    ro: 'Anuleaza',
+  },
+  backButton: {
+    en: 'Back',
+    ro: 'Inapoi',
+  },
+  postedOn: {
+    en: 'Posted on',
+    ro: 'Postat pe',
+  },
+  body: {
+    en: 'Body',
+    ro: 'Continut',
+  },
+  shortDescription: {
+    en: 'Short description',
+    ro: 'Scurta descriere',
+  },
+  leaveComment: {
+    en: 'Leave a comment',
+    ro: 'Lasa un comentariu',
+  },
 };
 
 export const navbarTranslation = {
@@ -119,5 +143,40 @@ export const myProfileTranslation = {
   problemsSolved: {
     en: 'solved problems',
     ro: 'probleme rezolvate',
+  },
+};
+
+export const articlesTranslations = {
+  articles: {
+    en: 'Articles',
+    ro: 'Articole',
+  },
+  createArticleMessage: {
+    en: 'Do you want to share something interesting with us?',
+    ro: 'Vrei sa imparti ceva interesant cu noi?',
+  },
+  createArticleLink: {
+    en: 'Create your own article',
+    ro: 'Creeaza propriul articol',
+  },
+  discussion: {
+    en: 'Discussion',
+    ro: 'Comentarii',
+  },
+  readArticleLink: {
+    en: 'Read full article',
+    ro: 'Citeste tot articolul',
+  },
+  createArticle: {
+    en: 'Create an article',
+    ro: 'Creeaza un articol',
+  },
+  editArticle: {
+    en: 'Edit an article',
+    ro: 'Editeaza un articol',
+  },
+  whatIsAbout: {
+    en: "What's this article about?",
+    ro: 'Despre ce e vorba?',
   },
 };
