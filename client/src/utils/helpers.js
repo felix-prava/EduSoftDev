@@ -30,3 +30,10 @@ export const statusClassColour = (status) => {
   if (status === 'pending') return 'bg-yellow-100 text-yellow-600';
   return 'bg-red-500 text-red-900';
 };
+
+export const capitalizeWords = (str) => {
+  return str
+    .split(' ')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+};

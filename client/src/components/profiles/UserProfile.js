@@ -4,7 +4,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import { getProfileById } from '../../actions/profile';
-import { myProfileTranslation } from '../layout/Translations';
+import {
+  myProfileTranslation,
+  universalTranslations,
+} from '../layout/Translations';
 import Experience from './Experience';
 import Education from './Education';
 import ProfileSocialItems from './ProfileSocialItems';
@@ -36,7 +39,7 @@ const UserProfile = ({
   const experienceLabel = myProfileTranslation.experience[language];
   const educationLabel = myProfileTranslation.education[language];
   const githubReposLabel = myProfileTranslation.githubRepos[language];
-  const problemsSolvedLabel = myProfileTranslation.problemsSolved[language];
+  const solvedProblemsLabel = universalTranslations.solvedProblems[language];
   const solvedProblems =
     (user && user.solvedProblems && user.solvedProblems.length) || 0;
 
@@ -272,7 +275,7 @@ const UserProfile = ({
                               </div>
                               <div className='ml-3 text-base text-gray-500 hover:text-gray-700'>
                                 <p>
-                                  {solvedProblems} {problemsSolvedLabel}
+                                  {solvedProblems} {solvedProblemsLabel}
                                 </p>
                               </div>
                             </div>

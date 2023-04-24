@@ -31,6 +31,18 @@ export const universalTranslations = {
     en: 'Leave a comment',
     ro: 'Lasa un comentariu',
   },
+  solvedProblems: {
+    en: 'solved problems',
+    ro: 'probleme rezolvate',
+  },
+  lessonsLearned: {
+    en: 'lessons learned',
+    ro: 'lectii invatate',
+  },
+  quizzesCompleted: {
+    en: 'quizzes completed',
+    ro: 'quizz-uri completate',
+  },
 };
 
 export const navbarTranslation = {
@@ -140,10 +152,6 @@ export const myProfileTranslation = {
     en: 'Github Repos',
     ro: 'Repo-uri de Github',
   },
-  problemsSolved: {
-    en: 'solved problems',
-    ro: 'probleme rezolvate',
-  },
 };
 
 export const articlesTranslations = {
@@ -178,5 +186,48 @@ export const articlesTranslations = {
   whatIsAbout: {
     en: "What's this article about?",
     ro: 'Despre ce e vorba?',
+  },
+};
+
+export const dashboardTranslations = {
+  hello: {
+    en: 'Hello',
+    ro: 'Buna',
+  },
+  verifiedAccount: {
+    en: 'Verified account',
+    ro: 'Cont verificat',
+  },
+  continueLearning: {
+    en: 'Continue Learning',
+    ro: 'Continua unde ai ramas',
+  },
+  overview: {
+    en: 'Overview',
+    ro: 'Prezentare generala',
+  },
+  viewAll: {
+    en: 'View all',
+    ro: 'Vezi toate',
+  },
+  recentSolutions: {
+    en: 'Recent solutions',
+    ro: 'Solutii recente',
+  },
+  problem: {
+    en: 'Problem',
+    ro: 'Problema',
+  },
+  status: {
+    en: 'Status',
+    ro: 'Status',
+  },
+  score: {
+    en: 'Score',
+    ro: 'Scor',
+  },
+  date: {
+    en: 'Date',
+    ro: 'Data',
   },
 };
