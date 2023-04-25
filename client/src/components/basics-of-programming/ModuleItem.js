@@ -35,6 +35,7 @@ const ModuleItem = ({
   let title = null;
   let description = null;
   let displayErrorPage = false;
+  const language = user ? user.language : 'en';
 
   const [modal, setModal] = useState(false);
   const [modalData, setModalData] = useState([]);
@@ -45,32 +46,32 @@ const ModuleItem = ({
 
   switch (moduleName) {
     case 'introduction':
-      title = INTRODUCTION_TITLE;
-      description = INTRODUCTION_DESCRIPTION;
+      title = INTRODUCTION_TITLE[language];
+      description = INTRODUCTION_DESCRIPTION[language];
       break;
     case 'if-else':
-      title = IF_ELSE_TITLE;
-      description = IF_ELSE_DESCRIPTION;
+      title = IF_ELSE_TITLE.seond_type[language];
+      description = IF_ELSE_DESCRIPTION[language];
       break;
     case 'while-for':
-      title = WHILE_FOR_TITLE;
-      description = WHILE_FOR_DESCRIPTION;
+      title = WHILE_FOR_TITLE.seond_type[language];
+      description = WHILE_FOR_DESCRIPTION[language];
       break;
     case 'arrays-functions':
-      title = ARRAYS_FUNCTIONS_TITLE;
-      description = ARRAYS_FUNCTIONS_DESCRIPTION;
+      title = ARRAYS_FUNCTIONS_TITLE.seond_type[language];
+      description = ARRAYS_FUNCTIONS_DESCRIPTION[language];
       break;
     case 'matrix-strings':
-      title = MATRIX_STRINGS_TITLE;
-      description = MATRIX_STRINGS_DESCRIPTION;
+      title = MATRIX_STRINGS_TITLE.seond_type[language];
+      description = MATRIX_STRINGS_DESCRIPTION[language];
       break;
     case 'oop-db':
-      title = DATABASE_OOP_TITLE;
-      description = DATABASE_OOP_DESCRIPTION;
+      title = DATABASE_OOP_TITLE.seond_type[language];
+      description = DATABASE_OOP_DESCRIPTION[language];
       break;
     case 'backtracking-recursion':
-      title = BACKTRACKING_RECURSION_TITLE;
-      description = BACKTRACKING_RECURSION_DESCRIPTION;
+      title = BACKTRACKING_RECURSION_TITLE.seond_type[language];
+      description = BACKTRACKING_RECURSION_DESCRIPTION[language];
       break;
     default:
       displayErrorPage = true;
