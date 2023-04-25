@@ -6,6 +6,7 @@ import Spinner from '../layout/Spinner';
 import { getProfileById } from '../../actions/profile';
 import {
   myProfileTranslation,
+  profilesTranslation,
   universalTranslations,
 } from '../layout/Translations';
 import Experience from './Experience';
@@ -42,6 +43,8 @@ const UserProfile = ({
   const solvedProblemsLabel = universalTranslations.solvedProblems[language];
   const solvedProblems =
     (user && user.solvedProblems && user.solvedProblems.length) || 0;
+  const noExperienceLabel = profilesTranslation.noExperience[language];
+  const noEducationLabel = profilesTranslation.noEducation[language];
 
   return (
     <Fragment>
@@ -294,7 +297,7 @@ const UserProfile = ({
                     </h2>
                     {profile.experience.length === 0 ? (
                       <p className='text-xl text-gray-500'>
-                        No professional experience credentials.
+                        {noExperienceLabel}
                       </p>
                     ) : (
                       <Experience
@@ -309,7 +312,7 @@ const UserProfile = ({
                     </h2>
                     {profile.education.length === 0 ? (
                       <p className='text-xl text-gray-500'>
-                        No education credentials.
+                        {noEducationLabel}
                       </p>
                     ) : (
                       <Education

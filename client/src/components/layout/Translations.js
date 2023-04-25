@@ -105,6 +105,14 @@ export const profilesTranslation = {
     en: 'View Profile',
     ro: 'Vezi Profil',
   },
+  noExperience: {
+    en: 'No available professional experience information.',
+    ro: 'Nu există informații disponibile despre experiența profesională.',
+  },
+  noEducation: {
+    en: 'No available education information.',
+    ro: 'Nu există informații despre educație disponibile.',
+  },
 };
 
 export const myProfileTranslation = {
