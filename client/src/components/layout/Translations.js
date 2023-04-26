@@ -43,6 +43,10 @@ export const universalTranslations = {
     en: 'quizzes completed',
     ro: 'quizz-uri completate',
   },
+  expPoints: {
+    en: 'exp points',
+    ro: 'puncte de experienta',
+  },
 };
 
 export const navbarTranslation = {
@@ -159,6 +163,10 @@ export const myProfileTranslation = {
   githubRepos: {
     en: 'Github Repos',
     ro: 'Repo-uri de Github',
+  },
+  myProfileDescription: {
+    en: 'You can see and edit your general information. Also you can add previous education and experience.',
+    ro: 'Poți vedea și edita informațiile tale generale. De asemenea, poți adăuga educația și experiențele anterioare.',
   },
 };
 

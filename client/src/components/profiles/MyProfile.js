@@ -3,7 +3,10 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
-import { myProfileTranslation } from '../layout/Translations';
+import {
+  myProfileTranslation,
+  universalTranslations,
+} from '../layout/Translations';
 import { getCurrentUserProfile } from '../../actions/profile';
 import Experience from './Experience';
 import Education from './Education';
@@ -24,6 +27,8 @@ const MyProfile = ({
 
   const language = user ? user.language : 'en';
   const myProfileLabel = myProfileTranslation.myProfile[language];
+  const myProfileDescriptionLabel =
+    myProfileTranslation.myProfileDescription[language];
   const generalInfoLabel = myProfileTranslation.generalInfo[language];
   const editProfileLabel = myProfileTranslation.editProfile[language];
   const editGeneralInfoLabel = myProfileTranslation.editGeneralInfo[language];
@@ -34,6 +39,11 @@ const MyProfile = ({
   const noExperienceLabel = myProfileTranslation.noExperience[language];
   const noEducationLabel = myProfileTranslation.noEducation[language];
   const githubReposLabel = myProfileTranslation.githubRepos[language];
+  const expPointsLabel = universalTranslations.expPoints[language];
+  const solvedProblemsLabel = universalTranslations.solvedProblems[language];
+  const lessonsLearnedLabel = universalTranslations.lessonsLearned[language];
+  const quizzesCompletedLabel =
+    universalTranslations.quizzesCompleted[language];
 
   const solvedProblems =
     (user.solvedProblems && user.solvedProblems.length) || 0;
@@ -54,10 +64,7 @@ const MyProfile = ({
               {profile && (
                 <Fragment>
                   <p className='text-xl text-gray-500'>
-                    Nulla quam felis, enim faucibus proin velit, ornare id
-                    pretium. Augue ultrices sed arcu condimentum vestibulum
-                    suspendisse. Volutpat eu faucibus vivamus eget bibendum
-                    cras.
+                    {myProfileDescriptionLabel}
                   </p>
                   <Link to='/edit-profile'>
                     <button
@@ -206,7 +213,9 @@ const MyProfile = ({
                               </svg>
                             </div>
                             <div className='ml-3 text-base text-gray-500 hover:text-gray-700'>
-                              <p>{user.exp} exp points</p>
+                              <p>
+                                {user.exp} {expPointsLabel}
+                              </p>
                             </div>
                           </div>
                           <div className='mt-6 flex'>
@@ -229,7 +238,9 @@ const MyProfile = ({
                               </svg>
                             </div>
                             <div className='ml-3 text-base text-gray-500 hover:text-gray-700'>
-                              <p>{lessonsLearned} lessons learned</p>
+                              <p>
+                                {lessonsLearned} {lessonsLearnedLabel}
+                              </p>
                             </div>
                           </div>
                         </div>
@@ -288,7 +299,9 @@ const MyProfile = ({
                               </svg>
                             </div>
                             <div className='ml-3 text-base text-gray-500 hover:text-gray-700'>
-                              <p>{solvedProblems} solved problems</p>
+                              <p>
+                                {solvedProblems} {solvedProblemsLabel}
+                              </p>
                             </div>
                           </div>
                           <div className='mt-6 flex'>
@@ -309,7 +322,9 @@ const MyProfile = ({
                               </svg>
                             </div>
                             <div className='ml-3 text-base text-gray-500 hover:text-gray-700'>
-                              <p>{solvedQuizzes} quizzes completed</p>
+                              <p>
+                                {solvedQuizzes} {quizzesCompletedLabel}
+                              </p>
                             </div>
                           </div>
                         </div>
