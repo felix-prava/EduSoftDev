@@ -8,6 +8,7 @@ import MaterialItem from './MaterialItem';
 import Spinner from '../layout/Spinner';
 import Modal from '../layout/Modal';
 import PageNotFound from '../layout/PageNotFound';
+import { modulesTranslations } from '../layout/Translations';
 import {
   INTRODUCTION_TITLE,
   INTRODUCTION_DESCRIPTION,
@@ -36,6 +37,9 @@ const ModuleItem = ({
   let description = null;
   let displayErrorPage = false;
   const language = user ? user.language : 'en';
+  const addProblemLabel = modulesTranslations.addProblem[language];
+  const addLessonLabel = modulesTranslations.addLesson[language];
+  const addQuizLabel = modulesTranslations.addQuiz[language];
 
   const [modal, setModal] = useState(false);
   const [modalData, setModalData] = useState([]);
@@ -106,7 +110,7 @@ const ModuleItem = ({
                     type='button'
                     className='inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
                   >
-                    Add Problem
+                    {addProblemLabel}
                   </button>
                 </Link>
                 <Link to={`/modules/${moduleName}/create-lesson`}>
@@ -114,7 +118,7 @@ const ModuleItem = ({
                     type='button'
                     className='inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
                   >
-                    Add Lesson
+                    {addLessonLabel}
                   </button>
                 </Link>
                 <Link to={`/modules/${moduleName}/create-quiz`}>
@@ -122,7 +126,7 @@ const ModuleItem = ({
                     type='button'
                     className='inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
                   >
-                    Add Quiz
+                    {addQuizLabel}
                   </button>
                 </Link>
               </div>

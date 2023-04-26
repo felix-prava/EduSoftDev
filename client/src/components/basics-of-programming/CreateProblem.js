@@ -4,9 +4,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addLearningMaterial } from '../../actions/learning';
 import { setAlert } from '../../actions/alert';
+import {
+  learningMaterialTranslations,
+  universalTranslations,
+} from '../layout/Translations';
+import { capitalizeWords } from '../../utils/helpers';
 import TextEditor from '../layout/TextEditor';
 
-const CreateProblem = ({ addLearningMaterial, setAlert }) => {
+const CreateProblem = ({ auth: { user }, addLearningMaterial, setAlert }) => {
   const { module } = useParams();
   let navigate = useNavigate();
 
@@ -44,6 +49,31 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
   let testsHeader = null;
   let examplesHeader = null;
   let hintsHeader = null;
+
+  const language = user ? user.language : 'en';
+  const addProblemTitleLabel =
+    learningMaterialTranslations.addProblemTitle[language];
+  const problemNameLabel = learningMaterialTranslations.problemName[language];
+  const expNeededLabel = learningMaterialTranslations.expNeeded[language];
+  const expGainedLabel = learningMaterialTranslations.expGained[language];
+  const expMaxLabel = learningMaterialTranslations.expMax[language];
+  const testsTitleLabel = learningMaterialTranslations.testsTitle[language];
+  const inputLabel = learningMaterialTranslations.input[language];
+  const outputLabel = learningMaterialTranslations.output[language];
+  const showTestLabel = learningMaterialTranslations.showTest[language];
+  const addTestLabel = learningMaterialTranslations.addTest[language];
+  const examplesTitleLabel =
+    learningMaterialTranslations.examplesTitle[language];
+  const addExampleLabel = learningMaterialTranslations.addExample[language];
+  const hintsTitleLabel = learningMaterialTranslations.hintsTitle[language];
+  const hintLabel = learningMaterialTranslations.hint[language];
+  const addHintLabel = learningMaterialTranslations.addHint[language];
+
+  const bodyLabel = universalTranslations.body[language];
+  const shortDescriptionLabel =
+    universalTranslations.shortDescription[language];
+  const saveButtonLabel = universalTranslations.saveButton[language];
+  const cancelButtonLabel = universalTranslations.cancelButton[language];
 
   const addTest = function () {
     if (testsInputField === null) {
@@ -136,7 +166,7 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
             <div>
               <div>
                 <h3 className='text-2xl font-bold leading-6 font-medium text-gray-900 sm:text-2xl'>
-                  Create a new problem
+                  {addProblemTitleLabel}
                 </h3>
               </div>
 
@@ -146,8 +176,7 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
                     htmlFor='name'
                     className='block text-sm font-medium text-gray-700'
                   >
-                    {' '}
-                    What's the name of the problem?{' '}
+                    {problemNameLabel}
                   </label>
                   <div className='mt-1'>
                     <input
@@ -169,8 +198,7 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
                         htmlFor='expNeeded'
                         className='block text-sm font-medium text-gray-700'
                       >
-                        {' '}
-                        Experience Needed{' '}
+                        {expNeededLabel}
                       </label>
                       <div className='mt-1'>
                         <input
@@ -189,8 +217,7 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
                         htmlFor='expGained'
                         className='block text-sm font-medium text-gray-700'
                       >
-                        {' '}
-                        Experience Gained{' '}
+                        {expGainedLabel}
                       </label>
                       <div className='mt-1'>
                         <input
@@ -209,8 +236,7 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
                         htmlFor='expMax'
                         className='block text-sm font-medium text-gray-700'
                       >
-                        {' '}
-                        Max Experience{' '}
+                        {expMaxLabel}
                       </label>
                       <div className='mt-1'>
                         <input
@@ -232,8 +258,7 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
                     htmlFor='body'
                     className='block text-sm font-medium text-gray-700'
                   >
-                    {' '}
-                    Body{' '}
+                    {bodyLabel}
                   </label>
                   <div className='mt-1'>
                     <TextEditor
@@ -253,8 +278,7 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
                     htmlFor='shortDescription'
                     className='block text-sm font-medium text-gray-700'
                   >
-                    {' '}
-                    Short description{' '}
+                    {capitalizeWords(shortDescriptionLabel)}
                   </label>
                   <div className='mt-1'>
                     <input
@@ -275,7 +299,7 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
                   id='tests-header'
                   className='mt-6 font-xl font-bold leading-6 font-medium text-gray-900 sm:text-xl'
                 >
-                  Tests
+                  {testsTitleLabel}
                 </h1>
               </div>
               <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-7'>
@@ -284,8 +308,7 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
                     htmlFor='testInput'
                     className='block text-sm font-medium text-gray-700'
                   >
-                    {' '}
-                    Input{' '}
+                    {inputLabel}
                   </label>
                   <div className='mt-1'>
                     <textarea
@@ -301,8 +324,7 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
                     htmlFor='testOutput'
                     className='block text-sm font-medium text-gray-700'
                   >
-                    {' '}
-                    Output{' '}
+                    {outputLabel}
                   </label>
                   <div className='mt-1'>
                     <textarea
@@ -315,7 +337,7 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
 
                 <div className='sm:col-span-1'>
                   <label className='block text-sm font-medium text-gray-700'>
-                    Show Test
+                    {showTestLabel}
                   </label>
                   <div className='mt-1'>
                     <input
@@ -333,7 +355,7 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
                   onClick={addTest}
                   className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
                 >
-                  Add Test
+                  {addTestLabel}
                 </button>
               </div>
             </div>
@@ -344,7 +366,7 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
                   id='examples-header'
                   className='mt-6 font-xl font-bold leading-6 font-medium text-gray-900 sm:text-xl'
                 >
-                  Examples
+                  {examplesTitleLabel}
                 </h1>
               </div>
               <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
@@ -353,8 +375,7 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
                     htmlFor='exampleInput'
                     className='block text-sm font-medium text-gray-700'
                   >
-                    {' '}
-                    Input{' '}
+                    {inputLabel}
                   </label>
                   <div className='mt-1'>
                     <textarea
@@ -370,8 +391,7 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
                     htmlFor='exampleOutput'
                     className='block text-sm font-medium text-gray-700'
                   >
-                    {' '}
-                    Output{' '}
+                    {outputLabel}
                   </label>
                   <div className='mt-1'>
                     <textarea
@@ -388,7 +408,7 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
                   onClick={addExample}
                   className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
                 >
-                  Add Example
+                  {addExampleLabel}
                 </button>
               </div>
             </div>
@@ -399,7 +419,7 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
                   id='hints-header'
                   className='mt-6 font-xl font-bold leading-6 font-medium text-gray-900 sm:text-xl'
                 >
-                  Hints
+                  {hintsTitleLabel}
                 </h1>
               </div>
               <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
@@ -408,8 +428,7 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
                     htmlFor='hint'
                     className='block text-sm font-medium text-gray-700'
                   >
-                    {' '}
-                    Hint{' '}
+                    {hintLabel}
                   </label>
                   <div className='mt-1'>
                     <input
@@ -426,7 +445,7 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
                   onClick={addHint}
                   className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
                 >
-                  Add Hint
+                  {addHintLabel}
                 </button>
               </div>
             </div>
@@ -439,14 +458,14 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
                   type='button'
                   className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
                 >
-                  Cancel
+                  {cancelButtonLabel}
                 </button>
               </Link>
               <button
                 type='submit'
                 className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
               >
-                Save
+                {saveButtonLabel}
               </button>
             </div>
           </div>
@@ -457,8 +476,15 @@ const CreateProblem = ({ addLearningMaterial, setAlert }) => {
 };
 
 CreateProblem.propTypes = {
+  auth: PropTypes.object.isRequired,
   addLearningMaterial: PropTypes.func.isRequired,
   setAlert: PropTypes.func.isRequired,
 };
 
-export default connect(null, { addLearningMaterial, setAlert })(CreateProblem);
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { addLearningMaterial, setAlert })(
+  CreateProblem
+);

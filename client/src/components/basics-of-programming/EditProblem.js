@@ -13,10 +13,16 @@ import {
   deleteHint,
 } from '../../actions/learning';
 import TextEditor from '../layout/TextEditor';
+import {
+  learningMaterialTranslations,
+  universalTranslations,
+} from '../layout/Translations';
+import { capitalizeWords } from '../../utils/helpers';
 import Spinner from '../layout/Spinner';
 import { setAlert } from '../../actions/alert';
 
 const EditProblem = ({
+  auth: { user },
   learning: { learningMaterial, loading },
   getLearningMaterial,
   updateLearningMaterial,
@@ -60,6 +66,36 @@ const EditProblem = ({
   let testsInputField = null;
   let testsOutputField = null;
   let testsCheckbox = null;
+
+  const language = user ? user.language : 'en';
+  const editProblemTitleLabel =
+    learningMaterialTranslations.editProblemTitle[language];
+  const problemNameLabel = learningMaterialTranslations.problemName[language];
+  const expNeededLabel = learningMaterialTranslations.expNeeded[language];
+  const expGainedLabel = learningMaterialTranslations.expGained[language];
+  const expMaxLabel = learningMaterialTranslations.expMax[language];
+  const testsTitleLabel = learningMaterialTranslations.testsTitle[language];
+  const inputLabel = learningMaterialTranslations.input[language];
+  const outputLabel = learningMaterialTranslations.output[language];
+  const showTestLabel = learningMaterialTranslations.showTest[language];
+  const testLabel = learningMaterialTranslations.test[language];
+  const displayTestLabel = learningMaterialTranslations.displayTest[language];
+  const addTestLabel = learningMaterialTranslations.addTest[language];
+  const examplesTitleLabel =
+    learningMaterialTranslations.examplesTitle[language];
+  const addExampleLabel = learningMaterialTranslations.addExample[language];
+  const hintsTitleLabel = learningMaterialTranslations.hintsTitle[language];
+  const hintLabel = learningMaterialTranslations.hint[language];
+  const newHintLabel = learningMaterialTranslations.newHint[language];
+  const addHintLabel = learningMaterialTranslations.addHint[language];
+
+  const bodyLabel = universalTranslations.body[language];
+  const shortDescriptionLabel =
+    universalTranslations.shortDescription[language];
+  const yesLabel = universalTranslations.yes[language];
+  const noLabel = universalTranslations.no[language];
+  const saveButtonLabel = universalTranslations.saveButton[language];
+  const cancelButtonLabel = universalTranslations.cancelButton[language];
 
   const addNewHint = function () {
     if (hintsField === null) {
@@ -157,7 +193,7 @@ const EditProblem = ({
             <div>
               <div>
                 <h3 className='text-2xl font-bold leading-6 font-medium text-gray-900 sm:text-2xl'>
-                  Edit problem
+                  {editProblemTitleLabel}
                 </h3>
               </div>
 
@@ -167,8 +203,7 @@ const EditProblem = ({
                     htmlFor='name'
                     className='block text-sm font-medium text-gray-700'
                   >
-                    {' '}
-                    What's the title of this lesson?{' '}
+                    {problemNameLabel}
                   </label>
                   <div className='mt-1'>
                     <input
@@ -190,8 +225,7 @@ const EditProblem = ({
                         htmlFor='expNeeded'
                         className='block text-sm font-medium text-gray-700'
                       >
-                        {' '}
-                        Experience Needed{' '}
+                        {expNeededLabel}
                       </label>
                       <div className='mt-1'>
                         <input
@@ -210,8 +244,7 @@ const EditProblem = ({
                         htmlFor='expGained'
                         className='block text-sm font-medium text-gray-700'
                       >
-                        {' '}
-                        Experience Gained{' '}
+                        {expGainedLabel}
                       </label>
                       <div className='mt-1'>
                         <input
@@ -230,8 +263,7 @@ const EditProblem = ({
                         htmlFor='expMax'
                         className='block text-sm font-medium text-gray-700'
                       >
-                        {' '}
-                        Max Experience{' '}
+                        {expMaxLabel}
                       </label>
                       <div className='mt-1'>
                         <input
@@ -253,8 +285,7 @@ const EditProblem = ({
                     htmlFor='body'
                     className='block text-sm font-medium text-gray-700'
                   >
-                    {' '}
-                    Body{' '}
+                    {bodyLabel}
                   </label>
                   <div className='mt-1'>
                     <TextEditor
@@ -275,8 +306,7 @@ const EditProblem = ({
                     htmlFor='shortDescription'
                     className='block text-sm font-medium text-gray-700'
                   >
-                    {' '}
-                    Short description{' '}
+                    {capitalizeWords(shortDescriptionLabel)}
                   </label>
                   <div className='mt-1'>
                     <input
@@ -297,7 +327,7 @@ const EditProblem = ({
                   id='tests-header'
                   className='mt-6 font-xl font-bold leading-6 font-medium text-gray-900 sm:text-xl'
                 >
-                  Tests
+                  {testsTitleLabel}
                 </h1>
               </div>
               <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-7'>
@@ -306,8 +336,7 @@ const EditProblem = ({
                     htmlFor='testInput'
                     className='block text-sm font-medium text-gray-700'
                   >
-                    {' '}
-                    Input{' '}
+                    {inputLabel}
                   </label>
                   <div className='mt-1'>
                     <textarea
@@ -323,8 +352,7 @@ const EditProblem = ({
                     htmlFor='testOutput'
                     className='block text-sm font-medium text-gray-700'
                   >
-                    {' '}
-                    Output{' '}
+                    {outputLabel}
                   </label>
                   <div className='mt-1'>
                     <textarea
@@ -337,7 +365,7 @@ const EditProblem = ({
 
                 <div className='sm:col-span-1'>
                   <label className='block text-sm font-medium text-gray-700'>
-                    Show Test
+                    {showTestLabel}
                   </label>
                   <div className='mt-1'>
                     <input
@@ -355,7 +383,7 @@ const EditProblem = ({
                   onClick={addNewTest}
                   className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
                 >
-                  Add Test
+                  {addTestLabel}
                 </button>
               </div>
               <div>
@@ -368,18 +396,19 @@ const EditProblem = ({
                             <div className='sm:col-span-3'>
                               <div className='flex items-center justify-between'>
                                 <h3 className='text-sm font-medium'>
-                                  {`Test ${index + 1}`}
+                                  {`${testLabel} ${index + 1}`}
                                 </h3>
                               </div>
 
                               <p className='text-sm text-gray-500'>
-                                Input: {test.input}
+                                {inputLabel}: {test.input}
                               </p>
                               <p className='text-sm text-gray-500'>
-                                Output: {test.output}
+                                {outputLabel}: {test.output}
                               </p>
                               <p className='text-sm text-gray-500'>
-                                Display Test: {test.showTest ? 'Yes' : 'No'}
+                                {displayTestLabel}:{' '}
+                                {test.showTest ? yesLabel : noLabel}
                               </p>
                             </div>
                             <div className='sm:col-span-3'>
@@ -426,7 +455,7 @@ const EditProblem = ({
                   id='examples-header'
                   className='mt-6 font-xl font-bold leading-6 font-medium text-gray-900 sm:text-xl'
                 >
-                  Examples
+                  {examplesTitleLabel}
                 </h1>
               </div>
               <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
@@ -435,8 +464,7 @@ const EditProblem = ({
                     htmlFor='exampleInput'
                     className='block text-sm font-medium text-gray-700'
                   >
-                    {' '}
-                    Input{' '}
+                    {inputLabel}
                   </label>
                   <div className='mt-1'>
                     <textarea
@@ -452,8 +480,7 @@ const EditProblem = ({
                     htmlFor='exampleOutput'
                     className='block text-sm font-medium text-gray-700'
                   >
-                    {' '}
-                    Output{' '}
+                    {outputLabel}
                   </label>
                   <div className='mt-1'>
                     <textarea
@@ -470,7 +497,7 @@ const EditProblem = ({
                   onClick={addNewExample}
                   className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
                 >
-                  Add Example
+                  {addExampleLabel}
                 </button>
               </div>
               <div>
@@ -489,10 +516,10 @@ const EditProblem = ({
                               {/*<!-- TODO 2 columns for bigger examples and tests. Buttons on the second column -->*/}
 
                               <p className='text-sm text-gray-500'>
-                                Input: {example.input}
+                                {inputLabel}: {example.input}
                               </p>
                               <p className='text-sm text-gray-500'>
-                                Output: {example.output}
+                                {outputLabel}: {example.output}
                               </p>
                             </div>
                             <div className='sm:col-span-3'>
@@ -536,14 +563,13 @@ const EditProblem = ({
             <div>
               <div>
                 <h1 className='mt-6 font-xl font-bold leading-6 font-medium text-gray-900 sm:text-xl'>
-                  Hints
+                  {hintsTitleLabel}
                 </h1>
               </div>
               <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
                 <div className='sm:col-span-6'>
                   <label className='block text-sm font-medium text-gray-700'>
-                    {' '}
-                    New Hint{' '}
+                    {newHintLabel}
                   </label>
                   <div className='mt-1'>
                     <input
@@ -560,7 +586,7 @@ const EditProblem = ({
                   onClick={addNewHint}
                   className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
                 >
-                  Add Hint
+                  {addHintLabel}
                 </button>
               </div>
 
@@ -572,7 +598,7 @@ const EditProblem = ({
                         <div className='flex-1 space-y-1'>
                           <div className='flex items-center justify-between'>
                             <h3 className='text-sm font-medium'>
-                              {`Hint ${index + 1}`}
+                              {`${hintLabel} ${index + 1}`}
                             </h3>
                             <p className='text-sm text-gray-500'>
                               {learningMaterial && (
@@ -616,14 +642,14 @@ const EditProblem = ({
                   type='button'
                   className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
                 >
-                  Cancel
+                  {cancelButtonLabel}
                 </button>
               </Link>
               <button
                 type='submit'
                 className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
               >
-                Save
+                {saveButtonLabel}
               </button>
             </div>
           </div>
@@ -634,6 +660,7 @@ const EditProblem = ({
 };
 
 EditProblem.propTypes = {
+  auth: PropTypes.object.isRequired,
   learning: PropTypes.object.isRequired,
   getLearningMaterial: PropTypes.func.isRequired,
   updateLearningMaterial: PropTypes.func.isRequired,
@@ -647,6 +674,7 @@ EditProblem.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
+  auth: state.auth,
   learning: state.learning,
 });
 

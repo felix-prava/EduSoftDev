@@ -71,6 +71,14 @@ export const universalTranslations = {
     en: 'Current',
     ro: 'Actual',
   },
+  yes: {
+    en: 'Yes',
+    ro: 'Da',
+  },
+  no: {
+    en: 'No',
+    ro: 'Nu',
+  },
 };
 
 export const navbarTranslations = {
@@ -331,5 +339,99 @@ export const experienceTranslations = {
   jobDescription: {
     en: 'Job Description',
     ro: 'Descrierea Postului',
+  },
+};
+
+export const modulesTranslations = {
+  addProblem: {
+    en: 'Add Problem',
+    ro: 'Adaugă o Problemă',
+  },
+  addLesson: {
+    en: 'Add Lesson',
+    ro: 'Adaugă o Lecție',
+  },
+  addQuiz: {
+    en: 'Add Quiz',
+    ro: 'Adaugă un quiz',
+  },
+};
+
+export const learningMaterialTranslations = {
+  addProblemTitle: {
+    en: 'Create a New Problem',
+    ro: 'Adaugă o Problemă Nouă',
+  },
+  editProblemTitle: {
+    en: 'Edit Problem',
+    ro: 'Editează o Problemă',
+  },
+  problemName: {
+    en: "What's the name of the problem?",
+    ro: 'Care este numele problemei?',
+  },
+  expNeeded: {
+    en: 'Experience Needed',
+    ro: 'Experiență Necesară',
+  },
+  expGained: {
+    en: 'Experience Gained',
+    ro: 'Experiență Câștigată',
+  },
+  expMax: {
+    en: 'Max Experience',
+    ro: 'Experiență maximă',
+  },
+  testsTitle: {
+    en: 'Tests',
+    ro: 'Teste',
+  },
+  test: {
+    en: 'Test',
+    ro: 'Test',
+  },
+  displayTest: {
+    en: 'Display Test',
+    ro: 'Afișează Testul',
+  },
+  input: {
+    en: 'Input',
+    ro: 'Date de Intrare',
+  },
+  output: {
+    en: 'Output',
+    ro: 'Date de Ieșire',
+  },
+  showTest: {
+    en: 'Show Test',
+    ro: 'Afișează Testul',
+  },
+  addTest: {
+    en: 'Add Test',
+    ro: 'Adaugă un Test',
+  },
+  examplesTitle: {
+    en: 'Examples',
+    ro: 'Exemple',
+  },
+  addExample: {
+    en: 'Add Example',
+    ro: 'Adaugă un Exemplu',
+  },
+  hintsTitle: {
+    en: 'Hints',
+    ro: 'Indicii',
+  },
+  hint: {
+    en: 'Hint',
+    ro: 'Indiciu',
+  },
+  newHint: {
+    en: 'New Hint',
+    ro: 'Indiciu Nou',
+  },
+  addHint: {
+    en: 'Add Hint',
+    ro: 'Adaugă un Indiciu',
   },
 };
