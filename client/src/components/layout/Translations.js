@@ -59,6 +59,18 @@ export const universalTranslations = {
     en: 'Remove Social Links',
     ro: 'Șterge linkuri de social media',
   },
+  startDate: {
+    en: 'Start Date',
+    ro: 'Data de Început',
+  },
+  endDate: {
+    en: 'End Date',
+    ro: 'Data de Sfârşit',
+  },
+  current: {
+    en: 'Current',
+    ro: 'Actual',
+  },
 };
 
 export const navbarTranslation = {
@@ -265,5 +277,47 @@ export const dashboardTranslations = {
   date: {
     en: 'Date',
     ro: 'Data',
+  },
+};
+
+export const educationTranslations = {
+  educationTitle: {
+    en: 'Add Education',
+    ro: 'Adaugă Educație',
+  },
+  school: {
+    en: 'School',
+    ro: 'Școală',
+  },
+  degree: {
+    en: 'Degree or Certificate',
+    ro: 'Diplomă sau Certificat',
+  },
+  fieldOfStudy: {
+    en: 'Field of Study',
+    ro: 'Domeniu de Studiu',
+  },
+};
+
+export const experienceTranslations = {
+  experienceTitle: {
+    en: 'Add Experience',
+    ro: 'Adaugă experiență',
+  },
+  jobTitle: {
+    en: 'Job Title',
+    ro: 'Denumirea Funcției',
+  },
+  companyName: {
+    en: 'Company Name',
+    ro: 'Numele Companiei',
+  },
+  location: {
+    en: 'Location',
+    ro: 'Locație',
+  },
+  jobDescription: {
+    en: 'Job Description',
+    ro: 'Descrierea Postului',
   },
 };
