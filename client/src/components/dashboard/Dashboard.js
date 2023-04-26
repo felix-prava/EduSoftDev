@@ -34,7 +34,7 @@ const Dashboard = ({
   const viewAllLabel = dashboardTranslations.viewAll[language];
   const recentSolutionsLabel = dashboardTranslations.recentSolutions[language];
   const problemLabel = dashboardTranslations.problem[language];
-  const statusLabel = dashboardTranslations.status[language];
+  const statusLabel = universalTranslations.status[language];
   const scoreLabel = dashboardTranslations.score[language];
   const dateLabel = dashboardTranslations.date[language];
 

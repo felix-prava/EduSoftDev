@@ -47,6 +47,18 @@ export const universalTranslations = {
     en: 'exp points',
     ro: 'puncte de experienta',
   },
+  status: {
+    en: 'Status',
+    ro: 'Status',
+  },
+  socialLinks: {
+    en: 'Add Social Links',
+    ro: 'Adaugă linkuri de social media',
+  },
+  removeLinks: {
+    en: 'Remove Social Links',
+    ro: 'Șterge linkuri de social media',
+  },
 };
 
 export const navbarTranslation = {
@@ -168,6 +180,18 @@ export const myProfileTranslation = {
     en: 'You can see and edit your general information. Also you can add previous education and experience.',
     ro: 'Poți vedea și edita informațiile tale generale. De asemenea, poți adăuga educația și experiențele anterioare.',
   },
+  about: {
+    en: 'About',
+    ro: 'Despre',
+  },
+  aboutDescription: {
+    en: 'Tell us a little about yourself',
+    ro: 'Povestește-ne puțin despre tine',
+  },
+  statusDescription: {
+    en: 'What is your current job? Or maybe you are a student?',
+    ro: 'Care este jobul tău actual? Sau poate ești student?',
+  },
 };
 
 export const articlesTranslations = {
@@ -233,10 +257,6 @@ export const dashboardTranslations = {
   problem: {
     en: 'Problem',
     ro: 'Problema',
-  },
-  status: {
-    en: 'Status',
-    ro: 'Status',
   },
   score: {
     en: 'Score',
