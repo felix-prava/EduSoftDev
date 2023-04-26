@@ -5,6 +5,10 @@ import Spinner from '../layout/Spinner';
 import { connect } from 'react-redux';
 import { updateUser } from '../../actions/auth';
 import { setAlert } from '../../actions/alert';
+import {
+  myProfileTranslation,
+  universalTranslations,
+} from '../layout/Translations';
 
 const EditGeneralInfo = ({ auth: { user, loading }, updateUser, setAlert }) => {
   const [formData, setFormData] = useState({
@@ -46,6 +50,14 @@ const EditGeneralInfo = ({ auth: { user, loading }, updateUser, setAlert }) => {
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
+  const language = user ? user.language : 'en';
+  const updateGeneralInfoLabel =
+    myProfileTranslation.updateGeneralInfo[language];
+  const firstNameLabel = myProfileTranslation.firstName[language];
+  const lastNameLabel = myProfileTranslation.lastName[language];
+  const saveButtonLabel = universalTranslations.saveButton[language];
+  const cancelButtonLabel = universalTranslations.cancelButton[language];
+
   return (
     <Fragment>
       {user === null ? (
@@ -54,13 +66,13 @@ const EditGeneralInfo = ({ auth: { user, loading }, updateUser, setAlert }) => {
         <div className='container mt-8'>
           <form
             className='space-y-8 divide-y divide-gray-200'
-            onSubmit={(e) => updateGeneralInfo(e)}
+            onSubmit={(e) => lastName(e)}
           >
             <div className='space-y-8 divide-y divide-gray-200'>
               <div>
                 <div>
                   <h3 className='text-2xl font-bold leading-6 font-medium text-gray-900 sm:text-2xl'>
-                    Update General Info
+                    {updateGeneralInfoLabel}
                   </h3>
                 </div>
 
@@ -71,8 +83,7 @@ const EditGeneralInfo = ({ auth: { user, loading }, updateUser, setAlert }) => {
                         htmlFor='firstName'
                         className='block text-sm font-medium text-gray-700'
                       >
-                        {' '}
-                        First Name{' '}
+                        {firstNameLabel}
                       </label>
                       <div className='mt-1'>
                         <input
@@ -90,8 +101,7 @@ const EditGeneralInfo = ({ auth: { user, loading }, updateUser, setAlert }) => {
                         htmlFor='lastName'
                         className='block text-sm font-medium text-gray-700'
                       >
-                        {' '}
-                        Last Name{' '}
+                        {lastNameLabel}
                       </label>
                       <div className='mt-1'>
                         <input
@@ -157,7 +167,7 @@ const EditGeneralInfo = ({ auth: { user, loading }, updateUser, setAlert }) => {
                     type='button'
                     className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
                   >
-                    Cancel
+                    {cancelButtonLabel}
                   </button>
                 </Link>
                 <button
@@ -165,7 +175,7 @@ const EditGeneralInfo = ({ auth: { user, loading }, updateUser, setAlert }) => {
                   onClick={updateGeneralInfo}
                   className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
                 >
-                  Save
+                  {saveButtonLabel}
                 </button>
               </div>
             </div>

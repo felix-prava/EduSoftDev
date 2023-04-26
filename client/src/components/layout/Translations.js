@@ -204,6 +204,18 @@ export const myProfileTranslation = {
     en: 'What is your current job? Or maybe you are a student?',
     ro: 'Care este jobul tău actual? Sau poate ești student?',
   },
+  updateGeneralInfo: {
+    en: 'Update General Info',
+    ro: 'Actualizează informațiile generale',
+  },
+  firstName: {
+    en: 'First Name',
+    ro: 'Prenume',
+  },
+  lastName: {
+    en: 'Last Name',
+    ro: 'Nume de Familie',
+  },
 };
 
 export const articlesTranslations = {
