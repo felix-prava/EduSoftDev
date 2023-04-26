@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import { getProfileById } from '../../actions/profile';
 import {
-  myProfileTranslation,
-  profilesTranslation,
+  myProfileTranslations,
+  profilesTranslations,
   universalTranslations,
 } from '../layout/Translations';
 import Experience from './Experience';
@@ -33,18 +33,18 @@ const UserProfile = ({
   }, [getProfileById, id]);
 
   const language = currentUser ? currentUser.language : 'en';
-  const generalInfoLabel = myProfileTranslation.generalInfo[language];
-  const editProfileLabel = myProfileTranslation.editProfile[language];
-  const addExperienceLabel = myProfileTranslation.addExperience[language];
-  const addEducationLabel = myProfileTranslation.addEducation[language];
-  const experienceLabel = myProfileTranslation.experience[language];
-  const educationLabel = myProfileTranslation.education[language];
-  const githubReposLabel = myProfileTranslation.githubRepos[language];
+  const generalInfoLabel = myProfileTranslations.generalInfo[language];
+  const editProfileLabel = myProfileTranslations.editProfile[language];
+  const addExperienceLabel = myProfileTranslations.addExperience[language];
+  const addEducationLabel = myProfileTranslations.addEducation[language];
+  const experienceLabel = myProfileTranslations.experience[language];
+  const educationLabel = myProfileTranslations.education[language];
+  const githubReposLabel = myProfileTranslations.githubRepos[language];
   const solvedProblemsLabel = universalTranslations.solvedProblems[language];
   const solvedProblems =
     (user && user.solvedProblems && user.solvedProblems.length) || 0;
-  const noExperienceLabel = profilesTranslation.noExperience[language];
-  const noEducationLabel = profilesTranslation.noEducation[language];
+  const noExperienceLabel = profilesTranslations.noExperience[language];
+  const noEducationLabel = profilesTranslations.noEducation[language];
 
   return (
     <Fragment>

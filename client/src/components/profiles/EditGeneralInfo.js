@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { updateUser } from '../../actions/auth';
 import { setAlert } from '../../actions/alert';
 import {
-  myProfileTranslation,
+  myProfileTranslations,
   universalTranslations,
 } from '../layout/Translations';
 
@@ -52,9 +52,9 @@ const EditGeneralInfo = ({ auth: { user, loading }, updateUser, setAlert }) => {
 
   const language = user ? user.language : 'en';
   const updateGeneralInfoLabel =
-    myProfileTranslation.updateGeneralInfo[language];
-  const firstNameLabel = myProfileTranslation.firstName[language];
-  const lastNameLabel = myProfileTranslation.lastName[language];
+    myProfileTranslations.updateGeneralInfo[language];
+  const firstNameLabel = myProfileTranslations.firstName[language];
+  const lastNameLabel = myProfileTranslations.lastName[language];
   const saveButtonLabel = universalTranslations.saveButton[language];
   const cancelButtonLabel = universalTranslations.cancelButton[language];
 

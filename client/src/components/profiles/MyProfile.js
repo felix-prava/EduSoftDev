@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import {
-  myProfileTranslation,
+  myProfileTranslations,
   universalTranslations,
 } from '../layout/Translations';
 import { getCurrentUserProfile } from '../../actions/profile';
@@ -26,19 +26,19 @@ const MyProfile = ({
   }
 
   const language = user ? user.language : 'en';
-  const myProfileLabel = myProfileTranslation.myProfile[language];
+  const myProfileLabel = myProfileTranslations.myProfile[language];
   const myProfileDescriptionLabel =
-    myProfileTranslation.myProfileDescription[language];
-  const generalInfoLabel = myProfileTranslation.generalInfo[language];
-  const editProfileLabel = myProfileTranslation.editProfile[language];
-  const editGeneralInfoLabel = myProfileTranslation.editGeneralInfo[language];
-  const addExperienceLabel = myProfileTranslation.addExperience[language];
-  const addEducationLabel = myProfileTranslation.addEducation[language];
-  const experienceLabel = myProfileTranslation.experience[language];
-  const educationLabel = myProfileTranslation.education[language];
-  const noExperienceLabel = myProfileTranslation.noExperience[language];
-  const noEducationLabel = myProfileTranslation.noEducation[language];
-  const githubReposLabel = myProfileTranslation.githubRepos[language];
+    myProfileTranslations.myProfileDescription[language];
+  const generalInfoLabel = myProfileTranslations.generalInfo[language];
+  const editProfileLabel = myProfileTranslations.editProfile[language];
+  const editGeneralInfoLabel = myProfileTranslations.editGeneralInfo[language];
+  const addExperienceLabel = myProfileTranslations.addExperience[language];
+  const addEducationLabel = myProfileTranslations.addEducation[language];
+  const experienceLabel = myProfileTranslations.experience[language];
+  const educationLabel = myProfileTranslations.education[language];
+  const noExperienceLabel = myProfileTranslations.noExperience[language];
+  const noEducationLabel = myProfileTranslations.noEducation[language];
+  const githubReposLabel = myProfileTranslations.githubRepos[language];
   const expPointsLabel = universalTranslations.expPoints[language];
   const solvedProblemsLabel = universalTranslations.solvedProblems[language];
   const lessonsLearnedLabel = universalTranslations.lessonsLearned[language];

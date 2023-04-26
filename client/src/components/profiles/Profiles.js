@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getAllProfiles } from '../../actions/profile';
 import ProfileItem from './ProfileItem';
-import { profilesTranslation } from '../layout/Translations';
+import { profilesTranslations } from '../layout/Translations';
 import Spinner from '../layout/Spinner';
 
 const Profiles = ({
@@ -16,8 +16,8 @@ const Profiles = ({
   }, [getAllProfiles]);
 
   const language = user ? user.language : 'en';
-  const userProfilesLabel = profilesTranslation.userProfiles[language];
-  const noProfilesLabel = profilesTranslation.noProfiles[language];
+  const userProfilesLabel = profilesTranslations.userProfiles[language];
+  const noProfilesLabel = profilesTranslations.noProfiles[language];
 
   return (
     <Fragment>

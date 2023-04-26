@@ -7,7 +7,7 @@ import {
   getCurrentUserProfile,
 } from '../../actions/profile';
 import {
-  myProfileTranslation,
+  myProfileTranslations,
   universalTranslations,
 } from '../layout/Translations';
 
@@ -33,11 +33,12 @@ const EditProfile = ({
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
 
   const language = user ? user.language : 'en';
-  const myProfileLabel = myProfileTranslation.myProfile[language];
-  const aboutLabel = myProfileTranslation.about[language];
-  const aboutDescriptionLabel = myProfileTranslation.aboutDescription[language];
+  const myProfileLabel = myProfileTranslations.myProfile[language];
+  const aboutLabel = myProfileTranslations.about[language];
+  const aboutDescriptionLabel =
+    myProfileTranslations.aboutDescription[language];
   const statusDescriptionLabel =
-    myProfileTranslation.statusDescription[language];
+    myProfileTranslations.statusDescription[language];
   const statusLabel = universalTranslations.status[language];
   const socialLinksLabel = universalTranslations.socialLinks[language];
   const removeLinksLabel = universalTranslations.removeLinks[language];

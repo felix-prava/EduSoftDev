@@ -73,7 +73,7 @@ export const universalTranslations = {
   },
 };
 
-export const navbarTranslation = {
+export const navbarTranslations = {
   home: {
     en: 'Home',
     ro: 'Acasa',
@@ -120,7 +120,7 @@ export const navbarTranslation = {
   },
 };
 
-export const profilesTranslation = {
+export const profilesTranslations = {
   userProfiles: {
     en: 'User Profiles',
     ro: 'Profilurile Userilor',
@@ -143,7 +143,7 @@ export const profilesTranslation = {
   },
 };
 
-export const myProfileTranslation = {
+export const myProfileTranslations = {
   myProfile: {
     en: 'My Profile',
     ro: 'Profilul Meu',

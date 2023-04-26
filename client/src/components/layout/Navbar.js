@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logoutUser } from '../../actions/auth';
 import { useLocation } from 'react-router-dom';
-import { navbarTranslation } from './Translations';
+import { navbarTranslations } from './Translations';
 
 const toggleProfileDropdown = function () {
   const profileDropdown = document.getElementById('profile-dropdown-options');
@@ -43,17 +43,17 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
   }
 
   const language = user ? user.language : 'en';
-  const homeLabel = navbarTranslation.home[language];
-  const profilesLabel = navbarTranslation.profiles[language];
-  const modulesLabel = navbarTranslation.modules[language];
-  const articlesLabel = navbarTranslation.articles[language];
-  const registerLabel = navbarTranslation.register[language];
-  const aboutUsLabel = navbarTranslation.aboutUs[language];
-  const loginLabel = navbarTranslation.login[language];
-  const logoutLabel = navbarTranslation.logout[language];
-  const signOutLabel = navbarTranslation.signOut[language];
-  const settingsLabel = navbarTranslation.settings[language];
-  const myProfileLabel = navbarTranslation.myProfile[language];
+  const homeLabel = navbarTranslations.home[language];
+  const profilesLabel = navbarTranslations.profiles[language];
+  const modulesLabel = navbarTranslations.modules[language];
+  const articlesLabel = navbarTranslations.articles[language];
+  const registerLabel = navbarTranslations.register[language];
+  const aboutUsLabel = navbarTranslations.aboutUs[language];
+  const loginLabel = navbarTranslations.login[language];
+  const logoutLabel = navbarTranslations.logout[language];
+  const signOutLabel = navbarTranslations.signOut[language];
+  const settingsLabel = navbarTranslations.settings[language];
+  const myProfileLabel = navbarTranslations.myProfile[language];
 
   const modules = (
     <Link

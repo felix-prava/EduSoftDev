@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { profilesTranslation } from '../layout/Translations';
+import { profilesTranslations } from '../layout/Translations';
 
 const ProfileItem = ({
   language,
@@ -11,7 +11,7 @@ const ProfileItem = ({
     social,
   },
 }) => {
-  const viewProfileLabel = profilesTranslation.viewProfile[language];
+  const viewProfileLabel = profilesTranslations.viewProfile[language];
 
   let facebook = null,
     instagram = null,
