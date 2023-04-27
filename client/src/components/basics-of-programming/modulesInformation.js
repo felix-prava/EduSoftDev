@@ -23,7 +23,7 @@ export const IF_ELSE_TITLE = {
     en: 'If Else - Conditional Statements',
     ro: 'If Else - Structuri de decizie',
   },
-  seond_type: {
+  second_type: {
     en: 'If Else Module',
     ro: 'Modulul If Else',
   },
@@ -38,7 +38,7 @@ export const WHILE_FOR_TITLE = {
     en: 'While and For Loops',
     ro: 'Structurile repetitive While si For',
   },
-  seond_type: {
+  second_type: {
     en: 'While - For Loops Module',
     ro: 'Modulul While - For',
   },
@@ -53,7 +53,7 @@ export const ARRAYS_FUNCTIONS_TITLE = {
     en: 'Arrays and Functions',
     ro: 'Vectori si Functii',
   },
-  seond_type: {
+  second_type: {
     en: 'Arrays and Functions Module',
     ro: 'Modulul Vectori si Functii',
   },
@@ -68,7 +68,7 @@ export const MATRIX_STRINGS_TITLE = {
     en: 'Matrix and Strings',
     ro: 'Matrice si Siruri de Caractere',
   },
-  seond_type: {
+  second_type: {
     en: 'Matrix and Strings Module',
     ro: 'Modulul Matrice si String-uri',
   },
@@ -83,7 +83,7 @@ export const DATABASE_OOP_TITLE = {
     en: 'OOP and Databases',
     ro: 'POO si Baze de Date',
   },
-  seond_type: {
+  second_type: {
     en: 'OOP and Database Module',
     ro: 'Modulul POO si Baze de Date',
   },
@@ -98,7 +98,7 @@ export const BACKTRACKING_RECURSION_TITLE = {
     en: 'Backtracking and Recursion',
     ro: 'Backtracking si Recursivitate',
   },
-  seond_type: {
+  second_type: {
     en: 'Backtracking and Recursion Module',
     ro: 'Modulul Backtracking si Recursivitate',
   },

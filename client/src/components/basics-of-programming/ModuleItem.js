@@ -54,27 +54,27 @@ const ModuleItem = ({
       description = INTRODUCTION_DESCRIPTION[language];
       break;
     case 'if-else':
-      title = IF_ELSE_TITLE.seond_type[language];
+      title = IF_ELSE_TITLE.second_type[language];
       description = IF_ELSE_DESCRIPTION[language];
       break;
     case 'while-for':
-      title = WHILE_FOR_TITLE.seond_type[language];
+      title = WHILE_FOR_TITLE.second_type[language];
       description = WHILE_FOR_DESCRIPTION[language];
       break;
     case 'arrays-functions':
-      title = ARRAYS_FUNCTIONS_TITLE.seond_type[language];
+      title = ARRAYS_FUNCTIONS_TITLE.second_type[language];
       description = ARRAYS_FUNCTIONS_DESCRIPTION[language];
       break;
     case 'matrix-strings':
-      title = MATRIX_STRINGS_TITLE.seond_type[language];
+      title = MATRIX_STRINGS_TITLE.second_type[language];
       description = MATRIX_STRINGS_DESCRIPTION[language];
       break;
     case 'oop-db':
-      title = DATABASE_OOP_TITLE.seond_type[language];
+      title = DATABASE_OOP_TITLE.second_type[language];
       description = DATABASE_OOP_DESCRIPTION[language];
       break;
     case 'backtracking-recursion':
-      title = BACKTRACKING_RECURSION_TITLE.seond_type[language];
+      title = BACKTRACKING_RECURSION_TITLE.second_type[language];
       description = BACKTRACKING_RECURSION_DESCRIPTION[language];
       break;
     default:
