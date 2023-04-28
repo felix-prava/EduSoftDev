@@ -182,7 +182,7 @@ const Dashboard = ({
                         <div className='ml-5 w-0 flex-1'>
                           <dl>
                             <dt className='text-sm font-medium text-gray-500 truncate'>
-                              {lessonsLearnedLabel}
+                              {capitalizeWords(lessonsLearnedLabel)}
                             </dt>
                             <dd>
                               <div className='text-lg font-medium text-gray-900'>
@@ -229,7 +229,7 @@ const Dashboard = ({
                         <div className='ml-5 w-0 flex-1'>
                           <dl>
                             <dt className='text-sm font-medium text-gray-500 truncate'>
-                              {quizzesCompletedLabel}
+                              {capitalizeWords(quizzesCompletedLabel)}
                             </dt>
                             <dd>
                               <div className='text-lg font-medium text-gray-900'>
