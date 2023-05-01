@@ -5,11 +5,11 @@ export const universalTranslations = {
   },
   saveButton: {
     en: 'Save',
-    ro: 'Salveaza',
+    ro: 'Salvează',
   },
   cancelButton: {
     en: 'Cancel',
-    ro: 'Anuleaza',
+    ro: 'Anulează',
   },
   backButton: {
     en: 'Back',
@@ -21,7 +21,7 @@ export const universalTranslations = {
   },
   body: {
     en: 'Body',
-    ro: 'Continut',
+    ro: 'Conținut',
   },
   shortDescription: {
     en: 'Short description',
@@ -37,7 +37,7 @@ export const universalTranslations = {
   },
   lessonsLearned: {
     en: 'lessons learned',
-    ro: 'lectii invatate',
+    ro: 'lectii invățate',
   },
   quizzesCompleted: {
     en: 'quizzes completed',
@@ -45,7 +45,7 @@ export const universalTranslations = {
   },
   expPoints: {
     en: 'exp points',
-    ro: 'puncte de experienta',
+    ro: 'puncte de experiență',
   },
   status: {
     en: 'Status',
@@ -96,7 +96,7 @@ export const universalTranslations = {
 export const navbarTranslations = {
   home: {
     en: 'Home',
-    ro: 'Acasa',
+    ro: 'Acasă',
   },
   profiles: {
     en: 'Profiles',
@@ -370,13 +370,25 @@ export const learningMaterialTranslations = {
     en: 'Create a New Problem',
     ro: 'Adaugă o Problemă Nouă',
   },
+  addLessonTitle: {
+    en: 'Create a New Lesson',
+    ro: 'Adaugă o Lecție Nouă',
+  },
   editProblemTitle: {
     en: 'Edit Problem',
     ro: 'Editează o Problemă',
   },
+  editLessonTitle: {
+    en: 'Edit Lesson',
+    ro: 'Editează o Lecție',
+  },
   problemName: {
     en: "What's the name of the problem?",
     ro: 'Care este numele problemei?',
+  },
+  lessonName: {
+    en: "What's the title of this lesson?",
+    ro: 'Care este titlul lecției?',
   },
   expNeeded: {
     en: 'Experience Needed',
