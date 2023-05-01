@@ -79,6 +79,18 @@ export const universalTranslations = {
     en: 'No',
     ro: 'Nu',
   },
+  problem: {
+    en: 'Problem',
+    ro: 'Problemă',
+  },
+  lesson: {
+    en: 'Lesson',
+    ro: 'Lecție',
+  },
+  quiz: {
+    en: 'Quiz',
+    ro: 'Quiz',
+  },
 };
 
 export const navbarTranslations = {
@@ -285,10 +297,6 @@ export const dashboardTranslations = {
   recentSolutions: {
     en: 'Recent solutions',
     ro: 'Solutii recente',
-  },
-  problem: {
-    en: 'Problem',
-    ro: 'Problema',
   },
   score: {
     en: 'Score',
