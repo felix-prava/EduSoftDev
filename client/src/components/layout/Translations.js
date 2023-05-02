@@ -25,7 +25,7 @@ export const universalTranslations = {
   },
   shortDescription: {
     en: 'Short description',
-    ro: 'Scurta descriere',
+    ro: 'Scurtă descriere',
   },
   leaveComment: {
     en: 'Leave a comment',
@@ -361,7 +361,7 @@ export const modulesTranslations = {
   },
   addQuiz: {
     en: 'Add Quiz',
-    ro: 'Adaugă un quiz',
+    ro: 'Adaugă un Quiz',
   },
 };
 
@@ -374,6 +374,10 @@ export const learningMaterialTranslations = {
     en: 'Create a New Lesson',
     ro: 'Adaugă o Lecție Nouă',
   },
+  addQuizTitle: {
+    en: 'Create a New Quiz',
+    ro: 'Adaugă un Quiz Nou',
+  },
   editProblemTitle: {
     en: 'Edit Problem',
     ro: 'Editează o Problemă',
@@ -382,6 +386,10 @@ export const learningMaterialTranslations = {
     en: 'Edit Lesson',
     ro: 'Editează o Lecție',
   },
+  editQuizTitle: {
+    en: 'Edit Quiz',
+    ro: 'Editează un Quiz',
+  },
   problemName: {
     en: "What's the name of the problem?",
     ro: 'Care este numele problemei?',
@@ -389,6 +397,10 @@ export const learningMaterialTranslations = {
   lessonName: {
     en: "What's the title of this lesson?",
     ro: 'Care este titlul lecției?',
+  },
+  quizName: {
+    en: "What's the title of this quiz?",
+    ro: 'Care este numele quiz-ului?',
   },
   expNeeded: {
     en: 'Experience Needed',
@@ -400,7 +412,7 @@ export const learningMaterialTranslations = {
   },
   expMax: {
     en: 'Max Experience',
-    ro: 'Experiență maximă',
+    ro: 'Experiență Maximă',
   },
   testsTitle: {
     en: 'Tests',
@@ -453,5 +465,37 @@ export const learningMaterialTranslations = {
   addHint: {
     en: 'Add Hint',
     ro: 'Adaugă un Indiciu',
+  },
+  failedQuizMessage: {
+    en: 'Message for Failed Quiz',
+    ro: 'Mesaj pentru Test Eșuat',
+  },
+  waitingMinutes: {
+    en: 'Waiting Minutes',
+    ro: 'Minute de Așteptare',
+  },
+  wrongAnswers: {
+    en: 'Wrong Answers',
+    ro: 'Răspunsuri Greșite',
+  },
+  wrongAnswer: {
+    en: 'Wrong Answer',
+    ro: 'Răspuns Greșit',
+  },
+  rightAnswers: {
+    en: 'Right Answers',
+    ro: 'Răspunsuri Corecte',
+  },
+  rightAnswer: {
+    en: 'Right Answer',
+    ro: 'Răspuns Corect',
+  },
+  addWrongAnswer: {
+    en: 'Add Wrong Answer',
+    ro: 'Adaugă Răspuns Greșit',
+  },
+  addRightAnswer: {
+    en: 'Add Right Answer',
+    ro: 'Adaugă Răspuns Corect',
   },
 };
