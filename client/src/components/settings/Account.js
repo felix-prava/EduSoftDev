@@ -5,6 +5,10 @@ import { deleteAccount } from '../../actions/profile';
 import { updateUser } from '../../actions/auth';
 import { setAlert } from '../../actions/alert';
 import Modal from '../layout/Modal';
+import {
+  settingsTranslations,
+  universalTranslations,
+} from '../layout/Translations';
 
 const Account = ({ auth: { user }, updateUser, deleteAccount, setAlert }) => {
   const [formData, setFormData] = useState({
@@ -17,6 +21,17 @@ const Account = ({ auth: { user }, updateUser, deleteAccount, setAlert }) => {
     'Are you sure you want to delete the account? It will be permanently removed, this action cannot be undone.';
 
   const { username, preferredName } = formData;
+
+  const language = user ? user.language : 'en';
+  const changeUsernameLabel = settingsTranslations.changeUsername[language];
+  const updateProfilePictureLabel =
+    settingsTranslations.updateProfilePicture[language];
+  const deleteAccountLabel = settingsTranslations.deleteAccount[language];
+  const deleteAccountMessageLabel =
+    settingsTranslations.deleteAccountMessage[language];
+  const deleteYourAccountLabel =
+    settingsTranslations.deleteYourAccount[language];
+  const saveButtonLabel = universalTranslations.saveButton[language];
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -32,7 +47,7 @@ const Account = ({ auth: { user }, updateUser, deleteAccount, setAlert }) => {
                   id='update-username'
                   className='text-lg leading-6 font-medium text-gray-900'
                 >
-                  Change Username
+                  {changeUsernameLabel}
                 </h2>
               </div>
 
@@ -65,7 +80,7 @@ const Account = ({ auth: { user }, updateUser, deleteAccount, setAlert }) => {
                 }}
                 className='bg-gray-800 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900'
               >
-                Save
+                {saveButtonLabel}
               </button>
             </div>
           </div>
@@ -119,7 +134,7 @@ const Account = ({ auth: { user }, updateUser, deleteAccount, setAlert }) => {
                 }}
                 className='bg-gray-800 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900'
               >
-                Save
+                {saveButtonLabel}
               </button>
             </div>
           </div>
@@ -134,7 +149,7 @@ const Account = ({ auth: { user }, updateUser, deleteAccount, setAlert }) => {
                     id='profile-picture'
                     className='text-lg leading-6 font-medium text-gray-900'
                   >
-                    Update Profile Picture
+                    {updateProfilePictureLabel}
                   </h2>
                 </div>
               </div>
@@ -143,7 +158,7 @@ const Account = ({ auth: { user }, updateUser, deleteAccount, setAlert }) => {
                   type='submit'
                   className='bg-gray-800 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900'
                 >
-                  Save
+                  {saveButtonLabel}
                 </button>
               </div>
             </div>
@@ -157,11 +172,10 @@ const Account = ({ auth: { user }, updateUser, deleteAccount, setAlert }) => {
                 id='delete-account'
                 className='text-2xl font-extrabold leading-6 font-medium text-red-600'
               >
-                Delete Account
+                {deleteAccountLabel}
               </h2>
               <p className='mt-1 text-sm text-gray-500'>
-                Once you delete your account, there is no going back. Please be
-                certain.
+                {deleteAccountMessageLabel}
               </p>
             </div>
             <div className='mt-6 flex flex-col'>
@@ -172,7 +186,7 @@ const Account = ({ auth: { user }, updateUser, deleteAccount, setAlert }) => {
                       onClick={() => setModal(!modal)}
                       className='bg-red-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center ml-4 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600'
                     >
-                      Delete Your Account
+                      {deleteYourAccountLabel}
                     </button>
                   </div>
                 </div>

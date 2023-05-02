@@ -567,3 +567,50 @@ export const learningMaterialTranslations = {
     ro: 'Termină Quiz-ul',
   },
 };
+
+export const settingsTranslations = {
+  account: {
+    en: 'Account',
+    ro: 'Cont',
+  },
+  password: {
+    en: 'Password',
+    ro: 'Parolă',
+  },
+  appearance: {
+    en: 'Appearance',
+    ro: 'Aspect',
+  },
+  appearance: {
+    en: 'Appearance',
+    ro: 'Aspect',
+  },
+  notifications: {
+    en: 'Notifications',
+    ro: 'Notificări',
+  },
+  planAndBilling: {
+    en: 'Plan & Billing',
+    ro: 'Planificare & Facturare',
+  },
+  changeUsername: {
+    en: 'Change Username',
+    ro: 'Schimbă Username-ul',
+  },
+  updateProfilePicture: {
+    en: 'Update Profile Picture',
+    ro: 'Actualiează fotografia de profil',
+  },
+  deleteAccount: {
+    en: 'Delete Account',
+    ro: 'Șterge Cont',
+  },
+  deleteAccountMessage: {
+    en: 'Once you delete your account, there is no going back. Please be certain.',
+    ro: 'Odată ce îţi ștergi contul, acest lucru este ireversibil. Te rugăm să fii sigur.',
+  },
+  deleteYourAccount: {
+    en: 'Delete Your Account',
+    ro: 'Șterge-ţi Contul',
+  },
+};
