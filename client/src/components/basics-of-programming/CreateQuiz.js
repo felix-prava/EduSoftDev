@@ -64,6 +64,10 @@ const CreateQuiz = ({ auth: { user }, addLearningMaterial, setAlert }) => {
   const rightAnswerLabel = learningMaterialTranslations.rightAnswer[language];
   const addRightAnswerLabel =
     learningMaterialTranslations.addRightAnswer[language];
+  const noEmptyAnswerMessage =
+    learningMaterialTranslations.noEmptyAnswer[language];
+  const addNewAnswerMessage =
+    learningMaterialTranslations.addNewAnswer[language];
 
   const bodyLabel = universalTranslations.body[language];
   const shortDescriptionLabel =
@@ -79,7 +83,7 @@ const CreateQuiz = ({ auth: { user }, addLearningMaterial, setAlert }) => {
       wrongAnswerHeader = document.getElementById('wrong-answers-header');
     }
     if (wrongAnswersField.value === '') {
-      setAlert("You can't add an empty answer", 'error', 3500);
+      setAlert(`${noEmptyAnswerMessage}`, 'error', 3500);
       return;
     }
     wrongAnswers.push({
@@ -87,7 +91,7 @@ const CreateQuiz = ({ auth: { user }, addLearningMaterial, setAlert }) => {
     });
     wrongAnswersField.value = null;
     wrongAnswerHeader.textContent = `Wrong Answers (${wrongAnswers.length})`;
-    setAlert('A new answer was added', 'success', 2000, false);
+    setAlert(`${addNewAnswerMessage}`, 'success', 2000, false);
   };
 
   const addRightAnswer = function () {
@@ -98,7 +102,7 @@ const CreateQuiz = ({ auth: { user }, addLearningMaterial, setAlert }) => {
       rightAnswerHeader = document.getElementById('right-answers-header');
     }
     if (rightAnswersField.value === '') {
-      setAlert("You can't add an empty answer", 'error', 3500);
+      setAlert(`${noEmptyAnswerMessage}`, 'error', 3500);
       return;
     }
     rightAnswers.push({
@@ -106,7 +110,7 @@ const CreateQuiz = ({ auth: { user }, addLearningMaterial, setAlert }) => {
     });
     rightAnswersField.value = null;
     rightAnswerHeader.textContent = `Right Answers (${rightAnswers.length})`;
-    setAlert('A new answer was added', 'success', 2000, false);
+    setAlert(`${addNewAnswerMessage}`, 'success', 2000, false);
   };
 
   const onChange = (e) =>

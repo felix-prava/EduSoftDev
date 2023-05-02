@@ -68,6 +68,16 @@ const CreateProblem = ({ auth: { user }, addLearningMaterial, setAlert }) => {
   const hintsTitleLabel = learningMaterialTranslations.hintsTitle[language];
   const hintLabel = learningMaterialTranslations.hint[language];
   const addHintLabel = learningMaterialTranslations.addHint[language];
+  const testMustHaveInputOutpuMessage =
+    learningMaterialTranslations.testMustHaveInputOutput[language];
+  const addNewTestMessage = learningMaterialTranslations.addNewTest[language];
+  const addNewHintMessage = learningMaterialTranslations.addNewHint[language];
+  const exampleMustHaveInputOutputMessage =
+    learningMaterialTranslations.exampleMustHaveInputOutput[language];
+  const addNewExampleMessage =
+    learningMaterialTranslations.addNewExample[language];
+  const addEmptyHintMessage =
+    learningMaterialTranslations.addEmptyHint[language];
 
   const bodyLabel = universalTranslations.body[language];
   const shortDescriptionLabel =
@@ -89,7 +99,7 @@ const CreateProblem = ({ auth: { user }, addLearningMaterial, setAlert }) => {
       testsHeader = document.getElementById('tests-header');
     }
     if (testsInputField.value === '' || testsOutputField.value === '') {
-      setAlert('A test must have an input and an output', 'error', 3500);
+      setAlert(`${testMustHaveInputOutpuMessage}`, 'error', 3500);
       return;
     }
     tests.push({
@@ -101,7 +111,7 @@ const CreateProblem = ({ auth: { user }, addLearningMaterial, setAlert }) => {
     testsOutputField.value = null;
     testsCheckbox.checked = false;
     testsHeader.textContent = `Tests (${tests.length})`;
-    setAlert('A new test was added', 'success', 2000, false);
+    setAlert(`${addNewTestMessage}`, 'success', 2000, false);
   };
 
   const addExample = function () {
@@ -115,7 +125,7 @@ const CreateProblem = ({ auth: { user }, addLearningMaterial, setAlert }) => {
       examplesHeader = document.getElementById('examples-header');
     }
     if (examplesInputField.value === '' || examplesOutputField.value === '') {
-      setAlert('An example must have an input and an output', 'error', 3500);
+      setAlert(`${exampleMustHaveInputOutputMessage}`, 'error', 3500);
       return;
     }
     examples.push({
@@ -125,7 +135,7 @@ const CreateProblem = ({ auth: { user }, addLearningMaterial, setAlert }) => {
     examplesInputField.value = null;
     examplesOutputField.value = null;
     examplesHeader.textContent = `Examples (${examples.length})`;
-    setAlert('A new example was added', 'success', 2000, false);
+    setAlert(`${addNewExampleMessage}`, 'success', 2000, false);
   };
 
   const addHint = function () {
@@ -136,7 +146,7 @@ const CreateProblem = ({ auth: { user }, addLearningMaterial, setAlert }) => {
       hintsHeader = document.getElementById('hints-header');
     }
     if (hintsField.value === '') {
-      setAlert("You can't add an empty hint", 'error', 3500);
+      setAlert(`${addEmptyHintMessage}`, 'error', 3500);
       return;
     }
     hints.push({
@@ -144,7 +154,7 @@ const CreateProblem = ({ auth: { user }, addLearningMaterial, setAlert }) => {
     });
     hintsField.value = null;
     hintsHeader.textContent = `Hints (${hints.length})`;
-    setAlert('A new hint was added', 'success', 2000, false);
+    setAlert(`${addNewHintMessage}`, 'success', 2000, false);
   };
 
   const onChange = (e) =>

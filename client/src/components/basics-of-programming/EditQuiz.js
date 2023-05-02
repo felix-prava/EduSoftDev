@@ -75,6 +75,8 @@ const EditQuiz = ({
   const rightAnswerLabel = learningMaterialTranslations.rightAnswer[language];
   const addRightAnswerLabel =
     learningMaterialTranslations.addRightAnswer[language];
+  const noEmptyAnswerMessage =
+    learningMaterialTranslations.noEmptyAnswer[language];
 
   const bodyLabel = universalTranslations.body[language];
   const shortDescriptionLabel =
@@ -88,7 +90,7 @@ const EditQuiz = ({
         wrongAnswersField = document.getElementById('wrong-answer-field');
       }
       if (wrongAnswersField.value === '') {
-        setAlert("You can't add an empty answer", 'error', 3500);
+        setAlert(`${noEmptyAnswerMessage}`, 'error', 3500);
         return;
       }
       addAnswer(learningMaterial._id, 'wrongAnswer', {
@@ -101,7 +103,7 @@ const EditQuiz = ({
       rightAnswersField = document.getElementById('right-answer-field');
     }
     if (rightAnswersField.value === '') {
-      setAlert("You can't add an empty answer", 'error', 3500);
+      setAlert(`${noEmptyAnswerMessage}`, 'error', 3500);
       return;
     }
     addAnswer(learningMaterial._id, 'rightAnswer', {

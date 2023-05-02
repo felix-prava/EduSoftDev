@@ -88,6 +88,12 @@ const EditProblem = ({
   const hintLabel = learningMaterialTranslations.hint[language];
   const newHintLabel = learningMaterialTranslations.newHint[language];
   const addHintLabel = learningMaterialTranslations.addHint[language];
+  const testMustHaveInputOutpuMessage =
+    learningMaterialTranslations.testMustHaveInputOutput[language];
+  const exampleMustHaveInputOutputMessage =
+    learningMaterialTranslations.exampleMustHaveInputOutput[language];
+  const addEmptyHintMessage =
+    learningMaterialTranslations.addEmptyHint[language];
 
   const bodyLabel = universalTranslations.body[language];
   const shortDescriptionLabel =
@@ -102,7 +108,7 @@ const EditProblem = ({
       hintsField = document.getElementById('hint-field');
     }
     if (hintsField.value === '') {
-      setAlert("You can't add an empty hint", 'error', 3500);
+      setAlert(`${addEmptyHintMessage}`, 'error', 3500);
       return;
     }
     addHint(learningMaterial._id, { body: hintsField.value });
@@ -120,7 +126,7 @@ const EditProblem = ({
       testsCheckbox = document.getElementById('show-test-checkbox');
     }
     if (testsInputField.value === '' || testsOutputField.value === '') {
-      setAlert('A test must have an input and an output', 'error', 3500);
+      setAlert(`${testMustHaveInputOutpuMessage}`, 'error', 3500);
       return;
     }
     addTest(learningMaterial._id, {
@@ -141,7 +147,7 @@ const EditProblem = ({
       examplesOutputField = document.getElementById('example-output-field');
     }
     if (examplesInputField.value === '' || examplesOutputField.value === '') {
-      setAlert('An example must have an input and an output', 'error', 3500);
+      setAlert(`${exampleMustHaveInputOutputMessage}`, 'error', 3500);
       return;
     }
     addExample(learningMaterial._id, {

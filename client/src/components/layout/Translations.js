@@ -498,4 +498,36 @@ export const learningMaterialTranslations = {
     en: 'Add Right Answer',
     ro: 'Adaugă Răspuns Corect',
   },
+  testMustHaveInputOutput: {
+    en: 'A test must have an input and an output',
+    ro: 'Un test trebuie să aibă un input și un output',
+  },
+  addNewTest: {
+    en: 'A new test was added',
+    ro: 'Un nou test a fost adăugat',
+  },
+  exampleMustHaveInputOutput: {
+    en: 'An example must have an input and an output',
+    ro: 'Un exemplu trebuie să aibă un input și un output',
+  },
+  addNewExample: {
+    en: 'A new example was added',
+    ro: 'Un nou exemplu a fost adăugat',
+  },
+  addEmptyHint: {
+    en: "You can't add an empty hint",
+    ro: 'Nu poți adăuga un indiciu fără conținut',
+  },
+  addNewHint: {
+    en: 'A new hint was added',
+    ro: 'Un nou indiciu a fost adăugat',
+  },
+  noEmptyAnswer: {
+    en: "You can't add an empty answer",
+    ro: 'Nu poți adăuga un răspuns fără conținut',
+  },
+  addNewAnswer: {
+    en: 'A new answer was added',
+    ro: 'Un nou răspuns a fost adăugat',
+  },
 };
