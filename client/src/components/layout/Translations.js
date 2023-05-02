@@ -645,4 +645,16 @@ export const settingsTranslations = {
     en: 'Password Updated',
     ro: 'Parolă Actualizată',
   },
+  languageUpdated: {
+    en: 'Language Updated',
+    ro: 'Limba Actualizată',
+  },
+  selectLanguage: {
+    en: 'Select Language',
+    ro: 'Alege Limba',
+  },
+  language: {
+    en: 'Language',
+    ro: 'Limba',
+  },
 };
