@@ -5,28 +5,44 @@ import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import { getLearningMaterial, solveProblem } from '../../actions/learning';
 import { setAlert } from '../../actions/alert';
-
-function toggleHint(hintId, index) {
-  let downArrow = document.getElementById(`down-arrow-${hintId}`);
-  let upArrow = document.getElementById(`up-arrow-${hintId}`);
-  let hintBody = document.getElementById(`hint-body-${hintId}`);
-  let hintHeader = document.getElementById(`hint-header-${hintId}`);
-
-  downArrow.classList.toggle('hidden');
-  upArrow.classList.toggle('hidden');
-  hintBody.classList.toggle('hidden');
-  hintHeader.textContent = hintHeader.textContent.startsWith('Show')
-    ? `Hide Hint ${index}`
-    : `Show Hint ${index}`;
-}
+import {
+  learningMaterialTranslations,
+  universalTranslations,
+} from '../layout/Translations';
 
 const Problem = ({
+  auth: { user },
   learning: { learningMaterial, loading },
   getLearningMaterial,
   solveProblem,
   setAlert,
 }) => {
   const { module, problemId } = useParams();
+
+  const language = user ? user.language : 'en';
+  const sendSolutionLabel = learningMaterialTranslations.sendSolution[language];
+  const exampleLabel = learningMaterialTranslations.example[language];
+  const addYourSolutionLabel =
+    learningMaterialTranslations.addYourSolution[language];
+  const showHintLabel = learningMaterialTranslations.showHint[language];
+  const hideHintLabel = learningMaterialTranslations.hideHint[language];
+  const noEmptySolutionLabel =
+    learningMaterialTranslations.noEmptySolution[language];
+  const backButtonLabel = universalTranslations.backButton[language];
+
+  function toggleHint(hintId, index) {
+    let downArrow = document.getElementById(`down-arrow-${hintId}`);
+    let upArrow = document.getElementById(`up-arrow-${hintId}`);
+    let hintBody = document.getElementById(`hint-body-${hintId}`);
+    let hintHeader = document.getElementById(`hint-header-${hintId}`);
+
+    downArrow.classList.toggle('hidden');
+    upArrow.classList.toggle('hidden');
+    hintBody.classList.toggle('hidden');
+    hintHeader.textContent = hintHeader.textContent.startsWith(showHintLabel)
+      ? `${hideHintLabel} ${index}`
+      : `${showHintLabel} ${index}`;
+  }
 
   useEffect(() => {
     getLearningMaterial(problemId);
@@ -58,7 +74,7 @@ const Problem = ({
                       <div className='sm:col-span-3'>
                         <div className='flex items-center justify-between'>
                           <h3 className='text-sm font-medium'>
-                            {`Example ${index + 1}`}
+                            {`${exampleLabel} ${index + 1}`}
                           </h3>
                         </div>
                         <p className='text-sm text-gray-500'>
@@ -79,8 +95,7 @@ const Problem = ({
         <div className='mt-16 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
           <div className='sm:col-span-6 mr-4'>
             <label className='block text-sm font-medium text-gray-700'>
-              {' '}
-              Add Your Solution{' '}
+              {addYourSolutionLabel}
             </label>
             <div className='mt-2'>
               <textarea
@@ -104,7 +119,7 @@ const Problem = ({
                         className='text-sm font-medium'
                         id={`hint-header-${hint._id}`}
                       >
-                        {`Show Hint ${index + 1}`}
+                        {`${showHintLabel} ${index + 1}`}
                       </h3>
                       <svg
                         xmlns='http://www.w3.org/2000/svg'
@@ -159,7 +174,7 @@ const Problem = ({
                 type='button'
                 className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
               >
-                Go Back
+                {backButtonLabel}
               </button>
             </Link>
             <button
@@ -168,14 +183,14 @@ const Problem = ({
                 let solutionBody =
                   document.getElementById('solution-body').value;
                 if (solutionBody === '') {
-                  setAlert("You can't send an empty solution", 'error');
+                  setAlert(noEmptySolutionLabel, 'error');
                   return;
                 }
                 solveProblem(problemId, solutionBody);
               }}
               className='ml-3 mr-2 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
             >
-              Send Solution
+              {sendSolutionLabel}
             </button>
           </div>
         </div>
@@ -185,6 +200,7 @@ const Problem = ({
 };
 
 Problem.propTypes = {
+  auth: PropTypes.object.isRequired,
   learning: PropTypes.object.isRequired,
   getLearningMaterial: PropTypes.func.isRequired,
   solveProblem: PropTypes.func.isRequired,
@@ -192,6 +208,7 @@ Problem.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
+  auth: state.auth,
   learning: state.learning,
 });
 

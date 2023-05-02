@@ -13,7 +13,7 @@ export const universalTranslations = {
   },
   backButton: {
     en: 'Back',
-    ro: 'Inapoi',
+    ro: 'Înapoi',
   },
   postedOn: {
     en: 'Posted on',
@@ -529,5 +529,41 @@ export const learningMaterialTranslations = {
   addNewAnswer: {
     en: 'A new answer was added',
     ro: 'Un nou răspuns a fost adăugat',
+  },
+  noEmptySolution: {
+    en: "You can't send an empty solution",
+    ro: 'Nu poți trimite o soluție fără conținut',
+  },
+  selectOneOption: {
+    en: 'You must select at least one option',
+    ro: 'Trebuie să selectezi cel puțin o opțiune',
+  },
+  lessonLearned: {
+    en: 'Lesson Learned',
+    ro: 'Lecție Învățată',
+  },
+  sendSolution: {
+    en: 'Send Solution',
+    ro: 'Trimite Soluția',
+  },
+  example: {
+    en: 'Example',
+    ro: 'Exemplu',
+  },
+  addYourSolution: {
+    en: 'Add Your Solution',
+    ro: 'Adăugă Soluția Ta',
+  },
+  showHint: {
+    en: 'Show Hint',
+    ro: 'Afișează Indiciul',
+  },
+  hideHint: {
+    en: 'Hide Hint',
+    ro: 'Ascunde Indiciul',
+  },
+  finishQuiz: {
+    en: 'Finish Quiz',
+    ro: 'Termină Quiz-ul',
   },
 };
