@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { updateUser } from '../../actions/auth';
 import { setAlert } from '../../actions/alert';
+import {
+  settingsTranslations,
+  universalTranslations,
+} from '../layout/Translations';
 
 const Password = ({ auth: { user }, updateUser, setAlert }) => {
   const [formData, setFormData] = useState({
@@ -13,26 +17,41 @@ const Password = ({ auth: { user }, updateUser, setAlert }) => {
 
   const { oldPassword, password, passwordConfirmation } = formData;
 
+  const language = user ? user.language : 'en';
+  const changePasswordLabel = settingsTranslations.changePassword[language];
+  const oldPasswordLabel = settingsTranslations.oldPassword[language];
+  const newPasswordLabel = settingsTranslations.newPassword[language];
+  const confirmNewPasswordLabel =
+    settingsTranslations.confirmNewPassword[language];
+  const passwordsDoNotMatchMessage =
+    settingsTranslations.passwordsDoNotMatch[language];
+  const blankOldPasswordMessage =
+    settingsTranslations.blankOldPassword[language];
+  const blankNewPasswordMessage =
+    settingsTranslations.blankNewPassword[language];
+  const passwordUpdatedMessage = settingsTranslations.passwordUpdated[language];
+  const saveButtonLabel = universalTranslations.saveButton[language];
+
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const updatePassword = async () => {
     if (password !== passwordConfirmation) {
-      setAlert('Passwords do not match', 'error');
+      setAlert(passwordsDoNotMatchMessage, 'error');
       return;
     }
     if (oldPassword === '') {
-      setAlert("Old password can't be blank", 'error');
+      setAlert(blankOldPasswordMessage, 'error');
       return;
     }
     if (password === '') {
-      setAlert("Password can't be blank", 'error');
+      setAlert(blankNewPasswordMessage, 'error');
       return;
     }
     const result = await updateUser(
       { oldPassword, password },
       user._id,
-      'Password Updated'
+      passwordUpdatedMessage
     );
     if (result === 0) {
       setFormData({
@@ -55,14 +74,13 @@ const Password = ({ auth: { user }, updateUser, setAlert }) => {
                   id='update-password'
                   className='text-lg leading-6 font-medium text-gray-900'
                 >
-                  Change Password
+                  {changePasswordLabel}
                 </h2>
               </div>
 
               <div>
                 <label className='mt-6 block text-sm font-medium text-gray-700'>
-                  {' '}
-                  Old Password{' '}
+                  {oldPasswordLabel}
                 </label>
                 <div className='grid grid-cols-4 gap-6'>
                   <div className='col-span-4 sm:col-span-2'>
@@ -80,8 +98,7 @@ const Password = ({ auth: { user }, updateUser, setAlert }) => {
 
               <div>
                 <label className='mt-6 block text-sm font-medium text-gray-700'>
-                  {' '}
-                  Password{' '}
+                  {newPasswordLabel}
                 </label>
                 <div className='grid grid-cols-4 gap-6'>
                   <div className='col-span-4 sm:col-span-2'>
@@ -99,8 +116,7 @@ const Password = ({ auth: { user }, updateUser, setAlert }) => {
 
               <div>
                 <label className='mt-6 block text-sm font-medium text-gray-700'>
-                  {' '}
-                  Confirm New Password{' '}
+                  {confirmNewPasswordLabel}
                 </label>
                 <div className='grid grid-cols-4 gap-6'>
                   <div className='col-span-4 sm:col-span-2'>
@@ -121,7 +137,7 @@ const Password = ({ auth: { user }, updateUser, setAlert }) => {
                 onClick={() => updatePassword()}
                 className='bg-gray-800 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900'
               >
-                Save
+                {saveButtonLabel}
               </button>
             </div>
           </div>

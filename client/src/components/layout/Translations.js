@@ -597,6 +597,22 @@ export const settingsTranslations = {
     en: 'Change Username',
     ro: 'Schimbă Username-ul',
   },
+  changePassword: {
+    en: 'Change Password',
+    ro: 'Schimbă Parola',
+  },
+  oldPassword: {
+    en: 'Old Password',
+    ro: 'Vechea Parolă',
+  },
+  newPassword: {
+    en: 'New Password',
+    ro: 'Noua Parolă',
+  },
+  confirmNewPassword: {
+    en: 'Confirm New Password',
+    ro: 'Confirmă Noua Parolă',
+  },
   updateProfilePicture: {
     en: 'Update Profile Picture',
     ro: 'Actualiează fotografia de profil',
@@ -612,5 +628,21 @@ export const settingsTranslations = {
   deleteYourAccount: {
     en: 'Delete Your Account',
     ro: 'Șterge-ţi Contul',
+  },
+  passwordsDoNotMatch: {
+    en: 'Passwords do not match',
+    ro: 'Parolele nu se potrivesc',
+  },
+  blankOldPassword: {
+    en: "Old password can't be blank",
+    ro: 'Vechea parolă nu poate să fie fără conținut',
+  },
+  blankNewPassword: {
+    en: "New password can't be blank",
+    ro: 'Noua parolă nu poate să fie fără conținut',
+  },
+  passwordUpdated: {
+    en: 'Password Updated',
+    ro: 'Parolă Actualizată',
   },
 };
