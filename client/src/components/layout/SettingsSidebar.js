@@ -1,11 +1,13 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useLocation, Link } from 'react-router-dom';
 import Account from '../settings/Account';
 import Password from '../settings/Password';
 import Appearance from '../settings/Appearance';
+import { settingsTranslations } from './Translations';
 
-const SettingsSidebar = ({}) => {
+const SettingsSidebar = ({ auth: { user } }) => {
   const menuItemClass =
     'text-gray-900 hover:text-gray-900 hover:bg-gray-50 group rounded-md px-3 py-2 flex items-center text-sm font-medium';
   const selectedMenuItemClass =
@@ -15,6 +17,13 @@ const SettingsSidebar = ({}) => {
     'text-gray-400 group-hover:text-gray-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6';
   const selectedItemSvgClass =
     'text-orange-500 flex-shrink-0 -ml-1 mr-3 h-6 w-6';
+
+  const language = user ? user.language : 'en';
+  const accountLabel = settingsTranslations.account[language];
+  const passwordLabel = settingsTranslations.password[language];
+  const appearanceLabel = settingsTranslations.appearance[language];
+  const notificationsLabel = settingsTranslations.notifications[language];
+  const planAndBillingLabel = settingsTranslations.planAndBilling[language];
 
   let location = useLocation();
   let settingsMenu = null;
@@ -83,7 +92,7 @@ const SettingsSidebar = ({}) => {
                       d='M15 12a3 3 0 11-6 0 3 3 0 016 0z'
                     />
                   </svg>
-                  <span className='truncate'> Account </span>
+                  <span className='truncate'> {accountLabel} </span>
                 </Link>
 
                 <Link
@@ -113,7 +122,7 @@ const SettingsSidebar = ({}) => {
                       d='M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z'
                     />
                   </svg>
-                  <span className='truncate'> Password </span>
+                  <span className='truncate'> {passwordLabel} </span>
                 </Link>
 
                 <Link
@@ -142,7 +151,7 @@ const SettingsSidebar = ({}) => {
                       d='M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z'
                     />
                   </svg>
-                  <span className='truncate'> Appearance </span>
+                  <span className='truncate'> {appearanceLabel} </span>
                 </Link>
 
                 <Link
@@ -171,7 +180,7 @@ const SettingsSidebar = ({}) => {
                       d='M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207'
                     />
                   </svg>
-                  <span className='truncate'> Emails </span>
+                  <span className='truncate'> Email </span>
                 </Link>
 
                 <Link
@@ -201,7 +210,7 @@ const SettingsSidebar = ({}) => {
                       d='M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9'
                     />
                   </svg>
-                  <span className='truncate'> Notifications </span>
+                  <span className='truncate'> {notificationsLabel} </span>
                 </Link>
 
                 <Link
@@ -231,7 +240,7 @@ const SettingsSidebar = ({}) => {
                       d='M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z'
                     />
                   </svg>
-                  <span className='truncate'> Plan &amp; Billing </span>
+                  <span className='truncate'> {planAndBillingLabel} </span>
                 </Link>
               </nav>
             </aside>
@@ -243,4 +252,12 @@ const SettingsSidebar = ({}) => {
   );
 };
 
-export default connect(null, {})(SettingsSidebar);
+SettingsSidebar.propTypes = {
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, {})(SettingsSidebar);

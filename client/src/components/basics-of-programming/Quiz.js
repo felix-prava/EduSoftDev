@@ -5,8 +5,13 @@ import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import { getLearningMaterial, solveQuiz } from '../../actions/learning';
 import { setAlert } from '../../actions/alert';
+import {
+  learningMaterialTranslations,
+  universalTranslations,
+} from '../layout/Translations';
 
 const Quiz = ({
+  auth: { user },
   learning: { learningMaterial, loading },
   getLearningMaterial,
   solveQuiz,
@@ -16,6 +21,12 @@ const Quiz = ({
 
   let answers = [];
   let userAnswers = [];
+
+  const language = user ? user.language : 'en';
+  const finishQuizLabel = learningMaterialTranslations.finishQuiz[language];
+  const selectOneOptionLabel =
+    learningMaterialTranslations.selectOneOption[language];
+  const backButtonLabel = universalTranslations.backButton[language];
 
   useEffect(() => {
     getLearningMaterial(quizId);
@@ -109,21 +120,21 @@ const Quiz = ({
                   type='button'
                   className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
                 >
-                  Go Back
+                  {backButtonLabel}
                 </button>
               </Link>
               <button
                 type='button'
                 onClick={() => {
                   if (userAnswers.length === 0) {
-                    setAlert('You must select at least one option', 'error');
+                    setAlert(`${selectOneOptionLabel}`, 'error');
                     return;
                   }
                   solveQuiz(quizId, userAnswers);
                 }}
                 className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
               >
-                Finish Quiz
+                {finishQuizLabel}
               </button>
             </div>
           </div>
@@ -134,6 +145,7 @@ const Quiz = ({
 };
 
 Quiz.propTypes = {
+  auth: PropTypes.object.isRequired,
   learning: PropTypes.object.isRequired,
   getLearningMaterial: PropTypes.func.isRequired,
   solveQuiz: PropTypes.func.isRequired,
@@ -141,6 +153,7 @@ Quiz.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
+  auth: state.auth,
   learning: state.learning,
 });
 

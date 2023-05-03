@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addComment } from '../../actions/article';
 
-const AddComment = ({ articleId, addComment }) => {
+const AddComment = ({ articleId, addComment, translations }) => {
   const [comment, setComment] = useState('');
   return (
     <Fragment>
@@ -20,7 +20,7 @@ const AddComment = ({ articleId, addComment }) => {
             <div>
               <div>
                 <h3 className='text-2xl font-bold leading-6 font-medium text-gray-900 sm:text-2xl'>
-                  Leave a Comment
+                  {translations.leaveCommentLabel}
                 </h3>
               </div>
 
@@ -46,7 +46,7 @@ const AddComment = ({ articleId, addComment }) => {
                 type='submit'
                 className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
               >
-                Save
+                {translations.saveButtonLabel}
               </button>
             </div>
           </div>

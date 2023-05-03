@@ -21,6 +21,7 @@ const ArticleItem = ({
     dislikes,
     date,
   },
+  translations,
   addLike,
   addDislike,
   setAlert,
@@ -66,8 +67,7 @@ const ArticleItem = ({
               to={`/articles/${_id}`}
               className='text-base font-semibold text-indigo-600 hover:text-indigo-500'
             >
-              {' '}
-              Read full article{' '}
+              {translations.readArticleLinkLabel}
             </Link>
           </div>
           <div className='mt-6 flex space-x-3'>
@@ -106,7 +106,8 @@ const ArticleItem = ({
               onClick={() => showArticle(_id)}
               className='inline-flex items-center px-4 py-1 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
             >
-              Discussion {comments.length > 0 && comments.length}
+              {translations.discussionLabel}{' '}
+              {comments.length > 0 && comments.length}
             </button>
 
             {!auth.loading &&
@@ -162,7 +163,9 @@ const ArticleItem = ({
               )}
             </p>
             <div className='flex space-x-1 text-sm text-gray-500'>
-              <time dateTime={date}> Posted on {displayDate(date)}</time>
+              <time dateTime={date}>
+                {translations.postedOnLabel} {displayDate(date)}
+              </time>
             </div>
           </div>
         </div>

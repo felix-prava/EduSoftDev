@@ -4,6 +4,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import { getProfileById } from '../../actions/profile';
+import {
+  myProfileTranslations,
+  profilesTranslations,
+  universalTranslations,
+} from '../layout/Translations';
 import Experience from './Experience';
 import Education from './Education';
 import ProfileSocialItems from './ProfileSocialItems';
@@ -26,6 +31,20 @@ const UserProfile = ({
   useEffect(() => {
     getProfileById(id);
   }, [getProfileById, id]);
+
+  const language = currentUser ? currentUser.language : 'en';
+  const generalInfoLabel = myProfileTranslations.generalInfo[language];
+  const editProfileLabel = myProfileTranslations.editProfile[language];
+  const addExperienceLabel = myProfileTranslations.addExperience[language];
+  const addEducationLabel = myProfileTranslations.addEducation[language];
+  const experienceLabel = myProfileTranslations.experience[language];
+  const educationLabel = myProfileTranslations.education[language];
+  const githubReposLabel = myProfileTranslations.githubRepos[language];
+  const solvedProblemsLabel = universalTranslations.solvedProblems[language];
+  const solvedProblems =
+    (user && user.solvedProblems && user.solvedProblems.length) || 0;
+  const noExperienceLabel = profilesTranslations.noExperience[language];
+  const noEducationLabel = profilesTranslations.noEducation[language];
 
   return (
     <Fragment>
@@ -64,14 +83,14 @@ const UserProfile = ({
                               d='M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z'
                             />
                           </svg>
-                          Edit Profile
+                          {editProfileLabel}
                         </button>
                       </Link>
                       <div className='grid grid-cols-2 grid-flow-col gap-4'>
                         <Link to='/my-profile/add-experience'>
                           <button
                             type='button'
-                            className='mt-2 inline-flex text-center px-4 py-2 border border-transparent shadow-sm w-full text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
+                            className='mt-2 inline-flex text-center px-3 py-2 border border-transparent shadow-sm w-full text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
                           >
                             <svg
                               xmlns='http://www.w3.org/2000/svg'
@@ -87,13 +106,13 @@ const UserProfile = ({
                                 d='M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'
                               />
                             </svg>
-                            Add Experience
+                            {addExperienceLabel}
                           </button>
                         </Link>
                         <Link to='/my-profile/add-education'>
                           <button
                             type='button'
-                            className='mt-2 content-center inline-flex text-center px-4 py-2 border border-transparent shadow-sm w-full text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
+                            className='mt-2 content-center inline-flex text-center px-3 py-2 border border-transparent shadow-sm w-full text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
                           >
                             <svg
                               xmlns='http://www.w3.org/2000/svg'
@@ -111,7 +130,7 @@ const UserProfile = ({
                                 d='M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222'
                               />
                             </svg>
-                            Add Education
+                            {addEducationLabel}
                           </button>
                         </Link>
                       </div>
@@ -123,7 +142,7 @@ const UserProfile = ({
                   {profile && (
                     <div className='bg-white mb-8'>
                       <h2 className='text-2xl font-extrabold text-gray-900 sm:text-3xl'>
-                        General Info
+                        {generalInfoLabel}
                       </h2>
                       <div className='max-w-lg mx-auto md:max-w-none md:grid md:grid-cols-2 md:gap-8'>
                         <div>
@@ -258,7 +277,9 @@ const UserProfile = ({
                                 </svg>
                               </div>
                               <div className='ml-3 text-base text-gray-500 hover:text-gray-700'>
-                                <p>0 problems solved</p>
+                                <p>
+                                  {solvedProblems} {solvedProblemsLabel}
+                                </p>
                               </div>
                             </div>
                           </div>
@@ -272,11 +293,11 @@ const UserProfile = ({
                   )}
                   <div className='space-y-5 sm:space-y-4 mb-6'>
                     <h2 className='text-3xl font-extrabold tracking-tight sm:text-4xl'>
-                      Experience
+                      {experienceLabel}
                     </h2>
                     {profile.experience.length === 0 ? (
                       <p className='text-xl text-gray-500'>
-                        No professional experience credentials.
+                        {noExperienceLabel}
                       </p>
                     ) : (
                       <Experience
@@ -287,11 +308,11 @@ const UserProfile = ({
                   </div>
                   <div className='space-y-5 sm:space-y-4 mb-6'>
                     <h2 className='text-3xl font-extrabold tracking-tight sm:text-4xl'>
-                      Education
+                      {educationLabel}
                     </h2>
                     {profile.education.length === 0 ? (
                       <p className='text-xl text-gray-500'>
-                        No education credentials.
+                        {noEducationLabel}
                       </p>
                     ) : (
                       <Education
@@ -303,7 +324,7 @@ const UserProfile = ({
                   {profile && profile.githubUsername && (
                     <div className='space-y-5 sm:space-y-4 mb-6'>
                       <h2 className='text-3xl font-extrabold tracking-tight sm:text-4xl'>
-                        Github Repos
+                        {githubReposLabel}
                       </h2>
                       <GithubRepos username={profile.githubUsername} />
                     </div>

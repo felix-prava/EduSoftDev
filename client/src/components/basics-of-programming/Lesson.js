@@ -4,13 +4,23 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import { getLearningMaterial, completeLesson } from '../../actions/learning';
+import {
+  learningMaterialTranslations,
+  universalTranslations,
+} from '../layout/Translations';
 
 const Lesson = ({
+  auth: { user },
   getLearningMaterial,
   completeLesson,
   learning: { learningMaterial, loading },
 }) => {
   const { module, lessonId } = useParams();
+
+  const language = user ? user.language : 'en';
+  const lessonLearnedLabel =
+    learningMaterialTranslations.lessonLearned[language];
+  const backButtonLabel = universalTranslations.backButton[language];
 
   useEffect(() => {
     getLearningMaterial(lessonId);
@@ -39,7 +49,7 @@ const Lesson = ({
                 type='button'
                 className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
               >
-                Go Back
+                {backButtonLabel}
               </button>
             </Link>
             <button
@@ -47,7 +57,7 @@ const Lesson = ({
               onClick={() => completeLesson(lessonId)}
               className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
             >
-              Lesson Learned
+              {lessonLearnedLabel}
             </button>
           </div>
         </div>
@@ -57,12 +67,14 @@ const Lesson = ({
 };
 
 Lesson.propTypes = {
+  auth: PropTypes.object.isRequired,
   learning: PropTypes.object.isRequired,
   getLearningMaterial: PropTypes.func.isRequired,
   completeLesson: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  auth: state.auth,
   learning: state.learning,
 });
 

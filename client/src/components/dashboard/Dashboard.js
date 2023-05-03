@@ -5,6 +5,11 @@ import { connect } from 'react-redux';
 import NormalSolutionItem from '../solutions/NormalSolutionItem';
 import SmallSolutionItem from '../solutions/SmallSolutionItem';
 import Spinner from '../layout/Spinner';
+import {
+  dashboardTranslations,
+  universalTranslations,
+} from '../layout/Translations';
+import { capitalizeWords } from '../../utils/helpers';
 import { getUserSolutions } from '../../actions/solution';
 
 const Dashboard = ({
@@ -15,6 +20,23 @@ const Dashboard = ({
   useEffect(() => {
     getUserSolutions(user && user._id);
   }, [user, getUserSolutions]);
+
+  const language = user ? user.language : 'en';
+  const helloLabel = dashboardTranslations.hello[language];
+  const verifiedAccountLabel = dashboardTranslations.verifiedAccount[language];
+  const continueLearningLabel =
+    dashboardTranslations.continueLearning[language];
+  const solvedProblemsLabel = universalTranslations.solvedProblems[language];
+  const lessonsLearnedLabel = universalTranslations.lessonsLearned[language];
+  const quizzesCompletedLabel =
+    universalTranslations.quizzesCompleted[language];
+  const overviewLabel = dashboardTranslations.overview[language];
+  const viewAllLabel = dashboardTranslations.viewAll[language];
+  const recentSolutionsLabel = dashboardTranslations.recentSolutions[language];
+  const problemLabel = universalTranslations.problem[language];
+  const statusLabel = universalTranslations.status[language];
+  const scoreLabel = dashboardTranslations.score[language];
+  const dateLabel = dashboardTranslations.date[language];
 
   return loading || solutionsLoading || user === null ? (
     <Spinner />
@@ -45,7 +67,7 @@ const Dashboard = ({
                           />
 
                           <h1 className='ml-3 text-2xl font-bold leading-7 text-gray-900 sm:leading-9 sm:truncate'>
-                            Hello, {user.lastName} {user.firstName}
+                            {helloLabel}, {user.lastName} {user.firstName}
                           </h1>
                         </div>
                         <dl className='mt-6 flex flex-col sm:ml-3 sm:mt-1 sm:flex-row sm:flex-wrap'>
@@ -64,7 +86,7 @@ const Dashboard = ({
                                 clipRule='evenodd'
                               />
                             </svg>
-                            Verified account
+                            {verifiedAccountLabel}
                           </dd>
                         </dl>
                       </div>
@@ -75,7 +97,7 @@ const Dashboard = ({
                       type='button'
                       className='inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
                     >
-                      Continue Learning
+                      {continueLearningLabel}
                     </button>
                   </div>
                 </div>
@@ -85,7 +107,7 @@ const Dashboard = ({
             <div className='mt-8'>
               <div className='max-w-6xl mx-auto px-4 sm:px-6 lg:px-8'>
                 <h2 className='text-lg leading-6 font-medium text-gray-900'>
-                  Overview
+                  {overviewLabel}
                 </h2>
                 <div className='mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3'>
                   {/* Card */}
@@ -111,7 +133,7 @@ const Dashboard = ({
                         <div className='ml-5 w-0 flex-1'>
                           <dl>
                             <dt className='text-sm font-medium text-gray-500 truncate'>
-                              Solved Problems
+                              {capitalizeWords(solvedProblemsLabel)}
                             </dt>
                             <dd>
                               <div className='text-lg font-medium text-gray-900'>
@@ -130,8 +152,7 @@ const Dashboard = ({
                           to='#'
                           className='font-medium text-cyan-700 hover:text-cyan-900'
                         >
-                          {' '}
-                          View all{' '}
+                          {viewAllLabel}
                         </Link>
                       </div>
                     </div>
@@ -161,7 +182,7 @@ const Dashboard = ({
                         <div className='ml-5 w-0 flex-1'>
                           <dl>
                             <dt className='text-sm font-medium text-gray-500 truncate'>
-                              Lessons Learned
+                              {capitalizeWords(lessonsLearnedLabel)}
                             </dt>
                             <dd>
                               <div className='text-lg font-medium text-gray-900'>
@@ -180,8 +201,7 @@ const Dashboard = ({
                           to='#'
                           className='font-medium text-cyan-700 hover:text-cyan-900'
                         >
-                          {' '}
-                          View all{' '}
+                          {viewAllLabel}
                         </Link>
                       </div>
                     </div>
@@ -209,7 +229,7 @@ const Dashboard = ({
                         <div className='ml-5 w-0 flex-1'>
                           <dl>
                             <dt className='text-sm font-medium text-gray-500 truncate'>
-                              Quizzes Completed
+                              {capitalizeWords(quizzesCompletedLabel)}
                             </dt>
                             <dd>
                               <div className='text-lg font-medium text-gray-900'>
@@ -228,8 +248,7 @@ const Dashboard = ({
                           to='#'
                           className='font-medium text-cyan-700 hover:text-cyan-900'
                         >
-                          {' '}
-                          View all{' '}
+                          {viewAllLabel}
                         </Link>
                       </div>
                     </div>
@@ -240,7 +259,7 @@ const Dashboard = ({
               </div>
 
               <h2 className='max-w-6xl mx-auto mt-8 px-4 text-lg leading-6 font-medium text-gray-900 sm:px-6 lg:px-8'>
-                Recent solutions
+                {recentSolutionsLabel}
               </h2>
 
               {/* Activity list (smallest breakpoint only) */}
@@ -261,16 +280,16 @@ const Dashboard = ({
                         <thead>
                           <tr>
                             <th className='px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                              Problem
+                              {problemLabel}
                             </th>
                             <th className='px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                              Status
+                              {statusLabel}
                             </th>
                             <th className='px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                              Score
+                              {scoreLabel}
                             </th>
                             <th className='px-6 py-3 bg-gray-50 text-right text-xs font-medium text-gray-500 uppercase tracking-wider'>
-                              Date
+                              {dateLabel}
                             </th>
                           </tr>
                         </thead>
