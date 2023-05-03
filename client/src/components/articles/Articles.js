@@ -3,12 +3,16 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getArticles, deleteArticle } from '../../actions/article';
+import {
+  articlesTranslations,
+  universalTranslations,
+} from '../layout/Translations';
 import Spinner from '../layout/Spinner';
 import ArticleItem from './ArticleItem';
 import Modal from '../layout/Modal';
 
 const Articles = ({
-  auth: { isAuthenticated },
+  auth: { user, isAuthenticated },
   article: { articles, loading },
   getArticles,
   deleteArticle,
@@ -20,6 +24,16 @@ const Articles = ({
   const [modal, setModal] = useState(false);
   const [modalData, setModalData] = useState([]);
 
+  const language = user ? user.language : 'en';
+  const articlesLabel = articlesTranslations.articles[language];
+  const createArticleMessageLabel =
+    articlesTranslations.createArticleMessage[language];
+  const createArticleLinkLabel =
+    articlesTranslations.createArticleLink[language];
+  const discussionLabel = articlesTranslations.discussion[language];
+  const readArticleLinkLabel = articlesTranslations.readArticleLink[language];
+  const postedOnLabel = universalTranslations.postedOn[language];
+
   return (
     <Fragment>
       {loading ? (
@@ -30,16 +44,16 @@ const Articles = ({
             <div className='relative max-w-lg mx-auto divide-y-2 divide-gray-200 lg:max-w-7xl'>
               <div>
                 <h2 className='text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl'>
-                  Articles
+                  {articlesLabel}
                 </h2>
                 {isAuthenticated && (
                   <p className='mt-6 text-lg tracking-tight text-gray-900'>
-                    Do you want to share something interesting with us?{' '}
+                    {createArticleMessageLabel}{' '}
                     <Link
                       to='/articles/create-article'
                       className='text-blue-500'
                     >
-                      Create your own article
+                      {createArticleLinkLabel}
                     </Link>
                   </p>
                 )}
@@ -49,6 +63,11 @@ const Articles = ({
                   <ArticleItem
                     key={article._id}
                     article={article}
+                    translations={{
+                      discussionLabel,
+                      readArticleLinkLabel,
+                      postedOnLabel,
+                    }}
                     toggleModal={() => setModal(!modal)}
                     setModalData={setModalData}
                   />

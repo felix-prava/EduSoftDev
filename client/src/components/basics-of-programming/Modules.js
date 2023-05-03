@@ -1,7 +1,24 @@
 import React, { Fragment } from 'react';
+import { MODULES_TITLE, MODULES_TITLE_DESCRIPTION } from './modulesInformation';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import {
+  INTRODUCTION_TITLE,
+  INTRODUCTION_DESCRIPTION,
+  IF_ELSE_TITLE,
+  IF_ELSE_DESCRIPTION,
+  WHILE_FOR_TITLE,
+  WHILE_FOR_DESCRIPTION,
+  ARRAYS_FUNCTIONS_TITLE,
+  ARRAYS_FUNCTIONS_DESCRIPTION,
+  MATRIX_STRINGS_TITLE,
+  MATRIX_STRINGS_DESCRIPTION,
+  DATABASE_OOP_TITLE,
+  DATABASE_OOP_DESCRIPTION,
+  BACKTRACKING_RECURSION_TITLE,
+  BACKTRACKING_RECURSION_DESCRIPTION,
+} from './modulesInformation';
 
 const Modules = ({ auth: { loading, user } }) => {
   const expNeededForIfElseModule = 10;
@@ -10,6 +27,8 @@ const Modules = ({ auth: { loading, user } }) => {
   const expNeededForMatrixStringsModule = 850;
   const expNeededForDatabaseAndOOPModule = 1250;
   const expNeededForBacktrackingRecursionModule = 700;
+
+  const language = user ? user.language : 'en';
 
   return (
     <Fragment>
@@ -20,13 +39,10 @@ const Modules = ({ auth: { loading, user } }) => {
         <div className='relative max-w-7xl mx-auto'>
           <div className='text-center'>
             <h2 className='text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl'>
-              The Basics of Programming
+              {MODULES_TITLE[language]}
             </h2>
             <p className='mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4'>
-              Learn step by step the basics of programming by reading
-              theoretical lessons, completing quizzes and most importantly,
-              solving problems that aim to develop your logical thinking and
-              make you think like a programmer.
+              {MODULES_TITLE_DESCRIPTION[language]}
             </p>
           </div>
           <div className='mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none'>
@@ -42,12 +58,10 @@ const Modules = ({ auth: { loading, user } }) => {
                 <div className='flex-1'>
                   <Link to='/modules/introduction' className='block mt-2'>
                     <p className='text-xl font-semibold text-gray-900'>
-                      Introduction
+                      {INTRODUCTION_TITLE[language]}
                     </p>
                     <p className='mt-3 text-base text-gray-500'>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Architecto accusantium praesentium eius, ut atque fuga
-                      culpa, similique sequi cum eos quis dolorum.
+                      {INTRODUCTION_DESCRIPTION[language]}
                     </p>
                   </Link>
                 </div>
@@ -66,14 +80,13 @@ const Modules = ({ auth: { loading, user } }) => {
                 <div className='flex-1'>
                   <Link to='/modules/if-else' className='block mt-2'>
                     <p className='text-xl font-semibold text-gray-900'>
-                      If Else - Conditional Statments
+                      {IF_ELSE_TITLE.first_type[language]}
                     </p>
-                    {!loading && user && user.exp >= expNeededForIfElseModule ? (
+                    {!loading &&
+                    user &&
+                    user.exp >= expNeededForIfElseModule ? (
                       <p className='mt-3 text-base text-gray-500'>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Velit facilis asperiores porro quaerat doloribus,
-                        eveniet dolore. Adipisci tempora aut inventore optio
-                        animi., tempore temporibus quo laudantium.
+                        {IF_ELSE_DESCRIPTION[language]}
                       </p>
                     ) : (
                       <div className='grid grid-cols-1 gap-4 place-items-center h-24'>
@@ -110,16 +123,13 @@ const Modules = ({ auth: { loading, user } }) => {
                 <div className='flex-1'>
                   <Link to='/modules/while-for' className='block mt-2'>
                     <p className='text-xl font-semibold text-gray-900'>
-                      While and For Loops
+                      {WHILE_FOR_TITLE.first_type[language]}
                     </p>
                     {!loading &&
                     user &&
                     user.exp >= expNeededForWhileForLoopsModule ? (
                       <p className='mt-3 text-base text-gray-500'>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Velit facilis asperiores porro quaerat doloribus,
-                        eveniet dolore. Adipisci tempora aut inventore optio
-                        animi., tempore temporibus quo laudantium.
+                        {WHILE_FOR_DESCRIPTION[language]}
                       </p>
                     ) : (
                       <Fragment>
@@ -158,16 +168,13 @@ const Modules = ({ auth: { loading, user } }) => {
                 <div className='flex-1'>
                   <Link to='/modules/arrays-functions' className='block mt-2'>
                     <p className='text-xl font-semibold text-gray-900'>
-                      Arrays and Functions
+                      {ARRAYS_FUNCTIONS_TITLE.first_type[language]}
                     </p>
                     {!loading &&
                     user &&
                     user.exp >= expNeededForArraysFunctionsModule ? (
                       <p className='mt-3 text-base text-gray-500'>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Velit facilis asperiores porro quaerat doloribus,
-                        eveniet dolore. Adipisci tempora aut inventore optio
-                        animi., tempore temporibus quo laudantium.
+                        {ARRAYS_FUNCTIONS_DESCRIPTION[language]}
                       </p>
                     ) : (
                       <Fragment>
@@ -206,16 +213,13 @@ const Modules = ({ auth: { loading, user } }) => {
                 <div className='flex-1'>
                   <Link to='/modules/matrix-strings' className='block mt-2'>
                     <p className='text-xl font-semibold text-gray-900'>
-                      Matrix and Strings
+                      {MATRIX_STRINGS_TITLE.first_type[language]}
                     </p>
                     {!loading &&
                     user &&
                     user.exp >= expNeededForMatrixStringsModule ? (
                       <p className='mt-3 text-base text-gray-500'>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Velit facilis asperiores porro quaerat doloribus,
-                        eveniet dolore. Adipisci tempora aut inventore optio
-                        animi., tempore temporibus quo laudantium.
+                        {MATRIX_STRINGS_DESCRIPTION}
                       </p>
                     ) : (
                       <Fragment>
@@ -254,16 +258,13 @@ const Modules = ({ auth: { loading, user } }) => {
                 <div className='flex-1'>
                   <Link to='/modules/oop-db' className='block mt-2'>
                     <p className='text-xl font-semibold text-gray-900'>
-                      OOP and Databases
+                      {DATABASE_OOP_TITLE.first_type[language]}
                     </p>
                     {!loading &&
                     user &&
                     user.exp >= expNeededForDatabaseAndOOPModule ? (
                       <p className='mt-3 text-base text-gray-500'>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Velit facilis asperiores porro quaerat doloribus,
-                        eveniet dolore. Adipisci tempora aut inventore optio
-                        animi., tempore temporibus quo laudantium.
+                        {DATABASE_OOP_DESCRIPTION}
                       </p>
                     ) : (
                       <Fragment>
@@ -305,16 +306,13 @@ const Modules = ({ auth: { loading, user } }) => {
                     className='block mt-2'
                   >
                     <p className='text-xl font-semibold text-gray-900'>
-                      Backtracking and Recursion
+                      {BACKTRACKING_RECURSION_TITLE.first_type[language]}
                     </p>
                     {!loading &&
                     user &&
                     user.exp >= expNeededForBacktrackingRecursionModule ? (
                       <p className='mt-3 text-base text-gray-500'>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Velit facilis asperiores porro quaerat doloribus,
-                        eveniet dolore. Adipisci tempora aut inventore optio
-                        animi., tempore temporibus quo laudantium.
+                        {BACKTRACKING_RECURSION_DESCRIPTION}
                       </p>
                     ) : (
                       <Fragment>

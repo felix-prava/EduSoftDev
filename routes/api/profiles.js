@@ -142,6 +142,7 @@ router.get('/user/:user_id', auth, async (req, res) => {
       'email',
       'username',
       'exp',
+      'solvedProblems',
     ]);
 
     if (!profile) {

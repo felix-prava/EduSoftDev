@@ -8,6 +8,7 @@ import MaterialItem from './MaterialItem';
 import Spinner from '../layout/Spinner';
 import Modal from '../layout/Modal';
 import PageNotFound from '../layout/PageNotFound';
+import { modulesTranslations } from '../layout/Translations';
 import {
   INTRODUCTION_TITLE,
   INTRODUCTION_DESCRIPTION,
@@ -35,6 +36,10 @@ const ModuleItem = ({
   let title = null;
   let description = null;
   let displayErrorPage = false;
+  const language = user ? user.language : 'en';
+  const addProblemLabel = modulesTranslations.addProblem[language];
+  const addLessonLabel = modulesTranslations.addLesson[language];
+  const addQuizLabel = modulesTranslations.addQuiz[language];
 
   const [modal, setModal] = useState(false);
   const [modalData, setModalData] = useState([]);
@@ -45,32 +50,32 @@ const ModuleItem = ({
 
   switch (moduleName) {
     case 'introduction':
-      title = INTRODUCTION_TITLE;
-      description = INTRODUCTION_DESCRIPTION;
+      title = INTRODUCTION_TITLE[language];
+      description = INTRODUCTION_DESCRIPTION[language];
       break;
     case 'if-else':
-      title = IF_ELSE_TITLE;
-      description = IF_ELSE_DESCRIPTION;
+      title = IF_ELSE_TITLE.second_type[language];
+      description = IF_ELSE_DESCRIPTION[language];
       break;
     case 'while-for':
-      title = WHILE_FOR_TITLE;
-      description = WHILE_FOR_DESCRIPTION;
+      title = WHILE_FOR_TITLE.second_type[language];
+      description = WHILE_FOR_DESCRIPTION[language];
       break;
     case 'arrays-functions':
-      title = ARRAYS_FUNCTIONS_TITLE;
-      description = ARRAYS_FUNCTIONS_DESCRIPTION;
+      title = ARRAYS_FUNCTIONS_TITLE.second_type[language];
+      description = ARRAYS_FUNCTIONS_DESCRIPTION[language];
       break;
     case 'matrix-strings':
-      title = MATRIX_STRINGS_TITLE;
-      description = MATRIX_STRINGS_DESCRIPTION;
+      title = MATRIX_STRINGS_TITLE.second_type[language];
+      description = MATRIX_STRINGS_DESCRIPTION[language];
       break;
     case 'oop-db':
-      title = DATABASE_OOP_TITLE;
-      description = DATABASE_OOP_DESCRIPTION;
+      title = DATABASE_OOP_TITLE.second_type[language];
+      description = DATABASE_OOP_DESCRIPTION[language];
       break;
     case 'backtracking-recursion':
-      title = BACKTRACKING_RECURSION_TITLE;
-      description = BACKTRACKING_RECURSION_DESCRIPTION;
+      title = BACKTRACKING_RECURSION_TITLE.second_type[language];
+      description = BACKTRACKING_RECURSION_DESCRIPTION[language];
       break;
     default:
       displayErrorPage = true;
@@ -105,7 +110,7 @@ const ModuleItem = ({
                     type='button'
                     className='inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
                   >
-                    Add Problem
+                    {addProblemLabel}
                   </button>
                 </Link>
                 <Link to={`/modules/${moduleName}/create-lesson`}>
@@ -113,7 +118,7 @@ const ModuleItem = ({
                     type='button'
                     className='inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
                   >
-                    Add Lesson
+                    {addLessonLabel}
                   </button>
                 </Link>
                 <Link to={`/modules/${moduleName}/create-quiz`}>
@@ -121,7 +126,7 @@ const ModuleItem = ({
                     type='button'
                     className='inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
                   >
-                    Add Quiz
+                    {addQuizLabel}
                   </button>
                 </Link>
               </div>

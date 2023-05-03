@@ -14,10 +14,11 @@ import {
 import { setAlert } from '../../actions/alert';
 import { deleteComment } from '../../actions/article';
 import { displayDate } from '../../utils/helpers';
+import { universalTranslations } from '../layout/Translations';
 
 const Article = ({
   getArticle,
-  auth,
+  auth: { user, isAuthenticated, loading: authLoading },
   article: { article, loading, error },
   addLike,
   addDislike,
@@ -31,7 +32,7 @@ const Article = ({
   }, [getArticle, id]);
 
   function likeArticle(articleId) {
-    if (auth.isAuthenticated) {
+    if (isAuthenticated) {
       addLike(articleId, true);
     } else {
       setAlert('Must be logged in to like this article', 'error');
@@ -40,7 +41,7 @@ const Article = ({
   }
 
   function dislikeArticle(articleId) {
-    if (auth.isAuthenticated) {
+    if (isAuthenticated) {
       addDislike(articleId, true);
     } else {
       setAlert('Must be logged in to dislike this article', 'error');
@@ -53,7 +54,12 @@ const Article = ({
     navigate(`/articles/edit/${articleId}`);
   }
 
-  const commentsMargin = auth.isAuthenticated ? 'pb-4' : 'mt-28 pt-8 pb-4';
+  const language = user ? user.language : 'en';
+  const saveButtonLabel = universalTranslations.saveButton[language];
+  const postedOnLabel = universalTranslations.postedOn[language];
+  const leaveCommentLabel = universalTranslations.leaveComment[language];
+
+  const commentsMargin = isAuthenticated ? 'pb-4' : 'mt-28 pt-8 pb-4';
 
   if (error && error.msg === 'Not Found') {
     return <PageNotFound />;
@@ -107,11 +113,11 @@ const Article = ({
                 </svg>
                 {article.dislikes.length > 0 && article.dislikes.length}
               </button>
-              {!auth.loading &&
-                auth.user !== null &&
-                (auth.user._id === article.user ||
-                  auth.user.role === 'admin' ||
-                  auth.user.role === 'mentor') && (
+              {!authLoading &&
+                user !== null &&
+                (user._id === article.user ||
+                  user.role === 'admin' ||
+                  user.role === 'mentor') && (
                   <Fragment>
                     <button
                       type='button'
@@ -174,17 +180,22 @@ const Article = ({
                 </p>
                 <div className='flex space-x-1 text-sm text-gray-500'>
                   <time dateTime={article.date}>
-                    {' '}
-                    Posted on {displayDate(article.date)}
+                    {postedOnLabel} {displayDate(article.date)}
                   </time>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        {auth.isAuthenticated && (
+        {isAuthenticated && (
           <div className='mt-8 pt-2'>
-            <AddComment articleId={article._id} />
+            <AddComment
+              articleId={article._id}
+              translations={{
+                saveButtonLabel,
+                leaveCommentLabel,
+              }}
+            />
           </div>
         )}
         <div className={commentsMargin}>
@@ -211,11 +222,11 @@ const Article = ({
                       </h3>
                       <p className='text-sm text-gray-500'>
                         {displayDate(comment.date)}
-                        {!auth.loading &&
-                          auth.user !== null &&
-                          (auth.user._id === comment.user ||
-                            auth.user.role === 'admin' ||
-                            auth.user.role === 'mentor') && (
+                        {!authLoading &&
+                          user !== null &&
+                          (user._id === comment.user ||
+                            user.role === 'admin' ||
+                            user.role === 'mentor') && (
                             <button
                               onClick={() =>
                                 deleteComment(article._id, comment._id)

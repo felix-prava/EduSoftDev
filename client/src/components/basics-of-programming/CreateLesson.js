@@ -3,9 +3,13 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addLearningMaterial } from '../../actions/learning';
+import {
+  learningMaterialTranslations,
+  universalTranslations,
+} from '../layout/Translations';
 import TextEditor from '../layout/TextEditor';
 
-const CreateLesson = ({ addLearningMaterial }) => {
+const CreateLesson = ({ auth: { user }, addLearningMaterial }) => {
   const { module } = useParams();
   let navigate = useNavigate();
 
@@ -20,6 +24,19 @@ const CreateLesson = ({ addLearningMaterial }) => {
   });
 
   const { name, expNeeded, expGained, expMax, shortDescription } = formData;
+
+  const language = user ? user.language : 'en';
+  const addLessonTitleLabel =
+    learningMaterialTranslations.addLessonTitle[language];
+  const lessonNameLabel = learningMaterialTranslations.lessonName[language];
+  const expNeededLabel = learningMaterialTranslations.expNeeded[language];
+  const expGainedLabel = learningMaterialTranslations.expGained[language];
+  const expMaxLabel = learningMaterialTranslations.expMax[language];
+  const bodyLabel = universalTranslations.body[language];
+  const shortDescriptionLabel =
+    universalTranslations.shortDescription[language];
+  const saveButtonLabel = universalTranslations.saveButton[language];
+  const cancelButtonLabel = universalTranslations.cancelButton[language];
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -40,7 +57,7 @@ const CreateLesson = ({ addLearningMaterial }) => {
             <div>
               <div>
                 <h3 className='text-2xl font-bold leading-6 font-medium text-gray-900 sm:text-2xl'>
-                  Create a new lesson
+                  {addLessonTitleLabel}
                 </h3>
               </div>
 
@@ -50,8 +67,7 @@ const CreateLesson = ({ addLearningMaterial }) => {
                     htmlFor='name'
                     className='block text-sm font-medium text-gray-700'
                   >
-                    {' '}
-                    What's the title of this lesson?{' '}
+                    {lessonNameLabel}
                   </label>
                   <div className='mt-1'>
                     <input
@@ -73,8 +89,7 @@ const CreateLesson = ({ addLearningMaterial }) => {
                         htmlFor='expNeeded'
                         className='block text-sm font-medium text-gray-700'
                       >
-                        {' '}
-                        Experience Needed{' '}
+                        {expNeededLabel}
                       </label>
                       <div className='mt-1'>
                         <input
@@ -93,8 +108,7 @@ const CreateLesson = ({ addLearningMaterial }) => {
                         htmlFor='expGained'
                         className='block text-sm font-medium text-gray-700'
                       >
-                        {' '}
-                        Experience Gained{' '}
+                        {expGainedLabel}
                       </label>
                       <div className='mt-1'>
                         <input
@@ -113,8 +127,7 @@ const CreateLesson = ({ addLearningMaterial }) => {
                         htmlFor='expMax'
                         className='block text-sm font-medium text-gray-700'
                       >
-                        {' '}
-                        Max Experience{' '}
+                        {expMaxLabel}
                       </label>
                       <div className='mt-1'>
                         <input
@@ -136,8 +149,7 @@ const CreateLesson = ({ addLearningMaterial }) => {
                     htmlFor='body'
                     className='block text-sm font-medium text-gray-700'
                   >
-                    {' '}
-                    Body{' '}
+                    {bodyLabel}
                   </label>
                   <div className='mt-1'>
                     <div className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md'>
@@ -159,8 +171,7 @@ const CreateLesson = ({ addLearningMaterial }) => {
                     htmlFor='shortDescription'
                     className='block text-sm font-medium text-gray-700'
                   >
-                    {' '}
-                    Short description{' '}
+                    {shortDescriptionLabel}
                   </label>
                   <div className='mt-1'>
                     <input
@@ -183,14 +194,14 @@ const CreateLesson = ({ addLearningMaterial }) => {
                   type='button'
                   className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
                 >
-                  Cancel
+                  {cancelButtonLabel}
                 </button>
               </Link>
               <button
                 type='submit'
                 className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
               >
-                Save
+                {saveButtonLabel}
               </button>
             </div>
           </div>
@@ -201,7 +212,12 @@ const CreateLesson = ({ addLearningMaterial }) => {
 };
 
 CreateLesson.propTypes = {
+  auth: PropTypes.object.isRequired,
   addLearningMaterial: PropTypes.func.isRequired,
 };
 
-export default connect(null, { addLearningMaterial })(CreateLesson);
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { addLearningMaterial })(CreateLesson);

@@ -1,12 +1,15 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { Navigate, Link, useNavigate, useLocation } from 'react-router-dom';
-
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   createUpdateProfile,
   getCurrentUserProfile,
 } from '../../actions/profile';
+import {
+  myProfileTranslations,
+  universalTranslations,
+} from '../layout/Translations';
 
 const EditProfile = ({
   profile: { profile, loading },
@@ -28,6 +31,19 @@ const EditProfile = ({
   });
 
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
+
+  const language = user ? user.language : 'en';
+  const myProfileLabel = myProfileTranslations.myProfile[language];
+  const aboutLabel = myProfileTranslations.about[language];
+  const aboutDescriptionLabel =
+    myProfileTranslations.aboutDescription[language];
+  const statusDescriptionLabel =
+    myProfileTranslations.statusDescription[language];
+  const statusLabel = universalTranslations.status[language];
+  const socialLinksLabel = universalTranslations.socialLinks[language];
+  const removeLinksLabel = universalTranslations.removeLinks[language];
+  const saveButtonLabel = universalTranslations.saveButton[language];
+  const cancelButtonLabel = universalTranslations.cancelButton[language];
 
   useEffect(() => {
     if (!profile) getCurrentUserProfile();
@@ -92,7 +108,7 @@ const EditProfile = ({
             <div>
               <div>
                 <h3 className='text-2xl font-bold leading-6 font-medium text-gray-900 sm:text-2xl'>
-                  My Profile
+                  {myProfileLabel}
                 </h3>
               </div>
 
@@ -102,8 +118,7 @@ const EditProfile = ({
                     htmlFor='bio'
                     className='block text-sm font-medium text-gray-700'
                   >
-                    {' '}
-                    About{' '}
+                    {aboutLabel}
                   </label>
                   <div className='mt-1'>
                     <textarea
@@ -115,7 +130,7 @@ const EditProfile = ({
                     ></textarea>
                   </div>
                   <p className='mt-2 text-sm text-gray-500'>
-                    Tell us a little about yourself
+                    {aboutDescriptionLabel}
                   </p>
                 </div>
               </div>
@@ -128,8 +143,7 @@ const EditProfile = ({
                     htmlFor='status'
                     className='block text-sm font-medium text-gray-700'
                   >
-                    {' '}
-                    Status{' '}
+                    {statusLabel}
                   </label>
                   <div className='mt-1'>
                     <input
@@ -141,7 +155,7 @@ const EditProfile = ({
                     />
                   </div>
                   <p className='mt-2 text-sm text-gray-500'>
-                    What is your current job? Or maybe you are a student?
+                    {statusDescriptionLabel}
                   </p>
                 </div>
 
@@ -172,7 +186,7 @@ const EditProfile = ({
                 onClick={() => toggleSocialInputs(!displaySocialInputs)}
                 className='py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-offset-2 focus:ring-indigo-500'
               >
-                Add Social Links
+                {socialLinksLabel}
               </button>
             )}
             {displaySocialInputs && (
@@ -182,7 +196,7 @@ const EditProfile = ({
                   onClick={() => toggleSocialInputs(!displaySocialInputs)}
                   className='py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-offset-2 focus:ring-indigo-500'
                 >
-                  Remove Social Links
+                  {removeLinksLabel}
                 </button>
 
                 <div className=''>
@@ -340,14 +354,14 @@ const EditProfile = ({
                   type='button'
                   className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
                 >
-                  Cancel
+                  {cancelButtonLabel}
                 </button>
               </Link>
               <button
                 type='submit'
                 className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
               >
-                Save
+                {saveButtonLabel}
               </button>
             </div>
           </div>

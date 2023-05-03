@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { universalTranslations } from '../layout/Translations';
 
 const MaterialItem = ({
   auth: { user },
@@ -26,9 +27,24 @@ const MaterialItem = ({
       ? 'sm:col-span-7'
       : 'sm:col-span-9';
 
+  const language = user ? user.language : 'en';
+  const problemLabel = universalTranslations.problem[language];
+  const lessonLabel = universalTranslations.lesson[language];
+  const quizLabel = universalTranslations.quiz[language];
+
   let navigate = useNavigate();
   function editLearningMaterial(learningMaterialId) {
     navigate(`/${module}/${materialType}/edit/${learningMaterialId}`);
+  }
+
+  function translateType(type) {
+    if (type === 'Problem') {
+      return problemLabel;
+    }
+    if (type === 'Lesson') {
+      return lessonLabel;
+    }
+    return quizLabel;
   }
 
   return (
@@ -52,7 +68,7 @@ const MaterialItem = ({
                       <p className='text-xl font-semibold text-gray-900'>
                         {name}
                       </p>
-                      <p className={materialTypeClass}>{type}</p>
+                      <p className={materialTypeClass}>{translateType(type)}</p>
                       <p className='mt-3 text-base text-gray-500'>
                         {shortDescription || 'No description available'}
                       </p>
@@ -130,7 +146,7 @@ const MaterialItem = ({
             ) : (
               <Fragment>
                 <p className='text-xl font-semibold text-gray-900'>{name}</p>
-                <p className={materialTypeClass}>{type}</p>
+                <p className={materialTypeClass}>{translateType(type)}</p>
                 <div className='grid grid-cols-1 gap-4 place-items-center h-24'>
                   <div>
                     <svg

@@ -4,9 +4,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addLearningMaterial } from '../../actions/learning';
 import { setAlert } from '../../actions/alert';
+import {
+  learningMaterialTranslations,
+  universalTranslations,
+} from '../layout/Translations';
 import TextEditor from '../layout/TextEditor';
 
-const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
+const CreateQuiz = ({ auth: { user }, addLearningMaterial, setAlert }) => {
   const { module } = useParams();
   const navigate = useNavigate();
 
@@ -42,6 +46,35 @@ const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
   let rightAnswersField = null;
   let rightAnswerHeader = null;
 
+  const language = user ? user.language : 'en';
+  const addQuizTitleLabel = learningMaterialTranslations.addQuizTitle[language];
+  const quizNameLabel = learningMaterialTranslations.quizName[language];
+  const expNeededLabel = learningMaterialTranslations.expNeeded[language];
+  const expGainedLabel = learningMaterialTranslations.expGained[language];
+  const expMaxLabel = learningMaterialTranslations.expMax[language];
+  const failedQuizMessageLabel =
+    learningMaterialTranslations.failedQuizMessage[language];
+  const waitingMinutesLabel =
+    learningMaterialTranslations.waitingMinutes[language];
+  const wrongAnswersLabel = learningMaterialTranslations.wrongAnswers[language];
+  const wrongAnswerLabel = learningMaterialTranslations.wrongAnswer[language];
+  const addWrongAnswerLabel =
+    learningMaterialTranslations.addWrongAnswer[language];
+  const rightAnswersLabel = learningMaterialTranslations.rightAnswers[language];
+  const rightAnswerLabel = learningMaterialTranslations.rightAnswer[language];
+  const addRightAnswerLabel =
+    learningMaterialTranslations.addRightAnswer[language];
+  const noEmptyAnswerMessage =
+    learningMaterialTranslations.noEmptyAnswer[language];
+  const addNewAnswerMessage =
+    learningMaterialTranslations.addNewAnswer[language];
+
+  const bodyLabel = universalTranslations.body[language];
+  const shortDescriptionLabel =
+    universalTranslations.shortDescription[language];
+  const saveButtonLabel = universalTranslations.saveButton[language];
+  const cancelButtonLabel = universalTranslations.cancelButton[language];
+
   const addWrongAnswer = function () {
     if (wrongAnswersField === null) {
       wrongAnswersField = document.getElementById('wrong-answer-field');
@@ -50,7 +83,7 @@ const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
       wrongAnswerHeader = document.getElementById('wrong-answers-header');
     }
     if (wrongAnswersField.value === '') {
-      setAlert("You can't add an empty answer", 'error', 3500);
+      setAlert(`${noEmptyAnswerMessage}`, 'error', 3500);
       return;
     }
     wrongAnswers.push({
@@ -58,7 +91,7 @@ const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
     });
     wrongAnswersField.value = null;
     wrongAnswerHeader.textContent = `Wrong Answers (${wrongAnswers.length})`;
-    setAlert('A new answer was added', 'success', 2000, false);
+    setAlert(`${addNewAnswerMessage}`, 'success', 2000, false);
   };
 
   const addRightAnswer = function () {
@@ -69,7 +102,7 @@ const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
       rightAnswerHeader = document.getElementById('right-answers-header');
     }
     if (rightAnswersField.value === '') {
-      setAlert("You can't add an empty answer", 'error', 3500);
+      setAlert(`${noEmptyAnswerMessage}`, 'error', 3500);
       return;
     }
     rightAnswers.push({
@@ -77,7 +110,7 @@ const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
     });
     rightAnswersField.value = null;
     rightAnswerHeader.textContent = `Right Answers (${rightAnswers.length})`;
-    setAlert('A new answer was added', 'success', 2000, false);
+    setAlert(`${addNewAnswerMessage}`, 'success', 2000, false);
   };
 
   const onChange = (e) =>
@@ -99,7 +132,7 @@ const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
             <div>
               <div>
                 <h3 className='text-2xl font-bold leading-6 font-medium text-gray-900 sm:text-2xl'>
-                  Create a new quiz
+                  {addQuizTitleLabel}
                 </h3>
               </div>
 
@@ -109,8 +142,7 @@ const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
                     htmlFor='name'
                     className='block text-sm font-medium text-gray-700'
                   >
-                    {' '}
-                    What's the title of this lesson?{' '}
+                    {quizNameLabel}
                   </label>
                   <div className='mt-1'>
                     <input
@@ -132,8 +164,7 @@ const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
                         htmlFor='expNeeded'
                         className='block text-sm font-medium text-gray-700'
                       >
-                        {' '}
-                        Experience Needed{' '}
+                        {expNeededLabel}
                       </label>
                       <div className='mt-1'>
                         <input
@@ -152,8 +183,7 @@ const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
                         htmlFor='expGained'
                         className='block text-sm font-medium text-gray-700'
                       >
-                        {' '}
-                        Experience Gained{' '}
+                        {expGainedLabel}
                       </label>
                       <div className='mt-1'>
                         <input
@@ -172,8 +202,7 @@ const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
                         htmlFor='expMax'
                         className='block text-sm font-medium text-gray-700'
                       >
-                        {' '}
-                        Max Experience{' '}
+                        {expMaxLabel}
                       </label>
                       <div className='mt-1'>
                         <input
@@ -195,8 +224,7 @@ const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
                     htmlFor='body'
                     className='block text-sm font-medium text-gray-700'
                   >
-                    {' '}
-                    Body{' '}
+                    {bodyLabel}
                   </label>
                   <div className='mt-1'>
                     <div className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md'>
@@ -218,8 +246,7 @@ const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
                     htmlFor='shortDescription'
                     className='block text-sm font-medium text-gray-700'
                   >
-                    {' '}
-                    Short description{' '}
+                    {shortDescriptionLabel}
                   </label>
                   <div className='mt-1'>
                     <input
@@ -242,8 +269,7 @@ const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
                       htmlFor='failedQuizMessage'
                       className='block text-sm font-medium text-gray-700'
                     >
-                      {' '}
-                      Message for Failed Quiz{' '}
+                      {failedQuizMessageLabel}
                     </label>
                     <div className='mt-1'>
                       <input
@@ -261,8 +287,7 @@ const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
                       htmlFor='waitingMinutes'
                       className='block text-sm font-medium text-gray-700'
                     >
-                      {' '}
-                      Waiting Minutes{' '}
+                      {waitingMinutesLabel}
                     </label>
                     <div className='mt-1'>
                       <input
@@ -284,14 +309,13 @@ const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
                   id='wrong-answers-header'
                   className='mt-6 font-xl font-bold leading-6 font-medium text-gray-900 sm:text-xl'
                 >
-                  Wrong Answers
+                  {wrongAnswersLabel}
                 </h1>
               </div>
               <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
                 <div className='sm:col-span-6'>
                   <label className='block text-sm font-medium text-gray-700'>
-                    {' '}
-                    Wrong Answer{' '}
+                    {wrongAnswerLabel}
                   </label>
                   <div className='mt-1'>
                     <input
@@ -308,7 +332,7 @@ const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
                   onClick={addWrongAnswer}
                   className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
                 >
-                  Add Wrong Answer
+                  {addWrongAnswerLabel}
                 </button>
               </div>
             </div>
@@ -319,14 +343,13 @@ const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
                   id='right-answers-header'
                   className='mt-6 font-xl font-bold leading-6 font-medium text-gray-900 sm:text-xl'
                 >
-                  Right Answers
+                  {rightAnswersLabel}
                 </h1>
               </div>
               <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
                 <div className='sm:col-span-6'>
                   <label className='block text-sm font-medium text-gray-700'>
-                    {' '}
-                    Right Answer{' '}
+                    {rightAnswerLabel}
                   </label>
                   <div className='mt-1'>
                     <input
@@ -343,7 +366,7 @@ const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
                   onClick={addRightAnswer}
                   className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
                 >
-                  Add Right Answer
+                  {addRightAnswerLabel}
                 </button>
               </div>
             </div>
@@ -356,14 +379,14 @@ const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
                   type='button'
                   className='bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
                 >
-                  Cancel
+                  {cancelButtonLabel}
                 </button>
               </Link>
               <button
                 type='submit'
                 className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
               >
-                Save
+                {saveButtonLabel}
               </button>
             </div>
           </div>
@@ -374,8 +397,15 @@ const CreateQuiz = ({ addLearningMaterial, setAlert }) => {
 };
 
 CreateQuiz.propTypes = {
+  auth: PropTypes.object.isRequired,
   addLearningMaterial: PropTypes.func.isRequired,
   setAlert: PropTypes.func.isRequired,
 };
 
-export default connect(null, { addLearningMaterial, setAlert })(CreateQuiz);
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { addLearningMaterial, setAlert })(
+  CreateQuiz
+);

@@ -2,9 +2,19 @@ import React, { Fragment, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { updateUser } from '../../actions/auth';
+import {
+  settingsTranslations,
+  universalTranslations,
+} from '../layout/Translations';
 
 const Appearance = ({ auth: { user }, updateUser }) => {
   const [language, setLanguage] = useState('');
+
+  const userLanguage = user ? user.language : 'en';
+  const selectLanguageLabel = settingsTranslations.selectLanguage[userLanguage];
+  const languageLabel = settingsTranslations.language[userLanguage];
+  const languageUpdatedMessage = settingsTranslations.languageUpdated[language];
+  const saveButtonLabel = universalTranslations.saveButton[userLanguage];
 
   useEffect(() => {
     if (user) {
@@ -17,7 +27,7 @@ const Appearance = ({ auth: { user }, updateUser }) => {
   };
 
   const updateLanguage = async () => {
-    await updateUser({ language }, user._id, 'Language Updated');
+    await updateUser({ language }, user._id, languageUpdatedMessage);
   };
 
   return (
@@ -31,13 +41,13 @@ const Appearance = ({ auth: { user }, updateUser }) => {
                   id='update-password'
                   className='text-lg leading-6 font-medium text-gray-900'
                 >
-                  Select Language
+                  {selectLanguageLabel}
                 </h2>
               </div>
 
               <div>
                 <label className='mt-6 block text-sm font-medium text-gray-700'>
-                  Language{' '}
+                  {languageLabel}
                 </label>
                 <div className='col-span-4 sm:col-span-2'>
                   <select
@@ -58,7 +68,7 @@ const Appearance = ({ auth: { user }, updateUser }) => {
                 onClick={() => updateLanguage()}
                 className='bg-gray-800 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900'
               >
-                Save
+                {saveButtonLabel}
               </button>
             </div>
           </div>

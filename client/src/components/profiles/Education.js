@@ -3,8 +3,12 @@ import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
 import { deleteEducation } from '../../actions/profile';
+import { universalTranslations } from '../layout/Translations';
 
 const Education = ({ auth: { user }, education, userId, deleteEducation }) => {
+  const language = user ? user.language : 'en';
+  const deleteButtonLabel = universalTranslations.deleteButton[language];
+
   const educations = education.map((edu) => (
     <li key={edu._id} className='sm:py-8'>
       <div className='space-y-4 mr-4 sm:gap-6 sm:space-y-0'>
@@ -32,7 +36,7 @@ const Education = ({ auth: { user }, education, userId, deleteEducation }) => {
                     onClick={() => deleteEducation(edu._id, userId)}
                     className='mt-4 sm:float-center inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-400'
                   >
-                    Delete
+                    {deleteButtonLabel}
                   </button>
                 </div>
               )}
