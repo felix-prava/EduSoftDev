@@ -21,52 +21,27 @@ const toggleMobileDropdown = function () {
 
 const features = [
   {
-    name: 'Unlimited Inboxes',
-    description:
-      'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
+    name: '200+ Practice Questions',
+    description: 'There are over 200 problems and quizzes you can from.',
     icon: InboxIcon,
   },
   {
-    name: 'Manage Team Members',
+    name: 'Help from our Mentors',
     description:
-      'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
+      'Do you have concerns or questions? Our mentors are always ready to answer.',
     icon: UsersIcon,
   },
   {
-    name: 'Spam Report',
+    name: 'View Your Progress',
     description:
-      'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
-    icon: TrashIcon,
-  },
-  {
-    name: 'Compose in Markdown',
-    description:
-      'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
-    icon: PencilAltIcon,
-  },
-  {
-    name: 'Team Reporting',
-    description:
-      'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
+      'There are different statistics that will help you understand what you are doing well, what you need to improve and how you are doing in relation to other users.',
     icon: DocumentReportIcon,
   },
   {
-    name: 'Saved Replies',
+    name: 'In Your Own Rhythm',
     description:
-      'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
+      'There are no fixed hours at which you must be present. You can learn from where you want, when you want and for how long you want.',
     icon: ReplyIcon,
-  },
-  {
-    name: 'Email Commenting',
-    description:
-      'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
-    icon: ChatAltIcon,
-  },
-  {
-    name: 'Connect with Customers',
-    description:
-      'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et magna sit morbi lobortis.',
-    icon: HeartIcon,
   },
 ];
 const footerNavigation = {
@@ -479,12 +454,11 @@ export default function Landing() {
         <div className='bg-gradient-to-r from-purple-800 to-indigo-700'>
           <div className='max-w-4xl mx-auto px-4 py-16 sm:px-6 sm:pt-20 sm:pb-24 lg:max-w-7xl lg:pt-24 lg:px-8'>
             <h2 className='text-3xl font-extrabold text-white tracking-tight'>
-              Inbox support built for efficiency
+              All-In-One Platform
             </h2>
             <p className='mt-4 max-w-3xl text-lg text-purple-200'>
-              Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. Et
-              magna sit morbi lobortis. Blandit aliquam sit nisl euismod mattis
-              in.
+              If you want to start learning programming, you don't need to leave
+              the platform. You'll have everything you need right here.
             </p>
             <div className='mt-12 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4 lg:gap-x-8 lg:gap-y-16'>
               {features.map((feature) => (
