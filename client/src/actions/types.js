@@ -51,4 +51,5 @@ export const REMOVE_ANSWER = 'REMOVE_ANSWER';
 
 // Solutions
 export const GET_USER_SOLUTIONS = 'GET_USER_SOLUTIONS';
+export const GET_SOLUTION = 'GET_SOLUTION';
 export const SOLUTION_ERROR = 'SOLUTION_ERROR';

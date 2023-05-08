@@ -154,4 +154,25 @@ router.get('/execute/:solution_id', async (req, res) => {
   }
 });
 
+// @route   GET /api/solutions/:solution_id
+// @desc    Get a solution by id
+// @access  Private
+router.get('/:solution_id', auth, async (req, res) => {
+  try {
+    const solution = await Solution.findById(req.params.solution_id).populate(
+      'problem',
+      ['name', 'module']
+    );
+    res.json(solution);
+  } catch (err) {
+    if (err.kind == 'ObjectId') {
+      return res
+        .status(404)
+        .json({ msg: 'No solution found for this solution_id' });
+    }
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 module.exports = router;
