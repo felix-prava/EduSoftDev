@@ -101,9 +101,29 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
     </Link>
   );
 
+  const homeGuest = (
+    <Link
+      to='/'
+      className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'
+      aria-current='page'
+    >
+      {homeLabel}
+    </Link>
+  );
+
   const homeMobile = (
     <Link
       to='/home'
+      className='bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium'
+      aria-current='page'
+    >
+      {homeLabel}
+    </Link>
+  );
+
+  const homeGuestMobile = (
+    <Link
+      to='/'
       className='bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium'
       aria-current='page'
     >
@@ -189,13 +209,6 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
       {modules}
       {articles}
       {aboutUs}
-      <Link
-        to='#'
-        onClick={logoutUser}
-        className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
-      >
-        {logoutLabel}
-      </Link>
     </Fragment>
   );
 
@@ -220,7 +233,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
 
   const guestLinks = (
     <Fragment>
-      {home}
+      {homeGuest}
       {register}
       {login}
       {articles}
@@ -234,14 +247,6 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
       {modulesMobile}
       {articlesMobile}
       {aboutUsMobile}
-
-      <Link
-        to='#'
-        onClick={logoutUser}
-        className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
-      >
-        {logoutLabel}
-      </Link>
     </Fragment>
   );
 
@@ -266,7 +271,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
 
   const guestMobileLinks = (
     <Fragment>
-      {homeMobile}
+      {homeGuestMobile}
       {registerMobile}
       {loginMobile}
       {articlesMobile}
