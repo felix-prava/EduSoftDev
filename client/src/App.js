@@ -10,6 +10,7 @@ import Navbar from './components/layout/Navbar';
 import Alert from './components/layout/Alert';
 import SettingsSidebar from './components/layout/SettingsSidebar';
 import PageNotFound from './components/layout/PageNotFound';
+import AboutUs from './components/layout/AboutUs';
 
 // Dashboard
 import Dashboard from './components/dashboard/Dashboard';
@@ -285,6 +286,9 @@ const App = () => {
                 </PrivateRoute>
               }
             />
+
+            {/* About Us */}
+            <Route exact path='/about-us' element={<AboutUs />} />
 
             {/* Page not Found */}
             <Route exact path='*' element={<PageNotFound />} />
