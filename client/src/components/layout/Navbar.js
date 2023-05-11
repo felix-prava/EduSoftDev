@@ -91,195 +91,191 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
     </Link>
   );
 
+  const home = (
+    <Link
+      to='/home'
+      className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'
+      aria-current='page'
+    >
+      {homeLabel}
+    </Link>
+  );
+
+  const homeGuest = (
+    <Link
+      to='/'
+      className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'
+      aria-current='page'
+    >
+      {homeLabel}
+    </Link>
+  );
+
+  const homeMobile = (
+    <Link
+      to='/home'
+      className='bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium'
+      aria-current='page'
+    >
+      {homeLabel}
+    </Link>
+  );
+
+  const homeGuestMobile = (
+    <Link
+      to='/'
+      className='bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium'
+      aria-current='page'
+    >
+      {homeLabel}
+    </Link>
+  );
+
+  const adminProfiles = (
+    <Link
+      to='/admin/profiles'
+      className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+    >
+      {profilesLabel}
+    </Link>
+  );
+
+  const adminProfilesMobile = (
+    <Link
+      to='/admin/profiles'
+      className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
+    >
+      {profilesLabel}
+    </Link>
+  );
+
+  const register = (
+    <Link
+      to='/register'
+      className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+    >
+      {registerLabel}
+    </Link>
+  );
+
+  const registerMobile = (
+    <Link
+      to='/register'
+      className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
+    >
+      {registerLabel}
+    </Link>
+  );
+
+  const login = (
+    <Link
+      to='/login'
+      className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+    >
+      {loginLabel}
+    </Link>
+  );
+
+  const loginMobile = (
+    <Link
+      to='/login'
+      className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
+    >
+      {loginLabel}
+    </Link>
+  );
+
+  const aboutUs = (
+    <Link
+      to='/about-us'
+      className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+    >
+      {aboutUsLabel}
+    </Link>
+  );
+
+  const aboutUsMobile = (
+    <Link
+      to='/about-us'
+      className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
+    >
+      {aboutUsLabel}
+    </Link>
+  );
+
   const normalUserLinks = (
     <Fragment>
-      <Link
-        to='/home'
-        className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'
-        aria-current='page'
-      >
-        {homeLabel}
-      </Link>
-
+      {home}
       {modules}
       {articles}
-
-      <Link
-        to='#'
-        onClick={logoutUser}
-        className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
-      >
-        {logoutLabel}
-      </Link>
+      {aboutUs}
     </Fragment>
   );
 
   const mentorLinks = (
     <Fragment>
-      <Link
-        to='/home'
-        className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'
-        aria-current='page'
-      >
-        {homeLabel}
-      </Link>
-
+      {home}
       {modules}
       {articles}
+      {aboutUs}
     </Fragment>
   );
 
   const adminLinks = (
     <Fragment>
-      <Link
-        to='/home'
-        className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'
-        aria-current='page'
-      >
-        {homeLabel}
-      </Link>
-
+      {home}
       {modules}
-
-      <Link
-        to='/admin/profiles'
-        className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
-      >
-        {profilesLabel}
-      </Link>
-
+      {adminProfiles}
       {articles}
+      {aboutUs}
     </Fragment>
   );
 
   const guestLinks = (
     <Fragment>
-      <Link
-        to='/'
-        className='bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium'
-        aria-current='page'
-      >
-        {homeLabel}
-      </Link>
-
-      <Link
-        to='/register'
-        className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
-      >
-        {registerLabel}
-      </Link>
-
-      <Link
-        to='/login'
-        className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
-      >
-        {loginLabel}
-      </Link>
-
+      {homeGuest}
+      {register}
+      {login}
       {articles}
-
-      <Link
-        to='/about-us'
-        className='text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
-      >
-        {aboutUsLabel}
-      </Link>
+      {aboutUs}
     </Fragment>
   );
 
   const normalUserMobileLinks = (
     <Fragment>
-      <Link
-        to='/home'
-        className='bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium'
-        aria-current='page'
-      >
-        {homeLabel}
-      </Link>
-
+      {homeMobile}
       {modulesMobile}
       {articlesMobile}
-
-      <Link
-        to='#'
-        onClick={logoutUser}
-        className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
-      >
-        {logoutLabel}
-      </Link>
+      {aboutUsMobile}
     </Fragment>
   );
 
   const mentorMobileLinks = (
     <Fragment>
-      <Link
-        to='/home'
-        className='bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium'
-        aria-current='page'
-      >
-        {homeLabel}
-      </Link>
-
+      {homeMobile}
       {modulesMobile}
       {articlesMobile}
+      {aboutUsMobile}
     </Fragment>
   );
 
   const adminMobileLinks = (
     <Fragment>
-      <Link
-        to='/home'
-        className='bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium'
-        aria-current='page'
-      >
-        {homeLabel}
-      </Link>
-
+      {homeMobile}
       {modulesMobile}
-
-      <Link
-        to='/admin/profiles'
-        className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
-      >
-        {profilesLabel}
-      </Link>
-
+      {adminProfilesMobile}
       {articlesMobile}
+      {aboutUsMobile}
     </Fragment>
   );
 
   const guestMobileLinks = (
     <Fragment>
-      <Link
-        to='/'
-        className='bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium'
-        aria-current='page'
-      >
-        {homeLabel}
-      </Link>
-
-      <Link
-        to='/register'
-        className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
-      >
-        {registerLabel}
-      </Link>
-
-      <Link
-        to='/login'
-        className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
-      >
-        {loginLabel}
-      </Link>
-
+      {homeGuestMobile}
+      {registerMobile}
+      {loginMobile}
       {articlesMobile}
-
-      <Link
-        to='/about-us'
-        className='text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
-      >
-        {aboutUsLabel}
-      </Link>
+      {aboutUsMobile}
     </Fragment>
   );
 
