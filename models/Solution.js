@@ -27,6 +27,14 @@ const SolutionSchema = new mongoose.Schema({
     required: true,
     default: 0,
   },
+  totalTests: {
+    type: Number,
+    default: 0,
+  },
+  passedTests: {
+    type: Number,
+    default: 0,
+  },
   date: {
     type: Date,
     default: Date.now,

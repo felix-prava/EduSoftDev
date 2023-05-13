@@ -4,7 +4,7 @@ const auth = require('../../middleware/auth');
 const { check } = require('express-validator');
 const http = require('http');
 const axios = require('axios');
-const { calculateScore, updateSolution } = require('../../utils/helpers');
+const { updateSolution } = require('../../utils/helpers');
 const COMPILER_API_URL = 'https://api.codex.jaagrav.in';
 const config = require('config');
 
@@ -125,8 +125,8 @@ router.get('/execute/:solution_id', async (req, res) => {
     }
 
     // Update solution
-    const newScore = calculateScore(passedTests, totalTests);
-    updateSolution(solution, newScore, compilationError);
+    const testsTotals = { passedTests, totalTests };
+    updateSolution(solution, testsTotals, compilationError);
     if (solution.status === 'accepted') {
       axios
         .post(
