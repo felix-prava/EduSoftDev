@@ -658,3 +658,22 @@ export const settingsTranslations = {
     ro: 'Limba',
   },
 };
+
+export const solutionTranslations = {
+  solution: {
+    en: 'Solution',
+    ro: 'Soluţie',
+  },
+  passedTests: {
+    en: 'Passed Tests',
+    ro: 'Teste Trecute',
+  },
+  totalTests: {
+    en: 'Total Tests',
+    ro: 'Nr. Total de Teste',
+  },
+  successRate: {
+    en: 'Success Rate',
+    ro: 'Rata de Succes',
+  },
+};
