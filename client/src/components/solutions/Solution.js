@@ -111,11 +111,9 @@ const Solution = ({
               {addedAtLabel}: {displayDate(solution.date, language)}
             </span>
           </p>
-          <code>
-            {solution.code.split('\n').map((line, index) => (
-              <div key={index}>{line}</div>
-            ))}
-          </code>
+          <pre>
+            <code className='language-cpp'>{solution.code}</code>
+          </pre>
         </div>
         <div className='pt-5'>
           <div className='flex justify-end mb-8'>

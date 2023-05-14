@@ -589,10 +589,6 @@ export const settingsTranslations = {
     en: 'Appearance',
     ro: 'Aspect',
   },
-  appearance: {
-    en: 'Appearance',
-    ro: 'Aspect',
-  },
   notifications: {
     en: 'Notifications',
     ro: 'Notificări',
