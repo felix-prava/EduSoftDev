@@ -6,6 +6,11 @@ import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { getSolution } from '../../actions/solution';
 import {
+  statusClassColour,
+  capitalizeWords,
+  displayDate,
+} from '../../utils/helpers';
+import {
   universalTranslations,
   solutionTranslations,
 } from '../layout/Translations';
@@ -27,7 +32,9 @@ const Solution = ({
   const totalTestsLabel = solutionTranslations.totalTests[language];
   const successRateLabel = solutionTranslations.successRate[language];
   const problemLabel = universalTranslations.problem[language];
+  const statusLabel = universalTranslations.status[language];
   const backButtonLabel = universalTranslations.backButton[language];
+  const addedAtLabel = universalTranslations.addedAt[language];
 
   return loading || solution === null ? (
     <Spinner />
@@ -88,6 +95,22 @@ const Solution = ({
               </div>
             </div>
           </div>
+          <p className='mt-2 flex items-baseline gap-x-2'>
+            <span className='font-semibold tracking-tight'>{statusLabel}:</span>
+            <span
+              className={`font-semibold tracking-tight ${statusClassColour(
+                solution.status,
+                true
+              )}`}
+            >
+              {capitalizeWords(solution.status)}
+            </span>
+          </p>
+          <p className='mt-2 mb-6 flex items-baseline gap-x-2'>
+            <span className='font-semibold tracking-tight'>
+              {addedAtLabel}: {displayDate(solution.date, language)}
+            </span>
+          </p>
           <code>
             {solution.code.split('\n').map((line, index) => (
               <div key={index}>{line}</div>

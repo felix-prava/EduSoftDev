@@ -91,6 +91,18 @@ export const universalTranslations = {
     en: 'Quiz',
     ro: 'Quiz',
   },
+  date: {
+    en: 'Date',
+    ro: 'Data',
+  },
+  addedAt: {
+    en: 'Added at',
+    ro: 'Adăugată la',
+  },
+  today: {
+    en: 'Today',
+    ro: 'Azi',
+  },
 };
 
 export const navbarTranslations = {
@@ -301,10 +313,6 @@ export const dashboardTranslations = {
   score: {
     en: 'Score',
     ro: 'Scor',
-  },
-  date: {
-    en: 'Date',
-    ro: 'Data',
   },
 };
 
