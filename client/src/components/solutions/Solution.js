@@ -28,7 +28,6 @@ const Solution = ({
   const successRateLabel = solutionTranslations.successRate[language];
   const problemLabel = universalTranslations.problem[language];
   const backButtonLabel = universalTranslations.backButton[language];
-  const problem = solution.problem;
 
   return loading || solution === null ? (
     <Spinner />
@@ -39,47 +38,49 @@ const Solution = ({
           <h2 className='text-3xl text-left tracking-tight font-bold text-gray-900 sm:text-3xl'>
             {solutionLabel}
           </h2>
-          <div class='mt-12'>
-            <div class='xl:pl-72'>
-              <div class='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'>
-                <div class='border-t border-white/5 py-6 px-4 sm:px-6 lg:px-8'>
-                  <p class='text-sm font-semibold leading-6 text-gray-400'>
+          <div className='mt-12 mb-10'>
+            <div className='xl:pl-72'>
+              <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'>
+                <div className='border-t border-white/5 py-6 px-4 sm:px-6 lg:px-8'>
+                  <p className='text-sm font-semibold leading-6 text-gray-400'>
                     {problemLabel}
                   </p>
-                  <Link to={`/${problem.module}/problems/${problem._id}`}>
-                    <p class='mt-2 flex items-baseline gap-x-2'>
-                      <span class='text-3xl font-semibold tracking-tight'>
-                        {problem.name}
+                  <Link
+                    to={`/${solution.problem.module}/problems/${solution.problem._id}`}
+                  >
+                    <p className='mt-2 flex items-baseline gap-x-2'>
+                      <span className='text-3xl font-semibold tracking-tight'>
+                        {solution.problem.name}
                       </span>
                     </p>
                   </Link>
                 </div>
-                <div class='border-t border-white/5 py-6 px-4 sm:px-6 lg:px-8 sm:border-l'>
-                  <p class='text-sm font-semibold leading-6 text-gray-400'>
+                <div className='border-t border-white/5 py-6 px-4 sm:px-6 lg:px-8 sm:border-l'>
+                  <p className='text-sm font-semibold leading-6 text-gray-400'>
                     {passedTestsLabel}
                   </p>
-                  <p class='mt-2 flex items-baseline gap-x-2'>
-                    <span class='text-3xl font-semibold tracking-tight'>
+                  <p className='mt-2 flex items-baseline gap-x-2'>
+                    <span className='text-3xl font-semibold tracking-tight'>
                       {solution.passedTests}
                     </span>
                   </p>
                 </div>
-                <div class='border-t border-white/5 py-6 px-4 sm:px-6 lg:px-8 lg:border-l'>
-                  <p class='text-sm font-semibold leading-6 text-gray-400'>
+                <div className='border-t border-white/5 py-6 px-4 sm:px-6 lg:px-8 lg:border-l'>
+                  <p className='text-sm font-semibold leading-6 text-gray-400'>
                     {totalTestsLabel}
                   </p>
-                  <p class='mt-2 flex items-baseline gap-x-2'>
-                    <span class='text-3xl font-semibold tracking-tight'>
+                  <p className='mt-2 flex items-baseline gap-x-2'>
+                    <span className='text-3xl font-semibold tracking-tight'>
                       {solution.totalTests}
                     </span>
                   </p>
                 </div>
-                <div class='border-t border-white/5 py-6 px-4 sm:px-6 lg:px-8 sm:border-l'>
-                  <p class='text-sm font-semibold leading-6 text-gray-400'>
+                <div className='border-t border-white/5 py-6 px-4 sm:px-6 lg:px-8 sm:border-l'>
+                  <p className='text-sm font-semibold leading-6 text-gray-400'>
                     {successRateLabel}
                   </p>
-                  <p class='mt-2 flex items-baseline gap-x-2'>
-                    <span class='text-3xl font-semibold tracking-tight'>
+                  <p className='mt-2 flex items-baseline gap-x-2'>
+                    <span className='text-3xl font-semibold tracking-tight'>
                       {`${solution.score}%`}
                     </span>
                   </p>
@@ -87,12 +88,11 @@ const Solution = ({
               </div>
             </div>
           </div>
-          <div
-            className='mt-10 text-base rich-text-body'
-            dangerouslySetInnerHTML={{
-              __html: solution.code,
-            }}
-          />
+          <code>
+            {solution.code.split('\n').map((line, index) => (
+              <div key={index}>{line}</div>
+            ))}
+          </code>
         </div>
         <div className='pt-5'>
           <div className='flex justify-end mb-8'>
