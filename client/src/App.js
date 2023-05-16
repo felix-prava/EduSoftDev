@@ -46,6 +46,9 @@ import EditProblem from './components/basics-of-programming/EditProblem';
 import EditLesson from './components/basics-of-programming/EditLesson';
 import EditQuiz from './components/basics-of-programming/EditQuiz';
 
+// Solutions
+import Solution from './components/solutions/Solution';
+
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { loadUser } from './actions/auth';
@@ -286,6 +289,9 @@ const App = () => {
                 </PrivateRoute>
               }
             />
+
+            {/*Solutions */}
+            <Route exact path='/solutions/:solutionId' element={<Solution />} />
 
             {/* About Us */}
             <Route exact path='/about-us' element={<AboutUs />} />

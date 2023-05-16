@@ -91,6 +91,18 @@ export const universalTranslations = {
     en: 'Quiz',
     ro: 'Quiz',
   },
+  date: {
+    en: 'Date',
+    ro: 'Data',
+  },
+  addedAt: {
+    en: 'Added at',
+    ro: 'Adăugată la',
+  },
+  today: {
+    en: 'Today',
+    ro: 'Azi',
+  },
 };
 
 export const navbarTranslations = {
@@ -301,10 +313,6 @@ export const dashboardTranslations = {
   score: {
     en: 'Score',
     ro: 'Scor',
-  },
-  date: {
-    en: 'Date',
-    ro: 'Data',
   },
 };
 
@@ -581,10 +589,6 @@ export const settingsTranslations = {
     en: 'Appearance',
     ro: 'Aspect',
   },
-  appearance: {
-    en: 'Appearance',
-    ro: 'Aspect',
-  },
   notifications: {
     en: 'Notifications',
     ro: 'Notificări',
@@ -656,5 +660,24 @@ export const settingsTranslations = {
   language: {
     en: 'Language',
     ro: 'Limba',
+  },
+};
+
+export const solutionTranslations = {
+  solution: {
+    en: 'Solution',
+    ro: 'Soluţie',
+  },
+  passedTests: {
+    en: 'Passed Tests',
+    ro: 'Teste Trecute',
+  },
+  totalTests: {
+    en: 'Total Tests',
+    ro: 'Nr. Total de Teste',
+  },
+  successRate: {
+    en: 'Success Rate',
+    ro: 'Rata de Succes',
   },
 };

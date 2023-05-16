@@ -33,10 +33,10 @@ const Dashboard = ({
   const overviewLabel = dashboardTranslations.overview[language];
   const viewAllLabel = dashboardTranslations.viewAll[language];
   const recentSolutionsLabel = dashboardTranslations.recentSolutions[language];
+  const scoreLabel = dashboardTranslations.score[language];
   const problemLabel = universalTranslations.problem[language];
   const statusLabel = universalTranslations.status[language];
-  const scoreLabel = dashboardTranslations.score[language];
-  const dateLabel = dashboardTranslations.date[language];
+  const dateLabel = universalTranslations.date[language];
 
   return loading || solutionsLoading || user === null ? (
     <Spinner />
