@@ -30,13 +30,18 @@ function calculateScore(passedTests, totalTests) {
   return parseFloat(percentage.toFixed(2));
 }
 
-function updateSolution(solution, newScore, compilationError) {
+function updateSolution(solution, testsTotals, compilationError) {
+  const passedTests = testsTotals.passedTests;
+  const totalTests = testsTotals.totalTests;
+  const newScore = calculateScore(passedTests, totalTests);
   if (compilationError !== null) {
     solution.status = compilationError;
   } else {
     solution.score = newScore;
     solution.status = newScore === 100 ? 'accepted' : 'incorrect';
   }
+  solution.totalTests = totalTests;
+  solution.passedTests = passedTests;
 }
 
 module.exports = {

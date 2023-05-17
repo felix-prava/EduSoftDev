@@ -4,7 +4,7 @@ const auth = require('../../middleware/auth');
 const { check } = require('express-validator');
 const http = require('http');
 const axios = require('axios');
-const { calculateScore, updateSolution } = require('../../utils/helpers');
+const { updateSolution } = require('../../utils/helpers');
 const COMPILER_API_URL = 'https://api.codex.jaagrav.in';
 const config = require('config');
 
@@ -125,8 +125,8 @@ router.get('/execute/:solution_id', async (req, res) => {
     }
 
     // Update solution
-    const newScore = calculateScore(passedTests, totalTests);
-    updateSolution(solution, newScore, compilationError);
+    const testsTotals = { passedTests, totalTests };
+    updateSolution(solution, testsTotals, compilationError);
     if (solution.status === 'accepted') {
       axios
         .post(
@@ -148,6 +148,27 @@ router.get('/execute/:solution_id', async (req, res) => {
   } catch (err) {
     if (err.kind == 'ObjectId') {
       return res.status(404).json({ msg: 'Solution not found' });
+    }
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route   GET /api/solutions/:solution_id
+// @desc    Get a solution by id
+// @access  Private
+router.get('/:solution_id', auth, async (req, res) => {
+  try {
+    const solution = await Solution.findById(req.params.solution_id).populate(
+      'problem',
+      ['name', 'module']
+    );
+    res.json(solution);
+  } catch (err) {
+    if (err.kind == 'ObjectId') {
+      return res
+        .status(404)
+        .json({ msg: 'No solution found for this solution_id' });
     }
     console.error(err.message);
     res.status(500).send('Server Error');
