@@ -24,8 +24,9 @@ const Account = ({ auth: { user }, updateUser, deleteAccount, setAlert }) => {
 
   const language = user ? user.language : 'en';
   const changeUsernameLabel = settingsTranslations.changeUsername[language];
-  const updateProfilePictureLabel =
-    settingsTranslations.updateProfilePicture[language];
+  const changePreferredNameLabel =
+    settingsTranslations.changePreferredName[language];
+  const noPreferredNameLabel = settingsTranslations.noPreferredName[language];
   const deleteAccountLabel = settingsTranslations.deleteAccount[language];
   const deleteAccountMessageLabel =
     settingsTranslations.deleteAccountMessage[language];
@@ -94,7 +95,7 @@ const Account = ({ auth: { user }, updateUser, deleteAccount, setAlert }) => {
                   id='preferred-name'
                   className='text-lg leading-6 font-medium text-gray-900'
                 >
-                  Change Preferred Name
+                  {changePreferredNameLabel}
                 </h2>
               </div>
 
@@ -109,7 +110,7 @@ const Account = ({ auth: { user }, updateUser, deleteAccount, setAlert }) => {
                     placeholder={
                       user && user.preferredName
                         ? user.preferredName
-                        : "You don't have a preferred name"
+                        : noPreferredNameLabel
                     }
                     className='mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm'
                   />
@@ -138,31 +139,6 @@ const Account = ({ auth: { user }, updateUser, deleteAccount, setAlert }) => {
               </button>
             </div>
           </div>
-        </section>
-
-        <section aria-labelledby='profile-picture'>
-          <form action='#' method='POST'>
-            <div className='shadow sm:rounded-md sm:overflow-hidden'>
-              <div className='bg-white py-6 px-4 space-y-6 sm:p-6'>
-                <div>
-                  <h2
-                    id='profile-picture'
-                    className='text-lg leading-6 font-medium text-gray-900'
-                  >
-                    {updateProfilePictureLabel}
-                  </h2>
-                </div>
-              </div>
-              <div className='px-4 py-3 bg-gray-50 text-right sm:px-6'>
-                <button
-                  type='submit'
-                  className='bg-gray-800 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900'
-                >
-                  {saveButtonLabel}
-                </button>
-              </div>
-            </div>
-          </form>
         </section>
 
         <section aria-labelledby='delete-account'>

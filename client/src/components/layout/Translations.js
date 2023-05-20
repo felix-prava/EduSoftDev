@@ -29,7 +29,7 @@ export const universalTranslations = {
   },
   leaveComment: {
     en: 'Leave a comment',
-    ro: 'Lasa un comentariu',
+    ro: 'Lasă un comentariu',
   },
   solvedProblems: {
     en: 'solved problems',
@@ -37,7 +37,7 @@ export const universalTranslations = {
   },
   lessonsLearned: {
     en: 'lessons learned',
-    ro: 'lectii invățate',
+    ro: 'lecții invățate',
   },
   quizzesCompleted: {
     en: 'quizzes completed',
@@ -124,7 +124,7 @@ export const navbarTranslations = {
   },
   register: {
     en: 'Register',
-    ro: 'Inregistreaza-te',
+    ro: 'Înregistrează-te',
   },
   aboutUs: {
     en: 'About Us',
@@ -132,19 +132,19 @@ export const navbarTranslations = {
   },
   login: {
     en: 'Login',
-    ro: 'Conecteaza-te',
+    ro: 'Conectează-te',
   },
   logout: {
     en: 'Logout',
-    ro: 'Deconecteaza-te',
+    ro: 'Deconectează-te',
   },
   signOut: {
     en: 'Sign Out',
-    ro: 'Deconecteaza-te',
+    ro: 'Deconectează-te',
   },
   settings: {
     en: 'Settings',
-    ro: 'Setari',
+    ro: 'Setări',
   },
   myProfile: {
     en: 'My Profile',
@@ -261,7 +261,7 @@ export const articlesTranslations = {
   },
   createArticleLink: {
     en: 'Create your own article',
-    ro: 'Creeaza propriul articol',
+    ro: 'Creează propriul articol',
   },
   discussion: {
     en: 'Discussion',
@@ -273,11 +273,11 @@ export const articlesTranslations = {
   },
   createArticle: {
     en: 'Create an article',
-    ro: 'Creeaza un articol',
+    ro: 'Creează un articol',
   },
   editArticle: {
     en: 'Edit an article',
-    ro: 'Editeaza un articol',
+    ro: 'Editează un articol',
   },
   whatIsAbout: {
     en: "What's this article about?",
@@ -288,7 +288,7 @@ export const articlesTranslations = {
 export const dashboardTranslations = {
   hello: {
     en: 'Hello',
-    ro: 'Buna',
+    ro: 'Bună',
   },
   verifiedAccount: {
     en: 'Verified account',
@@ -296,7 +296,7 @@ export const dashboardTranslations = {
   },
   continueLearning: {
     en: 'Continue Learning',
-    ro: 'Continua unde ai ramas',
+    ro: 'Continuă unde ai ramas',
   },
   overview: {
     en: 'Overview',
@@ -308,7 +308,7 @@ export const dashboardTranslations = {
   },
   recentSolutions: {
     en: 'Recent solutions',
-    ro: 'Solutii recente',
+    ro: 'Soluții recente',
   },
   score: {
     en: 'Score',
@@ -600,6 +600,14 @@ export const settingsTranslations = {
   changeUsername: {
     en: 'Change Username',
     ro: 'Schimbă Username-ul',
+  },
+  changePreferredName: {
+    en: 'Change Preferred Name',
+    ro: 'Schimbă Prenumele Preferat',
+  },
+  noPreferredName: {
+    en: "You didn't tell us your preferred name",
+    ro: 'Nu ne-ai spus care este prenumele tău preferat',
   },
   changePassword: {
     en: 'Change Password',

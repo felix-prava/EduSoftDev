@@ -41,6 +41,7 @@ const UserProfile = ({
   const educationLabel = myProfileTranslations.education[language];
   const githubReposLabel = myProfileTranslations.githubRepos[language];
   const solvedProblemsLabel = universalTranslations.solvedProblems[language];
+  const expPointsLabel = universalTranslations.expPoints[language];
   const solvedProblems =
     (user && user.solvedProblems && user.solvedProblems.length) || 0;
   const noExperienceLabel = profilesTranslations.noExperience[language];
@@ -209,7 +210,9 @@ const UserProfile = ({
                                 </svg>
                               </div>
                               <div className='ml-3 text-base text-gray-500 hover:text-gray-700'>
-                                <p>{user.exp} exp</p>
+                                <p>
+                                  {user.exp} {expPointsLabel}
+                                </p>
                               </div>
                             </div>
                           </div>
