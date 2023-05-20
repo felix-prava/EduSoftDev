@@ -45,75 +45,92 @@ const Solution = ({
           <h2 className='text-3xl text-left tracking-tight font-bold text-gray-900 sm:text-3xl'>
             {solutionLabel}
           </h2>
-          <div className='mt-12 mb-10'>
-            <div className='xl:pl-72'>
-              <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'>
-                <div className='border-t border-white/5 py-6 px-4 sm:px-6 lg:px-8'>
-                  <p className='text-sm font-semibold leading-6 text-gray-400'>
-                    {problemLabel}
-                  </p>
-                  <Link
-                    to={`/${solution.problem.module}/problems/${solution.problem._id}`}
-                  >
-                    <p className='mt-2 flex items-baseline gap-x-2'>
-                      <span className='text-3xl font-semibold tracking-tight'>
-                        {solution.problem.name}
-                      </span>
-                    </p>
-                  </Link>
-                </div>
-                <div className='border-t border-white/5 py-6 px-4 sm:px-6 lg:px-8 sm:border-l'>
-                  <p className='text-sm font-semibold leading-6 text-gray-400'>
-                    {passedTestsLabel}
-                  </p>
-                  <p className='mt-2 flex items-baseline gap-x-2'>
-                    <span className='text-3xl font-semibold tracking-tight'>
-                      {solution.passedTests}
-                    </span>
-                  </p>
-                </div>
-                <div className='border-t border-white/5 py-6 px-4 sm:px-6 lg:px-8 lg:border-l'>
-                  <p className='text-sm font-semibold leading-6 text-gray-400'>
-                    {totalTestsLabel}
-                  </p>
-                  <p className='mt-2 flex items-baseline gap-x-2'>
-                    <span className='text-3xl font-semibold tracking-tight'>
-                      {solution.totalTests}
-                    </span>
-                  </p>
-                </div>
-                <div className='border-t border-white/5 py-6 px-4 sm:px-6 lg:px-8 sm:border-l'>
-                  <p className='text-sm font-semibold leading-6 text-gray-400'>
-                    {successRateLabel}
-                  </p>
-                  <p className='mt-2 flex items-baseline gap-x-2'>
-                    <span className='text-3xl font-semibold tracking-tight'>
-                      {`${solution.score}%`}
-                    </span>
-                  </p>
+          <section aria-labelledby='update-password' className='mt-10 mb-10'>
+            <div className='shadow sm:rounded-md sm:overflow-hidden'>
+              <div className='bg-white py-6 px-4 sm:p-6'>
+                <div className='mt-12 mb-10'>
+                  <div className='xl:pl-72'>
+                    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'>
+                      <div className='border-t border-white/5 py-6 px-4 sm:px-6 lg:px-8'>
+                        <p className='text-sm font-semibold leading-6 text-gray-400'>
+                          {problemLabel}
+                        </p>
+                        <Link
+                          to={`/${solution.problem.module}/problems/${solution.problem._id}`}
+                        >
+                          <p className='mt-2 flex items-baseline gap-x-2'>
+                            <span className='text-3xl font-semibold tracking-tight'>
+                              {solution.problem.name}
+                            </span>
+                          </p>
+                        </Link>
+                      </div>
+                      <div className='border-t border-white/5 py-6 px-4 sm:px-6 lg:px-8 sm:border-l'>
+                        <p className='text-sm font-semibold leading-6 text-gray-400'>
+                          {passedTestsLabel}
+                        </p>
+                        <p className='mt-2 flex items-baseline gap-x-2'>
+                          <span className='text-3xl font-semibold tracking-tight'>
+                            {solution.passedTests}
+                          </span>
+                        </p>
+                      </div>
+                      <div className='border-t border-white/5 py-6 px-4 sm:px-6 lg:px-8 lg:border-l'>
+                        <p className='text-sm font-semibold leading-6 text-gray-400'>
+                          {totalTestsLabel}
+                        </p>
+                        <p className='mt-2 flex items-baseline gap-x-2'>
+                          <span className='text-3xl font-semibold tracking-tight'>
+                            {solution.totalTests}
+                          </span>
+                        </p>
+                      </div>
+                      <div className='border-t border-white/5 py-6 px-4 sm:px-6 lg:px-8 sm:border-l'>
+                        <p className='text-sm font-semibold leading-6 text-gray-400'>
+                          {successRateLabel}
+                        </p>
+                        <p className='mt-2 flex items-baseline gap-x-2'>
+                          <span className='text-3xl font-semibold tracking-tight'>
+                            {`${solution.score}%`}
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
+              <div className='px-4 py-3 bg-gray-50 text-right sm:px-6'>
+                <p className='mt-2 flex items-baseline gap-x-2'>
+                  <span className='font-semibold tracking-tight'>
+                    {statusLabel}:
+                  </span>
+                  <span
+                    className={`font-semibold tracking-tight ${statusClassColour(
+                      solution.status,
+                      true
+                    )}`}
+                  >
+                    {capitalizeWords(solution.status)}
+                  </span>
+                </p>
+                <p className='mt-2 mb-6 flex items-baseline gap-x-2'>
+                  <span className='font-semibold tracking-tight'>
+                    {addedAtLabel}: {displayDate(solution.date, language)}
+                  </span>
+                </p>
+              </div>
             </div>
-          </div>
-          <p className='mt-2 flex items-baseline gap-x-2'>
-            <span className='font-semibold tracking-tight'>{statusLabel}:</span>
-            <span
-              className={`font-semibold tracking-tight ${statusClassColour(
-                solution.status,
-                true
-              )}`}
-            >
-              {capitalizeWords(solution.status)}
-            </span>
-          </p>
-          <p className='mt-2 mb-6 flex items-baseline gap-x-2'>
-            <span className='font-semibold tracking-tight'>
-              {addedAtLabel}: {displayDate(solution.date, language)}
-            </span>
-          </p>
-          <pre>
-            <code className='language-cpp'>{solution.code}</code>
-          </pre>
+          </section>
+
+          <section aria-labelledby='update-password'>
+            <div className='shadow sm:rounded-md sm:overflow-hidden'>
+              <div className='bg-white py-6 px-4 sm:p-6'>
+                <pre>
+                  <code className='language-cpp'>{solution.code}</code>
+                </pre>
+              </div>
+            </div>
+          </section>
         </div>
         <div className='pt-5'>
           <div className='flex justify-end mb-8'>
