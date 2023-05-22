@@ -14,11 +14,11 @@ const EditGeneralInfo = ({ auth: { user, loading }, updateUser, setAlert }) => {
   const [formData, setFormData] = useState({
     firstName: loading || !user ? '' : user.firstName,
     lastName: loading || !user ? '' : user.lastName,
-    username: loading || !user ? '' : user.username,
-    email: loading || !user ? '' : user.email,
+    preferredName: loading || !user ? '' : user.preferredName,
+    birthdate: loading || !user ? '' : user.birthdate,
   });
 
-  const { firstName, lastName, username, email } = formData;
+  const { firstName, lastName, preferredName, birthdate } = formData;
 
   const updateGeneralInfo = async () => {
     let validFormData = true;
@@ -30,18 +30,10 @@ const EditGeneralInfo = ({ auth: { user, loading }, updateUser, setAlert }) => {
       setAlert("Last name can't be empty", 'error');
       validFormData = false;
     }
-    if (username === '') {
-      setAlert("Username can't be empty", 'error');
-      validFormData = false;
-    }
-    if (email === '') {
-      setAlert("Email can't be empty", 'error');
-      validFormData = false;
-    }
     if (!validFormData) return;
 
     await updateUser(
-      { firstName, lastName, username, email },
+      { firstName, lastName, preferredName, birthdate },
       user._id,
       'Information Updated'
     );
@@ -55,6 +47,8 @@ const EditGeneralInfo = ({ auth: { user, loading }, updateUser, setAlert }) => {
     myProfileTranslations.updateGeneralInfo[language];
   const firstNameLabel = myProfileTranslations.firstName[language];
   const lastNameLabel = myProfileTranslations.lastName[language];
+  const preferredNameLabel = myProfileTranslations.preferredName[language];
+  const birthdateLabel = myProfileTranslations.birthdate[language];
   const saveButtonLabel = universalTranslations.saveButton[language];
   const cancelButtonLabel = universalTranslations.cancelButton[language];
 
@@ -121,17 +115,16 @@ const EditGeneralInfo = ({ auth: { user, loading }, updateUser, setAlert }) => {
                 <div className='mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6'>
                   <div className='sm:col-span-3'>
                     <label
-                      htmlFor='username'
+                      htmlFor='preferredName'
                       className='block text-sm font-medium text-gray-700'
                     >
-                      {' '}
-                      Username{' '}
+                      {preferredNameLabel}
                     </label>
                     <div className='mt-1'>
                       <input
                         type='text'
-                        name='username'
-                        value={username}
+                        name='preferredName'
+                        value={preferredName}
                         onChange={(e) => onChange(e)}
                         className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
                       />
@@ -140,17 +133,20 @@ const EditGeneralInfo = ({ auth: { user, loading }, updateUser, setAlert }) => {
 
                   <div className='sm:col-span-3'>
                     <label
-                      htmlFor='email'
+                      htmlFor='birthdate'
                       className='block text-sm font-medium text-gray-700'
                     >
-                      {' '}
-                      Email{' '}
+                      {birthdateLabel}
                     </label>
                     <div className='mt-1'>
                       <input
-                        type='text'
-                        name='email'
-                        value={email}
+                        type='date'
+                        name='birthdate'
+                        value={
+                          birthdate
+                            ? new Date(birthdate).toISOString().split('T')[0]
+                            : ''
+                        }
                         onChange={(e) => onChange(e)}
                         className='shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md'
                       />

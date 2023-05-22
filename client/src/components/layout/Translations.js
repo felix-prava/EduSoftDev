@@ -248,6 +248,14 @@ export const myProfileTranslations = {
     en: 'Last Name',
     ro: 'Nume de Familie',
   },
+  preferredName: {
+    en: 'Preferred Name',
+    ro: 'Prenume Preferat',
+  },
+  birthdate: {
+    en: 'Birth Date',
+    ro: 'Zi de Naştere',
+  },
 };
 
 export const articlesTranslations = {

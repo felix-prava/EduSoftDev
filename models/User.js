@@ -41,6 +41,9 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: 'en',
   },
+  birthdate: {
+    type: Date,
+  },
   solvedProblems: [
     {
       problem: {
