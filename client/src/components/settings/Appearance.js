@@ -38,31 +38,27 @@ const Appearance = ({ auth: { user }, updateUser }) => {
         <section aria-labelledby='update-password'>
           <div className='shadow sm:rounded-md sm:overflow-hidden'>
             <div className='bg-white py-6 px-4 sm:p-6'>
-              <div>
-                <h2
-                  id='update-password'
-                  className='text-lg leading-6 font-medium text-gray-900'
-                >
-                  {selectLanguageLabel}
-                </h2>
-              </div>
+              <h2
+                id='update-password'
+                className='text-lg leading-6 font-medium text-gray-900'
+              >
+                {selectLanguageLabel}
+              </h2>
 
-              <div>
-                <label className='mt-6 block text-sm font-medium text-gray-700'>
-                  {languageLabel}
-                </label>
-                <div className='col-span-4 sm:col-span-2'>
-                  <select
-                    name='language'
-                    id='language'
-                    value={language}
-                    onChange={(e) => onChange(e)}
-                    className='mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm'
-                  >
-                    <option value='en'>English</option>
-                    <option value='ro'>Română</option>
-                  </select>
-                </div>
+              <label className='mt-6 block text-sm font-medium text-gray-700'>
+                {languageLabel}
+              </label>
+              <div className='col-span-4 sm:col-span-2'>
+                <select
+                  name='language'
+                  id='language'
+                  value={language}
+                  onChange={(e) => onChange(e)}
+                  className='mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm'
+                >
+                  <option value='en'>English</option>
+                  <option value='ro'>Română</option>
+                </select>
               </div>
             </div>
             <div className='px-4 py-3 bg-gray-50 text-right sm:px-6'>
@@ -80,14 +76,12 @@ const Appearance = ({ auth: { user }, updateUser }) => {
           <form action='#' method='POST'>
             <div className='shadow sm:rounded-md sm:overflow-hidden'>
               <div className='bg-white py-6 px-4 space-y-6 sm:p-6'>
-                <div>
-                  <h2
-                    id='profile-picture'
-                    className='text-lg leading-6 font-medium text-gray-900'
-                  >
-                    {updateProfilePictureLabel}
-                  </h2>
-                </div>
+                <h2
+                  id='profile-picture'
+                  className='text-lg leading-6 font-medium text-gray-900'
+                >
+                  {updateProfilePictureLabel}
+                </h2>
               </div>
               <div className='px-4 py-3 bg-gray-50 text-right sm:px-6'>
                 <button

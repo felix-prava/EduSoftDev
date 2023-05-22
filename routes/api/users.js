@@ -77,9 +77,6 @@ router.post(
       if (preferredName) {
         user.preferredName = preferredName;
       }
-      if (birthdate) {
-        user.birthdate = birthdate;
-      }
 
       // Encrypt password
       const salt = await bcrypt.genSalt(10);
@@ -141,6 +138,8 @@ router.put('/:user_id', auth, async (req, res) => {
       lastName,
       preferredName,
       birthdate,
+      getNotifications,
+      getNews,
       username,
       language,
       email,
@@ -155,6 +154,9 @@ router.put('/:user_id', auth, async (req, res) => {
     if (preferredName || preferredName === '')
       userFields.preferredName = preferredName;
     if (birthdate) userFields.birthdate = birthdate;
+    if (getNotifications !== null)
+      userFields.getNotifications = getNotifications;
+    if (getNews !== null) userFields.getNews = getNews;
     if (username && user.username !== username) {
       try {
         const userExists = await User.exists({ username });

@@ -665,6 +665,34 @@ export const settingsTranslations = {
     en: 'Password Updated',
     ro: 'Parolă Actualizată',
   },
+  changeEmail: {
+    en: 'Change Email',
+    ro: 'Schimbă Email-ul',
+  },
+  emailSettings: {
+    en: 'Email Settings',
+    ro: 'Setări pentru Email',
+  },
+  getNotifications: {
+    en: 'Do you want to receive email notifications about your platform progress and your work?',
+    ro: 'Dorești să primești notificări prin email despre progresul tău pe platformă?',
+  },
+  getNews: {
+    en: 'Do you want to receive emails about IT news, our plans and other things that are not related to the platform?',
+    ro: 'Dorești să primești email-uri despre lucruri noi din IT, planurile noastre și alte lucruri care nu au legătură cu platforma?',
+  },
+  emailUpdated: {
+    en: 'Email Updated',
+    ro: 'Email Actualizat',
+  },
+  emailSettingsUpdated: {
+    en: 'Email Settings Updated',
+    ro: 'Setările email-ului au fost actualizate',
+  },
+  blankNewEmail: {
+    en: "New email can't be blank",
+    ro: 'Noul email nu poate să fie fără conținut',
+  },
   languageUpdated: {
     en: 'Language Updated',
     ro: 'Limba Actualizată',

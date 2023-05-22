@@ -44,6 +44,14 @@ const UserSchema = new mongoose.Schema({
   birthdate: {
     type: Date,
   },
+  getNotifications: {
+    type: Boolean,
+    default: false,
+  },
+  getNews: {
+    type: Boolean,
+    default: false,
+  },
   solvedProblems: [
     {
       problem: {

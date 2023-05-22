@@ -69,66 +69,58 @@ const Password = ({ auth: { user }, updateUser, setAlert }) => {
         <section aria-labelledby='update-password'>
           <div className='shadow sm:rounded-md sm:overflow-hidden'>
             <div className='bg-white py-6 px-4 sm:p-6'>
-              <div>
-                <h2
-                  id='update-password'
-                  className='text-lg leading-6 font-medium text-gray-900'
-                >
-                  {changePasswordLabel}
-                </h2>
-              </div>
+              <h2
+                id='update-password'
+                className='text-lg leading-6 font-medium text-gray-900'
+              >
+                {changePasswordLabel}
+              </h2>
 
-              <div>
-                <label className='mt-6 block text-sm font-medium text-gray-700'>
-                  {oldPasswordLabel}
-                </label>
-                <div className='grid grid-cols-4 gap-6'>
-                  <div className='col-span-4 sm:col-span-2'>
-                    <input
-                      type='password'
-                      name='oldPassword'
-                      id='oldPassword'
-                      value={oldPassword}
-                      onChange={(e) => onChange(e)}
-                      className='mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm'
-                    />
-                  </div>
+              <label className='mt-6 block text-sm font-medium text-gray-700'>
+                {oldPasswordLabel}
+              </label>
+              <div className='grid grid-cols-4 gap-6'>
+                <div className='col-span-4 sm:col-span-2'>
+                  <input
+                    type='password'
+                    name='oldPassword'
+                    id='oldPassword'
+                    value={oldPassword}
+                    onChange={(e) => onChange(e)}
+                    className='mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm'
+                  />
                 </div>
               </div>
 
-              <div>
-                <label className='mt-6 block text-sm font-medium text-gray-700'>
-                  {newPasswordLabel}
-                </label>
-                <div className='grid grid-cols-4 gap-6'>
-                  <div className='col-span-4 sm:col-span-2'>
-                    <input
-                      type='password'
-                      name='password'
-                      id='password'
-                      value={password}
-                      onChange={(e) => onChange(e)}
-                      className='mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm'
-                    />
-                  </div>
+              <label className='mt-6 block text-sm font-medium text-gray-700'>
+                {newPasswordLabel}
+              </label>
+              <div className='grid grid-cols-4 gap-6'>
+                <div className='col-span-4 sm:col-span-2'>
+                  <input
+                    type='password'
+                    name='password'
+                    id='password'
+                    value={password}
+                    onChange={(e) => onChange(e)}
+                    className='mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm'
+                  />
                 </div>
               </div>
 
-              <div>
-                <label className='mt-6 block text-sm font-medium text-gray-700'>
-                  {confirmNewPasswordLabel}
-                </label>
-                <div className='grid grid-cols-4 gap-6'>
-                  <div className='col-span-4 sm:col-span-2'>
-                    <input
-                      type='password'
-                      name='passwordConfirmation'
-                      id='passwordConfirmation'
-                      value={passwordConfirmation}
-                      onChange={(e) => onChange(e)}
-                      className='mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm'
-                    />
-                  </div>
+              <label className='mt-6 block text-sm font-medium text-gray-700'>
+                {confirmNewPasswordLabel}
+              </label>
+              <div className='grid grid-cols-4 gap-6'>
+                <div className='col-span-4 sm:col-span-2'>
+                  <input
+                    type='password'
+                    name='passwordConfirmation'
+                    id='passwordConfirmation'
+                    value={passwordConfirmation}
+                    onChange={(e) => onChange(e)}
+                    className='mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm'
+                  />
                 </div>
               </div>
             </div>
