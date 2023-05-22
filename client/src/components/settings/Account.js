@@ -60,6 +60,7 @@ const Account = ({ auth: { user }, updateUser, deleteAccount, setAlert }) => {
                     id='username'
                     value={username}
                     onChange={(e) => onChange(e)}
+                    placeholder={user && user.username}
                     className='mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-gray-900 focus:border-gray-900 sm:text-sm'
                   />
                 </div>
