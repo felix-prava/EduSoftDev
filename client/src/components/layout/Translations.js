@@ -29,7 +29,7 @@ export const universalTranslations = {
   },
   leaveComment: {
     en: 'Leave a comment',
-    ro: 'Lasa un comentariu',
+    ro: 'Lasă un comentariu',
   },
   solvedProblems: {
     en: 'solved problems',
@@ -37,7 +37,7 @@ export const universalTranslations = {
   },
   lessonsLearned: {
     en: 'lessons learned',
-    ro: 'lectii invățate',
+    ro: 'lecții invățate',
   },
   quizzesCompleted: {
     en: 'quizzes completed',
@@ -124,7 +124,7 @@ export const navbarTranslations = {
   },
   register: {
     en: 'Register',
-    ro: 'Inregistreaza-te',
+    ro: 'Înregistrează-te',
   },
   aboutUs: {
     en: 'About Us',
@@ -132,19 +132,19 @@ export const navbarTranslations = {
   },
   login: {
     en: 'Login',
-    ro: 'Conecteaza-te',
+    ro: 'Conectează-te',
   },
   logout: {
     en: 'Logout',
-    ro: 'Deconecteaza-te',
+    ro: 'Deconectează-te',
   },
   signOut: {
     en: 'Sign Out',
-    ro: 'Deconecteaza-te',
+    ro: 'Deconectează-te',
   },
   settings: {
     en: 'Settings',
-    ro: 'Setari',
+    ro: 'Setări',
   },
   myProfile: {
     en: 'My Profile',
@@ -248,6 +248,14 @@ export const myProfileTranslations = {
     en: 'Last Name',
     ro: 'Nume de Familie',
   },
+  preferredName: {
+    en: 'Preferred Name',
+    ro: 'Prenume Preferat',
+  },
+  birthdate: {
+    en: 'Birth Date',
+    ro: 'Zi de Naştere',
+  },
 };
 
 export const articlesTranslations = {
@@ -261,7 +269,7 @@ export const articlesTranslations = {
   },
   createArticleLink: {
     en: 'Create your own article',
-    ro: 'Creeaza propriul articol',
+    ro: 'Creează propriul articol',
   },
   discussion: {
     en: 'Discussion',
@@ -273,11 +281,11 @@ export const articlesTranslations = {
   },
   createArticle: {
     en: 'Create an article',
-    ro: 'Creeaza un articol',
+    ro: 'Creează un articol',
   },
   editArticle: {
     en: 'Edit an article',
-    ro: 'Editeaza un articol',
+    ro: 'Editează un articol',
   },
   whatIsAbout: {
     en: "What's this article about?",
@@ -288,7 +296,7 @@ export const articlesTranslations = {
 export const dashboardTranslations = {
   hello: {
     en: 'Hello',
-    ro: 'Buna',
+    ro: 'Bună',
   },
   verifiedAccount: {
     en: 'Verified account',
@@ -296,7 +304,7 @@ export const dashboardTranslations = {
   },
   continueLearning: {
     en: 'Continue Learning',
-    ro: 'Continua unde ai ramas',
+    ro: 'Continuă unde ai ramas',
   },
   overview: {
     en: 'Overview',
@@ -308,7 +316,7 @@ export const dashboardTranslations = {
   },
   recentSolutions: {
     en: 'Recent solutions',
-    ro: 'Solutii recente',
+    ro: 'Soluții recente',
   },
   score: {
     en: 'Score',
@@ -601,6 +609,14 @@ export const settingsTranslations = {
     en: 'Change Username',
     ro: 'Schimbă Username-ul',
   },
+  changePreferredName: {
+    en: 'Change Preferred Name',
+    ro: 'Schimbă Prenumele Preferat',
+  },
+  noPreferredName: {
+    en: "You didn't tell us your preferred name",
+    ro: 'Nu ne-ai spus care este prenumele tău preferat',
+  },
   changePassword: {
     en: 'Change Password',
     ro: 'Schimbă Parola',
@@ -648,6 +664,34 @@ export const settingsTranslations = {
   passwordUpdated: {
     en: 'Password Updated',
     ro: 'Parolă Actualizată',
+  },
+  changeEmail: {
+    en: 'Change Email',
+    ro: 'Schimbă Email-ul',
+  },
+  emailSettings: {
+    en: 'Email Settings',
+    ro: 'Setări pentru Email',
+  },
+  getNotifications: {
+    en: 'Do you want to receive email notifications about your platform progress and your work?',
+    ro: 'Dorești să primești notificări prin email despre progresul tău pe platformă?',
+  },
+  getNews: {
+    en: 'Do you want to receive emails about IT news, our plans and other things that are not related to the platform?',
+    ro: 'Dorești să primești email-uri despre lucruri noi din IT, planurile noastre și alte lucruri care nu au legătură cu platforma?',
+  },
+  emailUpdated: {
+    en: 'Email Updated',
+    ro: 'Email Actualizat',
+  },
+  emailSettingsUpdated: {
+    en: 'Email Settings Updated',
+    ro: 'Setările email-ului au fost actualizate',
+  },
+  blankNewEmail: {
+    en: "New email can't be blank",
+    ro: 'Noul email nu poate să fie fără conținut',
   },
   languageUpdated: {
     en: 'Language Updated',

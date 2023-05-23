@@ -5,6 +5,7 @@ import { useLocation, Link } from 'react-router-dom';
 import Account from '../settings/Account';
 import Password from '../settings/Password';
 import Appearance from '../settings/Appearance';
+import Emails from '../settings/Emails';
 import { settingsTranslations } from './Translations';
 
 const SettingsSidebar = ({ auth: { user } }) => {
@@ -46,6 +47,13 @@ const SettingsSidebar = ({ auth: { user } }) => {
       settingsMenu = (
         <Fragment>
           <Appearance />
+        </Fragment>
+      );
+      break;
+    case '/settings/emails':
+      settingsMenu = (
+        <Fragment>
+          <Emails />
         </Fragment>
       );
       break;

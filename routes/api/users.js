@@ -32,8 +32,15 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { firstName, lastName, preferredName, username, email, password } =
-      req.body;
+    const {
+      firstName,
+      lastName,
+      preferredName,
+      birthdate,
+      username,
+      email,
+      password,
+    } = req.body;
 
     try {
       let user = await User.findOne({ email });
@@ -130,6 +137,9 @@ router.put('/:user_id', auth, async (req, res) => {
       firstName,
       lastName,
       preferredName,
+      birthdate,
+      getNotifications,
+      getNews,
       username,
       language,
       email,
@@ -143,6 +153,10 @@ router.put('/:user_id', auth, async (req, res) => {
     if (lastName) userFields.lastName = lastName;
     if (preferredName || preferredName === '')
       userFields.preferredName = preferredName;
+    if (birthdate) userFields.birthdate = birthdate;
+    if (getNotifications !== null)
+      userFields.getNotifications = getNotifications;
+    if (getNews !== null) userFields.getNews = getNews;
     if (username && user.username !== username) {
       try {
         const userExists = await User.exists({ username });
