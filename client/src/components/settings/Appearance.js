@@ -13,9 +13,10 @@ const Appearance = ({ auth: { user }, updateUser }) => {
   const userLanguage = user ? user.language : 'en';
   const selectLanguageLabel = settingsTranslations.selectLanguage[userLanguage];
   const languageLabel = settingsTranslations.language[userLanguage];
-  const languageUpdatedMessage = settingsTranslations.languageUpdated[language];
+  const languageUpdatedMessage =
+    settingsTranslations.languageUpdated[userLanguage];
   const updateProfilePictureLabel =
-    settingsTranslations.updateProfilePicture[language];
+    settingsTranslations.updateProfilePicture[userLanguage];
   const saveButtonLabel = universalTranslations.saveButton[userLanguage];
 
   useEffect(() => {
