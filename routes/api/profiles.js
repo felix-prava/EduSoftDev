@@ -141,6 +141,8 @@ router.get('/user/:user_id', auth, async (req, res) => {
       'avatar',
       'email',
       'username',
+      'birthdate',
+      'role',
       'exp',
       'solvedProblems',
     ]);

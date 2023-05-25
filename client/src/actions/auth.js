@@ -115,6 +115,7 @@ export const updateUser =
       email,
       oldPassword,
       password,
+      role,
     },
     userId,
     msg
@@ -137,6 +138,7 @@ export const updateUser =
       email,
       oldPassword,
       password,
+      role,
     });
 
     try {

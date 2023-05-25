@@ -63,6 +63,30 @@ const UserProfile = ({
                     src={user.avatar}
                     alt=''
                   />
+                  {currentUser.role === 'admin' && currentUser._id !== id && (
+                    <Link to={`/profiles/${id}/edit`}>
+                      <button
+                        type='button'
+                        className='mt-2 inline-flex text-center content-center mr-4 px-4 py-2 border border-transparent shadow-sm w-full text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
+                      >
+                        <svg
+                          xmlns='http://www.w3.org/2000/svg'
+                          className='h-6 w-6 mr-2'
+                          fill='none'
+                          viewBox='0 0 24 24'
+                          stroke='currentColor'
+                          strokeWidth='2'
+                        >
+                          <path
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
+                            d='M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z'
+                          />
+                        </svg>
+                        <div className='pt-0.5'>{editProfileLabel}</div>
+                      </button>
+                    </Link>
+                  )}
                   {currentUser._id === id && (
                     <Fragment>
                       <Link to='/edit-profile'>
@@ -84,7 +108,7 @@ const UserProfile = ({
                               d='M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z'
                             />
                           </svg>
-                          {editProfileLabel}
+                          <div className='pt-0.5'>{editProfileLabel}</div>
                         </button>
                       </Link>
                       <div className='grid grid-cols-2 grid-flow-col gap-4'>
