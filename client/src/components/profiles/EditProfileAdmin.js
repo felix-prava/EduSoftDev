@@ -86,6 +86,8 @@ const EditProfileAdmin = ({
       validFormData = false;
     }
     if (!validFormData) return;
+    let dispatchUserUpdated = false;
+
     await updateUser(
       {
         firstName,
@@ -99,7 +101,8 @@ const EditProfileAdmin = ({
         //githubUsername,
       },
       profile.user._id,
-      'Information Updated'
+      'Information Updated',
+      dispatchUserUpdated
     );
   };
 
