@@ -1,3 +1,5 @@
+const Profile = require('../models/Profile');
+
 function checkQuizAnswers(userAnswers = [], rightAnswers = []) {
   if (userAnswers.length !== rightAnswers.length) {
     return -1;
@@ -44,10 +46,24 @@ function updateSolution(solution, testsTotals, compilationError) {
   solution.passedTests = passedTests;
 }
 
+async function updateProfile(status, githubUsername, user_id) {
+  if (status !== undefined || githubUsername !== undefined) {
+    const profile = await Profile.findOne({
+      user: user_id,
+    });
+    if (profile) {
+      profile.status = status;
+      profile.githubUsername = githubUsername;
+      profile.save();
+    }
+  }
+}
+
 module.exports = {
   filterFailedQuizzes,
   checkQuizAnswers,
   failedQuizzesContainsCurrentQuiz,
   calculateScore,
   updateSolution,
+  updateProfile,
 };

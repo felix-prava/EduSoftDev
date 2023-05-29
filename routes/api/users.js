@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 const auth = require('../../middleware/auth');
 const compareUsers = require('../../middleware/compareUsers');
+const { updateProfile } = require('../../utils/helpers');
 
 const User = require('../../models/User');
 const Profile = require('../../models/Profile');
@@ -146,7 +147,10 @@ router.put('/:user_id', auth, async (req, res) => {
       password,
       oldPassword,
       role,
+      status,
+      githubUsername,
     } = req.body;
+    await updateProfile(status, githubUsername, req.params.user_id);
 
     // Build user fields
     const userFields = {};

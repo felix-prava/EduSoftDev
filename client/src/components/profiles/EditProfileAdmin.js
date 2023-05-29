@@ -42,8 +42,8 @@ const EditProfileAdmin = ({
         email: loading || !user ? '' : user.email || '',
         username: loading || !user ? '' : user.username || '',
         role: loading || !user ? '' : user.role || '',
-        status: loading || !user ? '' : user.status || '',
-        githubUsername: loading || !user ? '' : user.githubUsername || '',
+        status: loading ? '' : profile.status || '',
+        githubUsername: loading ? '' : profile.githubUsername || '',
       });
     }
   }, [getProfileById, id, profile]);
@@ -97,8 +97,8 @@ const EditProfileAdmin = ({
         email,
         username,
         role,
-        //status,
-        //githubUsername,
+        status,
+        githubUsername,
       },
       profile.user._id,
       'Information Updated',

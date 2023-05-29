@@ -116,6 +116,8 @@ export const updateUser =
       oldPassword,
       password,
       role,
+      status,
+      githubUsername,
     },
     userId,
     msg,
@@ -140,6 +142,8 @@ export const updateUser =
       oldPassword,
       password,
       role,
+      status,
+      githubUsername,
     });
 
     try {
