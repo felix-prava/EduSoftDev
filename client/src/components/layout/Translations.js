@@ -240,6 +240,10 @@ export const myProfileTranslations = {
     en: 'Update General Info',
     ro: 'Actualizează informațiile generale',
   },
+  updateUserInfo: {
+    en: 'Update User Info',
+    ro: 'Actualizează informațiile utilizatorului',
+  },
   firstName: {
     en: 'First Name',
     ro: 'Prenume',

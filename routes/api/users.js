@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 const auth = require('../../middleware/auth');
 const compareUsers = require('../../middleware/compareUsers');
+const { updateProfile } = require('../../utils/helpers');
 
 const User = require('../../models/User');
 const Profile = require('../../models/Profile');
@@ -145,7 +146,11 @@ router.put('/:user_id', auth, async (req, res) => {
       email,
       password,
       oldPassword,
+      role,
+      status,
+      githubUsername,
     } = req.body;
+    await updateProfile(status, githubUsername, req.params.user_id);
 
     // Build user fields
     const userFields = {};
@@ -171,6 +176,7 @@ router.put('/:user_id', auth, async (req, res) => {
       userFields.username = username;
     }
     if (language) userFields.language = language;
+    if (role) userFields.role = role;
     if (email && user.email !== email) {
       try {
         const userExists = await User.exists({ email });
