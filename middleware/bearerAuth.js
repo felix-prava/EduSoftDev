@@ -8,7 +8,9 @@ module.exports = function (req, res, next) {
   if (!token) {
     return res.status(401).json({ msg: 'No token, authorization denied' });
   }
-  if (token !== `Bearer ${config.get('privateRouteKey')}`) {
+  const privateRouteKey =
+    process.env.privateRouteKey || config.get('privateRouteKey');
+  if (token !== `Bearer ${privateRouteKey}`) {
     return res.status(401).json({ msg: 'Token is not valid' });
   }
   next();
