@@ -115,9 +115,13 @@ export const updateUser =
       email,
       oldPassword,
       password,
+      role,
+      status,
+      githubUsername,
     },
     userId,
-    msg
+    msg,
+    dispatchUserUpdated = true
   ) =>
   async (dispatch) => {
     const config = {
@@ -137,15 +141,20 @@ export const updateUser =
       email,
       oldPassword,
       password,
+      role,
+      status,
+      githubUsername,
     });
 
     try {
       const res = await axios.put('/api/users/' + userId, body, config);
 
-      dispatch({
-        type: USER_UPDATED,
-        payload: res.data,
-      });
+      if (dispatchUserUpdated) {
+        dispatch({
+          type: USER_UPDATED,
+          payload: res.data,
+        });
+      }
 
       dispatch(setAlert(msg, 'success'));
       return 0;

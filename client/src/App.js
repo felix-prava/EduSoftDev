@@ -22,6 +22,7 @@ import PrivateRoute from './components/routing/PrivateRoute';
 import MyProfile from './components/profiles/MyProfile';
 import UserProfile from './components/profiles/UserProfile';
 import EditProfile from './components/profiles/EditProfile';
+import EditProfileAdmin from './components/profiles/EditProfileAdmin';
 import EditGeneralInfo from './components/profiles/EditGeneralInfo';
 import AddExperience from './components/profiles/AddExperience';
 import AddEducation from './components/profiles/AddEducation';
@@ -125,6 +126,15 @@ const App = () => {
               element={
                 <PrivateRoute>
                   <EditProfile />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              exact
+              path='/profiles/:id/edit'
+              element={
+                <PrivateRoute>
+                  <EditProfileAdmin />
                 </PrivateRoute>
               }
             />
