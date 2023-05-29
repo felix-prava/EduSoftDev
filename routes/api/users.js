@@ -97,16 +97,12 @@ router.post(
           id: user.id,
         },
       };
+      const jwtSecret = process.env.jwtSecret || config.get('jwtSecret');
 
-      jwt.sign(
-        payload,
-        config.get('jwtSecret'),
-        { expiresIn: 3600 },
-        (err, token) => {
-          if (err) throw err;
-          res.json({ token });
-        }
-      );
+      jwt.sign(payload, jwtSecret, { expiresIn: 3600 }, (err, token) => {
+        if (err) throw err;
+        res.json({ token });
+      });
     } catch (err) {
       res.status(500).json({ error: [{ msg: 'Server error' }] });
     }

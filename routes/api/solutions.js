@@ -127,6 +127,9 @@ router.get('/execute/:solution_id', async (req, res) => {
     // Update solution
     const testsTotals = { passedTests, totalTests };
     updateSolution(solution, testsTotals, compilationError);
+
+    const privateRouteKey =
+      process.env.privateRouteKey || config.get('privateRouteKey');
     if (solution.status === 'accepted') {
       axios
         .post(
@@ -134,7 +137,7 @@ router.get('/execute/:solution_id', async (req, res) => {
           {},
           {
             headers: {
-              Authorization: `Bearer ${config.get('privateRouteKey')}`,
+              Authorization: `Bearer ${privateRouteKey}`,
             },
           }
         )
