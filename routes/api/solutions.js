@@ -6,6 +6,7 @@ const http = require('http');
 const axios = require('axios');
 const { updateSolution } = require('../../utils/helpers');
 const COMPILER_API_URL = 'https://api.codex.jaagrav.in';
+const PORT = process.env.PORT || 3200;
 const config = require('config');
 
 const LearningMaterial = require('../../models/LearningMaterial');
@@ -38,7 +39,7 @@ router.post(
 
       // Start compilation and execution of the solution
       http.get(
-        `${req.protocol}://${req.hostname}:3200/api/solutions/execute/${solution._id}`
+        `${req.protocol}://${req.hostname}:${PORT}/api/solutions/execute/${solution._id}`
       );
       res.json(solution);
     } catch (err) {
@@ -133,7 +134,7 @@ router.get('/execute/:solution_id', async (req, res) => {
     if (solution.status === 'accepted') {
       axios
         .post(
-          `${req.protocol}://${req.hostname}:3200/api/learning-materials/problems/${solution.problem._id}/${solution.user._id}/problem-solved`,
+          `${req.protocol}://${req.hostname}:${PORT}/api/learning-materials/problems/${solution.problem._id}/${solution.user._id}/problem-solved`,
           {},
           {
             headers: {
