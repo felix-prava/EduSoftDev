@@ -50,7 +50,7 @@ function updateSolution(solution, testsTotals, compilationError) {
   const totalTests = testsTotals.totalTests;
   const newScore = calculateScore(passedTests, totalTests);
   if (compilationError !== null) {
-    solution.status = compilationError;
+    solution.status = 'Compilation Error';
   } else {
     solution.score = newScore;
     solution.status = newScore === 100 ? 'accepted' : 'incorrect';
