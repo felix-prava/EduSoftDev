@@ -1,5 +1,10 @@
 const Profile = require('../models/Profile');
 
+function calculateScore(passedTests, totalTests) {
+  const percentage = (passedTests / totalTests) * 100;
+  return parseFloat(percentage.toFixed(2));
+}
+
 function checkQuizAnswers(userAnswers = [], rightAnswers = []) {
   if (userAnswers.length !== rightAnswers.length) {
     return -1;
@@ -8,6 +13,13 @@ function checkQuizAnswers(userAnswers = [], rightAnswers = []) {
     if (!userAnswers.includes(answer._id.toHexString())) return -1;
   }
   return 0;
+}
+
+function failedQuizzesContainsCurrentQuiz(failedQuizzes, quizId) {
+  for (const failedQuiz of failedQuizzes) {
+    if (quizId === failedQuiz.quiz.toHexString()) return true;
+  }
+  return false;
 }
 
 function filterFailedQuizzes(failedQuizzes) {
@@ -20,16 +32,17 @@ function filterFailedQuizzes(failedQuizzes) {
   );
 }
 
-function failedQuizzesContainsCurrentQuiz(failedQuizzes, quizId) {
-  for (const failedQuiz of failedQuizzes) {
-    if (quizId === failedQuiz.quiz.toHexString()) return true;
+async function updateProfile(status, githubUsername, user_id) {
+  if (status !== undefined || githubUsername !== undefined) {
+    const profile = await Profile.findOne({
+      user: user_id,
+    });
+    if (profile) {
+      profile.status = status;
+      profile.githubUsername = githubUsername;
+      profile.save();
+    }
   }
-  return false;
-}
-
-function calculateScore(passedTests, totalTests) {
-  const percentage = (passedTests / totalTests) * 100;
-  return parseFloat(percentage.toFixed(2));
 }
 
 function updateSolution(solution, testsTotals, compilationError) {
@@ -46,24 +59,11 @@ function updateSolution(solution, testsTotals, compilationError) {
   solution.passedTests = passedTests;
 }
 
-async function updateProfile(status, githubUsername, user_id) {
-  if (status !== undefined || githubUsername !== undefined) {
-    const profile = await Profile.findOne({
-      user: user_id,
-    });
-    if (profile) {
-      profile.status = status;
-      profile.githubUsername = githubUsername;
-      profile.save();
-    }
-  }
-}
-
 module.exports = {
-  filterFailedQuizzes,
+  calculateScore,
   checkQuizAnswers,
   failedQuizzesContainsCurrentQuiz,
-  calculateScore,
-  updateSolution,
+  filterFailedQuizzes,
   updateProfile,
+  updateSolution,
 };
