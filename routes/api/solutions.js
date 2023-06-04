@@ -4,8 +4,10 @@ const auth = require('../../middleware/auth');
 const { check } = require('express-validator');
 const http = require('http');
 const axios = require('axios');
-const { updateSolution } = require('../../utils/helpers');
-const COMPILER_API_URL = 'https://api.codex.jaagrav.in';
+const {
+  sendSolutionToJaagravCodexAPI,
+  updateSolution,
+} = require('../../utils/helpers');
 const config = require('config');
 
 const LearningMaterial = require('../../models/LearningMaterial');
@@ -89,40 +91,13 @@ router.get('/execute/:solution_id', async (req, res) => {
     let compilationError = null;
 
     for (const test of solution.problem.tests) {
-      const data = {
-        code: solution.code,
-        language: 'cpp',
-        input: test.input,
-      };
-
-      try {
-        const response = await axios.post(COMPILER_API_URL, data);
-        if (response.data['error'] === '' && response.data['output'] === '') {
-          // If the response has no error or output, retry the test after 1 second
-          await new Promise((resolve, reject) => {
-            setTimeout(() => {
-              axios
-                .post(COMPILER_API_URL, data)
-                .then((response) => {
-                  resolve(response);
-                })
-                .catch((error) => {
-                  reject(error);
-                });
-            }, 1000);
-          });
-        } else {
-          if (response.data['error'] !== '') {
-            compilationError = response.data['error'];
-          } else {
-            if (response.data['output'] === test.output) {
-              passedTests++;
-            }
-          }
-        }
-      } catch (error) {
-        console.error(error);
-        throw error;
+      let responseCompilerAPI = await sendSolutionToJaagravCodexAPI(
+        solution,
+        test
+      );
+      compilationError = responseCompilerAPI['compilationError'];
+      if (responseCompilerAPI['passedTest'] === true) {
+        passedTests++;
       }
     }
 

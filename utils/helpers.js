@@ -1,4 +1,6 @@
 const Profile = require('../models/Profile');
+const COMPILER_API_URL = 'https://api.codex.jaagrav.in';
+const axios = require('axios');
 
 function calculateScore(passedTests, totalTests) {
   const percentage = (passedTests / totalTests) * 100;
@@ -45,6 +47,48 @@ async function updateProfile(status, githubUsername, user_id) {
   }
 }
 
+async function sendSolutionToJaagravCodexAPI(solution, test) {
+  let passedTest = false;
+  let compilationError = null;
+
+  const data = {
+    code: solution.code,
+    language: 'cpp',
+    input: test.input,
+  };
+
+  try {
+    const response = await axios.post(COMPILER_API_URL, data);
+    if (response.data['error'] === '' && response.data['output'] === '') {
+      // If the response has no error or output, retry the test after 1 second
+      await new Promise((resolve, reject) => {
+        setTimeout(() => {
+          axios
+            .post(COMPILER_API_URL, data)
+            .then((response) => {
+              resolve(response);
+            })
+            .catch((error) => {
+              reject(error);
+            });
+        }, 1000);
+      });
+    } else {
+      if (response.data['error'] !== '') {
+        compilationError = response.data['error'];
+      } else {
+        if (response.data['output'] === test.output) {
+          passedTest = true;
+        }
+      }
+    }
+    return { passedTest, compilationError };
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
 function updateSolution(solution, testsTotals, compilationError) {
   const passedTests = testsTotals.passedTests;
   const totalTests = testsTotals.totalTests;
@@ -64,6 +108,7 @@ module.exports = {
   checkQuizAnswers,
   failedQuizzesContainsCurrentQuiz,
   filterFailedQuizzes,
+  sendSolutionToJaagravCodexAPI,
   updateProfile,
   updateSolution,
 };
