@@ -1,6 +1,16 @@
 const Profile = require('../models/Profile');
-const COMPILER_API_URL = 'https://api.codex.jaagrav.in';
+const config = require('config');
 const axios = require('axios');
+
+const CODEX_COMPILER_API_URL = 'https://api.codex.jaagrav.in';
+const CODEX_COMPILER_API_LANGUAGE = 'cpp';
+const JOODLE_COMPILER_API_URL = 'https://api.jdoodle.com/v1/execute';
+const JOODLE_COMPILER_API_LANGUAGE = 'cpp';
+const JOODLE_COMPILER_API_COMPILER_INDEX = 5;
+const JOODLE_CLIENT_ID =
+  process.env.joodleClientId || config.get('joodleClientId');
+const JOODLE_CLIENT_SECRET =
+  process.env.joodleClientSecret || config.get('joodleClientSecret');
 
 function calculateScore(passedTests, totalTests) {
   const percentage = (passedTests / totalTests) * 100;
@@ -53,18 +63,18 @@ async function sendSolutionToJaagravCodexAPI(solution, test) {
 
   const data = {
     code: solution.code,
-    language: 'cpp',
+    language: CODEX_COMPILER_API_LANGUAGE,
     input: test.input,
   };
 
   try {
-    const response = await axios.post(COMPILER_API_URL, data);
+    const response = await axios.post(CODEX_COMPILER_API_URL, data);
     if (response.data['error'] === '' && response.data['output'] === '') {
       // If the response has no error or output, retry the test after 1 second
       await new Promise((resolve, reject) => {
         setTimeout(() => {
           axios
-            .post(COMPILER_API_URL, data)
+            .post(CODEX_COMPILER_API_URL, data)
             .then((response) => {
               resolve(response);
             })
@@ -85,7 +95,37 @@ async function sendSolutionToJaagravCodexAPI(solution, test) {
     return { passedTest, compilationError };
   } catch (error) {
     console.error(error);
-    throw error;
+    return { passedTest, compilationError: 'Server Error' };
+  }
+}
+
+async function sendSolutionToJoodleAPI(solution, test) {
+  let passedTest = false;
+  let compilationError = null;
+
+  const data = {
+    clientId: JOODLE_CLIENT_ID,
+    clientSecret: JOODLE_CLIENT_SECRET,
+    script: solution.code,
+    stdin: test.input,
+    language: JOODLE_COMPILER_API_LANGUAGE,
+    versionIndex: JOODLE_COMPILER_API_COMPILER_INDEX,
+    compileOnly: false,
+  };
+
+  try {
+    const response = await axios.post(JOODLE_COMPILER_API_URL, data);
+    if (response.data['memory'] === null) {
+      compilationError = response.data['output'];
+    } else {
+      if (response.data['output'] === test.output) {
+        passedTest = true;
+      }
+    }
+    return { passedTest, compilationError };
+  } catch (error) {
+    console.error(error);
+    return { passedTest, compilationError: 'Server Error' };
   }
 }
 
@@ -94,7 +134,7 @@ function updateSolution(solution, testsTotals, compilationError) {
   const totalTests = testsTotals.totalTests;
   const newScore = calculateScore(passedTests, totalTests);
   if (compilationError !== null) {
-    solution.status = 'Compilation Error';
+    solution.status = 'compilation error';
   } else {
     solution.score = newScore;
     solution.status = newScore === 100 ? 'accepted' : 'incorrect';
@@ -109,6 +149,7 @@ module.exports = {
   failedQuizzesContainsCurrentQuiz,
   filterFailedQuizzes,
   sendSolutionToJaagravCodexAPI,
+  sendSolutionToJoodleAPI,
   updateProfile,
   updateSolution,
 };

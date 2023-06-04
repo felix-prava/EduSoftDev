@@ -6,6 +6,7 @@ const http = require('http');
 const axios = require('axios');
 const {
   sendSolutionToJaagravCodexAPI,
+  sendSolutionToJoodleAPI,
   updateSolution,
 } = require('../../utils/helpers');
 const config = require('config');
@@ -95,6 +96,10 @@ router.get('/execute/:solution_id', async (req, res) => {
         solution,
         test
       );
+      if (responseCompilerAPI['compilationError'] !== null) {
+        responseCompilerAPI = await sendSolutionToJoodleAPI(solution, test);
+        console.log(responseCompilerAPI);
+      }
       compilationError = responseCompilerAPI['compilationError'];
       if (responseCompilerAPI['passedTest'] === true) {
         passedTests++;
