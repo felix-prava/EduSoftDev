@@ -57,6 +57,24 @@ async function updateProfile(status, githubUsername, user_id) {
   }
 }
 
+function markProblemAsSolved(solution, protocol, host) {
+  const privateRouteKey =
+    process.env.privateRouteKey || config.get('privateRouteKey');
+  axios
+    .post(
+      `${protocol}://${host}/api/learning-materials/problems/${solution.problem._id}/${solution.user._id}/problem-solved`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${privateRouteKey}`,
+        },
+      }
+    )
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
 async function sendSolutionToJaagravCodexAPI(solution, test) {
   let passedTest = false;
   let compilationError = null;
@@ -148,6 +166,7 @@ module.exports = {
   checkQuizAnswers,
   failedQuizzesContainsCurrentQuiz,
   filterFailedQuizzes,
+  markProblemAsSolved,
   sendSolutionToJaagravCodexAPI,
   sendSolutionToJoodleAPI,
   updateProfile,

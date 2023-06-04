@@ -3,13 +3,12 @@ const router = express.Router();
 const auth = require('../../middleware/auth');
 const { check } = require('express-validator');
 const http = require('http');
-const axios = require('axios');
 const {
+  markProblemAsSolved,
   sendSolutionToJaagravCodexAPI,
   sendSolutionToJoodleAPI,
   updateSolution,
 } = require('../../utils/helpers');
-const config = require('config');
 
 const LearningMaterial = require('../../models/LearningMaterial');
 const Solution = require('../../models/Solution');
@@ -98,7 +97,6 @@ router.get('/execute/:solution_id', async (req, res) => {
       );
       if (responseCompilerAPI['compilationError'] !== null) {
         responseCompilerAPI = await sendSolutionToJoodleAPI(solution, test);
-        console.log(responseCompilerAPI);
       }
       compilationError = responseCompilerAPI['compilationError'];
       if (responseCompilerAPI['passedTest'] === true) {
@@ -109,27 +107,8 @@ router.get('/execute/:solution_id', async (req, res) => {
     // Update solution
     const testsTotals = { passedTests, totalTests };
     updateSolution(solution, testsTotals, compilationError);
-
-    const privateRouteKey =
-      process.env.privateRouteKey || config.get('privateRouteKey');
     if (solution.status === 'accepted') {
-      axios
-        .post(
-          `${req.protocol}://${req.get(
-            'host'
-          )}/api/learning-materials/problems/${solution.problem._id}/${
-            solution.user._id
-          }/problem-solved`,
-          {},
-          {
-            headers: {
-              Authorization: `Bearer ${privateRouteKey}`,
-            },
-          }
-        )
-        .catch((error) => {
-          console.error(error);
-        });
+      markProblemAsSolved(solution, req.protocol, req.get('host'));
     }
     await solution.save();
 
