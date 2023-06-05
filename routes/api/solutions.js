@@ -3,10 +3,12 @@ const router = express.Router();
 const auth = require('../../middleware/auth');
 const { check } = require('express-validator');
 const http = require('http');
-const axios = require('axios');
-const { updateSolution } = require('../../utils/helpers');
-const COMPILER_API_URL = 'https://api.codex.jaagrav.in';
-const config = require('config');
+const {
+  markProblemAsSolved,
+  sendSolutionToJaagravCodexAPI,
+  sendSolutionToJoodleAPI,
+  updateSolution,
+} = require('../../utils/helpers');
 
 const LearningMaterial = require('../../models/LearningMaterial');
 const Solution = require('../../models/Solution');
@@ -89,67 +91,24 @@ router.get('/execute/:solution_id', async (req, res) => {
     let compilationError = null;
 
     for (const test of solution.problem.tests) {
-      const data = {
-        code: solution.code,
-        language: 'cpp',
-        input: test.input,
-      };
-
-      try {
-        const response = await axios.post(COMPILER_API_URL, data);
-        if (response.data['error'] === '' && response.data['output'] === '') {
-          // If the response has no error or output, retry the test after 1 second
-          await new Promise((resolve, reject) => {
-            setTimeout(() => {
-              axios
-                .post(COMPILER_API_URL, data)
-                .then((response) => {
-                  resolve(response);
-                })
-                .catch((error) => {
-                  reject(error);
-                });
-            }, 1000);
-          });
-        } else {
-          if (response.data['error'] !== '') {
-            compilationError = response.data['error'];
-          } else {
-            if (response.data['output'] === test.output) {
-              passedTests++;
-            }
-          }
-        }
-      } catch (error) {
-        console.error(error);
-        throw error;
+      let responseCompilerAPI = await sendSolutionToJaagravCodexAPI(
+        solution,
+        test
+      );
+      if (responseCompilerAPI['compilationError'] !== null) {
+        responseCompilerAPI = await sendSolutionToJoodleAPI(solution, test);
+      }
+      compilationError = responseCompilerAPI['compilationError'];
+      if (responseCompilerAPI['passedTest'] === true) {
+        passedTests++;
       }
     }
 
     // Update solution
     const testsTotals = { passedTests, totalTests };
     updateSolution(solution, testsTotals, compilationError);
-
-    const privateRouteKey =
-      process.env.privateRouteKey || config.get('privateRouteKey');
     if (solution.status === 'accepted') {
-      axios
-        .post(
-          `${req.protocol}://${req.get(
-            'host'
-          )}/api/learning-materials/problems/${solution.problem._id}/${
-            solution.user._id
-          }/problem-solved`,
-          {},
-          {
-            headers: {
-              Authorization: `Bearer ${privateRouteKey}`,
-            },
-          }
-        )
-        .catch((error) => {
-          console.error(error);
-        });
+      markProblemAsSolved(solution, req.protocol, req.get('host'));
     }
     await solution.save();
 
