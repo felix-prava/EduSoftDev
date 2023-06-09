@@ -35,7 +35,9 @@ router.put(
         }
         if (
           isNaN(value) ||
-          (value && req.body.expNeeded && value <= req.body.expNeeded)
+          (value &&
+            req.body.expNeeded &&
+            Number(value) <= Number(req.body.expNeeded))
         ) {
           throw new Error(
             'Maximum experience must be greater than experience needed'
