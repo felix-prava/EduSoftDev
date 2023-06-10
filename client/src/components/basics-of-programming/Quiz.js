@@ -133,7 +133,7 @@ const Quiz = ({
                 type='button'
                 onClick={() => {
                   if (userAnswers.length === 0) {
-                    setAlert(`${selectOneOptionLabel}`, 'error');
+                    setAlert(`${selectOneOptionLabel}`, 'error', 4500, true);
                     return;
                   }
                   solveQuiz(quizId, userAnswers);
