@@ -14,8 +14,6 @@ const MaterialItem = ({
   toggleModal,
   setModalData,
 }) => {
-  console.log(index);
-  console.log(type);
   const materialType =
     type === 'Problem' ? 'problems' : type === 'Lesson' ? 'lessons' : 'quizzes';
   const materialTypeClass =

@@ -28,6 +28,12 @@ const Quiz = ({
     learningMaterialTranslations.selectOneOption[language];
   const backButtonLabel = universalTranslations.backButton[language];
 
+  function unselectUserAnswers(answers) {
+    for (let i = 0; i < answers.length; i++) {
+      document.getElementById(`answer-${answers[i].id}`).checked = false;
+    }
+  }
+
   useEffect(() => {
     getLearningMaterial(quizId);
   }, [getLearningMaterial, quizId]);
@@ -131,6 +137,7 @@ const Quiz = ({
                     return;
                   }
                   solveQuiz(quizId, userAnswers);
+                  unselectUserAnswers(answers);
                 }}
                 className='ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
               >
