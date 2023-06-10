@@ -185,8 +185,8 @@ export const myProfileTranslations = {
     ro: 'Informatii Generale',
   },
   editProfile: {
-    en: 'Edit Profile',
-    ro: 'Editare Profil',
+    en: 'Edit User Profile',
+    ro: 'Editare Profil User',
   },
   editGeneralInfo: {
     en: 'Edit General Info',
