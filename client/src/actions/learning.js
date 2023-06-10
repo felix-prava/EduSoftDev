@@ -74,7 +74,7 @@ export const addLearningMaterial =
         materialType.charAt(0).toUpperCase() + materialType.slice(1);
 
       navigate(`/modules/${moduleName}`);
-      dispatch(setAlert(`${materialType} Created`, 'success'));
+      dispatch(setAlert(`${materialType} Created`, 'success', 5500, true));
     } catch (err) {
       const errors = err.response.data.errors;
       if (errors) {
@@ -112,7 +112,7 @@ export const updateLearningMaterial =
         payload: res.data,
       });
 
-      dispatch(setAlert(`${materialType} Updated`, 'success'));
+      dispatch(setAlert(`${materialType} Updated`, 'success', 5500, true));
     } catch (err) {
       const errors = err.response.data.errors;
       if (errors) {
@@ -131,7 +131,7 @@ export const deleteLearningMaterial =
         type: DELETE_LEARNING_MATERIAL,
         payload: learningMaterialId,
       });
-      dispatch(setAlert(`${materialType} Deleted`, 'success', 2500, false));
+      dispatch(setAlert(`${materialType} Deleted`, 'success', 4500, true));
     } catch (err) {
       dispatch({
         type: LEARNING_ERROR,
@@ -340,7 +340,7 @@ export const completeLesson = (lessonId) => async (dispatch) => {
       `/api/learning-materials/lessons/${lessonId}/lesson-learned`
     );
 
-    dispatch(setAlert('Lesson Learned', 'success', 3000, false));
+    dispatch(setAlert('Lesson Learned', 'success', 3000, true));
     dispatch(loadUser());
     // MAYBE update solvingUsers for this lesson
   } catch (err) {
@@ -366,7 +366,7 @@ export const solveQuiz = (quizId, answers) => async (dispatch) => {
       config
     );
 
-    dispatch(setAlert('Quiz Completed', 'success', 3000, false));
+    dispatch(setAlert('Quiz Completed', 'success', 3000, true));
     dispatch(loadUser());
     // TODO MAYBE update solvingUsers for this quiz
   } catch (err) {
@@ -392,7 +392,7 @@ export const solveProblem = (problemId, solution) => async (dispatch) => {
       config
     );
 
-    dispatch(setAlert('Solution Added', 'success', 3000, false));
+    dispatch(setAlert('Solution Added', 'success', 3000, true));
     dispatch(loadUser());
     // TODO MAYBE update solvingUsers for this problem
   } catch (err) {
