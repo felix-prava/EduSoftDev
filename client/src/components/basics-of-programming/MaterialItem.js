@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { universalTranslations } from '../layout/Translations';
+import { imageSource } from '../../utils/helpers';
 
 const MaterialItem = ({
   auth: { user },
   problem: { _id, name, type, expNeeded, expGained, expMax, shortDescription },
   userExp,
+  index,
   module,
   toggleModal,
   setModalData,
@@ -53,7 +55,7 @@ const MaterialItem = ({
         <div className='flex-shrink-0'>
           <img
             className='h-48 w-full object-cover'
-            src={process.env.PUBLIC_URL + '/images/lessonImage.jpeg'}
+            src={imageSource(index, type)}
             alt=''
           />
         </div>

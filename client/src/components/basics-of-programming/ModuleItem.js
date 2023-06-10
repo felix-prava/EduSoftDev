@@ -44,6 +44,10 @@ const ModuleItem = ({
   const [modal, setModal] = useState(false);
   const [modalData, setModalData] = useState([]);
 
+  let lessonsCount = 0;
+  let problemsCount = 0;
+  let quizzesCount = 0;
+
   useEffect(() => {
     getAllMaterials(`${moduleName}`);
   }, [getAllMaterials, moduleName]);
@@ -133,12 +137,19 @@ const ModuleItem = ({
             </div>
           )}
           <div className='mt-24 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none'>
-            {problems.map((problem) => (
+            {problems.map((problem, index) => (
               <MaterialItem
                 key={problem._id}
                 problem={problem}
                 userExp={user.exp}
                 module={moduleName}
+                index={
+                  problem.type === 'Problem'
+                    ? problemsCount++
+                    : problem.type === 'Lesson'
+                    ? lessonsCount++
+                    : quizzesCount++
+                }
                 toggleModal={() => setModal(!modal)}
                 setModalData={setModalData}
               />
