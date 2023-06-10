@@ -3,6 +3,10 @@ import Moment from 'react-moment';
 import moment from 'moment';
 import { universalTranslations } from '../components/layout/Translations';
 
+const LESSONS_IMAGES_COUNT = 4;
+const PROBLEMS_IMAGES_COUNT = 7;
+const QUIZZES_IMAGES_COUNT = 4;
+
 export const displayDate = (date, language = 'en') => {
   let yesterdayMidnight = moment().subtract(1, 'days').endOf('day');
   let lastDayOfLastYear = moment().subtract(1, 'years').endOf('year');
@@ -18,6 +22,25 @@ export const displayDate = (date, language = 'en') => {
   } else {
     return <Moment format='DD/MM/YYYY'>{date}</Moment>;
   }
+};
+
+export const imageSource = (index, learningMaterialType) => {
+  let availableImages = LESSONS_IMAGES_COUNT;
+  let folderPath = 'lessons';
+  if (learningMaterialType === 'Problem') {
+    availableImages = PROBLEMS_IMAGES_COUNT;
+    folderPath = 'problems';
+  }
+  if (learningMaterialType === 'Quiz') {
+    availableImages = QUIZZES_IMAGES_COUNT;
+    folderPath = 'quizzes';
+  }
+  const selectedImageIndex = index % availableImages;
+
+  return (
+    process.env.PUBLIC_URL +
+    `/images/${folderPath}/${learningMaterialType.toLowerCase()}${selectedImageIndex}.jpg`
+  );
 };
 
 export const scoreClassColour = (score) => {
