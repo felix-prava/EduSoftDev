@@ -1,7 +1,21 @@
+// List of translations
+// universalTranslations
+// navbarTranslations
+// profilesTranslations
+// myProfileTranslations
+// articlesTranslations
+// dashboardTranslations
+// educationTranslations
+// experienceTranslations
+// modulesTranslations
+// learningMaterialTranslations
+// settingsTranslations
+// solutionTranslations
+
 export const universalTranslations = {
   deleteButton: {
     en: 'Delete',
-    ro: 'Sterge',
+    ro: 'Șterge',
   },
   saveButton: {
     en: 'Save',
@@ -337,6 +351,14 @@ export const educationTranslations = {
     en: 'Add Education',
     ro: 'Adaugă Educație',
   },
+  deleteEducation: {
+    en: 'Delete Education',
+    ro: 'Ștergere Educație',
+  },
+  areYouSureDeleteEducation: {
+    en: 'Are you sure you want to delete this education?',
+    ro: 'Sigur dorești să ștergi această educație?',
+  },
   school: {
     en: 'School',
     ro: 'Școală',
@@ -355,6 +377,14 @@ export const experienceTranslations = {
   experienceTitle: {
     en: 'Add Experience',
     ro: 'Adaugă experiență',
+  },
+  deleteExperience: {
+    en: 'Delete Experience',
+    ro: 'Ștergere Experiență',
+  },
+  areYouSureDeleteExperience: {
+    en: 'Are you sure you want to delete this experience?',
+    ro: 'Sigur dorești să ștergi această experiență?',
   },
   jobTitle: {
     en: 'Job Title',

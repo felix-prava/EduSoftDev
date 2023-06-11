@@ -119,6 +119,7 @@ const Account = ({ auth: { user }, updateUser, deleteAccount, setAlert }) => {
           modalData={[modalDeleteAccountTitle, modalDeleteAccountDescription]}
           hideModal={() => setModal(false)}
           action={() => deleteAccount(user._id)}
+          language={language}
         />
       )}
     </Fragment>
