@@ -677,15 +677,27 @@ export const settingsTranslations = {
   },
   deleteAccount: {
     en: 'Delete Account',
-    ro: 'Șterge Cont',
+    ro: 'Ștergere Cont',
   },
   deleteAccountMessage: {
     en: 'Once you delete your account, there is no going back. Please be certain.',
     ro: 'Odată ce îţi ștergi contul, acest lucru este ireversibil. Te rugăm să fii sigur.',
   },
+  deleteUserAccountMessage: {
+    en: 'Once you delete this user account, there is no going back. Please be certain.',
+    ro: 'Odată ce ștergi contul acestui utlizator, acest lucru este ireversibil. Te rugăm să fii sigur.',
+  },
   deleteYourAccount: {
     en: 'Delete Your Account',
     ro: 'Șterge-ţi Contul',
+  },
+  areYouSureDeleteAccount: {
+    en: 'Are you sure you want to delete the account? It will be permanently removed, this action cannot be undone.',
+    ro: 'Sigur dorești să ștergi contul? Va fi eliminat definitiv, această acțiune nu poate fi anulată.',
+  },
+  deleteUserAccount: {
+    en: 'Delete User Account',
+    ro: 'Șterge Contul User-ului',
   },
   passwordsDoNotMatch: {
     en: 'Passwords do not match',

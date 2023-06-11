@@ -1,18 +1,22 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
+import Modal from '../layout/Modal';
 import { updateUser } from '../../actions/auth';
+import { deleteAccount } from '../../actions/profile';
 import { setAlert } from '../../actions/alert';
 import {
   myProfileTranslations,
+  settingsTranslations,
   universalTranslations,
 } from '../layout/Translations';
 import { getProfileById } from '../../actions/profile';
 
 const EditProfileAdmin = ({
   getProfileById,
+  deleteAccount,
   auth: { user: currentUser },
   profile: { profile, loading },
   updateUser,
@@ -28,6 +32,8 @@ const EditProfileAdmin = ({
     status: '',
     githubUsername: '',
   });
+  const [modal, setModal] = useState(false);
+  const navigate = useNavigate();
 
   const { id } = useParams();
   useEffect(() => {
@@ -112,6 +118,13 @@ const EditProfileAdmin = ({
   const lastNameLabel = myProfileTranslations.lastName[language];
   const preferredNameLabel = myProfileTranslations.preferredName[language];
   const birthdateLabel = myProfileTranslations.birthdate[language];
+  const deleteAccountLabel = settingsTranslations.deleteAccount[language];
+  const deleteUserAccountMessageLabel =
+    settingsTranslations.deleteUserAccountMessage[language];
+  const deleteUserAccountLabel =
+    settingsTranslations.deleteUserAccount[language];
+  const areYouSureDeleteAccountLabel =
+    settingsTranslations.areYouSureDeleteAccount[language];
   const statusLabel = universalTranslations.status[language];
   const saveButtonLabel = universalTranslations.saveButton[language];
   const cancelButtonLabel = universalTranslations.cancelButton[language];
@@ -321,6 +334,37 @@ const EditProfileAdmin = ({
             </div>
           </div>
 
+          <section aria-labelledby='delete-account'>
+            <div className='bg-white pt-6 shadow sm:rounded-md sm:overflow-hidden'>
+              <div className='px-4 sm:px-6'>
+                <h2
+                  id='delete-account'
+                  className='text-2xl font-extrabold leading-6 font-medium text-red-600'
+                >
+                  {deleteAccountLabel}
+                </h2>
+                <p className='mt-1 text-sm text-gray-500'>
+                  {deleteUserAccountMessageLabel}
+                </p>
+              </div>
+              <div className='mt-6 flex flex-col'>
+                <div className='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
+                  <div className='py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8'>
+                    <div className='overflow-hidden py-2'>
+                      <button
+                        type='button'
+                        onClick={() => setModal(!modal)}
+                        className='bg-red-600 border border-transparent rounded-md shadow-sm py-2 px-4 inline-flex justify-center ml-4 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600'
+                      >
+                        {deleteUserAccountLabel}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
           <div className='pt-5'>
             <div className='flex justify-end mb-8'>
               <Link to={`/profiles/${id}`}>
@@ -342,12 +386,21 @@ const EditProfileAdmin = ({
           </div>
         </form>
       </div>
+      {modal && (
+        <Modal
+          modalData={[deleteAccountLabel, areYouSureDeleteAccountLabel]}
+          hideModal={() => setModal(false)}
+          action={() => deleteAccount(id, false, navigate)}
+          language={language}
+        />
+      )}
     </Fragment>
   );
 };
 
 EditProfileAdmin.propTypes = {
   getProfileById: PropTypes.func.isRequired,
+  deleteAccount: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
   updateUser: PropTypes.func.isRequired,
@@ -362,5 +415,6 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getProfileById,
   updateUser,
+  deleteAccount,
   setAlert,
 })(EditProfileAdmin);
