@@ -370,7 +370,9 @@ const MyProfile = ({
                       <h2 className='text-3xl font-extrabold tracking-tight sm:text-4xl'>
                         {githubReposLabel}
                       </h2>
-                      <GithubRepos username={profile.githubUsername} />
+                      <ul>
+                        <GithubRepos username={profile.githubUsername} />
+                      </ul>
                     </div>
                   )}
                 </Fragment>

@@ -11,7 +11,7 @@ const GithubRepos = ({ username, getGithubRepos, repos }) => {
   // TODO key is not unique error
   const githubRepos = repos.map((repo) => (
     <Fragment>
-      <li key={repo.id} className='sm:py-8'>
+      <li className='sm:py-8' key={repo.id}>
         <div className='space-y-4 mr-4 sm:gap-6 sm:space-y-0'>
           <div className='sm:col-span-2'>
             <div className='space-y-4'>

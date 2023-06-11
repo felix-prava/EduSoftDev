@@ -68,6 +68,7 @@ const Articles = ({
                       readArticleLinkLabel,
                       postedOnLabel,
                     }}
+                    currentUser={user}
                     toggleModal={() => setModal(!modal)}
                     setModalData={setModalData}
                   />
