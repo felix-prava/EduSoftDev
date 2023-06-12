@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
 const checkRole = require('../../middleware/checkRole');
-const compareUsers = require('../../middleware/compareUsers');
+const { deleteComment } = require('../../utils/commonActions');
 const { check, validationResult } = require('express-validator');
 
 const LearningMaterial = require('../../models/LearningMaterial');
@@ -362,6 +362,17 @@ router.post(
       console.error(err.message);
       res.status(500).send('Server Error');
     }
+  }
+);
+
+// @route   DELETE /api/learning-materials/comment/:learning_material_id/:comment_id
+// @desc    Delete a comment
+// @access  Private
+router.delete(
+  '/comment/:learning_material_id/:comment_id',
+  auth,
+  async (req, res) => {
+    deleteComment(req, res, 'learning material');
   }
 );
 
