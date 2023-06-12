@@ -2,18 +2,40 @@ const Article = require('../models/Article');
 const LearningMaterial = require('../models/LearningMaterial');
 const compareUsers = require('../middleware/compareUsers');
 
-async function deleteComment(req, res, resourceType) {
+async function addComment(req, res, resourceType) {
+  let objectModelName = null;
   try {
-    let objectModelName,
-      object = null;
-    if (resourceType === 'article') {
-      objectModelName = 'Article';
-      object = await Article.findById(req.params.article_id);
+    const user = await User.findById(req.user.id).select('-password');
+    const resourceInfo = await setObjectsType(req.params, resourceType);
+    objectModelName = resourceInfo['objectModelName'];
+    const object = resourceInfo['object'];
+
+    const newComment = {
+      body: req.body.body,
+      avatar: user.avatar,
+      username: user.username,
+      user: req.user.id,
+    };
+    object.comments.unshift(newComment);
+
+    await object.save();
+
+    res.json(object.comments);
+  } catch (err) {
+    if (err.kind == 'ObjectId') {
+      return res.status(404).json({ msg: `${objectModelName} not found` });
     }
-    if (resourceType === 'learning material') {
-      objectModelName = 'Learning material';
-      object = await LearningMaterial.findById(req.params.learning_material_id);
-    }
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+}
+
+async function deleteComment(req, res, resourceType) {
+  let objectModelName = null;
+  try {
+    const resourceInfo = await setObjectsType(req.params, resourceType);
+    objectModelName = resourceInfo['objectModelName'];
+    const object = resourceInfo['object'];
     if (!object) {
       return res.status(404).json({ msg: `${objectModelName} not found` });
     }
@@ -54,6 +76,21 @@ async function deleteComment(req, res, resourceType) {
   }
 }
 
+async function setObjectsType(params, resourceType) {
+  let objectModelName,
+    object = null;
+  if (resourceType === 'article') {
+    objectModelName = 'Article';
+    object = await Article.findById(params.article_id);
+  }
+  if (resourceType === 'learning material') {
+    objectModelName = 'Learning material';
+    object = await LearningMaterial.findById(params.learning_material_id);
+  }
+  return { objectModelName, object };
+}
+
 module.exports = {
+  addComment,
   deleteComment,
 };

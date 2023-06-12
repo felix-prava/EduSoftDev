@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
 const checkRole = require('../../middleware/checkRole');
-const { deleteComment } = require('../../utils/commonActions');
+const { addComment, deleteComment } = require('../../utils/commonActions');
 const { check, validationResult } = require('express-validator');
 
 const LearningMaterial = require('../../models/LearningMaterial');
@@ -337,31 +337,7 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-
-    try {
-      const user = await User.findById(req.user.id).select('-password');
-      const learningMaterial = await LearningMaterial.findById(
-        req.params.learning_material_id
-      );
-
-      const newComment = {
-        body: req.body.body,
-        avatar: user.avatar,
-        username: user.username,
-        user: req.user.id,
-      };
-      learningMaterial.comments.unshift(newComment);
-
-      await learningMaterial.save();
-
-      res.json(learningMaterial.comments);
-    } catch (err) {
-      if (err.kind == 'ObjectId') {
-        return res.status(404).json({ msg: 'Learning material not found' });
-      }
-      console.error(err.message);
-      res.status(500).send('Server Error');
-    }
+    addComment(req, res, 'learning material');
   }
 );
 

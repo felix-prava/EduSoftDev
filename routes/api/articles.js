@@ -3,7 +3,7 @@ const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const auth = require('../../middleware/auth');
 const compareUsers = require('../../middleware/compareUsers');
-const { deleteComment } = require('../../utils/commonActions');
+const { addComment, deleteComment } = require('../../utils/commonActions');
 const User = require('../../models/User');
 const Article = require('../../models/Article');
 
@@ -264,29 +264,7 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-
-    try {
-      const user = await User.findById(req.user.id).select('-password');
-      const article = await Article.findById(req.params.article_id);
-
-      const newComment = {
-        body: req.body.body,
-        avatar: user.avatar,
-        username: user.username,
-        user: req.user.id,
-      };
-      article.comments.unshift(newComment);
-
-      await article.save();
-
-      res.json(article.comments);
-    } catch (err) {
-      if (err.kind == 'ObjectId') {
-        return res.status(404).json({ msg: 'Article not found' });
-      }
-      console.error(err.message);
-      res.status(500).send('Server Error');
-    }
+    addComment(req, res, 'article');
   }
 );
 
