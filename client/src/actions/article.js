@@ -184,7 +184,7 @@ export const addComment = (articleId, formData) => async (dispatch) => {
       type: ADD_COMMENT,
       payload: res.data,
     });
-    dispatch(setAlert('Comment Added', 'success'));
+    dispatch(setAlert('Comment Added', 'success', 3000, false));
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -202,7 +202,7 @@ export const deleteComment = (articleId, commentId) => async (dispatch) => {
       type: REMOVE_COMMENT,
       payload: commentId,
     });
-    dispatch(setAlert('Comment Deleted', 'success'));
+    dispatch(setAlert('Comment Deleted', 'success', 3000, false));
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {

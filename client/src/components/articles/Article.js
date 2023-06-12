@@ -203,7 +203,13 @@ const Article = ({
             {article.comments.map((comment) => (
               <li className='py-4' key={comment._id}>
                 <div className='flex space-x-3'>
-                  <Link to={`/profiles/${comment.user}`}>
+                  <Link
+                    to={
+                      user && user._id === comment.user
+                        ? '/my-profile'
+                        : `/profiles/${comment.user}`
+                    }
+                  >
                     <img
                       className='h-6 w-6 rounded-full'
                       src={comment.avatar}
@@ -213,11 +219,17 @@ const Article = ({
                   <div className='flex-1 space-y-1'>
                     <div className='flex items-center justify-between'>
                       <h3 className='text-sm font-medium'>
-                        <Link to={`/profiles/${comment.user}`}>
+                        <Link
+                          to={
+                            user && user._id === comment.user
+                              ? '/my-profile'
+                              : `/profiles/${comment.user}`
+                          }
+                        >
                           {/*<!-- 
                           TODO - Delete old comments (without an username)
                            -->*/}
-                          {comment.username || 'legolas24'}
+                          {comment.username || 'Username not available'}
                         </Link>
                       </h3>
                       <p className='text-sm text-gray-500'>

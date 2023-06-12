@@ -201,14 +201,13 @@ router.put(
   ],
   async (req, res) => {
     const validation = validationResult(req);
-    const errors = !validation.isEmpty();
     let errorsArray = validation.array();
     if (req.body.to === '' && req.body.current === false) {
       errorsArray.push({
-        msg: 'End date is required if this is your current job',
+        msg: 'End date is required if this is not your current job',
       });
     }
-    if (errors) {
+    if (errorsArray.length > 0) {
       return res.status(400).json({ errors: errorsArray });
     }
 
@@ -301,14 +300,14 @@ router.put(
   ],
   async (req, res) => {
     const validation = validationResult(req);
-    const errors = !validation.isEmpty();
     let errorsArray = validation.array();
     if (req.body.to === '' && req.body.current === false) {
       errorsArray.push({
-        msg: 'End date is required if this is your current school',
+        msg: 'End date is required if this is not your current school',
       });
     }
-    if (errors) {
+
+    if (errorsArray.length > 0) {
       return res.status(400).json({ errors: errorsArray });
     }
 

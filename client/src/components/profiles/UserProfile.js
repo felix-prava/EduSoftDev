@@ -35,6 +35,7 @@ const UserProfile = ({
   const language = currentUser ? currentUser.language : 'en';
   const generalInfoLabel = myProfileTranslations.generalInfo[language];
   const editProfileLabel = myProfileTranslations.editProfile[language];
+  const editUserProfileLabel = myProfileTranslations.editUserProfile[language];
   const addExperienceLabel = myProfileTranslations.addExperience[language];
   const addEducationLabel = myProfileTranslations.addEducation[language];
   const experienceLabel = myProfileTranslations.experience[language];
@@ -83,7 +84,7 @@ const UserProfile = ({
                             d='M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z'
                           />
                         </svg>
-                        <div className='pt-0.5'>{editProfileLabel}</div>
+                        <div className='pt-0.5'>{editUserProfileLabel}</div>
                       </button>
                     </Link>
                   )}
@@ -195,27 +196,7 @@ const UserProfile = ({
                                 </p>
                               </div>
                             </div>
-                            <div className='mt-6 flex'>
-                              <div className='flex-shrink-0 text-gray-600 hover:text-gray-800'>
-                                <svg
-                                  xmlns='http://www.w3.org/2000/svg'
-                                  className='h-6 w-6'
-                                  fill='none'
-                                  viewBox='0 0 24 24'
-                                  stroke='currentColor'
-                                  strokeWidth='2'
-                                >
-                                  <path
-                                    strokeLinecap='round'
-                                    strokeLinejoin='round'
-                                    d='M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'
-                                  />
-                                </svg>
-                              </div>
-                              <div className='ml-3 text-base text-gray-500 hover:text-gray-700'>
-                                <p>{status}</p>
-                              </div>
-                            </div>
+
                             <div className='mt-6 flex'>
                               <div className='flex-shrink-0 text-gray-600 hover:text-gray-800'>
                                 <svg
@@ -237,6 +218,28 @@ const UserProfile = ({
                                 <p>
                                   {user.exp} {expPointsLabel}
                                 </p>
+                              </div>
+                            </div>
+
+                            <div className='mt-6 flex'>
+                              <div className='flex-shrink-0 text-gray-600 hover:text-gray-800'>
+                                <svg
+                                  xmlns='http://www.w3.org/2000/svg'
+                                  className='h-6 w-6'
+                                  fill='none'
+                                  viewBox='0 0 24 24'
+                                  stroke='currentColor'
+                                  strokeWidth='2'
+                                >
+                                  <path
+                                    strokeLinecap='round'
+                                    strokeLinejoin='round'
+                                    d='M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'
+                                  />
+                                </svg>
+                              </div>
+                              <div className='ml-3 text-base text-gray-500 hover:text-gray-700'>
+                                <p>{status}</p>
                               </div>
                             </div>
                           </div>
@@ -264,28 +267,7 @@ const UserProfile = ({
                                 <p>{user.username}</p>
                               </div>
                             </div>
-                            <div className='mt-6 flex'>
-                              <div className='flex-shrink-0 text-gray-600 hover:text-gray-800'>
-                                <svg
-                                  className='h-6 w-6'
-                                  xmlns='http://www.w3.org/2000/svg'
-                                  fill='none'
-                                  viewBox='0 0 24 24'
-                                  strokeWidth='2'
-                                  stroke='currentColor'
-                                  aria-hidden='true'
-                                >
-                                  <path
-                                    strokeLinecap='round'
-                                    strokeLinejoin='round'
-                                    d='M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'
-                                  />
-                                </svg>
-                              </div>
-                              <div className='ml-3 text-base text-gray-500 hover:text-gray-700'>
-                                <p>{user.email}</p>
-                              </div>
-                            </div>
+
                             <div className='mt-6 flex'>
                               <div className='flex-shrink-0 text-gray-600 hover:text-gray-800'>
                                 <svg
@@ -309,6 +291,31 @@ const UserProfile = ({
                                 </p>
                               </div>
                             </div>
+
+                            {currentUser.role === 'admin' && (
+                              <div className='mt-6 flex'>
+                                <div className='flex-shrink-0 text-gray-600 hover:text-gray-800'>
+                                  <svg
+                                    className='h-6 w-6'
+                                    xmlns='http://www.w3.org/2000/svg'
+                                    fill='none'
+                                    viewBox='0 0 24 24'
+                                    strokeWidth='2'
+                                    stroke='currentColor'
+                                    aria-hidden='true'
+                                  >
+                                    <path
+                                      strokeLinecap='round'
+                                      strokeLinejoin='round'
+                                      d='M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'
+                                    />
+                                  </svg>
+                                </div>
+                                <div className='ml-3 text-base text-gray-500 hover:text-gray-700'>
+                                  <p>{user.email}</p>
+                                </div>
+                              </div>
+                            )}
                           </div>
                         </div>
                       </div>
