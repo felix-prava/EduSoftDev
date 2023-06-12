@@ -21,6 +21,7 @@ const ArticleItem = ({
     dislikes,
     date,
   },
+  currentUser,
   translations,
   addLike,
   addDislike,
@@ -148,12 +149,32 @@ const ArticleItem = ({
             <span className='sr-only'>
               {userLastName} {userFirstName}
             </span>
-            <img className='h-10 w-10 rounded-full' src={avatar} alt='' />
+            {user ? (
+              <Link
+                to={
+                  currentUser && currentUser._id === user
+                    ? '/my-profile'
+                    : `/profiles/${user}`
+                }
+              >
+                <img className='h-10 w-10 rounded-full' src={avatar} alt='' />
+              </Link>
+            ) : (
+              <Fragment>
+                <img className='h-10 w-10 rounded-full' src={avatar} alt='' />
+              </Fragment>
+            )}
           </div>
           <div className='ml-3'>
             <p className='text-sm font-medium text-gray-900'>
               {user ? (
-                <Link to={`/profiles/${user}`}>
+                <Link
+                  to={
+                    currentUser && currentUser._id === user
+                      ? '/my-profile'
+                      : `/profiles/${user}`
+                  }
+                >
                   {userLastName} {userFirstName}
                 </Link>
               ) : (

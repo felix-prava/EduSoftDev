@@ -1,7 +1,21 @@
+// List of translations
+// universalTranslations
+// navbarTranslations
+// profilesTranslations
+// myProfileTranslations
+// articlesTranslations
+// dashboardTranslations
+// educationTranslations
+// experienceTranslations
+// modulesTranslations
+// learningMaterialTranslations
+// settingsTranslations
+// solutionTranslations
+
 export const universalTranslations = {
   deleteButton: {
     en: 'Delete',
-    ro: 'Sterge',
+    ro: 'Șterge',
   },
   saveButton: {
     en: 'Save',
@@ -185,6 +199,10 @@ export const myProfileTranslations = {
     ro: 'Informatii Generale',
   },
   editProfile: {
+    en: 'Edit Profile',
+    ro: 'Editare Profil',
+  },
+  editUserProfile: {
     en: 'Edit User Profile',
     ro: 'Editare Profil User',
   },
@@ -333,6 +351,14 @@ export const educationTranslations = {
     en: 'Add Education',
     ro: 'Adaugă Educație',
   },
+  deleteEducation: {
+    en: 'Delete Education',
+    ro: 'Ștergere Educație',
+  },
+  areYouSureDeleteEducation: {
+    en: 'Are you sure you want to delete this education?',
+    ro: 'Sigur dorești să ștergi această educație?',
+  },
   school: {
     en: 'School',
     ro: 'Școală',
@@ -351,6 +377,14 @@ export const experienceTranslations = {
   experienceTitle: {
     en: 'Add Experience',
     ro: 'Adaugă experiență',
+  },
+  deleteExperience: {
+    en: 'Delete Experience',
+    ro: 'Ștergere Experiență',
+  },
+  areYouSureDeleteExperience: {
+    en: 'Are you sure you want to delete this experience?',
+    ro: 'Sigur dorești să ștergi această experiență?',
   },
   jobTitle: {
     en: 'Job Title',
@@ -643,15 +677,27 @@ export const settingsTranslations = {
   },
   deleteAccount: {
     en: 'Delete Account',
-    ro: 'Șterge Cont',
+    ro: 'Ștergere Cont',
   },
   deleteAccountMessage: {
     en: 'Once you delete your account, there is no going back. Please be certain.',
     ro: 'Odată ce îţi ștergi contul, acest lucru este ireversibil. Te rugăm să fii sigur.',
   },
+  deleteUserAccountMessage: {
+    en: 'Once you delete this user account, there is no going back. Please be certain.',
+    ro: 'Odată ce ștergi contul acestui utlizator, acest lucru este ireversibil. Te rugăm să fii sigur.',
+  },
   deleteYourAccount: {
     en: 'Delete Your Account',
     ro: 'Șterge-ţi Contul',
+  },
+  areYouSureDeleteAccount: {
+    en: 'Are you sure you want to delete the account? It will be permanently removed, this action cannot be undone.',
+    ro: 'Sigur dorești să ștergi contul? Va fi eliminat definitiv, această acțiune nu poate fi anulată.',
+  },
+  deleteUserAccount: {
+    en: 'Delete User Account',
+    ro: 'Șterge Contul User-ului',
   },
   passwordsDoNotMatch: {
     en: 'Passwords do not match',

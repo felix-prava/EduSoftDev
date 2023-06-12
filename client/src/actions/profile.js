@@ -221,33 +221,48 @@ export const deleteEducation = (expId, userId) => async (dispatch) => {
 };
 
 // Delete account & profile
-export const deleteAccount = (userId) => async (dispatch) => {
-  try {
-    await axios.delete(`/api/profiles/${userId}`);
+export const deleteAccount =
+  (userId, ownUserAccount = true, navigate = null) =>
+  async (dispatch) => {
+    try {
+      await axios.delete(`/api/profiles/${userId}`);
 
-    dispatch({
-      type: CLEAR_PROFILE,
-    });
-    dispatch({
-      type: ACCOUNT_DELETED,
-    });
+      if (ownUserAccount) {
+        dispatch({
+          type: CLEAR_PROFILE,
+        });
+        dispatch({
+          type: ACCOUNT_DELETED,
+        });
 
-    dispatch(
-      setAlert(
-        'Your account has been permanantly deleted',
-        'error',
-        6000,
-        true,
-        true
-      )
-    );
-  } catch (err) {
-    dispatch({
-      type: PROFILE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status },
-    });
-  }
-};
+        dispatch(
+          setAlert(
+            'Your account has been permanantly deleted',
+            'error',
+            6000,
+            true,
+            true
+          )
+        );
+        return;
+      }
+      dispatch(
+        setAlert(
+          'User account has been permanantly deleted',
+          'error',
+          6000,
+          true,
+          true
+        )
+      );
+      navigate('/admin/profiles');
+    } catch (err) {
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: { msg: err.response.statusText, status: err.response.status },
+      });
+    }
+  };
 
 // Get Github repos
 export const getGithubRepos = (githubUsername) => async (dispatch) => {

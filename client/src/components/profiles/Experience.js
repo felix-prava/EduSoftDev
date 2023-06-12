@@ -1,9 +1,13 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
 import { deleteExperience } from '../../actions/profile';
-import { universalTranslations } from '../layout/Translations';
+import Modal from '../layout/Modal';
+import {
+  experienceTranslations,
+  universalTranslations,
+} from '../layout/Translations';
 
 const Experience = ({
   auth: { user },
@@ -12,7 +16,14 @@ const Experience = ({
   deleteExperience,
 }) => {
   const language = user ? user.language : 'en';
+  const deleteExperienceLabel =
+    experienceTranslations.deleteExperience[language];
+  const areYouSureDeleteExperienceLabel =
+    experienceTranslations.areYouSureDeleteExperience[language];
   const deleteButtonLabel = universalTranslations.deleteButton[language];
+
+  const [modal, setModal] = useState(false);
+  const [targetId, setTargetId] = useState('');
 
   const experiences = experience.map((exp) => (
     <li key={exp._id} className='sm:py-8'>
@@ -39,7 +50,10 @@ const Experience = ({
                 <div>
                   <button
                     type='button'
-                    onClick={() => deleteExperience(exp._id, userId)}
+                    onClick={() => {
+                      setTargetId(exp._id);
+                      setModal(!modal);
+                    }}
                     className='mt-4 sm:float-center inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-400'
                   >
                     {deleteButtonLabel}
@@ -61,6 +75,14 @@ const Experience = ({
       <ul className='space-y-12 sm:divide-y sm:divide-gray-200 sm:space-y-0 sm:-mt-8 lg:gap-x-8 lg:space-y-0'>
         {experiences}
       </ul>
+      {modal && (
+        <Modal
+          modalData={[deleteExperienceLabel, areYouSureDeleteExperienceLabel]}
+          hideModal={() => setModal(false)}
+          action={() => deleteExperience(targetId, userId)}
+          language={language}
+        />
+      )}
     </Fragment>
   );
 };
