@@ -2,6 +2,7 @@ import React, { Fragment, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import CommentsSection from '../layout/CommentsSection';
 import Spinner from '../layout/Spinner';
 import { getLearningMaterial, solveQuiz } from '../../actions/learning';
 import { setAlert } from '../../actions/alert';
@@ -27,6 +28,8 @@ const Quiz = ({
   const selectOneOptionLabel =
     learningMaterialTranslations.selectOneOption[language];
   const backButtonLabel = universalTranslations.backButton[language];
+  const saveButtonLabel = universalTranslations.saveButton[language];
+  const leaveCommentLabel = universalTranslations.leaveComment[language];
 
   function unselectUserAnswers(answers) {
     for (let i = 0; i < answers.length; i++) {
@@ -147,6 +150,16 @@ const Quiz = ({
           </div>
         </form>
       </div>
+      <CommentsSection
+        options={{
+          object: learningMaterial,
+          objectId: quizId,
+          user,
+          saveButtonLabel,
+          leaveCommentLabel,
+          resourceType: 'learning material',
+        }}
+      />
     </Fragment>
   );
 };

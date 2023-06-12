@@ -3,7 +3,7 @@ const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const auth = require('../../middleware/auth');
 const compareUsers = require('../../middleware/compareUsers');
-
+const { addComment, deleteComment } = require('../../utils/commonActions');
 const User = require('../../models/User');
 const Article = require('../../models/Article');
 
@@ -264,29 +264,7 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-
-    try {
-      const user = await User.findById(req.user.id).select('-password');
-      const article = await Article.findById(req.params.article_id);
-
-      const newComment = {
-        body: req.body.body,
-        avatar: user.avatar,
-        username: user.username,
-        user: req.user.id,
-      };
-      article.comments.unshift(newComment);
-
-      await article.save();
-
-      res.json(article.comments);
-    } catch (err) {
-      if (err.kind == 'ObjectId') {
-        return res.status(404).json({ msg: 'Article not found' });
-      }
-      console.error(err.message);
-      res.status(500).send('Server Error');
-    }
+    addComment(req, res, 'article');
   }
 );
 
@@ -294,46 +272,7 @@ router.post(
 // @desc    Delete a comment
 // @access  Private
 router.delete('/comment/:article_id/:comment_id', auth, async (req, res) => {
-  try {
-    const article = await Article.findById(req.params.article_id);
-    if (!article) {
-      return res.status(404).json({ msg: 'Article not found' });
-    }
-
-    // Pull out comment
-    const comment = article.comments.find(
-      (comment) => comment.id === req.params.comment_id
-    );
-    if (!comment) {
-      return res.status(404).json({ msg: 'Comment does not exist' });
-    }
-
-    const checkStatus = await compareUsers(
-      req.user.id,
-      comment.user.toString(),
-      'mentor'
-    );
-
-    if (checkStatus == 401 || checkStatus == 500)
-      return res
-        .status(checkStatus)
-        .json({ msg: checkStatus == 401 ? 'Unauthorized' : 'Server Error' });
-
-    const removeIndex = article.comments
-      .map((comment) => comment.id.toString())
-      .indexOf(req.params.comment_id);
-
-    article.comments.splice(removeIndex, 1);
-    await article.save();
-
-    res.json({ msg: 'Comment deleted' });
-  } catch (err) {
-    if (err.kind == 'ObjectId') {
-      return res.status(404).json({ msg: 'Article not found' });
-    }
-    console.error(err.message);
-    res.status(500).send('Server Error');
-  }
+  deleteComment(req, res, 'article');
 });
 
 // @route   PUT /api/articles/comment/:article_id/:comment_id

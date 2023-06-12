@@ -1,9 +1,13 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addComment } from '../../actions/article';
+import { addComment } from '../../actions/commonActions';
 
-const AddComment = ({ articleId, addComment, translations }) => {
+const AddComment = ({
+  objectOptions: { objectId, objectType },
+  addComment,
+  translations,
+}) => {
   const [comment, setComment] = useState('');
   return (
     <Fragment>
@@ -12,7 +16,7 @@ const AddComment = ({ articleId, addComment, translations }) => {
           className='space-y-8 divide-y divide-gray-200'
           onSubmit={(e) => {
             e.preventDefault();
-            addComment(articleId, { body: comment });
+            addComment(objectId, { body: comment }, objectType);
             setComment('');
           }}
         >

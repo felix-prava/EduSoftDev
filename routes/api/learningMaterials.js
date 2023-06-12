@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
 const checkRole = require('../../middleware/checkRole');
-const compareUsers = require('../../middleware/compareUsers');
+const { addComment, deleteComment } = require('../../utils/commonActions');
 const { check, validationResult } = require('express-validator');
 
 const LearningMaterial = require('../../models/LearningMaterial');
@@ -323,6 +323,32 @@ router.delete(
       console.error(err.message);
       res.status(500).send('Server Error');
     }
+  }
+);
+
+// @route   POST /api/learning-materials/comment/:learning_material_id
+// @desc    Comment on a learning material
+// @access  Private
+router.post(
+  '/comment/:learning_material_id',
+  [auth, [check('body', 'Body is required').not().isEmpty()]],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    addComment(req, res, 'learning material');
+  }
+);
+
+// @route   DELETE /api/learning-materials/comment/:learning_material_id/:comment_id
+// @desc    Delete a comment
+// @access  Private
+router.delete(
+  '/comment/:learning_material_id/:comment_id',
+  auth,
+  async (req, res) => {
+    deleteComment(req, res, 'learning material');
   }
 );
 
