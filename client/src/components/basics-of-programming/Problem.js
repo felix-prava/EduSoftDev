@@ -2,6 +2,7 @@ import React, { Fragment, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import CommentsSection from '../layout/CommentsSection';
 import Spinner from '../layout/Spinner';
 import { getLearningMaterial, solveProblem } from '../../actions/learning';
 import { setAlert } from '../../actions/alert';
@@ -29,6 +30,8 @@ const Problem = ({
   const noEmptySolutionLabel =
     learningMaterialTranslations.noEmptySolution[language];
   const backButtonLabel = universalTranslations.backButton[language];
+  const saveButtonLabel = universalTranslations.saveButton[language];
+  const leaveCommentLabel = universalTranslations.leaveComment[language];
 
   function toggleHint(hintId, index) {
     let downArrow = document.getElementById(`down-arrow-${hintId}`);
@@ -195,6 +198,16 @@ const Problem = ({
           </div>
         </div>
       </div>
+      <CommentsSection
+        options={{
+          object: learningMaterial,
+          objectId: problemId,
+          user,
+          saveButtonLabel,
+          leaveCommentLabel,
+          resourceType: 'learning material',
+        }}
+      />
     </Fragment>
   );
 };

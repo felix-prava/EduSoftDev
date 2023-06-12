@@ -96,6 +96,9 @@ const LearningMaterialSchema = new mongoose.Schema({
       username: {
         type: String,
       },
+      avatar: {
+        type: String,
+      },
       date: {
         type: Date,
         default: Date.now,

@@ -7,8 +7,8 @@ import {
   DELETE_ARTICLE,
   ADD_ARTICLE,
   UPDATE_ARTICLE,
-  ADD_COMMENT,
-  REMOVE_COMMENT,
+  ADD_ARTICLE_COMMENT,
+  REMOVE_ARTICLE_COMMENT,
 } from '../actions/types';
 
 const initialState = {
@@ -79,14 +79,14 @@ export default function ArticleReducer(state = initialState, action) {
         loading: false,
         error: {},
       };
-    case ADD_COMMENT:
+    case ADD_ARTICLE_COMMENT:
       return {
         ...state,
         article: { ...state.article, comments: payload },
         loading: false,
         error: {},
       };
-    case REMOVE_COMMENT:
+    case REMOVE_ARTICLE_COMMENT:
       return {
         ...state,
         article: {

@@ -2,6 +2,7 @@ import React, { Fragment, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import CommentsSection from '../layout/CommentsSection';
 import Spinner from '../layout/Spinner';
 import { getLearningMaterial, completeLesson } from '../../actions/learning';
 import {
@@ -21,6 +22,8 @@ const Lesson = ({
   const lessonLearnedLabel =
     learningMaterialTranslations.lessonLearned[language];
   const backButtonLabel = universalTranslations.backButton[language];
+  const saveButtonLabel = universalTranslations.saveButton[language];
+  const leaveCommentLabel = universalTranslations.leaveComment[language];
 
   useEffect(() => {
     getLearningMaterial(lessonId);
@@ -62,6 +65,17 @@ const Lesson = ({
           </div>
         </div>
       </div>
+
+      <CommentsSection
+        options={{
+          object: learningMaterial,
+          objectId: lessonId,
+          user,
+          saveButtonLabel,
+          leaveCommentLabel,
+          resourceType: 'learning material',
+        }}
+      />
     </Fragment>
   );
 };
