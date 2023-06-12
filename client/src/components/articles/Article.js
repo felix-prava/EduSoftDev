@@ -12,7 +12,7 @@ import {
   deleteArticle,
 } from '../../actions/article';
 import { setAlert } from '../../actions/alert';
-import { deleteComment } from '../../actions/article';
+import { deleteComment } from '../../actions/commonActions';
 import { displayDate } from '../../utils/helpers';
 import { universalTranslations } from '../layout/Translations';
 

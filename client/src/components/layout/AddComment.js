@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addComment } from '../../actions/article';
+import { addComment } from '../../actions/commonActions';
 
 const AddComment = ({ objectId, addComment, translations }) => {
   const [comment, setComment] = useState('');
