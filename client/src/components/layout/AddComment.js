@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addComment } from '../../actions/commonActions';
 
-const AddComment = ({ objectId, addComment, translations }) => {
+const AddComment = ({
+  objectOptions: { objectId, objectType },
+  addComment,
+  translations,
+}) => {
   const [comment, setComment] = useState('');
   return (
     <Fragment>
@@ -12,7 +16,7 @@ const AddComment = ({ objectId, addComment, translations }) => {
           className='space-y-8 divide-y divide-gray-200'
           onSubmit={(e) => {
             e.preventDefault();
-            addComment(objectId, { body: comment }, 'article');
+            addComment(objectId, { body: comment }, objectType);
             setComment('');
           }}
         >

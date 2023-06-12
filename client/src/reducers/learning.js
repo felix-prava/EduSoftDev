@@ -7,10 +7,12 @@ import {
   ADD_EXAMPLE,
   ADD_HINT,
   ADD_ANSWER,
+  ADD_LEARNING_MATERIAL_COMMENT,
   REMOVE_TEST,
   REMOVE_EXAMPLE,
   REMOVE_HINT,
   REMOVE_ANSWER,
+  REMOVE_LEARNING_MATERIAL_COMMENT,
   LEARNING_ERROR,
 } from '../actions/types';
 
@@ -99,6 +101,13 @@ export default function LearningMaterialsReducer(state = initialState, action) {
         error: {},
       };
     }
+    case ADD_LEARNING_MATERIAL_COMMENT:
+      return {
+        ...state,
+        learningMaterial: { ...state.learningMaterial, comments: payload },
+        loading: false,
+        error: {},
+      };
     case REMOVE_TEST:
       return {
         ...state,
@@ -158,6 +167,18 @@ export default function LearningMaterialsReducer(state = initialState, action) {
         error: {},
       };
     }
+    case REMOVE_LEARNING_MATERIAL_COMMENT:
+      return {
+        ...state,
+        learningMaterial: {
+          ...state.learningMaterial,
+          comments: state.learningMaterial.comments.filter(
+            (comment) => comment._id !== payload
+          ),
+        },
+        loading: false,
+        error: {},
+      };
     case LEARNING_ERROR:
       return {
         ...state,

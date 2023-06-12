@@ -190,7 +190,7 @@ const Article = ({
         {isAuthenticated && (
           <div className='mt-8 pt-2'>
             <AddComment
-              objectId={article._id}
+              objectOptions={{ objectId: article._id, objectType: 'article' }}
               translations={{
                 saveButtonLabel,
                 leaveCommentLabel,
@@ -241,7 +241,11 @@ const Article = ({
                             user.role === 'mentor') && (
                             <button
                               onClick={() =>
-                                deleteComment(article._id, comment._id)
+                                deleteComment(
+                                  article._id,
+                                  comment._id,
+                                  'article'
+                                )
                               }
                               className='bg-red-600 border border-transparent rounded-md shadow-sm py-1 px-3 flex items-center inline-flex justify-center ml-4 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600'
                             >
