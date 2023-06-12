@@ -166,32 +166,35 @@ export const updateArticle = (formData, articleId) => async (dispatch) => {
 };
 
 // Add a comment to a post
-export const addComment = (articleId, formData) => async (dispatch) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
+export const addComment =
+  (objectId, formData, resourceType) => async (dispatch) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
 
-  try {
-    const res = await axios.post(
-      `/api/articles/comment/${articleId}`,
-      formData,
-      config
-    );
+    let reqEndpoint = null;
+    if (resourceType === 'article')
+      reqEndpoint = `/api/articles/comment/${objectId}`;
+    if (resourceType === 'learning material')
+      reqEndpoint = `/api/lm/comment/${objectId}`;
 
-    dispatch({
-      type: ADD_COMMENT,
-      payload: res.data,
-    });
-    dispatch(setAlert('Comment Added', 'success', 3000, false));
-  } catch (err) {
-    const errors = err.response.data.errors;
-    if (errors) {
-      errors.forEach((error) => dispatch(setAlert(error.msg, 'error')));
+    try {
+      const res = await axios.post(reqEndpoint, formData, config);
+
+      dispatch({
+        type: ADD_COMMENT,
+        payload: res.data,
+      });
+      dispatch(setAlert('Comment Added', 'success', 3000, false));
+    } catch (err) {
+      const errors = err.response.data.errors;
+      if (errors) {
+        errors.forEach((error) => dispatch(setAlert(error.msg, 'error')));
+      }
     }
-  }
-};
+  };
 
 // Remove comment
 export const deleteComment = (articleId, commentId) => async (dispatch) => {

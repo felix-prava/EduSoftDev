@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import AddComment from './AddComment';
+import AddComment from '../layout/AddComment';
 import Spinner from '../layout/Spinner';
 import PageNotFound from '../layout/PageNotFound';
 import {
@@ -190,7 +190,7 @@ const Article = ({
         {isAuthenticated && (
           <div className='mt-8 pt-2'>
             <AddComment
-              articleId={article._id}
+              objectId={article._id}
               translations={{
                 saveButtonLabel,
                 leaveCommentLabel,
