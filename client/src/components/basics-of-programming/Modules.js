@@ -19,6 +19,7 @@ import {
   BACKTRACKING_RECURSION_TITLE,
   BACKTRACKING_RECURSION_DESCRIPTION,
 } from './modulesInformation';
+import module_3 from '../layout/images/module_3.jpg';
 
 const Modules = ({ auth: { loading, user } }) => {
   const expNeededForIfElseModule = 10;
@@ -160,7 +161,7 @@ const Modules = ({ auth: { loading, user } }) => {
               <div className='flex-shrink-0'>
                 <img
                   className='h-48 w-full object-cover'
-                  src='https://images.unsplash.com/photo-1492724441997-5dc865305da7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80'
+                  src={module_3}
                   alt=''
                 />
               </div>
