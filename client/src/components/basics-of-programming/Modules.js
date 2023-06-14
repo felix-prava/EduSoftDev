@@ -19,6 +19,13 @@ import {
   BACKTRACKING_RECURSION_TITLE,
   BACKTRACKING_RECURSION_DESCRIPTION,
 } from './modulesInformation';
+import module_0 from '../layout/images/module_0.jpg';
+import module_1 from '../layout/images/module_1.jpg';
+import module_2 from '../layout/images/module_2.jpg';
+import module_3 from '../layout/images/module_3.jpg';
+import module_4 from '../layout/images/module_4.jpg';
+import module_5 from '../layout/images/module_5.jpg';
+import module_6 from '../layout/images/module_6.jpg';
 
 const Modules = ({ auth: { loading, user } }) => {
   const expNeededForIfElseModule = 10;
@@ -50,7 +57,7 @@ const Modules = ({ auth: { loading, user } }) => {
               <div className='flex-shrink-0'>
                 <img
                   className='h-48 w-full object-cover'
-                  src='https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80'
+                  src={module_0}
                   alt=''
                 />
               </div>
@@ -72,7 +79,7 @@ const Modules = ({ auth: { loading, user } }) => {
               <div className='flex-shrink-0'>
                 <img
                   className='h-48 w-full object-cover'
-                  src='https://images.unsplash.com/photo-1547586696-ea22b4d4235d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80'
+                  src={module_1}
                   alt=''
                 />
               </div>
@@ -115,7 +122,7 @@ const Modules = ({ auth: { loading, user } }) => {
               <div className='flex-shrink-0'>
                 <img
                   className='h-48 w-full object-cover'
-                  src='https://images.unsplash.com/photo-1492724441997-5dc865305da7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80'
+                  src={module_2}
                   alt=''
                 />
               </div>
@@ -160,7 +167,7 @@ const Modules = ({ auth: { loading, user } }) => {
               <div className='flex-shrink-0'>
                 <img
                   className='h-48 w-full object-cover'
-                  src='https://images.unsplash.com/photo-1492724441997-5dc865305da7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80'
+                  src={module_3}
                   alt=''
                 />
               </div>
@@ -205,7 +212,7 @@ const Modules = ({ auth: { loading, user } }) => {
               <div className='flex-shrink-0'>
                 <img
                   className='h-48 w-full object-cover'
-                  src='https://images.unsplash.com/photo-1492724441997-5dc865305da7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80'
+                  src={module_4}
                   alt=''
                 />
               </div>
@@ -250,7 +257,7 @@ const Modules = ({ auth: { loading, user } }) => {
               <div className='flex-shrink-0'>
                 <img
                   className='h-48 w-full object-cover'
-                  src='https://images.unsplash.com/photo-1492724441997-5dc865305da7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80'
+                  src={module_5}
                   alt=''
                 />
               </div>
@@ -295,7 +302,7 @@ const Modules = ({ auth: { loading, user } }) => {
               <div className='flex-shrink-0'>
                 <img
                   className='h-48 w-full object-cover'
-                  src='https://images.unsplash.com/photo-1492724441997-5dc865305da7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80'
+                  src={module_6}
                   alt=''
                 />
               </div>

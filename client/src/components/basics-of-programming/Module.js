@@ -26,7 +26,7 @@ import {
   BACKTRACKING_RECURSION_DESCRIPTION,
 } from './modulesInformation';
 
-const ModuleItem = ({
+const Module = ({
   auth: { user },
   learning: { loading, problems },
   getAllMaterials,
@@ -168,7 +168,7 @@ const ModuleItem = ({
   );
 };
 
-ModuleItem.propTypes = {
+Module.propTypes = {
   auth: PropTypes.object.isRequired,
   learning: PropTypes.object.isRequired,
   getAllMaterials: PropTypes.func.isRequired,
@@ -183,4 +183,4 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getAllMaterials,
   deleteLearningMaterial,
-})(ModuleItem);
+})(Module);
