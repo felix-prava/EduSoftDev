@@ -3,9 +3,9 @@ import Moment from 'react-moment';
 import moment from 'moment';
 import { universalTranslations } from '../components/layout/Translations';
 
-const LESSONS_IMAGES_COUNT = 4;
-const PROBLEMS_IMAGES_COUNT = 7;
-const QUIZZES_IMAGES_COUNT = 4;
+const LESSONS_IMAGES_COUNT = 2;
+const PROBLEMS_IMAGES_COUNT = 2;
+const QUIZZES_IMAGES_COUNT = 2;
 
 export const displayDate = (date, language = 'en') => {
   let yesterdayMidnight = moment().subtract(1, 'days').endOf('day');
