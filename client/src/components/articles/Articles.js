@@ -32,6 +32,9 @@ const Articles = ({
     articlesTranslations.createArticleLink[language];
   const discussionLabel = articlesTranslations.discussion[language];
   const readArticleLinkLabel = articlesTranslations.readArticleLink[language];
+  const deleteArticleTitle = articlesTranslations.deleteArticle[language];
+  const deleteArticleMessage =
+    articlesTranslations.deleteArticleMessage[language];
   const postedOnLabel = universalTranslations.postedOn[language];
 
   return (
@@ -67,6 +70,8 @@ const Articles = ({
                       discussionLabel,
                       readArticleLinkLabel,
                       postedOnLabel,
+                      deleteArticleTitle,
+                      deleteArticleMessage,
                     }}
                     currentUser={user}
                     toggleModal={() => setModal(!modal)}
@@ -83,6 +88,7 @@ const Articles = ({
           modalData={modalData}
           hideModal={() => setModal(false)}
           action={() => deleteArticle(modalData[2])}
+          language={language}
         />
       )}
     </Fragment>

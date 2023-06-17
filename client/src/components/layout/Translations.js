@@ -314,6 +314,14 @@ export const articlesTranslations = {
     en: "What's this article about?",
     ro: 'Despre ce e vorba?',
   },
+  deleteArticle: {
+    en: 'Delete Article',
+    ro: 'Ștergere Articol',
+  },
+  deleteArticleMessage: {
+    en: 'Are you sure you want to delete this article? It will be permanently removed from the database. This action cannot be undone.',
+    ro: 'Ești sigur că vrei să ștergeți acest articol? Va fi eliminat definitiv din baza de date. Această acțiune nu poate fi anulată.',
+  },
 };
 
 export const dashboardTranslations = {
@@ -417,6 +425,50 @@ export const modulesTranslations = {
   addQuiz: {
     en: 'Add Quiz',
     ro: 'Adaugă un Quiz',
+  },
+  all: {
+    en: 'All',
+    ro: 'Toate',
+  },
+  problems: {
+    en: 'Problems',
+    ro: 'Probleme',
+  },
+  lessons: {
+    en: 'Lessons',
+    ro: 'Lecții',
+  },
+  quizzes: {
+    en: 'Quizzes',
+    ro: 'Quizz-uri',
+  },
+  sortBy: {
+    en: 'Sort by',
+    ro: 'Sortare după',
+  },
+  mostSolved: {
+    en: 'Most Solved',
+    ro: 'Cele mai rezolvate',
+  },
+  leastSolved: {
+    en: 'Least Solved',
+    ro: 'Cele mai putin rezolvate',
+  },
+  delete: {
+    en: 'Delete',
+    ro: 'Ștergere',
+  },
+  deleteLessonMessage: {
+    en: 'Are you sure you want to delete this lesson? It will be permanently removed from the database. This action cannot be undone.',
+    ro: 'Ești sigur că vrei să ștergi această lecție? Va fi eliminată definitiv din baza de date. Această acțiune nu poate fi anulată.',
+  },
+  problemLessonMessage: {
+    en: 'Are you sure you want to delete this problem? It will be permanently removed from the database. This action cannot be undone.',
+    ro: 'Ești sigur că vrei să ștergi această problemă? Va fi eliminată definitiv din baza de date. Această acțiune nu poate fi anulată.',
+  },
+  deleteQuizMessage: {
+    en: 'Are you sure you want to delete this quiz? It will be permanently removed from the database. This action cannot be undone.',
+    ro: 'Ești sigur că vrei să ștergi acest quiz? Va fi eliminat definitiv din baza de date. Această acțiune nu poate fi anulată.',
   },
 };
 
