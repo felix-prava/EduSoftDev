@@ -40,6 +40,13 @@ const Module = ({
   const addProblemLabel = modulesTranslations.addProblem[language];
   const addLessonLabel = modulesTranslations.addLesson[language];
   const addQuizLabel = modulesTranslations.addQuiz[language];
+  const allLabel = modulesTranslations.all[language];
+  const problemsLabel = modulesTranslations.problems[language];
+  const lessonsLabel = modulesTranslations.lessons[language];
+  const quizzesLabel = modulesTranslations.quizzes[language];
+  const sortByLabel = modulesTranslations.sortBy[language];
+  const mostSolvedLabel = modulesTranslations.mostSolved[language];
+  const leastSolvedLabel = modulesTranslations.leastSolved[language];
 
   const [modal, setModal] = useState(false);
   const [modalData, setModalData] = useState([]);
@@ -145,19 +152,19 @@ const Module = ({
                     onChange={(e) => setFilterType(e.target.value)}
                     className='inline-flex items-center pl-4 pr-7 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
                   >
-                    <option value='all'>All</option>
-                    <option value='Problem'>Problems</option>
-                    <option value='Lesson'>Lessons</option>
-                    <option value='Quiz'>Quizzes</option>
+                    <option value='all'>{allLabel}</option>
+                    <option value='Problem'>{problemsLabel}</option>
+                    <option value='Lesson'>{lessonsLabel}</option>
+                    <option value='Quiz'>{quizzesLabel}</option>
                   </select>
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
                     className='inline-flex items-center pl-4 pr-7 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
                   >
-                    <option value=''>Sort by</option>
-                    <option value='most-solved'>Most Solved</option>
-                    <option value='least-solved'>Least Solved</option>
+                    <option value=''>{sortByLabel}</option>
+                    <option value='most-solved'>{mostSolvedLabel}</option>
+                    <option value='least-solved'>{leastSolvedLabel}</option>
                   </select>
                 </div>
               </div>
@@ -208,6 +215,7 @@ const Module = ({
           modalData={modalData}
           hideModal={() => setModal(false)}
           action={() => deleteLearningMaterial(modalData[2], modalData[3])}
+          language={language}
         />
       )}
     </Fragment>

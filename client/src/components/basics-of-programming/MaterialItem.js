@@ -2,7 +2,10 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { universalTranslations } from '../layout/Translations';
+import {
+  modulesTranslations,
+  universalTranslations,
+} from '../layout/Translations';
 import { imageSource } from '../../utils/helpers';
 
 const MaterialItem = ({
@@ -42,6 +45,13 @@ const MaterialItem = ({
   const problemLabel = universalTranslations.problem[language];
   const lessonLabel = universalTranslations.lesson[language];
   const quizLabel = universalTranslations.quiz[language];
+  const deleteLabel = modulesTranslations.delete[language];
+  const deleteLessonMessageLabel =
+    modulesTranslations.deleteLessonMessage[language];
+  const problemLessonMessageLabel =
+    modulesTranslations.problemLessonMessage[language];
+  const deleteQuizMessageLabel =
+    modulesTranslations.deleteQuizMessage[language];
 
   let navigate = useNavigate();
   function editLearningMaterial(learningMaterialId) {
@@ -56,6 +66,20 @@ const MaterialItem = ({
       return lessonLabel;
     }
     return quizLabel;
+  }
+
+  function setWarningMessage(type) {
+    let message = deleteLessonMessageLabel;
+    if (type === 'Problem') {
+      message = problemLessonMessageLabel;
+    }
+    if (type === 'Quiz') {
+      message = deleteQuizMessageLabel;
+    }
+    return {
+      title: `${deleteLabel} ` + translateType(type),
+      message: message,
+    };
   }
 
   return (
@@ -105,12 +129,10 @@ const MaterialItem = ({
                     <button
                       onClick={(e) => {
                         e.preventDefault();
+                        const warningMessage = setWarningMessage(type);
                         setModalData([
-                          'Delete ' + type,
-                          'Are you sure you want to delete this ' +
-                            type.charAt(0).toLowerCase() +
-                            type.slice(1) +
-                            '? It will be permanently removed from the database. This action cannot be undone.',
+                          warningMessage.title,
+                          warningMessage.message,
                           _id,
                           type,
                         ]);

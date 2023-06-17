@@ -29,9 +29,8 @@ const ArticleItem = ({
   toggleModal,
   setModalData,
 }) => {
-  const modalDeleteArticleTitle = 'Delete Article';
-  const modalDeleteArticleDescription =
-    'Are you sure you want to delete this article? It will be permanently removed from the database. This action cannot be undone.';
+  const modalDeleteArticleTitle = translations.deleteArticleTitle;
+  const modalDeleteArticleDescription = translations.deleteArticleMessage;
 
   function likeArticle(articleId) {
     if (auth.isAuthenticated) {
