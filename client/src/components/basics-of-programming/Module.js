@@ -109,55 +109,61 @@ const Module = ({
             </p>
           </div>
           {user && (user.role === 'admin' || user.role === 'mentor') && (
-            <div className='mr-8 mb-4 float-right'>
-              <div className='mt-6 flex space-x-3'>
-                <select
-                  value={filterType}
-                  onChange={(e) => setFilterType(e.target.value)}
-                  className='inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium rounded-md focus:outline-none focus:ring-cyan-500 focus:border-cyan-500'
-                >
-                  <option value='all'>All</option>
-                  <option value='Problem'>Problems</option>
-                  <option value='Lesson'>Lessons</option>
-                  <option value='Quiz'>Quizzes</option>
-                </select>
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className='inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium rounded-md focus:outline-none focus:ring-cyan-500 focus:border-cyan-500'
-                >
-                  <option value=''>Sort by</option>
-                  <option value='most-solved'>Most Solved</option>
-                  <option value='least-solved'>Least Solved</option>
-                </select>
-                <Link to={`/modules/${moduleName}/create-problem`}>
-                  <button
-                    type='button'
-                    className='inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
+            <div>
+              <div className='mr-8 mb-4 flex justify-end'>
+                <div className='mt-6 flex space-x-3'>
+                  <Link to={`/modules/${moduleName}/create-problem`}>
+                    <button
+                      type='button'
+                      className='inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
+                    >
+                      {addProblemLabel}
+                    </button>
+                  </Link>
+                  <Link to={`/modules/${moduleName}/create-lesson`}>
+                    <button
+                      type='button'
+                      className='inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
+                    >
+                      {addLessonLabel}
+                    </button>
+                  </Link>
+                  <Link to={`/modules/${moduleName}/create-quiz`}>
+                    <button
+                      type='button'
+                      className='inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
+                    >
+                      {addQuizLabel}
+                    </button>
+                  </Link>
+                </div>
+              </div>
+              <div className='mr-8 flex justify-end'>
+                <div className='flex space-x-3'>
+                  <select
+                    value={filterType}
+                    onChange={(e) => setFilterType(e.target.value)}
+                    className='inline-flex items-center pl-4 pr-7 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
                   >
-                    {addProblemLabel}
-                  </button>
-                </Link>
-                <Link to={`/modules/${moduleName}/create-lesson`}>
-                  <button
-                    type='button'
-                    className='inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
+                    <option value='all'>All</option>
+                    <option value='Problem'>Problems</option>
+                    <option value='Lesson'>Lessons</option>
+                    <option value='Quiz'>Quizzes</option>
+                  </select>
+                  <select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                    className='inline-flex items-center pl-4 pr-7 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
                   >
-                    {addLessonLabel}
-                  </button>
-                </Link>
-                <Link to={`/modules/${moduleName}/create-quiz`}>
-                  <button
-                    type='button'
-                    className='inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
-                  >
-                    {addQuizLabel}
-                  </button>
-                </Link>
+                    <option value=''>Sort by</option>
+                    <option value='most-solved'>Most Solved</option>
+                    <option value='least-solved'>Least Solved</option>
+                  </select>
+                </div>
               </div>
             </div>
           )}
-          <div className='mt-24 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none'>
+          <div className='mt-6 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none'>
             {problems
               .filter((problem) => {
                 console.log(problem.type);
