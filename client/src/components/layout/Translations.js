@@ -11,6 +11,7 @@
 // learningMaterialTranslations
 // settingsTranslations
 // solutionTranslations
+// aboutUsTranslations
 
 export const universalTranslations = {
   deleteButton: {
@@ -773,5 +774,128 @@ export const solutionTranslations = {
   successRate: {
     en: 'Success Rate',
     ro: 'Rata de Succes',
+  },
+};
+
+export const aboutUsTranslations = {
+  aboutUsTitle: {
+    en: 'We’re Your Pathway to a Software Development Career',
+    ro: 'Suntem Calea Ta Către o Carieră în Software Development',
+  },
+  aboutUsDescription: {
+    en:
+      'At EduSoftDev, we serve as the vital link between aspiring individuals and their dream job as software developers. ' +
+      'With our comprehensive program, we provide the necessary resources, guidance, and support to help you embark on a successful ' +
+      'journey towards your first role in software development. Our expert instructors and industry-aligned curriculum equip you ' +
+      'with the practical skills, industry knowledge and confidence needed to thrive in the competitive job market. ' +
+      'Through hands-on projects, real-world simulations and career development assistance, we bridge the gap between ' +
+      'your aspirations and the reality of landing your first job as a software developer. Take the leap with us and let ' +
+      'us guide you towards a rewarding career in the dynamic world of software development.',
+    ro:
+      'EduSoftDev reprezintă legătura vitală dintre persoanele aspirante și jobul lor de vis ca dezvoltatori de software. ' +
+      'Prin programul nostru cuprinzător, vă oferim resursele necesare, îndrumarea și sprijinul pentru a vă ajuta să începeți o ' +
+      'călătorie de succes către primul vostru rol în dezvoltarea de software. Instructorii noștri experți și curriculum-ul aliniat ' +
+      'la nivelul industriei vă oferă abilitățile practice, cunoștințele din domeniu și încrederea necesare pentru a prospera pe piața ' +
+      'competitivă a muncii. Prin proiecte practice, simulări din lumea reală și asistență pentru dezvoltarea carierei, facem o punte ' +
+      'între aspirațiile tale și realitatea obținerii primului tău loc de muncă ca dezvoltator de software. Faceți saltul cu noi și ' +
+      'lăsați-ne să vă ghidăm către o carieră plină de satisfacții în lumea dinamică a dezvoltării software.',
+  },
+  ourMissionTitle: {
+    en: 'Our mission',
+    ro: 'Misiunea noastră',
+  },
+  ourMission: {
+    en:
+      'Our mission is to empower individuals worldwide to unlock their full potential in the field of programming and technology. ' +
+      'By providing accessible and innovative learning experiences, we strive to break down barriers and bridge the gap between ' +
+      'aspiring learners and rewarding careers in software development.',
+    ro:
+      'Misiunea noastră este de a împuternici indivizii din întreaga lume să-și deblocheze întregul potențial în domeniul ' +
+      'programării și tehnologiei. Oferind experiențe de învățare accesibile și inovatoare, ne străduim să distrugem barierele și ' +
+      'să reducem decalajul dintre studenții aspiranți și carierele pline de satisfacții în dezvoltarea de software.',
+  },
+  ourMissionFirstPoint: {
+    en:
+      'We are committed to fostering a supportive and inclusive community where individuals can acquire practical skills, gain ' +
+      'confidence, and pursue their passion for coding. Through our dedication to excellence, we aim to revolutionize the way ' +
+      'programming is taught, inspire lifelong learning, and shape the future of the tech industry. Together, we are building a ' +
+      'world where anyone can thrive and succeed in the exciting realm of programming.',
+    ro:
+      'Ne angajăm să promovăm o comunitate de susținere și incluzivă în care indivizii pot dobândi abilități practice, câștiga ' +
+      'încredere și își pot urmări pasiunea pentru codificare. Prin dedicarea noastră față de excelență, ne propunem să ' +
+      'revoluționăm modul în care este predată programarea, să inspirăm învățarea pe tot parcursul vieții și să modelăm viitorul ' +
+      'industriei tehnologice. Împreună, construim o lume în care oricine poate prospera și poate reuși în tărâmul interesant al programării.',
+  },
+  firstStat: {
+    en: 'There are over 200 problems and quizzes you can choose from',
+    ro: 'Există peste 200 de probleme și chestionare din care puteți alege',
+  },
+  secondStat: {
+    en: 'Very quick response time to all your questions',
+    ro: 'Timp de răspuns foarte rapid la toate întrebările tale',
+  },
+  thirdStat: {
+    en: 'Technologies and software applications used in the real-life projects you will learn to use',
+    ro: 'Tehnologii și aplicații software utilizate în proiectele din viața reală pe care le vei învăța să le utilizezi',
+  },
+  ourValuesTitle: {
+    en: 'Our values',
+    ro: 'Valorile noastre',
+  },
+  ourValues: {
+    en: 'Unleashing excellence through shared knowledge, continuous growth and a supportive community.',
+    ro: 'Țintirea excelenței prin împărțirea cunoștințelor, creştere continuă și o comunitate ajutătoare.',
+  },
+  firstValueTile: {
+    en: 'Be world-class',
+    ro: 'Fii de clasă mondială',
+  },
+  firstValue: {
+    en: 'Strive for excellence in everything we do, setting high standards and pushing boundaries to deliver the best educational experience.',
+    ro: 'Aspiră către excelență în tot ceea ce faci, setând standarde înalte și depășind limitele pentru a oferi cea mai bună experiență educațională.',
+  },
+  secondValueTile: {
+    en: 'Share everything you know',
+    ro: 'Împarte tot ce ştii',
+  },
+  secondValue: {
+    en: 'Foster a culture of knowledge sharing, encouraging collaboration and empowering individuals to freely exchange their expertise and insights.',
+    ro: 'Promovează o cultură a împărțirii cunoștințelor, încurajând colaborarea și împuternicindu-le indivizilor să-și schimbe liber expertiza și cunoștințele.',
+  },
+  thirdValueTile: {
+    en: 'Always learning',
+    ro: 'Tot timpul învață',
+  },
+  thirdValue: {
+    en: 'Embrace a lifelong learning mindset, constantly seeking new knowledge and skills to stay at the forefront of education and personal development.',
+    ro:
+      'Îmbrățișează o mentalitate de învățare pe tot parcursul vieții, căutând în mod constant noi cunoștințe și abilități pentru a rămâne în fruntea ' +
+      'educației și a dezvoltării personale.',
+  },
+  fourthValueTile: {
+    en: 'Be supportive',
+    ro: 'Fii un susținător',
+  },
+  fourthValue: {
+    en: 'Nurture a supportive environment where everyone feels valued, respected, and encouraged to thrive, offering assistance and guidance to one another.',
+    ro: 'Crează un mediu de susținere în care toată lumea se simte apreciată, respectată și încurajată să prospere, oferind asistență și îndrumare unul altuia.',
+  },
+  fifthValueTile: {
+    en: 'Take responsibility',
+    ro: 'Asumă-ți responsabilitatea',
+  },
+  fifthValue: {
+    en: 'Take ownership of our actions, decisions, and their impact, holding ourselves accountable for delivering quality education and fulfilling our commitments.',
+    ro: 'Să-ți asumi acțiunile, deciziile și impactul lor, considerându-te responsabili pentru furnizarea de educație de calitate și pentru îndeplinirea angajamentelor tale.',
+  },
+  sixthValueTile: {
+    en: 'Enjoy downtime',
+    ro: 'Bucură-te de timpul de relaxare',
+  },
+  sixthValue: {
+    en: 'Recognize the importance of work-life balance, encouraging relaxation, self-care and the pursuit of personal interests to rejuvenate and maintain well-being.',
+    ro:
+      'Realizează importanța echilibrului dintre muncă și viață, încurajează relaxarea, îngrijirea de sine și urmărirea intereselor personale pentru a întineri ' +
+      'și a menține bunăstarea.',
   },
 };

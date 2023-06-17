@@ -1,5 +1,35 @@
 import React, { Fragment } from 'react';
-const AboutUs = ({}) => {
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { aboutUsTranslations } from './Translations';
+
+const AboutUs = ({ auth: { user } }) => {
+  const language = user ? user.language : 'en';
+  const aboutUsTitleLabel = aboutUsTranslations.aboutUsTitle[language];
+  const aboutUsDescriptionLabel =
+    aboutUsTranslations.aboutUsDescription[language];
+  const ourMissionTitleLabel = aboutUsTranslations.ourMissionTitle[language];
+  const ourMissionLabel = aboutUsTranslations.ourMission[language];
+  const ourMissionFirstPointLabel =
+    aboutUsTranslations.ourMissionFirstPoint[language];
+  const firstStatLabel = aboutUsTranslations.firstStat[language];
+  const secondStatLabel = aboutUsTranslations.secondStat[language];
+  const thirdStatLabel = aboutUsTranslations.thirdStat[language];
+  const ourValuesTitleLabel = aboutUsTranslations.ourValuesTitle[language];
+  const ourValuesLabel = aboutUsTranslations.ourValues[language];
+  const firstValueTileLabel = aboutUsTranslations.firstValueTile[language];
+  const firstValueLabel = aboutUsTranslations.firstValue[language];
+  const secondValueTileLabel = aboutUsTranslations.secondValueTile[language];
+  const secondValueLabel = aboutUsTranslations.secondValue[language];
+  const thirdValueTileLabel = aboutUsTranslations.thirdValueTile[language];
+  const thirdValueLabel = aboutUsTranslations.thirdValue[language];
+  const fourthValueTileLabel = aboutUsTranslations.fourthValueTile[language];
+  const fourthValueLabel = aboutUsTranslations.fourthValue[language];
+  const fifthValueTileLabel = aboutUsTranslations.fifthValueTile[language];
+  const fifthValueLabel = aboutUsTranslations.fifthValue[language];
+  const sixthValueTileLabel = aboutUsTranslations.sixthValueTile[language];
+  const sixthValueLabel = aboutUsTranslations.sixthValue[language];
+
   return (
     <Fragment>
       <div className='bg-white'>
@@ -53,23 +83,10 @@ const AboutUs = ({}) => {
                 <div className='mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-center'>
                   <div className='w-full max-w-xl lg:shrink-0 xl:max-w-2xl'>
                     <h1 className='text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl'>
-                      We’re Your Pathway to a Software Development Career.
+                      {aboutUsTitleLabel}
                     </h1>
                     <p className='relative mt-6 text-lg leading-8 text-gray-600 sm:max-w-md lg:max-w-none'>
-                      At EduSoftDev, we serve as the vital link between aspiring
-                      individuals and their dream job as software developers.
-                      With our comprehensive program, we provide the necessary
-                      resources, guidance, and support to help you embark on a
-                      successful journey towards your first role in software
-                      development. Our expert instructors and industry-aligned
-                      curriculum equip you with the practical skills, industry
-                      knowledge, and confidence needed to thrive in the
-                      competitive job market. Through hands-on projects,
-                      real-world simulations, and career development assistance,
-                      we bridge the gap between your aspirations and the reality
-                      of landing your first job as a software developer. Take
-                      the leap with us and let us guide you towards a rewarding
-                      career in the dynamic world of software development.
+                      {aboutUsDescriptionLabel}
                     </p>
                   </div>
                   <div className='mt-14 flex justify-end gap-8 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0'>
@@ -128,38 +145,22 @@ const AboutUs = ({}) => {
           <div className='mx-auto -mt-12 max-w-7xl px-6 sm:mt-0 lg:px-8 xl:-mt-8'>
             <div className='mx-auto max-w-2xl lg:mx-0 lg:max-w-none'>
               <h2 className='text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
-                Our mission
+                {ourMissionTitleLabel}
               </h2>
               <div className='mt-6 flex flex-col gap-x-8 gap-y-20 lg:flex-row'>
                 <div className='lg:w-full lg:max-w-2xl lg:flex-auto'>
                   <p className='text-xl leading-8 text-gray-600'>
-                    Our mission is to empower individuals worldwide to unlock
-                    their full potential in the field of programming and
-                    technology. By providing accessible and innovative learning
-                    experiences, we strive to break down barriers and bridge the
-                    gap between aspiring learners and rewarding careers in
-                    software development.
+                    {ourMissionLabel}
                   </p>
                   <div className='mt-10 max-w-xl text-base leading-7 text-gray-700'>
-                    <p>
-                      We are committed to fostering a supportive and inclusive
-                      community where individuals can acquire practical skills,
-                      gain confidence, and pursue their passion for coding.
-                      Through our dedication to excellence, we aim to
-                      revolutionize the way programming is taught, inspire
-                      lifelong learning, and shape the future of the tech
-                      industry. Together, we are building a world where anyone
-                      can thrive and succeed in the exciting realm of
-                      programming.
-                    </p>
+                    <p>{ourMissionFirstPointLabel}</p>
                   </div>
                 </div>
                 <div className='lg:flex lg:flex-auto lg:justify-center'>
                   <dl className='w-64 space-y-8 xl:w-80'>
                     <div className='flex flex-col-reverse gap-y-4'>
                       <dt className='text-base leading-7 text-gray-600'>
-                        There are over 200 problems and quizzes you can choose
-                        from
+                        {firstStatLabel}
                       </dt>
                       <dd className='text-5xl font-semibold tracking-tight text-gray-900'>
                         200+
@@ -167,7 +168,7 @@ const AboutUs = ({}) => {
                     </div>
                     <div className='flex flex-col-reverse gap-y-4'>
                       <dt className='text-base leading-7 text-gray-600'>
-                        Very quick response time to all your questions
+                        {secondStatLabel}
                       </dt>
                       <dd className='text-5xl font-semibold tracking-tight text-gray-900'>
                         1h - 24h
@@ -175,8 +176,7 @@ const AboutUs = ({}) => {
                     </div>
                     <div className='flex flex-col-reverse gap-y-4'>
                       <dt className='text-base leading-7 text-gray-600'>
-                        Technologies and software applications used in the
-                        real-life projects you will learn to use
+                        {thirdStatLabel}
                       </dt>
                       <dd className='text-5xl font-semibold tracking-tight text-gray-900'>
                         10+
@@ -196,73 +196,54 @@ const AboutUs = ({}) => {
             />
           </div>
 
-          {/* 
           <div className='mx-auto mt-32 max-w-7xl px-6 sm:mt-40 lg:px-8'>
             <div className='mx-auto max-w-2xl lg:mx-0'>
               <h2 className='text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl'>
-                Our values
+                {ourValuesTitleLabel}
               </h2>
               <p className='mt-6 text-lg leading-8 text-gray-600'>
-                Lorem ipsum dolor sit amet consect adipisicing elit. Possimus
-                magnam voluptatum cupiditate veritatis in accusamus quisquam.
+                {ourValuesLabel}
               </p>
             </div>
             <dl className='mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 text-base leading-7 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3'>
               <div>
-                <dt className='font-semibold text-gray-900'>Be world-class</dt>
-                <dd className='mt-1 text-gray-600'>
-                  Aut illo quae. Ut et harum ea animi natus. Culpa maiores et
-                  sed sint et magnam exercitationem quia. Ullam voluptas nihil
-                  vitae dicta molestiae et. Aliquid velit porro vero.
-                </dd>
+                <dt className='font-semibold text-gray-900'>
+                  {firstValueTileLabel}
+                </dt>
+                <dd className='mt-1 text-gray-600'>{firstValueLabel}</dd>
               </div>
               <div>
                 <dt className='font-semibold text-gray-900'>
-                  Share everything you know
+                  {secondValueTileLabel}
                 </dt>
-                <dd className='mt-1 text-gray-600'>
-                  Mollitia delectus a omnis. Quae velit aliquid. Qui nulla
-                  maxime adipisci illo id molestiae. Cumque cum ut minus rerum
-                  architecto magnam consequatur. Quia quaerat minima.
-                </dd>
-              </div>
-              <div>
-                <dt className='font-semibold text-gray-900'>Always learning</dt>
-                <dd className='mt-1 text-gray-600'>
-                  Aut repellendus et officiis dolor possimus. Deserunt velit
-                  quasi sunt fuga error labore quia ipsum. Commodi autem
-                  voluptatem nam. Quos voluptatem totam.
-                </dd>
-              </div>
-              <div>
-                <dt className='font-semibold text-gray-900'>Be supportive</dt>
-                <dd className='mt-1 text-gray-600'>
-                  Magnam provident veritatis odit. Vitae eligendi repellat non.
-                  Eum fugit impedit veritatis ducimus. Non qui aspernatur
-                  laudantium modi. Praesentium rerum error deserunt harum.
-                </dd>
+                <dd className='mt-1 text-gray-600'>{secondValueLabel}</dd>
               </div>
               <div>
                 <dt className='font-semibold text-gray-900'>
-                  Take responsibility
+                  {thirdValueTileLabel}
                 </dt>
-                <dd className='mt-1 text-gray-600'>
-                  Sit minus expedita quam in ullam molestiae dignissimos in
-                  harum. Tenetur dolorem iure. Non nesciunt dolorem veniam
-                  necessitatibus laboriosam voluptas perspiciatis error.
-                </dd>
+                <dd className='mt-1 text-gray-600'>{thirdValueLabel}</dd>
               </div>
               <div>
-                <dt className='font-semibold text-gray-900'>Enjoy downtime</dt>
-                <dd className='mt-1 text-gray-600'>
-                  Ipsa in earum deserunt aut. Quos minus aut animi et soluta.
-                  Ipsum dicta ut quia eius. Possimus reprehenderit iste
-                  aspernatur ut est velit consequatur distinctio.
-                </dd>
+                <dt className='font-semibold text-gray-900'>
+                  {fourthValueTileLabel}
+                </dt>
+                <dd className='mt-1 text-gray-600'>{fourthValueLabel}</dd>
+              </div>
+              <div>
+                <dt className='font-semibold text-gray-900'>
+                  {fifthValueTileLabel}
+                </dt>
+                <dd className='mt-1 text-gray-600'>{fifthValueLabel}</dd>
+              </div>
+              <div>
+                <dt className='font-semibold text-gray-900'>
+                  {sixthValueTileLabel}
+                </dt>
+                <dd className='mt-1 text-gray-600'>{sixthValueLabel}</dd>
               </div>
             </dl>
           </div>
-          */}
 
           <div className='relative isolate -z-10 mt-32 sm:mt-48'>
             <div className='absolute inset-x-0 top-1/2 -z-10 flex -translate-y-1/2 justify-center overflow-hidden [mask-image:radial-gradient(50%_45%_at_50%_55%,white,transparent)]'>
@@ -414,4 +395,12 @@ const AboutUs = ({}) => {
   );
 };
 
-export default AboutUs;
+AboutUs.propTypes = {
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, {})(AboutUs);
