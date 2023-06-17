@@ -43,6 +43,8 @@ const Module = ({
 
   const [modal, setModal] = useState(false);
   const [modalData, setModalData] = useState([]);
+  const [filterType, setFilterType] = useState('all'); // Default filter option is 'all'
+  const [sortBy, setSortBy] = useState(''); // Default sorting option is empty
 
   let lessonsCount = 0;
   let problemsCount = 0;
@@ -108,7 +110,26 @@ const Module = ({
           </div>
           {user && (user.role === 'admin' || user.role === 'mentor') && (
             <div className='mr-8 mb-4 float-right'>
-              <div className='mt-6 flex space-x-3 '>
+              <div className='mt-6 flex space-x-3'>
+                <select
+                  value={filterType}
+                  onChange={(e) => setFilterType(e.target.value)}
+                  className='inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium rounded-md focus:outline-none focus:ring-cyan-500 focus:border-cyan-500'
+                >
+                  <option value='all'>All</option>
+                  <option value='Problem'>Problems</option>
+                  <option value='Lesson'>Lessons</option>
+                  <option value='Quiz'>Quizzes</option>
+                </select>
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className='inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium rounded-md focus:outline-none focus:ring-cyan-500 focus:border-cyan-500'
+                >
+                  <option value=''>Sort by</option>
+                  <option value='most-solved'>Most Solved</option>
+                  <option value='least-solved'>Least Solved</option>
+                </select>
                 <Link to={`/modules/${moduleName}/create-problem`}>
                   <button
                     type='button'
@@ -137,23 +158,42 @@ const Module = ({
             </div>
           )}
           <div className='mt-24 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none'>
-            {problems.map((problem, index) => (
-              <MaterialItem
-                key={problem._id}
-                problem={problem}
-                userExp={user.exp}
-                module={moduleName}
-                index={
-                  problem.type === 'Problem'
-                    ? problemsCount++
-                    : problem.type === 'Lesson'
-                    ? lessonsCount++
-                    : quizzesCount++
+            {problems
+              .filter((problem) => {
+                console.log(problem.type);
+                if (filterType === 'all') return true;
+                return problem.type === filterType;
+              })
+              .sort((a, b) => {
+                if (sortBy === 'most-solved') {
+                  console.log(b.solvingUsers.length);
+                  console.log(a.solvingUsers.length);
+                  return b.solvingUsers.length - a.solvingUsers.length;
                 }
-                toggleModal={() => setModal(!modal)}
-                setModalData={setModalData}
-              />
-            ))}
+                if (sortBy === 'least-solved') {
+                  console.log(b.solvingUsers.length);
+                  console.log(a.solvingUsers.length);
+                  return a.solvingUsers.length - b.solvingUsers.length;
+                }
+                return 0; // No sorting by default
+              })
+              .map((problem, index) => (
+                <MaterialItem
+                  key={problem._id}
+                  problem={problem}
+                  userExp={user.exp}
+                  module={moduleName}
+                  index={
+                    problem.type === 'Problem'
+                      ? problemsCount++
+                      : problem.type === 'Lesson'
+                      ? lessonsCount++
+                      : quizzesCount++
+                  }
+                  toggleModal={() => setModal(!modal)}
+                  setModalData={setModalData}
+                />
+              ))}
           </div>
         </div>
       </div>
