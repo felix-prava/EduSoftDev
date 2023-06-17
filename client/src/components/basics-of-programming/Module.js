@@ -40,9 +40,18 @@ const Module = ({
   const addProblemLabel = modulesTranslations.addProblem[language];
   const addLessonLabel = modulesTranslations.addLesson[language];
   const addQuizLabel = modulesTranslations.addQuiz[language];
+  const allLabel = modulesTranslations.all[language];
+  const problemsLabel = modulesTranslations.problems[language];
+  const lessonsLabel = modulesTranslations.lessons[language];
+  const quizzesLabel = modulesTranslations.quizzes[language];
+  const sortByLabel = modulesTranslations.sortBy[language];
+  const mostSolvedLabel = modulesTranslations.mostSolved[language];
+  const leastSolvedLabel = modulesTranslations.leastSolved[language];
 
   const [modal, setModal] = useState(false);
   const [modalData, setModalData] = useState([]);
+  const [filterType, setFilterType] = useState('all'); // Default filter option is 'all'
+  const [sortBy, setSortBy] = useState(''); // Default sorting option is empty
 
   let lessonsCount = 0;
   let problemsCount = 0;
@@ -107,53 +116,97 @@ const Module = ({
             </p>
           </div>
           {user && (user.role === 'admin' || user.role === 'mentor') && (
-            <div className='mr-8 mb-4 float-right'>
-              <div className='mt-6 flex space-x-3 '>
-                <Link to={`/modules/${moduleName}/create-problem`}>
-                  <button
-                    type='button'
-                    className='inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
+            <div>
+              <div className='mr-8 mb-4 flex justify-end'>
+                <div className='mt-6 flex space-x-3'>
+                  <Link to={`/modules/${moduleName}/create-problem`}>
+                    <button
+                      type='button'
+                      className='inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
+                    >
+                      {addProblemLabel}
+                    </button>
+                  </Link>
+                  <Link to={`/modules/${moduleName}/create-lesson`}>
+                    <button
+                      type='button'
+                      className='inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
+                    >
+                      {addLessonLabel}
+                    </button>
+                  </Link>
+                  <Link to={`/modules/${moduleName}/create-quiz`}>
+                    <button
+                      type='button'
+                      className='inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
+                    >
+                      {addQuizLabel}
+                    </button>
+                  </Link>
+                </div>
+              </div>
+              <div className='mr-8 flex justify-end'>
+                <div className='flex space-x-3'>
+                  <select
+                    value={filterType}
+                    onChange={(e) => setFilterType(e.target.value)}
+                    className='inline-flex items-center pl-4 pr-7 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
                   >
-                    {addProblemLabel}
-                  </button>
-                </Link>
-                <Link to={`/modules/${moduleName}/create-lesson`}>
-                  <button
-                    type='button'
-                    className='inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
+                    <option value='all'>{allLabel}</option>
+                    <option value='Problem'>{problemsLabel}</option>
+                    <option value='Lesson'>{lessonsLabel}</option>
+                    <option value='Quiz'>{quizzesLabel}</option>
+                  </select>
+                  <select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                    className='inline-flex items-center pl-4 pr-7 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
                   >
-                    {addLessonLabel}
-                  </button>
-                </Link>
-                <Link to={`/modules/${moduleName}/create-quiz`}>
-                  <button
-                    type='button'
-                    className='inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-cyan-600 hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500'
-                  >
-                    {addQuizLabel}
-                  </button>
-                </Link>
+                    <option value=''>{sortByLabel}</option>
+                    <option value='most-solved'>{mostSolvedLabel}</option>
+                    <option value='least-solved'>{leastSolvedLabel}</option>
+                  </select>
+                </div>
               </div>
             </div>
           )}
-          <div className='mt-24 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none'>
-            {problems.map((problem, index) => (
-              <MaterialItem
-                key={problem._id}
-                problem={problem}
-                userExp={user.exp}
-                module={moduleName}
-                index={
-                  problem.type === 'Problem'
-                    ? problemsCount++
-                    : problem.type === 'Lesson'
-                    ? lessonsCount++
-                    : quizzesCount++
+          <div className='mt-6 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none'>
+            {problems
+              .filter((problem) => {
+                console.log(problem.type);
+                if (filterType === 'all') return true;
+                return problem.type === filterType;
+              })
+              .sort((a, b) => {
+                if (sortBy === 'most-solved') {
+                  console.log(b.solvingUsers.length);
+                  console.log(a.solvingUsers.length);
+                  return b.solvingUsers.length - a.solvingUsers.length;
                 }
-                toggleModal={() => setModal(!modal)}
-                setModalData={setModalData}
-              />
-            ))}
+                if (sortBy === 'least-solved') {
+                  console.log(b.solvingUsers.length);
+                  console.log(a.solvingUsers.length);
+                  return a.solvingUsers.length - b.solvingUsers.length;
+                }
+                return 0; // No sorting by default
+              })
+              .map((problem, index) => (
+                <MaterialItem
+                  key={problem._id}
+                  problem={problem}
+                  userExp={user.exp}
+                  module={moduleName}
+                  index={
+                    problem.type === 'Problem'
+                      ? problemsCount++
+                      : problem.type === 'Lesson'
+                      ? lessonsCount++
+                      : quizzesCount++
+                  }
+                  toggleModal={() => setModal(!modal)}
+                  setModalData={setModalData}
+                />
+              ))}
           </div>
         </div>
       </div>
@@ -162,6 +215,7 @@ const Module = ({
           modalData={modalData}
           hideModal={() => setModal(false)}
           action={() => deleteLearningMaterial(modalData[2], modalData[3])}
+          language={language}
         />
       )}
     </Fragment>
