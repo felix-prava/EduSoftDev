@@ -7,7 +7,16 @@ import { imageSource } from '../../utils/helpers';
 
 const MaterialItem = ({
   auth: { user },
-  problem: { _id, name, type, expNeeded, expGained, expMax, shortDescription },
+  problem: {
+    _id,
+    name,
+    type,
+    expNeeded,
+    expGained,
+    expMax,
+    shortDescription,
+    solvingUsers,
+  },
   userExp,
   index,
   module,
@@ -84,6 +93,9 @@ const MaterialItem = ({
                           E.G. {expGained || 'N/A'}
                         </p>
                         <p className='text-rose-600'>E.M. {expMax || 'N/A'}</p>
+                        <p className='text-[#c026d3]'>
+                          S.U. {solvingUsers.length}
+                        </p>
                       </div>
                     )}
                   </div>
