@@ -56,7 +56,7 @@ export const universalTranslations = {
   },
   quizzesCompleted: {
     en: 'quizzes completed',
-    ro: 'quizz-uri completate',
+    ro: 'quiz-uri completate',
   },
   expPoints: {
     en: 'exp points',
@@ -440,7 +440,7 @@ export const modulesTranslations = {
   },
   quizzes: {
     en: 'Quizzes',
-    ro: 'Quizz-uri',
+    ro: 'Quiz-uri',
   },
   sortBy: {
     en: 'Sort by',

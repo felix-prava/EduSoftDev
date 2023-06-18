@@ -7,6 +7,7 @@ import Password from '../settings/Password';
 import Appearance from '../settings/Appearance';
 import Emails from '../settings/Emails';
 import { settingsTranslations } from './Translations';
+import PageNotFound from '../layout/PageNotFound';
 
 const SettingsSidebar = ({ auth: { user } }) => {
   const menuItemClass =
@@ -23,8 +24,8 @@ const SettingsSidebar = ({ auth: { user } }) => {
   const accountLabel = settingsTranslations.account[language];
   const passwordLabel = settingsTranslations.password[language];
   const appearanceLabel = settingsTranslations.appearance[language];
-  const notificationsLabel = settingsTranslations.notifications[language];
-  const planAndBillingLabel = settingsTranslations.planAndBilling[language];
+  //const notificationsLabel = settingsTranslations.notifications[language];
+  //const planAndBillingLabel = settingsTranslations.planAndBilling[language];
 
   let location = useLocation();
   let settingsMenu = null;
@@ -61,7 +62,11 @@ const SettingsSidebar = ({ auth: { user } }) => {
       settingsMenu = 'Error';
   }
 
-  return (
+  return settingsMenu === 'Error' ? (
+    <Fragment>
+      <PageNotFound />{' '}
+    </Fragment>
+  ) : (
     <Fragment>
       <div className='h-full'>
         <main className='max-w-7xl mx-auto pb-10 lg:py-12 lg:px-8'>
@@ -191,6 +196,7 @@ const SettingsSidebar = ({ auth: { user } }) => {
                   <span className='truncate'> Email </span>
                 </Link>
 
+                {/*
                 <Link
                   to='/settings/notifications'
                   className={
@@ -250,6 +256,7 @@ const SettingsSidebar = ({ auth: { user } }) => {
                   </svg>
                   <span className='truncate'> {planAndBillingLabel} </span>
                 </Link>
+                */}
               </nav>
             </aside>
             {settingsMenu}
