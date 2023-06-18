@@ -370,6 +370,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
             </div>
             {!loading && isAuthenticated && (
               <div className='absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0'>
+                {/*
                 <div
                   id='notifications-bell'
                   onClick={toggleNotificationsDropdown}
@@ -379,7 +380,6 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
                     className='bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'
                   >
                     <span className='sr-only'>View notifications</span>
-                    {/*<!-- Heroicon name: outline/bell -->*/}
 
                     <svg
                       className='h-6 w-6'
@@ -398,6 +398,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
                     </svg>
                   </button>
                 </div>
+                */}
 
                 {/*<!-- Profile dropdown -->*/}
                 <div className='ml-3 relative'>
@@ -420,7 +421,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
                       ></img>
                     </button>
                   </div>
-
+                  {/*
                   <div id='notifications-dropdown-options' className='hidden'>
                     <div
                       className='origin-top-right absolute right-12 mt-2 ml-8 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50'
@@ -429,7 +430,6 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
                       aria-labelledby='user-menu-button'
                       tabIndex='-1'
                     >
-                      {/*<!-- Active: "bg-gray-100", Not Active: "" -->*/}
                       <Link
                         to='#'
                         className='block px-4 py-2 text-sm text-gray-700'
@@ -459,6 +459,7 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
                       </Link>
                     </div>
                   </div>
+                  */}
 
                   <div id='profile-dropdown-options' className='hidden'>
                     <div
