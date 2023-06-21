@@ -164,7 +164,11 @@ router.post(
           ).length > 0
         )
       ) {
-        user.solvedProblems.unshift({ problem: req.params.problem_id });
+        user.solvedProblems.unshift({
+          problem: req.params.problem_id,
+          name: problem.name,
+          module: problem.module,
+        });
         const maxExp = problem.expMax;
         const gainedExp = user.exp + problem.expGained;
         user.exp = gainedExp > maxExp ? maxExp : gainedExp;

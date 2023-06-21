@@ -149,7 +149,7 @@ const Dashboard = ({
                     <div className='bg-gray-50 px-5 py-3'>
                       <div className='text-sm'>
                         <Link
-                          to='#'
+                          to='/solved-problems'
                           className='font-medium text-cyan-700 hover:text-cyan-900'
                         >
                           {viewAllLabel}
@@ -198,7 +198,7 @@ const Dashboard = ({
                     <div className='bg-gray-50 px-5 py-3'>
                       <div className='text-sm'>
                         <Link
-                          to='#'
+                          to='/lessons-learned'
                           className='font-medium text-cyan-700 hover:text-cyan-900'
                         >
                           {viewAllLabel}
@@ -245,7 +245,7 @@ const Dashboard = ({
                     <div className='bg-gray-50 px-5 py-3'>
                       <div className='text-sm'>
                         <Link
-                          to='#'
+                          to='/solved-quizzes'
                           className='font-medium text-cyan-700 hover:text-cyan-900'
                         >
                           {viewAllLabel}
