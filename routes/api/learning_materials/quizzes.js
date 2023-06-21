@@ -189,6 +189,11 @@ router.post('/:quiz_id/quiz-solved', auth, async (req, res) => {
       const maxExp = quiz.expMax;
       const gainedExp = user.exp + quiz.expGained;
       user.exp = gainedExp > maxExp ? maxExp : gainedExp;
+      const lastLearningMaterial = {
+        material: req.params.quiz_id,
+        module: quiz.module,
+      };
+      user.lastLearningMaterial = lastLearningMaterial;
     }
 
     // Check if the quiz has already been solved by the user

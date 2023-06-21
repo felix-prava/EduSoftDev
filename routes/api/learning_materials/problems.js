@@ -172,6 +172,11 @@ router.post(
         const maxExp = problem.expMax;
         const gainedExp = user.exp + problem.expGained;
         user.exp = gainedExp > maxExp ? maxExp : gainedExp;
+        const lastLearningMaterial = {
+          material: req.params.problem_id,
+          module: problem.module,
+        };
+        user.lastLearningMaterial = lastLearningMaterial;
       }
 
       // Check if the problem has already been solved by the user
