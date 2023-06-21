@@ -245,7 +245,7 @@ const Dashboard = ({
                     <div className='bg-gray-50 px-5 py-3'>
                       <div className='text-sm'>
                         <Link
-                          to='/solved-quizzes'
+                          to='/completed-quizzes'
                           className='font-medium text-cyan-700 hover:text-cyan-900'
                         >
                           {viewAllLabel}

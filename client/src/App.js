@@ -78,7 +78,7 @@ const App = () => {
       path: '/lessons-learned',
     },
     {
-      path: '/solved-quizzes',
+      path: '/completed-quizzes',
     },
   ];
 
