@@ -339,7 +339,11 @@ export const dashboardTranslations = {
   },
   overview: {
     en: 'Overview',
-    ro: 'Prezentare generala',
+    ro: 'Prezentare generală',
+  },
+  view: {
+    en: 'View',
+    ro: 'Vezi',
   },
   viewAll: {
     en: 'View all',
@@ -352,6 +356,18 @@ export const dashboardTranslations = {
   score: {
     en: 'Score',
     ro: 'Scor',
+  },
+  noSolvedProblemsMessage: {
+    en: 'No solved problems were found',
+    ro: 'Nu s-au găsit probleme rezolvate',
+  },
+  noLearnedLessonsMessage: {
+    en: 'No learned lessons were found',
+    ro: 'Nu s-au găsit lecții invățate',
+  },
+  noSolvedQuizzesMessage: {
+    en: 'No completed quizzes were found',
+    ro: 'Nu s-au găsit quiz-uri completate',
   },
 };
 

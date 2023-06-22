@@ -23,7 +23,7 @@ const Dashboard = ({
 
   const language = user ? user.language : 'en';
   const helloLabel = dashboardTranslations.hello[language];
-  const verifiedAccountLabel = dashboardTranslations.verifiedAccount[language];
+  // const verifiedAccountLabel = dashboardTranslations.verifiedAccount[language];
   const continueLearningLabel =
     dashboardTranslations.continueLearning[language];
   const solvedProblemsLabel = universalTranslations.solvedProblems[language];
@@ -70,9 +70,10 @@ const Dashboard = ({
                             {helloLabel}, {user.lastName} {user.firstName}
                           </h1>
                         </div>
+                        {/*
                         <dl className='mt-6 flex flex-col sm:ml-3 sm:mt-1 sm:flex-row sm:flex-wrap'>
                           <dd className='mt-3 flex items-center text-sm text-gray-500 font-medium sm:mr-6 sm:mt-0 capitalize'>
-                            {/* Heroicon name: solid/check-circle */}
+                             Heroicon name: solid/check-circle 
                             <svg
                               className='flex-shrink-0 mr-1.5 h-5 w-5 text-green-400'
                               xmlns='http://www.w3.org/2000/svg'
@@ -89,6 +90,7 @@ const Dashboard = ({
                             {verifiedAccountLabel}
                           </dd>
                         </dl>
+                        */}
                       </div>
                     </div>
                   </div>
@@ -149,7 +151,7 @@ const Dashboard = ({
                     <div className='bg-gray-50 px-5 py-3'>
                       <div className='text-sm'>
                         <Link
-                          to='#'
+                          to='/solved-problems'
                           className='font-medium text-cyan-700 hover:text-cyan-900'
                         >
                           {viewAllLabel}
@@ -198,7 +200,7 @@ const Dashboard = ({
                     <div className='bg-gray-50 px-5 py-3'>
                       <div className='text-sm'>
                         <Link
-                          to='#'
+                          to='/lessons-learned'
                           className='font-medium text-cyan-700 hover:text-cyan-900'
                         >
                           {viewAllLabel}
@@ -245,7 +247,7 @@ const Dashboard = ({
                     <div className='bg-gray-50 px-5 py-3'>
                       <div className='text-sm'>
                         <Link
-                          to='#'
+                          to='/completed-quizzes'
                           className='font-medium text-cyan-700 hover:text-cyan-900'
                         >
                           {viewAllLabel}

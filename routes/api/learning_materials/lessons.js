@@ -118,7 +118,11 @@ router.post('/:lesson_id/lesson-learned', auth, async (req, res) => {
         ).length > 0
       )
     ) {
-      user.lessonsLearned.unshift({ lesson: req.params.lesson_id });
+      user.lessonsLearned.unshift({
+        lesson: req.params.lesson_id,
+        name: lesson.name,
+        module: lesson.module,
+      });
       const maxExp = lesson.expMax;
       const gainedExp = user.exp + lesson.expGained;
       user.exp = gainedExp > maxExp ? maxExp : gainedExp;
