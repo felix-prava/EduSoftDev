@@ -122,8 +122,13 @@ const UserSchema = new mongoose.Schema({
     },
   ],
   lastLearningMaterial: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'learning_material',
+    material: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'learning_material',
+    },
+    module: {
+      type: String,
+    },
   },
   date: {
     type: Date,

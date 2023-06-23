@@ -126,6 +126,11 @@ router.post('/:lesson_id/lesson-learned', auth, async (req, res) => {
       const maxExp = lesson.expMax;
       const gainedExp = user.exp + lesson.expGained;
       user.exp = gainedExp > maxExp ? maxExp : gainedExp;
+      const lastLearningMaterial = {
+        material: req.params.lesson_id,
+        module: lesson.module,
+      };
+      user.lastLearningMaterial = lastLearningMaterial;
     }
 
     // Check if the lesson has already been completed by the user

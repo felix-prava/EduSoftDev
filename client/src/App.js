@@ -73,12 +73,15 @@ const App = () => {
   const routes = [
     {
       path: '/solved-problems',
+      key: 'solved-problems-path',
     },
     {
       path: '/lessons-learned',
+      key: 'lessons-learned-path',
     },
     {
       path: '/completed-quizzes',
+      key: 'completed-quizzes-path',
     },
   ];
 
@@ -86,6 +89,7 @@ const App = () => {
     <Route
       exact
       path={route.path}
+      key={route.key}
       element={
         <PrivateRoute>
           <SolvedMaterials />
