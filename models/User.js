@@ -58,6 +58,12 @@ const UserSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'learning_material',
       },
+      name: {
+        type: String,
+      },
+      module: {
+        type: String,
+      },
       date: {
         type: Date,
         default: Date.now,
@@ -70,6 +76,12 @@ const UserSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'learning_material',
       },
+      name: {
+        type: String,
+      },
+      module: {
+        type: String,
+      },
       date: {
         type: Date,
         default: Date.now,
@@ -81,6 +93,12 @@ const UserSchema = new mongoose.Schema({
       quiz: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'learning_material',
+      },
+      name: {
+        type: String,
+      },
+      module: {
+        type: String,
       },
       date: {
         type: Date,
@@ -104,8 +122,13 @@ const UserSchema = new mongoose.Schema({
     },
   ],
   lastLearningMaterial: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'learning_material',
+    material: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'learning_material',
+    },
+    module: {
+      type: String,
+    },
   },
   date: {
     type: Date,

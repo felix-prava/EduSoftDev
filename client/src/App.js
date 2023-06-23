@@ -14,6 +14,7 @@ import AboutUs from './components/layout/AboutUs';
 
 // Dashboard
 import Dashboard from './components/dashboard/Dashboard';
+import SolvedMaterials from './components/dashboard/SolvedMaterials';
 
 // Routing
 import PrivateRoute from './components/routing/PrivateRoute';
@@ -69,6 +70,34 @@ const App = () => {
     store.dispatch(loadUser());
   }, []);
 
+  const routes = [
+    {
+      path: '/solved-problems',
+      key: 'solved-problems-path',
+    },
+    {
+      path: '/lessons-learned',
+      key: 'lessons-learned-path',
+    },
+    {
+      path: '/completed-quizzes',
+      key: 'completed-quizzes-path',
+    },
+  ];
+
+  const generatedRoutes = routes.map((route) => (
+    <Route
+      exact
+      path={route.path}
+      key={route.key}
+      element={
+        <PrivateRoute>
+          <SolvedMaterials />
+        </PrivateRoute>
+      }
+    />
+  ));
+
   return (
     <Provider store={store}>
       <Router>
@@ -91,6 +120,7 @@ const App = () => {
                 </PrivateRoute>
               }
             />
+            <>{generatedRoutes}</>
 
             {/* Profiles */}
             <Route
