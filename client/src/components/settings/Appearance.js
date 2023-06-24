@@ -35,7 +35,7 @@ const Appearance = ({ auth: { user }, updateUser }) => {
     );
     if (res === 0) {
       localStorage.setItem('esdLanguage', language);
-      setLanguage(localStorage.esdLanguage);
+      setLanguage(language);
     }
   };
 
