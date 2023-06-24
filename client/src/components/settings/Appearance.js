@@ -2,33 +2,41 @@ import React, { Fragment, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { updateUser } from '../../actions/auth';
+import setLanguage from '../../utils/setLanguage';
 import {
   settingsTranslations,
   universalTranslations,
 } from '../layout/Translations';
 
 const Appearance = ({ auth: { user }, updateUser }) => {
-  const [language, setLanguage] = useState('');
+  const [language, setLocalLanguage] = useState('');
 
   const userLanguage = user ? user.language : 'en';
   const selectLanguageLabel = settingsTranslations.selectLanguage[userLanguage];
   const languageLabel = settingsTranslations.language[userLanguage];
-  const languageUpdatedMessage =
-    settingsTranslations.languageUpdated[userLanguage];
+  const languageUpdatedMessage = settingsTranslations.languageUpdated[language];
   const saveButtonLabel = universalTranslations.saveButton[userLanguage];
 
   useEffect(() => {
     if (user) {
-      setLanguage(user.language);
+      setLocalLanguage(user.language);
     }
   }, [user]);
 
   const onChange = (e) => {
-    setLanguage(e.target.value);
+    setLocalLanguage(e.target.value);
   };
 
   const updateLanguage = async () => {
-    await updateUser({ language }, user._id, languageUpdatedMessage);
+    const res = await updateUser(
+      { language },
+      user._id,
+      languageUpdatedMessage
+    );
+    if (res === 0) {
+      localStorage.setItem('esdLanguage', language);
+      setLanguage(localStorage.esdLanguage);
+    }
   };
 
   return (

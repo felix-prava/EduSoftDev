@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { setAlert } from './alert';
 import setAuthToken from '../utils/setAuthToken';
+import setLanguage from '../utils/setLanguage';
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
@@ -17,6 +18,9 @@ import {
 export const loadUser = () => async (dispatch) => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
+  }
+  if (localStorage.esdLanguage) {
+    setLanguage(localStorage.esdLanguage);
   }
 
   try {
