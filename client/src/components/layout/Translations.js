@@ -355,7 +355,7 @@ export const dashboardTranslations = {
   },
   continueLearning: {
     en: 'Continue Learning',
-    ro: 'Continuă unde ai ramas',
+    ro: 'Continuă unde ai rămas',
   },
   overview: {
     en: 'Overview',
