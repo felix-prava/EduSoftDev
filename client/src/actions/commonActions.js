@@ -1,11 +1,12 @@
 import axios from 'axios';
+import { commonActionsTranslations } from './translations';
+import { setAlert } from './alert';
 import {
   ADD_ARTICLE_COMMENT,
   ADD_LEARNING_MATERIAL_COMMENT,
   REMOVE_ARTICLE_COMMENT,
   REMOVE_LEARNING_MATERIAL_COMMENT,
 } from './types';
-import { setAlert } from './alert';
 
 // Add a comment to a post or to a learning material
 export const addComment =
@@ -34,7 +35,15 @@ export const addComment =
         payload: res.data,
       });
 
-      dispatch(setAlert('Comment Added', 'success', 3000, false));
+      const language = localStorage.esdLanguage || 'en';
+      dispatch(
+        setAlert(
+          commonActionsTranslations.commentAdded[language],
+          'success',
+          3000,
+          false
+        )
+      );
     } catch (err) {
       const errors = err.response.data.errors;
       if (errors) {
@@ -64,7 +73,15 @@ export const deleteComment =
         payload: commentId,
       });
 
-      dispatch(setAlert('Comment Deleted', 'success', 3000, false));
+      const language = localStorage.esdLanguage || 'en';
+      dispatch(
+        setAlert(
+          commonActionsTranslations.commentDeleted[language],
+          'success',
+          3000,
+          false
+        )
+      );
     } catch (err) {
       const errors = err.response.data.errors;
       if (errors) {

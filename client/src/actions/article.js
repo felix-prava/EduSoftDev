@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { setAlert } from './alert';
+import { articleTranslations } from './translations';
 import {
   GET_ARTICLES,
   GET_ARTICLE,
@@ -106,7 +107,11 @@ export const deleteArticle =
       if (redirectUser) {
         navigate('/articles');
       }
-      dispatch(setAlert('Article Deleted', 'success'));
+
+      const language = localStorage.esdLanguage || 'en';
+      dispatch(
+        setAlert(articleTranslations.articleDeleted[language], 'success')
+      );
     } catch (err) {
       dispatch({
         type: ARTICLE_ERROR,
@@ -130,7 +135,9 @@ export const addArticle = (formData) => async (dispatch) => {
       type: ADD_ARTICLE,
       payload: res.data,
     });
-    dispatch(setAlert('Article Created', 'success'));
+
+    const language = localStorage.esdLanguage || 'en';
+    dispatch(setAlert(articleTranslations.articleCreated[language], 'success'));
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -154,7 +161,9 @@ export const updateArticle = (formData, articleId) => async (dispatch) => {
       type: UPDATE_ARTICLE,
       payload: res.data,
     });
-    dispatch(setAlert('Article Updated', 'success'));
+
+    const language = localStorage.esdLanguage || 'en';
+    dispatch(setAlert(articleTranslations.articleUpdated[language], 'success'));
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
