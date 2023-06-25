@@ -213,11 +213,11 @@ export const myProfileTranslations = {
   },
   addExperience: {
     en: 'Add Experience',
-    ro: 'Adauga Experiență',
+    ro: 'Adaugă Experiență',
   },
   addEducation: {
     en: 'Add Education',
-    ro: 'Adauga Educație',
+    ro: 'Adaugă Educație',
   },
   experience: {
     en: 'Experience',
@@ -225,7 +225,7 @@ export const myProfileTranslations = {
   },
   noExperience: {
     en: 'You have not added any professional experience yet.',
-    ro: 'Inca nu ai adaugat nimic la profilul de experiență.',
+    ro: 'Incă nu ai adăugat nimic la profilul de experiență.',
   },
   education: {
     en: 'Education',
@@ -233,7 +233,7 @@ export const myProfileTranslations = {
   },
   noEducation: {
     en: 'You have not added any education yet.',
-    ro: 'Incă nu ai adaugat nimic la profilul de educație.',
+    ro: 'Incă nu ai adăugat nimic la profilul de educație.',
   },
   githubRepos: {
     en: 'Github Repos',
@@ -843,6 +843,18 @@ export const settingsTranslations = {
   language: {
     en: 'Language',
     ro: 'Limba',
+  },
+  usernameMustBeFilled: {
+    en: 'Username must be filled',
+    ro: 'Username-ul trebuie completat',
+  },
+  usernameUpdated: {
+    en: 'Username Updated',
+    ro: 'Username Actualizat',
+  },
+  thisIsCurrentUsername: {
+    en: 'This is your current username',
+    ro: 'Aceste este username-ul tău curent',
   },
 };
 
