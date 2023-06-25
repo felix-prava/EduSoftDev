@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { setAlert } from './alert';
+import { profileTranslations } from './translations';
 import {
   GET_PROFILE,
   GET_PROFILES,
@@ -84,9 +85,11 @@ export const createUpdateProfile =
         payload: res.data,
       });
 
-      dispatch(
-        setAlert(edit ? 'Profile Updated' : 'Profile Created', 'success')
-      );
+      const language = localStorage.esdLanguage || 'en';
+      const alertMessage = edit
+        ? profileTranslations.profilUpdated[language]
+        : profileTranslations.profilCreated[language];
+      dispatch(setAlert(alertMessage, 'success'));
 
       if (!edit) {
         navigate('/home');
@@ -125,7 +128,16 @@ export const addExperience =
         payload: res.data,
       });
 
-      dispatch(setAlert('Experience Added', 'success'));
+      const language = localStorage.esdLanguage || 'en';
+      dispatch(
+        setAlert(
+          profileTranslations.experienceAdded[language],
+          'success',
+          3000,
+          true,
+          true
+        )
+      );
 
       navigate('/my-profile');
     } catch (err) {
@@ -162,7 +174,16 @@ export const addEducation =
         payload: res.data,
       });
 
-      dispatch(setAlert('Education Added', 'success'));
+      const language = localStorage.esdLanguage || 'en';
+      dispatch(
+        setAlert(
+          profileTranslations.educationAdded[language],
+          'success',
+          3000,
+          true,
+          true
+        )
+      );
 
       navigate('/my-profile');
     } catch (err) {
@@ -190,7 +211,10 @@ export const deleteExperience = (expId, userId) => async (dispatch) => {
       payload: res.data,
     });
 
-    dispatch(setAlert('Experience Removed', 'success'));
+    const language = localStorage.esdLanguage || 'en';
+    dispatch(
+      setAlert(profileTranslations.experienceRemoved[language], 'success')
+    );
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
@@ -211,7 +235,10 @@ export const deleteEducation = (expId, userId) => async (dispatch) => {
       payload: res.data,
     });
 
-    dispatch(setAlert('Education Removed', 'success'));
+    const language = localStorage.esdLanguage || 'en';
+    dispatch(
+      setAlert(profileTranslations.educationRemoved[language], 'success')
+    );
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
@@ -227,6 +254,7 @@ export const deleteAccount =
     try {
       await axios.delete(`/api/profiles/${userId}`);
 
+      const language = localStorage.esdLanguage || 'en';
       if (ownUserAccount) {
         dispatch({
           type: CLEAR_PROFILE,
@@ -237,7 +265,7 @@ export const deleteAccount =
 
         dispatch(
           setAlert(
-            'Your account has been permanantly deleted',
+            profileTranslations.yourAccountWasDeleted[language],
             'error',
             6000,
             true,
@@ -248,7 +276,7 @@ export const deleteAccount =
       }
       dispatch(
         setAlert(
-          'User account has been permanantly deleted',
+          profileTranslations.userAccountWasDeleted[language],
           'error',
           6000,
           true,

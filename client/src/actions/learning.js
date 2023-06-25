@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { setAlert } from './alert';
 import { loadUser } from './auth';
+import { learningTranslations } from './translations';
 import {
   GET_MODULE_PROBLEMS,
   GET_LEARNING_MATERIAL,
@@ -16,6 +17,33 @@ import {
   REMOVE_ANSWER,
   LEARNING_ERROR,
 } from './types';
+
+function setAlertMessage(materialType, action) {
+  const language = localStorage.esdLanguage || 'en';
+  materialType = materialType.charAt(0).toUpperCase() + materialType.slice(1);
+  if (action === 'created') {
+    if (materialType === 'Problem')
+      return learningTranslations.problemCreated[language];
+    if (materialType === 'Lesson')
+      return learningTranslations.lessonCreated[language];
+    if (materialType === 'Quiz')
+      return learningTranslations.quizCreated[language];
+  } else if (action === 'updated') {
+    if (materialType === 'Problem')
+      return learningTranslations.problemUpdated[language];
+    if (materialType === 'Lesson')
+      return learningTranslations.lessonUpdated[language];
+    if (materialType === 'Quiz')
+      return learningTranslations.quizUpdated[language];
+  } else if (action === 'deleted') {
+    if (materialType === 'Problem')
+      return learningTranslations.problemDeleted[language];
+    if (materialType === 'Lesson')
+      return learningTranslations.lessonDeleted[language];
+    if (materialType === 'Quiz')
+      return learningTranslations.quizDeleted[language];
+  }
+}
 
 // Get problems, quizzes and lessons by module
 export const getAllMaterials = (moduleName) => async (dispatch) => {
@@ -70,11 +98,16 @@ export const addLearningMaterial =
         formData,
         config
       );
-      materialType =
-        materialType.charAt(0).toUpperCase() + materialType.slice(1);
 
       navigate(`/modules/${moduleName}`);
-      dispatch(setAlert(`${materialType} Created`, 'success', 5500, true));
+      dispatch(
+        setAlert(
+          setAlertMessage(materialType, 'created'),
+          'success',
+          5500,
+          true
+        )
+      );
     } catch (err) {
       const errors = err.response.data.errors;
       if (errors) {
@@ -104,15 +137,20 @@ export const updateLearningMaterial =
         formData,
         config
       );
-      materialType =
-        materialType.charAt(0).toUpperCase() + materialType.slice(1);
 
       dispatch({
         type: UPDATE_LEARNING_MATERIAL,
         payload: res.data,
       });
 
-      dispatch(setAlert(`${materialType} Updated`, 'success', 5500, true));
+      dispatch(
+        setAlert(
+          setAlertMessage(materialType, 'updated'),
+          'success',
+          5500,
+          true
+        )
+      );
     } catch (err) {
       const errors = err.response.data.errors;
       if (errors) {
@@ -131,7 +169,15 @@ export const deleteLearningMaterial =
         type: DELETE_LEARNING_MATERIAL,
         payload: learningMaterialId,
       });
-      dispatch(setAlert(`${materialType} Deleted`, 'success', 4500, true));
+
+      dispatch(
+        setAlert(
+          setAlertMessage(materialType, 'deleted'),
+          'success',
+          4500,
+          true
+        )
+      );
     } catch (err) {
       dispatch({
         type: LEARNING_ERROR,
@@ -159,7 +205,16 @@ export const addExample = (problemId, formData) => async (dispatch) => {
       type: ADD_EXAMPLE,
       payload: res.data,
     });
-    dispatch(setAlert('Example Added', 'success', 2000, false));
+
+    const language = localStorage.esdLanguage || 'en';
+    dispatch(
+      setAlert(
+        learningTranslations.exampleAdded[language],
+        'success',
+        2000,
+        false
+      )
+    );
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -187,7 +242,11 @@ export const addTest = (problemId, formData) => async (dispatch) => {
       type: ADD_TEST,
       payload: res.data,
     });
-    dispatch(setAlert('Test Added', 'success', 2000, false));
+
+    const language = localStorage.esdLanguage || 'en';
+    dispatch(
+      setAlert(learningTranslations.testAdded[language], 'success', 2000, false)
+    );
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -215,7 +274,11 @@ export const addHint = (problemId, formData) => async (dispatch) => {
       type: ADD_HINT,
       payload: res.data,
     });
-    dispatch(setAlert('Hint Added', 'success', 2000, false));
+
+    const language = localStorage.esdLanguage || 'en';
+    dispatch(
+      setAlert(learningTranslations.hintAdded[language], 'success', 2000, false)
+    );
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -243,7 +306,16 @@ export const addAnswer = (quizId, answerType, formData) => async (dispatch) => {
       type: ADD_ANSWER,
       payload: { answers: res.data, answerType },
     });
-    dispatch(setAlert('Answer Added', 'success', 2000, false));
+
+    const language = localStorage.esdLanguage || 'en';
+    dispatch(
+      setAlert(
+        learningTranslations.answerAdded[language],
+        'success',
+        2000,
+        false
+      )
+    );
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -263,7 +335,16 @@ export const deleteTest = (problemId, testId) => async (dispatch) => {
       type: REMOVE_TEST,
       payload: testId,
     });
-    dispatch(setAlert('Test Deleted', 'success', 2000, false));
+
+    const language = localStorage.esdLanguage || 'en';
+    dispatch(
+      setAlert(
+        learningTranslations.testDeleted[language],
+        'success',
+        2000,
+        false
+      )
+    );
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -283,7 +364,16 @@ export const deleteExample = (problemId, exampleId) => async (dispatch) => {
       type: REMOVE_EXAMPLE,
       payload: exampleId,
     });
-    dispatch(setAlert('Example Deleted', 'success', 2000, false));
+
+    const language = localStorage.esdLanguage || 'en';
+    dispatch(
+      setAlert(
+        learningTranslations.exampleDeleted[language],
+        'success',
+        2000,
+        false
+      )
+    );
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -303,7 +393,16 @@ export const deleteHint = (problemId, hintId) => async (dispatch) => {
       type: REMOVE_HINT,
       payload: hintId,
     });
-    dispatch(setAlert('Hint Deleted', 'success', 2000, false));
+
+    const language = localStorage.esdLanguage || 'en';
+    dispatch(
+      setAlert(
+        learningTranslations.hintDeleted[language],
+        'success',
+        2000,
+        false
+      )
+    );
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
@@ -324,7 +423,16 @@ export const deleteAnswer =
         type: REMOVE_ANSWER,
         payload: { answerType, answerId },
       });
-      dispatch(setAlert('Answer Deleted', 'success', 2000, false));
+
+      const language = localStorage.esdLanguage || 'en';
+      dispatch(
+        setAlert(
+          learningTranslations.answerDeleted[language],
+          'success',
+          2000,
+          false
+        )
+      );
     } catch (err) {
       const errors = err.response.data.errors;
       if (errors) {
@@ -340,7 +448,15 @@ export const completeLesson = (lessonId) => async (dispatch) => {
       `/api/learning-materials/lessons/${lessonId}/lesson-learned`
     );
 
-    dispatch(setAlert('Lesson Learned', 'success', 3000, true));
+    const language = localStorage.esdLanguage || 'en';
+    dispatch(
+      setAlert(
+        learningTranslations.lessonLearned[language],
+        'success',
+        3000,
+        true
+      )
+    );
     dispatch(loadUser());
     // MAYBE update solvingUsers for this lesson
   } catch (err) {
@@ -366,7 +482,15 @@ export const solveQuiz = (quizId, answers) => async (dispatch) => {
       config
     );
 
-    dispatch(setAlert('Quiz Completed', 'success', 3000, true));
+    const language = localStorage.esdLanguage || 'en';
+    dispatch(
+      setAlert(
+        learningTranslations.quizCompleted[language],
+        'success',
+        3000,
+        true
+      )
+    );
     dispatch(loadUser());
     // TODO MAYBE update solvingUsers for this quiz
   } catch (err) {
@@ -392,7 +516,15 @@ export const solveProblem = (problemId, solution) => async (dispatch) => {
       config
     );
 
-    dispatch(setAlert('Solution Added', 'success', 3000, true));
+    const language = localStorage.esdLanguage || 'en';
+    dispatch(
+      setAlert(
+        learningTranslations.solutionAdded[language],
+        'success',
+        3000,
+        true
+      )
+    );
     dispatch(loadUser());
     // TODO MAYBE update solvingUsers for this problem
   } catch (err) {

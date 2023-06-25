@@ -24,6 +24,7 @@ export default function AuthReducer(state = initialState, action) {
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
       localStorage.setItem('token', payload.token);
+      localStorage.setItem('esdLanguage', payload.language);
       return {
         ...state,
         ...payload,
@@ -46,6 +47,7 @@ export default function AuthReducer(state = initialState, action) {
     case LOGOUT:
     case ACCOUNT_DELETED:
       localStorage.removeItem('token');
+      localStorage.removeItem('esdLanguage');
       return {
         ...state,
         token: null,

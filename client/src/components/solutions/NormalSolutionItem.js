@@ -6,9 +6,11 @@ import {
   displayDate,
   statusClassColour,
   scoreClassColour,
+  translateSolutionStatus,
 } from '../../utils/helpers';
 
 const NormalSolutionItem = ({
+  language,
   solution: { _id, problem, status, score, date },
 }) => {
   return (
@@ -48,9 +50,9 @@ const NormalSolutionItem = ({
             <span
               className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusClassColour(
                 status
-              )} capitalize`}
+              )}`}
             >
-              {status}
+              {translateSolutionStatus(status, language)}
             </span>
           </Link>
         </td>
@@ -69,7 +71,7 @@ const NormalSolutionItem = ({
           </Link>
         </td>
         <td className='px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500'>
-          <time dateTime={date}> {displayDate(date)}</time>
+          <time dateTime={date}> {displayDate(date, language)}</time>
         </td>
       </tr>
     </Fragment>

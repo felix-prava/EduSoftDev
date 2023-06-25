@@ -2,9 +2,16 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { displayDate, statusClassColour } from '../../utils/helpers';
+import {
+  displayDate,
+  statusClassColour,
+  translateSolutionStatus,
+} from '../../utils/helpers';
 
-const SmallSolutionItem = ({ solution: { _id, problem, status, date } }) => {
+const SmallSolutionItem = ({
+  language,
+  solution: { _id, problem, status, date },
+}) => {
   return (
     <Fragment>
       <li id={_id}>
@@ -36,13 +43,13 @@ const SmallSolutionItem = ({ solution: { _id, problem, status, date } }) => {
                     <span
                       className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusClassColour(
                         status
-                      )} capitalize`}
+                      )}`}
                     >
-                      {status}
+                      {translateSolutionStatus(status, language)}
                     </span>
                   </Link>
                 </span>
-                <time dateTime={date}> {displayDate(date)}</time>
+                <time dateTime={date}> {displayDate(date, language)}</time>
               </span>
             </span>
             <svg

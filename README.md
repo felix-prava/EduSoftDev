@@ -1,4 +1,4 @@
-# SoftDev Educational Platform
+# EduSoftDev - Educational Platform
 
 # Objectives:
 

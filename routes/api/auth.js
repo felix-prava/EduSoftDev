@@ -63,10 +63,11 @@ router.post(
           id: user.id,
         },
       };
+      const language = user.language || 'en';
       const jwtSecret = process.env.jwtSecret || config.get('jwtSecret');
       jwt.sign(payload, jwtSecret, { expiresIn: 3600 }, (err, token) => {
         if (err) throw err;
-        res.json({ token });
+        res.json({ token, language });
       });
     } catch (err) {
       res.status(500).send('Server error');

@@ -1,7 +1,10 @@
 import { Fragment } from 'react';
 import Moment from 'react-moment';
 import moment from 'moment';
-import { universalTranslations } from '../components/layout/Translations';
+import {
+  solutionTranslations,
+  universalTranslations,
+} from '../components/layout/Translations';
 
 const LESSONS_IMAGES_COUNT = 2;
 const PROBLEMS_IMAGES_COUNT = 2;
@@ -66,4 +69,25 @@ export const capitalizeWords = (str) => {
     .split(' ')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
+};
+
+export const translateSolutionStatus = (status, language) => {
+  const compilationErrorLabel = solutionTranslations.compilationError[language];
+  const acceptedLabel = solutionTranslations.accepted[language];
+  const incorrectLabel = solutionTranslations.incorrect[language];
+  const pendingLabel = solutionTranslations.pending[language];
+
+  if (status === 'compilation error') {
+    return compilationErrorLabel;
+  }
+  if (status === 'pending') {
+    return pendingLabel;
+  }
+  if (status === 'incorrect') {
+    return incorrectLabel;
+  }
+  if (status === 'accepted') {
+    return acceptedLabel;
+  }
+  return 'N/A';
 };
