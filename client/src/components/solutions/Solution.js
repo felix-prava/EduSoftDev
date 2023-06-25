@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { getSolution } from '../../actions/solution';
 import {
-  statusClassColour,
-  capitalizeWords,
   displayDate,
+  statusClassColour,
+  translateSolutionStatus,
 } from '../../utils/helpers';
 import {
   universalTranslations,
@@ -110,7 +110,7 @@ const Solution = ({
                       true
                     )}`}
                   >
-                    {capitalizeWords(solution.status)}
+                    {translateSolutionStatus(solution.status, language)}
                   </span>
                 </p>
                 <p className='mt-2 mb-6 flex items-baseline gap-x-2'>

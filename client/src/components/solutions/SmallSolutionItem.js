@@ -2,7 +2,11 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { displayDate, statusClassColour } from '../../utils/helpers';
+import {
+  displayDate,
+  statusClassColour,
+  translateSolutionStatus,
+} from '../../utils/helpers';
 
 const SmallSolutionItem = ({
   language,
@@ -39,9 +43,9 @@ const SmallSolutionItem = ({
                     <span
                       className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusClassColour(
                         status
-                      )} capitalize`}
+                      )}`}
                     >
-                      {status}
+                      {translateSolutionStatus(status, language)}
                     </span>
                   </Link>
                 </span>

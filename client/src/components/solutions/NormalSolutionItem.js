@@ -6,6 +6,7 @@ import {
   displayDate,
   statusClassColour,
   scoreClassColour,
+  translateSolutionStatus,
 } from '../../utils/helpers';
 
 const NormalSolutionItem = ({
@@ -49,9 +50,9 @@ const NormalSolutionItem = ({
             <span
               className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusClassColour(
                 status
-              )} capitalize`}
+              )}`}
             >
-              {status}
+              {translateSolutionStatus(status, language)}
             </span>
           </Link>
         </td>

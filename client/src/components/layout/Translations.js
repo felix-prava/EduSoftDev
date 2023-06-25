@@ -843,6 +843,22 @@ export const solutionTranslations = {
     en: 'Success Rate',
     ro: 'Rata de Succes',
   },
+  compilationError: {
+    en: 'Compilation Error',
+    ro: 'Eroare de Compilare',
+  },
+  accepted: {
+    en: 'Accepted',
+    ro: 'Acceptată',
+  },
+  incorrect: {
+    en: 'Incorrect',
+    ro: 'Incorectă',
+  },
+  pending: {
+    en: 'Pending',
+    ro: 'În Așteptare',
+  },
 };
 
 export const aboutUsTranslations = {
