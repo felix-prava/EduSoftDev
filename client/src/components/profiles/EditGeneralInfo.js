@@ -20,28 +20,6 @@ const EditGeneralInfo = ({ auth: { user, loading }, updateUser, setAlert }) => {
 
   const { firstName, lastName, preferredName, birthdate } = formData;
 
-  const updateGeneralInfo = async () => {
-    let validFormData = true;
-    if (firstName === '') {
-      setAlert("First name can't be empty", 'error');
-      validFormData = false;
-    }
-    if (lastName === '') {
-      setAlert("Last name can't be empty", 'error');
-      validFormData = false;
-    }
-    if (!validFormData) return;
-
-    await updateUser(
-      { firstName, lastName, preferredName, birthdate },
-      user._id,
-      'Information Updated'
-    );
-  };
-
-  const onChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-
   const language = user ? user.language : 'en';
   const updateGeneralInfoLabel =
     myProfileTranslations.updateGeneralInfo[language];
@@ -49,8 +27,36 @@ const EditGeneralInfo = ({ auth: { user, loading }, updateUser, setAlert }) => {
   const lastNameLabel = myProfileTranslations.lastName[language];
   const preferredNameLabel = myProfileTranslations.preferredName[language];
   const birthdateLabel = myProfileTranslations.birthdate[language];
+  const informationUpdatedMessage =
+    myProfileTranslations.informationUpdated[language];
+  const firstNameMustBeFilledMessage =
+    myProfileTranslations.firstNameMustBeFilled[language];
+  const lastNameMustBeFilledMessage =
+    myProfileTranslations.lastNameMustBeFilled[language];
   const saveButtonLabel = universalTranslations.saveButton[language];
   const cancelButtonLabel = universalTranslations.cancelButton[language];
+
+  const updateGeneralInfo = async () => {
+    let validFormData = true;
+    if (firstName === '') {
+      setAlert(firstNameMustBeFilledMessage, 'error');
+      validFormData = false;
+    }
+    if (lastName === '') {
+      setAlert(lastNameMustBeFilledMessage, 'error');
+      validFormData = false;
+    }
+    if (!validFormData) return;
+
+    await updateUser(
+      { firstName, lastName, preferredName, birthdate },
+      user._id,
+      informationUpdatedMessage
+    );
+  };
+
+  const onChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   return (
     <Fragment>

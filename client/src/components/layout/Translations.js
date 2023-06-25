@@ -233,7 +233,7 @@ export const myProfileTranslations = {
   },
   noEducation: {
     en: 'You have not added any education yet.',
-    ro: 'Inca nu ai adaugat nimic la profilul de educație.',
+    ro: 'Incă nu ai adaugat nimic la profilul de educație.',
   },
   githubRepos: {
     en: 'Github Repos',
@@ -278,6 +278,26 @@ export const myProfileTranslations = {
   birthdate: {
     en: 'Birth Date',
     ro: 'Zi de Naştere',
+  },
+  informationUpdated: {
+    en: 'Information Updated',
+    ro: 'Informații Actulizate',
+  },
+  firstNameMustBeFilled: {
+    en: 'First name must be filled',
+    ro: 'Prenumele trebuie completat',
+  },
+  lastNameMustBeFilled: {
+    en: 'Last name must be filled',
+    ro: 'Numele de familie trebuie completat',
+  },
+  emailMustBeFilled: {
+    en: 'Email must be filled',
+    ro: 'Email-ul trebuie completat',
+  },
+  usernameMustBeFilled: {
+    en: 'Username must be filled',
+    ro: 'Username-ul trebuie completat',
   },
 };
 
