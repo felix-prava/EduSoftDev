@@ -166,6 +166,7 @@ const Quiz = ({
           user,
           saveButtonLabel,
           leaveCommentLabel,
+          language,
           resourceType: 'learning material',
         }}
       />

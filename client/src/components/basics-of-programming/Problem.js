@@ -209,6 +209,7 @@ const Problem = ({
           user,
           saveButtonLabel,
           leaveCommentLabel,
+          language,
           resourceType: 'learning material',
         }}
       />

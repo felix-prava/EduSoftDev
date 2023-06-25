@@ -77,6 +77,7 @@ const Lesson = ({
           user,
           saveButtonLabel,
           leaveCommentLabel,
+          language,
           resourceType: 'learning material',
         }}
       />

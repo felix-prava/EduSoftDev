@@ -184,7 +184,7 @@ const ArticleItem = ({
             </p>
             <div className='flex space-x-1 text-sm text-gray-500'>
               <time dateTime={date}>
-                {translations.postedOnLabel} {displayDate(date)}
+                {displayDate(date, translations.language)}
               </time>
             </div>
           </div>

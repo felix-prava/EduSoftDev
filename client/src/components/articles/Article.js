@@ -180,7 +180,7 @@ const Article = ({
                 </p>
                 <div className='flex space-x-1 text-sm text-gray-500'>
                   <time dateTime={article.date}>
-                    {postedOnLabel} {displayDate(article.date)}
+                    {postedOnLabel}: {displayDate(article.date, language)}
                   </time>
                 </div>
               </div>
@@ -233,7 +233,7 @@ const Article = ({
                         </Link>
                       </h3>
                       <p className='text-sm text-gray-500'>
-                        {displayDate(comment.date)}
+                        {displayDate(comment.date, language)}
                         {!authLoading &&
                           user !== null &&
                           (user._id === comment.user ||

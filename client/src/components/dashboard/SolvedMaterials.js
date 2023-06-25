@@ -71,7 +71,7 @@ const SolvedMaterials = ({ auth: { user, loading }, getUserSolutions }) => {
                             <p className='mt-1 truncate text-xs leading-5 text-gray-500'>
                               <time dateTime={material.date}>
                                 {' '}
-                                {displayDate(material.date)}
+                                {displayDate(material.date, language)}
                               </time>
                             </p>
                           </div>

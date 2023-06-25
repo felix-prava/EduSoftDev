@@ -9,6 +9,7 @@ import {
 } from '../../utils/helpers';
 
 const NormalSolutionItem = ({
+  language,
   solution: { _id, problem, status, score, date },
 }) => {
   return (
@@ -69,7 +70,7 @@ const NormalSolutionItem = ({
           </Link>
         </td>
         <td className='px-6 py-4 text-right whitespace-nowrap text-sm text-gray-500'>
-          <time dateTime={date}> {displayDate(date)}</time>
+          <time dateTime={date}> {displayDate(date, language)}</time>
         </td>
       </tr>
     </Fragment>

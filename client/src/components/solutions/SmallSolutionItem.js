@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { displayDate, statusClassColour } from '../../utils/helpers';
 
-const SmallSolutionItem = ({ solution: { _id, problem, status, date } }) => {
+const SmallSolutionItem = ({
+  language,
+  solution: { _id, problem, status, date },
+}) => {
   return (
     <Fragment>
       <li id={_id}>
@@ -42,7 +45,7 @@ const SmallSolutionItem = ({ solution: { _id, problem, status, date } }) => {
                     </span>
                   </Link>
                 </span>
-                <time dateTime={date}> {displayDate(date)}</time>
+                <time dateTime={date}> {displayDate(date, language)}</time>
               </span>
             </span>
             <svg

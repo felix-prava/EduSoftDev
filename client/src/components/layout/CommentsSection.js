@@ -14,6 +14,7 @@ const CommentsSection = ({
     user,
     saveButtonLabel,
     leaveCommentLabel,
+    language,
     resourceType,
   },
   deleteComment,
@@ -65,7 +66,7 @@ const CommentsSection = ({
                         </Link>
                       </h3>
                       <p className='text-sm text-gray-500'>
-                        {displayDate(comment.date)}
+                        {displayDate(comment.date, language)}
                         {user !== null &&
                           (user._id === comment.user ||
                             user.role === 'admin' ||

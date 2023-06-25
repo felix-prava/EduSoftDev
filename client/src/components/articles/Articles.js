@@ -35,7 +35,6 @@ const Articles = ({
   const deleteArticleTitle = articlesTranslations.deleteArticle[language];
   const deleteArticleMessage =
     articlesTranslations.deleteArticleMessage[language];
-  const postedOnLabel = universalTranslations.postedOn[language];
 
   return (
     <Fragment>
@@ -69,7 +68,7 @@ const Articles = ({
                     translations={{
                       discussionLabel,
                       readArticleLinkLabel,
-                      postedOnLabel,
+                      language,
                       deleteArticleTitle,
                       deleteArticleMessage,
                     }}
