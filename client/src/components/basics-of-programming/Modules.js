@@ -33,7 +33,7 @@ const Modules = ({ auth: { loading, user } }) => {
   const expNeededForArraysFunctionsModule = 500;
   const expNeededForMatrixStringsModule = 850;
   const expNeededForDatabaseAndOOPModule = 1250;
-  const expNeededForBacktrackingRecursionModule = 700;
+  const expNeededForBacktrackingRecursionModule = 1700;
 
   const language = user ? user.language : 'en';
 

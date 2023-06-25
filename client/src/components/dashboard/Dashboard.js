@@ -272,7 +272,11 @@ const Dashboard = ({
               <div className='shadow sm:hidden'>
                 <ul className='mt-2 divide-y divide-gray-200 overflow-hidden shadow sm:hidden'>
                   {solutions.map((solution) => (
-                    <SmallSolutionItem key={solution._id} solution={solution} />
+                    <SmallSolutionItem
+                      key={solution._id}
+                      language={language}
+                      solution={solution}
+                    />
                   ))}
                 </ul>
               </div>
@@ -303,6 +307,7 @@ const Dashboard = ({
                           {solutions.map((solution) => (
                             <NormalSolutionItem
                               key={solution._id}
+                              language={language}
                               solution={solution}
                             />
                           ))}

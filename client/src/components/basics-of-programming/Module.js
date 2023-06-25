@@ -173,24 +173,19 @@ const Module = ({
           <div className='mt-6 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none'>
             {problems
               .filter((problem) => {
-                console.log(problem.type);
                 if (filterType === 'all') return true;
                 return problem.type === filterType;
               })
               .sort((a, b) => {
                 if (sortBy === 'most-solved') {
-                  console.log(b.solvingUsers.length);
-                  console.log(a.solvingUsers.length);
                   return b.solvingUsers.length - a.solvingUsers.length;
                 }
                 if (sortBy === 'least-solved') {
-                  console.log(b.solvingUsers.length);
-                  console.log(a.solvingUsers.length);
                   return a.solvingUsers.length - b.solvingUsers.length;
                 }
                 return 0; // No sorting by default
               })
-              .map((problem, index) => (
+              .map((problem) => (
                 <MaterialItem
                   key={problem._id}
                   problem={problem}

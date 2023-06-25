@@ -55,6 +55,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
+import setLanguage from './utils/setLanguage';
 
 // Redux
 import { Provider } from 'react-redux';
@@ -63,6 +64,9 @@ import './App.css';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
+}
+if (localStorage.esdLanguage) {
+  setLanguage(localStorage.esdLanguage);
 }
 
 const App = () => {

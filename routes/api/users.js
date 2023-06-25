@@ -8,6 +8,7 @@ const config = require('config');
 const auth = require('../../middleware/auth');
 const compareUsers = require('../../middleware/compareUsers');
 const { updateProfile } = require('../../utils/helpers');
+const { usersTranslations } = require('./translations');
 
 const User = require('../../models/User');
 const Profile = require('../../models/Profile');
@@ -33,15 +34,8 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const {
-      firstName,
-      lastName,
-      preferredName,
-      birthdate,
-      username,
-      email,
-      password,
-    } = req.body;
+    const { firstName, lastName, preferredName, username, email, password } =
+      req.body;
 
     try {
       let user = await User.findOne({ email });
@@ -113,11 +107,7 @@ router.post(
 // @desc    Update user's fields
 // @access  Private
 router.put('/:user_id', auth, async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-
+  const userLanguage = req.header('esd-language') || 'en';
   try {
     const user = await User.findById(req.params.user_id);
     if (!user) {
@@ -162,9 +152,9 @@ router.put('/:user_id', auth, async (req, res) => {
       try {
         const userExists = await User.exists({ username });
         if (userExists) {
-          return res
-            .status(400)
-            .json({ errors: [{ msg: 'Username is taken' }] });
+          return res.status(400).json({
+            errors: [{ msg: usersTranslations.usernameTaken[userLanguage] }],
+          });
         }
       } catch (err) {
         res.status(500).json({ error: [{ msg: 'Server error' }] });
@@ -177,7 +167,9 @@ router.put('/:user_id', auth, async (req, res) => {
       try {
         const userExists = await User.exists({ email });
         if (userExists) {
-          return res.status(400).json({ errors: [{ msg: 'Email Is Taken' }] });
+          return res.status(400).json({
+            errors: [{ msg: usersTranslations.emailTaken[userLanguage] }],
+          });
         }
       } catch (err) {
         res.status(500).json({ error: [{ msg: 'Server error' }] });
@@ -188,21 +180,21 @@ router.put('/:user_id', auth, async (req, res) => {
     if (password && oldPassword) {
       if (password.length < 6) {
         return res.status(400).json({
-          errors: [
-            { msg: 'Please enter a password with 6 or more characters' },
-          ],
+          errors: [{ msg: usersTranslations.passwordLength[userLanguage] }],
         });
       }
       if (oldPassword === password) {
         return res.status(400).json({
-          errors: [{ msg: 'New password cannot be the same as the old one' }],
+          errors: [
+            { msg: usersTranslations.newPasswordMustBeDifferent[userLanguage] },
+          ],
         });
       }
       const passwordsMatch = await bcrypt.compare(oldPassword, user.password);
 
       if (!passwordsMatch) {
         return res.status(400).json({
-          errors: [{ msg: 'The old password you have entered is incorrect' }],
+          errors: [{ msg: usersTranslations.oldPasswordIsWrong[userLanguage] }],
         });
       }
 

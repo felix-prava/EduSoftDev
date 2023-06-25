@@ -27,6 +27,11 @@ const Account = ({ auth: { user }, updateUser, deleteAccount, setAlert }) => {
     settingsTranslations.deleteYourAccount[language];
   const areYouSureDeleteAccountLabel =
     settingsTranslations.areYouSureDeleteAccount[language];
+  const usernameMustBeFilledMessage =
+    settingsTranslations.usernameMustBeFilled[language];
+  const usernameUpdatedMessage = settingsTranslations.usernameUpdated[language];
+  const thisIsCurrentUsernameMessage =
+    settingsTranslations.thisIsCurrentUsername[language];
   const saveButtonLabel = universalTranslations.saveButton[language];
 
   const onChange = (e) =>
@@ -65,13 +70,13 @@ const Account = ({ auth: { user }, updateUser, deleteAccount, setAlert }) => {
               <button
                 onClick={() => {
                   if (username === '') {
-                    setAlert("Username can't be empty", 'error');
+                    setAlert(usernameMustBeFilledMessage, 'error');
                     return;
                   }
                   if (user.username !== username) {
-                    updateUser({ username }, user._id, 'Username Updated');
+                    updateUser({ username }, user._id, usernameUpdatedMessage);
                   } else {
-                    setAlert('This is your current username', 'error');
+                    setAlert(thisIsCurrentUsernameMessage, 'error');
                   }
                   setFormData({ ...formData, username: '' });
                 }}

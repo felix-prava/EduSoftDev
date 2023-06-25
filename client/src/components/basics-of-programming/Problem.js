@@ -180,21 +180,25 @@ const Problem = ({
                 {backButtonLabel}
               </button>
             </Link>
-            <button
-              type='button'
-              onClick={() => {
-                let solutionBody =
-                  document.getElementById('solution-body').value;
-                if (solutionBody === '') {
-                  setAlert(noEmptySolutionLabel, 'error');
-                  return;
-                }
-                solveProblem(problemId, solutionBody);
-              }}
-              className='ml-3 mr-2 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
-            >
-              {sendSolutionLabel}
-            </button>
+            {user &&
+              learningMaterial &&
+              user.exp >= learningMaterial.expNeeded && (
+                <button
+                  type='button'
+                  onClick={() => {
+                    let solutionBody =
+                      document.getElementById('solution-body').value;
+                    if (solutionBody === '') {
+                      setAlert(noEmptySolutionLabel, 'error');
+                      return;
+                    }
+                    solveProblem(problemId, solutionBody);
+                  }}
+                  className='ml-3 mr-2 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-offset-2 focus:ring-indigo-500'
+                >
+                  {sendSolutionLabel}
+                </button>
+              )}
           </div>
         </div>
       </div>
@@ -205,6 +209,7 @@ const Problem = ({
           user,
           saveButtonLabel,
           leaveCommentLabel,
+          language,
           resourceType: 'learning material',
         }}
       />

@@ -73,22 +73,49 @@ const EditProfileAdmin = ({
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
+  const language = currentUser ? currentUser.language : 'en';
+  const updateUserInfoLabel = myProfileTranslations.updateUserInfo[language];
+  const firstNameLabel = myProfileTranslations.firstName[language];
+  const lastNameLabel = myProfileTranslations.lastName[language];
+  const preferredNameLabel = myProfileTranslations.preferredName[language];
+  const birthdateLabel = myProfileTranslations.birthdate[language];
+  const informationUpdatedMessage =
+    myProfileTranslations.informationUpdated[language];
+  const firstNameMustBeFilledMessage =
+    myProfileTranslations.firstNameMustBeFilled[language];
+  const lastNameMustBeFilledMessage =
+    myProfileTranslations.lastNameMustBeFilled[language];
+  const emailMustBeFilledMessage =
+    myProfileTranslations.emailMustBeFilled[language];
+  const usernameMustBeFilledMessage =
+    myProfileTranslations.usernameMustBeFilled[language];
+  const deleteAccountLabel = settingsTranslations.deleteAccount[language];
+  const deleteUserAccountMessageLabel =
+    settingsTranslations.deleteUserAccountMessage[language];
+  const deleteUserAccountLabel =
+    settingsTranslations.deleteUserAccount[language];
+  const areYouSureDeleteAccountLabel =
+    settingsTranslations.areYouSureDeleteAccount[language];
+  const statusLabel = universalTranslations.status[language];
+  const saveButtonLabel = universalTranslations.saveButton[language];
+  const cancelButtonLabel = universalTranslations.cancelButton[language];
+
   const updateGeneralInfo = async () => {
     let validFormData = true;
     if (firstName === '') {
-      setAlert("First name can't be empty", 'error');
+      setAlert(firstNameMustBeFilledMessage, 'error');
       validFormData = false;
     }
     if (lastName === '') {
-      setAlert("Last name can't be empty", 'error');
+      setAlert(lastNameMustBeFilledMessage, 'error');
       validFormData = false;
     }
     if (email === '') {
-      setAlert("Email can't be empty", 'error');
+      setAlert(emailMustBeFilledMessage, 'error');
       validFormData = false;
     }
     if (username === '') {
-      setAlert("Username can't be empty", 'error');
+      setAlert(usernameMustBeFilledMessage, 'error');
       validFormData = false;
     }
     if (!validFormData) return;
@@ -107,27 +134,10 @@ const EditProfileAdmin = ({
         githubUsername,
       },
       profile.user._id,
-      'Information Updated',
+      informationUpdatedMessage,
       dispatchUserUpdated
     );
   };
-
-  const language = currentUser ? currentUser.language : 'en';
-  const updateUserInfoLabel = myProfileTranslations.updateUserInfo[language];
-  const firstNameLabel = myProfileTranslations.firstName[language];
-  const lastNameLabel = myProfileTranslations.lastName[language];
-  const preferredNameLabel = myProfileTranslations.preferredName[language];
-  const birthdateLabel = myProfileTranslations.birthdate[language];
-  const deleteAccountLabel = settingsTranslations.deleteAccount[language];
-  const deleteUserAccountMessageLabel =
-    settingsTranslations.deleteUserAccountMessage[language];
-  const deleteUserAccountLabel =
-    settingsTranslations.deleteUserAccount[language];
-  const areYouSureDeleteAccountLabel =
-    settingsTranslations.areYouSureDeleteAccount[language];
-  const statusLabel = universalTranslations.status[language];
-  const saveButtonLabel = universalTranslations.saveButton[language];
-  const cancelButtonLabel = universalTranslations.cancelButton[language];
 
   return (
     <Fragment>

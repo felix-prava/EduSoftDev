@@ -213,27 +213,27 @@ export const myProfileTranslations = {
   },
   addExperience: {
     en: 'Add Experience',
-    ro: 'Adauga Experienta',
+    ro: 'Adaugă Experiență',
   },
   addEducation: {
     en: 'Add Education',
-    ro: 'Adauga Educatie',
+    ro: 'Adaugă Educație',
   },
   experience: {
     en: 'Experience',
-    ro: 'Experienta',
+    ro: 'Experiență',
   },
   noExperience: {
     en: 'You have not added any professional experience yet.',
-    ro: 'Inca nu ai adaugat nimic la profilul de experienta.',
+    ro: 'Incă nu ai adăugat nimic la profilul de experiență.',
   },
   education: {
     en: 'Education',
-    ro: 'Educatie',
+    ro: 'Educație',
   },
   noEducation: {
     en: 'You have not added any education yet.',
-    ro: 'Inca nu ai adaugat nimic la profilul de educatie.',
+    ro: 'Incă nu ai adăugat nimic la profilul de educație.',
   },
   githubRepos: {
     en: 'Github Repos',
@@ -278,6 +278,26 @@ export const myProfileTranslations = {
   birthdate: {
     en: 'Birth Date',
     ro: 'Zi de Naştere',
+  },
+  informationUpdated: {
+    en: 'Information Updated',
+    ro: 'Informații Actulizate',
+  },
+  firstNameMustBeFilled: {
+    en: 'First name must be filled',
+    ro: 'Prenumele trebuie completat',
+  },
+  lastNameMustBeFilled: {
+    en: 'Last name must be filled',
+    ro: 'Numele de familie trebuie completat',
+  },
+  emailMustBeFilled: {
+    en: 'Email must be filled',
+    ro: 'Email-ul trebuie completat',
+  },
+  usernameMustBeFilled: {
+    en: 'Username must be filled',
+    ro: 'Username-ul trebuie completat',
   },
 };
 
@@ -824,6 +844,18 @@ export const settingsTranslations = {
     en: 'Language',
     ro: 'Limba',
   },
+  usernameMustBeFilled: {
+    en: 'Username must be filled',
+    ro: 'Username-ul trebuie completat',
+  },
+  usernameUpdated: {
+    en: 'Username Updated',
+    ro: 'Username Actualizat',
+  },
+  thisIsCurrentUsername: {
+    en: 'This is your current username',
+    ro: 'Aceste este username-ul tău curent',
+  },
 };
 
 export const solutionTranslations = {
@@ -842,6 +874,22 @@ export const solutionTranslations = {
   successRate: {
     en: 'Success Rate',
     ro: 'Rata de Succes',
+  },
+  compilationError: {
+    en: 'Compilation Error',
+    ro: 'Eroare de Compilare',
+  },
+  accepted: {
+    en: 'Accepted',
+    ro: 'Acceptată',
+  },
+  incorrect: {
+    en: 'Incorrect',
+    ro: 'Incorectă',
+  },
+  pending: {
+    en: 'Pending',
+    ro: 'În Așteptare',
   },
 };
 
