@@ -709,6 +709,22 @@ export const learningMaterialTranslations = {
     en: 'Finish Quiz',
     ro: 'Termină Quiz-ul',
   },
+  nameIsRequired: {
+    en: 'Name is required',
+    ro: 'Numele este obligatoriu',
+  },
+  expMinIsRequired: {
+    en: 'Minimum experience is required',
+    ro: 'Experiența minimă este obligatorie',
+  },
+  expNeededIsRequired: {
+    en: 'Experience gained is required',
+    ro: 'Experiența câștigată este obligatorie',
+  },
+  shortDescIsRequired: {
+    en: 'Short description is required',
+    ro: 'O scurtă descriere este obligatorie',
+  },
 };
 
 export const settingsTranslations = {

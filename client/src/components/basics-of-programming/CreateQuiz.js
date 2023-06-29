@@ -68,6 +68,14 @@ const CreateQuiz = ({ auth: { user }, addLearningMaterial, setAlert }) => {
     learningMaterialTranslations.noEmptyAnswer[language];
   const addNewAnswerMessage =
     learningMaterialTranslations.addNewAnswer[language];
+  const nameIsRequiredMessage =
+    learningMaterialTranslations.nameIsRequired[language];
+  const expMinIsRequiredMessage =
+    learningMaterialTranslations.expMinIsRequired[language];
+  const expNeededIsRequiredMessage =
+    learningMaterialTranslations.expNeededIsRequired[language];
+  const shortDescIsRequiredMessage =
+    learningMaterialTranslations.shortDescIsRequired[language];
 
   const bodyLabel = universalTranslations.body[language];
   const shortDescriptionLabel =
@@ -90,7 +98,7 @@ const CreateQuiz = ({ auth: { user }, addLearningMaterial, setAlert }) => {
       body: wrongAnswersField.value,
     });
     wrongAnswersField.value = null;
-    wrongAnswerHeader.textContent = `Wrong Answers (${wrongAnswers.length})`;
+    wrongAnswerHeader.textContent = `${wrongAnswersLabel} (${wrongAnswers.length})`;
     setAlert(`${addNewAnswerMessage}`, 'success', 2000, false);
   };
 
@@ -109,7 +117,7 @@ const CreateQuiz = ({ auth: { user }, addLearningMaterial, setAlert }) => {
       body: rightAnswersField.value,
     });
     rightAnswersField.value = null;
-    rightAnswerHeader.textContent = `Right Answers (${rightAnswers.length})`;
+    rightAnswerHeader.textContent = `${rightAnswersLabel} (${rightAnswers.length})`;
     setAlert(`${addNewAnswerMessage}`, 'success', 2000, false);
   };
 
@@ -118,6 +126,25 @@ const CreateQuiz = ({ auth: { user }, addLearningMaterial, setAlert }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    let errors = [];
+    if (name === '') {
+      errors.push(nameIsRequiredMessage);
+    }
+    if (expNeeded === '') {
+      errors.push(expMinIsRequiredMessage);
+    }
+    if (expGained === '') {
+      errors.push(expNeededIsRequiredMessage);
+    }
+    if (shortDescription === '') {
+      errors.push(shortDescIsRequiredMessage);
+    }
+    if (errors.length !== 0) {
+      errors.forEach((errorMessage) => {
+        setAlert(`${errorMessage}`, 'error', 4500);
+      });
+      return;
+    }
     addLearningMaterial(formData, 'quiz', module, navigate);
   };
 
