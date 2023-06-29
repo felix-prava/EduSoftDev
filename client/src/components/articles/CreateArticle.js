@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import TextEditor from '../layout/TextEditor';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -17,6 +17,7 @@ const CreateArticle = ({ auth: { user }, addArticle, setAlert }) => {
     body: '',
   });
 
+  const navigate = useNavigate();
   const { subject, body, description } = formData;
   const childCompRef = useRef();
 
@@ -51,7 +52,7 @@ const CreateArticle = ({ auth: { user }, addArticle, setAlert }) => {
       return;
     }
 
-    addArticle(formData);
+    addArticle(formData, navigate);
     if (subject !== '' && body !== '') {
       setFormData({ subject: '', body: '', description: '' });
       childCompRef.current.setEmptyEditor();
