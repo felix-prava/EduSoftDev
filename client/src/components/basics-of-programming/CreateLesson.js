@@ -3,13 +3,14 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addLearningMaterial } from '../../actions/learning';
+import { setAlert } from '../../actions/alert';
 import {
   learningMaterialTranslations,
   universalTranslations,
 } from '../layout/Translations';
 import TextEditor from '../layout/TextEditor';
 
-const CreateLesson = ({ auth: { user }, addLearningMaterial }) => {
+const CreateLesson = ({ auth: { user }, addLearningMaterial, setAlert }) => {
   const { module } = useParams();
   let navigate = useNavigate();
 
@@ -32,6 +33,14 @@ const CreateLesson = ({ auth: { user }, addLearningMaterial }) => {
   const expNeededLabel = learningMaterialTranslations.expNeeded[language];
   const expGainedLabel = learningMaterialTranslations.expGained[language];
   const expMaxLabel = learningMaterialTranslations.expMax[language];
+  const nameIsRequiredMessage =
+    learningMaterialTranslations.nameIsRequired[language];
+  const expMinIsRequiredMessage =
+    learningMaterialTranslations.expMinIsRequired[language];
+  const expNeededIsRequiredMessage =
+    learningMaterialTranslations.expNeededIsRequired[language];
+  const shortDescIsRequiredMessage =
+    learningMaterialTranslations.shortDescIsRequired[language];
   const bodyLabel = universalTranslations.body[language];
   const shortDescriptionLabel =
     universalTranslations.shortDescription[language];
@@ -43,6 +52,25 @@ const CreateLesson = ({ auth: { user }, addLearningMaterial }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    let errors = [];
+    if (name === '') {
+      errors.push(nameIsRequiredMessage);
+    }
+    if (expNeeded === '') {
+      errors.push(expMinIsRequiredMessage);
+    }
+    if (expGained === '') {
+      errors.push(expNeededIsRequiredMessage);
+    }
+    if (shortDescription === '') {
+      errors.push(shortDescIsRequiredMessage);
+    }
+    if (errors.length !== 0) {
+      errors.forEach((errorMessage) => {
+        setAlert(`${errorMessage}`, 'error', 4500);
+      });
+      return;
+    }
     addLearningMaterial(formData, 'lesson', module, navigate);
   };
 
@@ -214,10 +242,13 @@ const CreateLesson = ({ auth: { user }, addLearningMaterial }) => {
 CreateLesson.propTypes = {
   auth: PropTypes.object.isRequired,
   addLearningMaterial: PropTypes.func.isRequired,
+  setAlert: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { addLearningMaterial })(CreateLesson);
+export default connect(mapStateToProps, { addLearningMaterial, setAlert })(
+  CreateLesson
+);
