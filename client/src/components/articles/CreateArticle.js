@@ -4,12 +4,13 @@ import TextEditor from '../layout/TextEditor';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addArticle } from '../../actions/article';
+import { setAlert } from '../../actions/alert';
 import {
   universalTranslations,
   articlesTranslations,
 } from '../layout/Translations';
 
-const CreateArticle = ({ auth: { user }, addArticle }) => {
+const CreateArticle = ({ auth: { user }, addArticle, setAlert }) => {
   const [formData, setFormData] = useState({
     subject: '',
     description: '',
@@ -19,18 +20,6 @@ const CreateArticle = ({ auth: { user }, addArticle }) => {
   const { subject, body, description } = formData;
   const childCompRef = useRef();
 
-  const onChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    addArticle(formData);
-    if (subject !== '' && body !== '') {
-      setFormData({ subject: '', body: '', description: '' });
-      childCompRef.current.setEmptyEditor();
-    }
-  };
-
   const language = user ? user.language : 'en';
   const bodyLabel = universalTranslations.body[language];
   const shortDescriptionLabel =
@@ -39,6 +28,35 @@ const CreateArticle = ({ auth: { user }, addArticle }) => {
   const saveButtonLabel = universalTranslations.saveButton[language];
   const createArticleLabel = articlesTranslations.createArticle[language];
   const whatIsAboutLabel = articlesTranslations.whatIsAbout[language];
+  const subjectIsRequiredMessage =
+    articlesTranslations.subjectIsRequired[language];
+  const bodyIsRequiredMessage = articlesTranslations.bodyIsRequired[language];
+
+  const onChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    let errors = [];
+    if (subject === '') {
+      errors.push(subjectIsRequiredMessage);
+    }
+    if (body === '' || body === '<p></p>\n') {
+      errors.push(bodyIsRequiredMessage);
+    }
+    if (errors.length !== 0) {
+      errors.forEach((errorMessage) => {
+        setAlert(`${errorMessage}`, 'error', 4500);
+      });
+      return;
+    }
+
+    addArticle(formData);
+    if (subject !== '' && body !== '') {
+      setFormData({ subject: '', body: '', description: '' });
+      childCompRef.current.setEmptyEditor();
+    }
+  };
 
   return (
     <Fragment>
@@ -147,10 +165,13 @@ const CreateArticle = ({ auth: { user }, addArticle }) => {
 CreateArticle.propTypes = {
   auth: PropTypes.object.isRequired,
   addArticle: PropTypes.func.isRequired,
+  setAlert: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { addArticle })(CreateArticle);
+export default connect(mapStateToProps, { addArticle, setAlert })(
+  CreateArticle
+);

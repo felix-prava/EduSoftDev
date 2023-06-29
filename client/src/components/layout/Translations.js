@@ -342,6 +342,14 @@ export const articlesTranslations = {
     en: 'Are you sure you want to delete this article? It will be permanently removed from the database. This action cannot be undone.',
     ro: 'Ești sigur că vrei să ștergeți acest articol? Va fi eliminat definitiv din baza de date. Această acțiune nu poate fi anulată.',
   },
+  subjectIsRequired: {
+    en: 'Subject is required',
+    ro: 'Subiectul este obligatoriu',
+  },
+  bodyIsRequired: {
+    en: 'Body is required',
+    ro: 'Conținutul este obligatoriu',
+  },
 };
 
 export const dashboardTranslations = {
