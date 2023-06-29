@@ -62,6 +62,7 @@ router.post(
       gt: 0,
     }),
     check('body', 'Body is required').not().isEmpty(),
+    check('body', 'Body is required').not().equals('<p></p>\n'),
     check('shortDescription', 'Short description is required').not().isEmpty(),
     check('expMax')
       .optional()
@@ -221,6 +222,7 @@ router.post(
       gt: 0,
     }),
     check('body', 'Body is required').not().isEmpty(),
+    check('body', 'Body is required').not().equals('<p></p>\n'),
     check('shortDescription', 'Short description is required').not().isEmpty(),
     check('rightAnswers', 'You must add at least one right answer')
       .not()

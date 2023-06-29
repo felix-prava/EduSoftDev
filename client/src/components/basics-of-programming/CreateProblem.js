@@ -78,6 +78,14 @@ const CreateProblem = ({ auth: { user }, addLearningMaterial, setAlert }) => {
     learningMaterialTranslations.addNewExample[language];
   const addEmptyHintMessage =
     learningMaterialTranslations.addEmptyHint[language];
+  const nameIsRequiredMessage =
+    learningMaterialTranslations.nameIsRequired[language];
+  const expMinIsRequiredMessage =
+    learningMaterialTranslations.expMinIsRequired[language];
+  const expNeededIsRequiredMessage =
+    learningMaterialTranslations.expNeededIsRequired[language];
+  const shortDescIsRequiredMessage =
+    learningMaterialTranslations.shortDescIsRequired[language];
 
   const bodyLabel = universalTranslations.body[language];
   const shortDescriptionLabel =
@@ -110,7 +118,7 @@ const CreateProblem = ({ auth: { user }, addLearningMaterial, setAlert }) => {
     testsInputField.value = null;
     testsOutputField.value = null;
     testsCheckbox.checked = false;
-    testsHeader.textContent = `Tests (${tests.length})`;
+    testsHeader.textContent = `${testsTitleLabel} (${tests.length})`;
     setAlert(`${addNewTestMessage}`, 'success', 2000, false);
   };
 
@@ -134,7 +142,7 @@ const CreateProblem = ({ auth: { user }, addLearningMaterial, setAlert }) => {
     });
     examplesInputField.value = null;
     examplesOutputField.value = null;
-    examplesHeader.textContent = `Examples (${examples.length})`;
+    examplesHeader.textContent = `${examplesTitleLabel} (${examples.length})`;
     setAlert(`${addNewExampleMessage}`, 'success', 2000, false);
   };
 
@@ -153,7 +161,7 @@ const CreateProblem = ({ auth: { user }, addLearningMaterial, setAlert }) => {
       body: hintsField.value,
     });
     hintsField.value = null;
-    hintsHeader.textContent = `Hints (${hints.length})`;
+    hintsHeader.textContent = `${hintsTitleLabel} (${hints.length})`;
     setAlert(`${addNewHintMessage}`, 'success', 2000, false);
   };
 
@@ -162,6 +170,25 @@ const CreateProblem = ({ auth: { user }, addLearningMaterial, setAlert }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    let errors = [];
+    if (name === '') {
+      errors.push(nameIsRequiredMessage);
+    }
+    if (expNeeded === '') {
+      errors.push(expMinIsRequiredMessage);
+    }
+    if (expGained === '') {
+      errors.push(expNeededIsRequiredMessage);
+    }
+    if (shortDescription === '') {
+      errors.push(shortDescIsRequiredMessage);
+    }
+    if (errors.length !== 0) {
+      errors.forEach((errorMessage) => {
+        setAlert(`${errorMessage}`, 'error', 4500);
+      });
+      return;
+    }
     addLearningMaterial(formData, 'problem', module, navigate);
   };
 

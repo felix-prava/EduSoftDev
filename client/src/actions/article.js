@@ -121,7 +121,7 @@ export const deleteArticle =
   };
 
 // Add an article
-export const addArticle = (formData) => async (dispatch) => {
+export const addArticle = (formData, navigate) => async (dispatch) => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -137,7 +137,16 @@ export const addArticle = (formData) => async (dispatch) => {
     });
 
     const language = localStorage.esdLanguage || 'en';
-    dispatch(setAlert(articleTranslations.articleCreated[language], 'success'));
+    dispatch(
+      setAlert(
+        articleTranslations.articleCreated[language],
+        'success',
+        4500,
+        true,
+        true
+      )
+    );
+    navigate('/articles');
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
