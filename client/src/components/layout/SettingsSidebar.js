@@ -24,8 +24,8 @@ const SettingsSidebar = ({ auth: { user } }) => {
   const accountLabel = settingsTranslations.account[language];
   const passwordLabel = settingsTranslations.password[language];
   const appearanceLabel = settingsTranslations.appearance[language];
-  //const notificationsLabel = settingsTranslations.notifications[language];
-  //const planAndBillingLabel = settingsTranslations.planAndBilling[language];
+  const notificationsLabel = settingsTranslations.notifications[language];
+  const planAndBillingLabel = settingsTranslations.planAndBilling[language];
 
   let location = useLocation();
   let settingsMenu = null;
@@ -196,7 +196,6 @@ const SettingsSidebar = ({ auth: { user } }) => {
                   <span className='truncate'> Email </span>
                 </Link>
 
-                {/*
                 <Link
                   to='/settings/notifications'
                   className={
@@ -256,7 +255,6 @@ const SettingsSidebar = ({ auth: { user } }) => {
                   </svg>
                   <span className='truncate'> {planAndBillingLabel} </span>
                 </Link>
-                */}
               </nav>
             </aside>
             {settingsMenu}
