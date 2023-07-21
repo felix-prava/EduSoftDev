@@ -15,6 +15,8 @@ const Appearance = ({ auth: { user }, updateUser }) => {
   const selectLanguageLabel = settingsTranslations.selectLanguage[userLanguage];
   const languageLabel = settingsTranslations.language[userLanguage];
   const languageUpdatedMessage = settingsTranslations.languageUpdated[language];
+  const updateProfilePictureLabel =
+    settingsTranslations.updateProfilePicture[userLanguage];
   const saveButtonLabel = universalTranslations.saveButton[userLanguage];
 
   useEffect(() => {
@@ -79,7 +81,6 @@ const Appearance = ({ auth: { user }, updateUser }) => {
           </div>
         </section>
 
-        {/*
         <section aria-labelledby='profile-picture'>
           <form action='#' method='POST'>
             <div className='shadow sm:rounded-md sm:overflow-hidden'>
@@ -102,7 +103,6 @@ const Appearance = ({ auth: { user }, updateUser }) => {
             </div>
           </form>
         </section>
-        */}
       </div>
     </Fragment>
   );

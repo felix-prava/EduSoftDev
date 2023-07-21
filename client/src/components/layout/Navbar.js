@@ -370,7 +370,6 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
             </div>
             {!loading && isAuthenticated && (
               <div className='absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0'>
-                {/*
                 <div
                   id='notifications-bell'
                   onClick={toggleNotificationsDropdown}
@@ -398,7 +397,6 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
                     </svg>
                   </button>
                 </div>
-                */}
 
                 {/*<!-- Profile dropdown -->*/}
                 <div className='ml-3 relative'>
@@ -421,7 +419,6 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
                       ></img>
                     </button>
                   </div>
-                  {/*
                   <div id='notifications-dropdown-options' className='hidden'>
                     <div
                       className='origin-top-right absolute right-12 mt-2 ml-8 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50'
@@ -459,7 +456,6 @@ const Navbar = ({ auth: { isAuthenticated, loading, user }, logoutUser }) => {
                       </Link>
                     </div>
                   </div>
-                  */}
 
                   <div id='profile-dropdown-options' className='hidden'>
                     <div
