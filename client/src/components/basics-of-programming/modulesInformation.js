@@ -7,7 +7,7 @@ export const MODULES_TITLE_DESCRIPTION = {
     'Learn step by step the basics of programming by reading theoretical lessons, completing quizzes and most ' +
     'importantly, solving problems that aim to develop your logical thinking and make you think like a programmer.',
   ro:
-    'Învață pas cu pas elementele de bază ale programării citind lecții, completând quizz-uri și cel mai important, ' +
+    'Învață pas cu pas elementele de bază ale programării citind lecții, completând quiz-uri și cel mai important, ' +
     'rezolvând probleme care au ca scop să-ți dezvolte gândirea logică și să te facă să gândești ca un programator.',
 };
 export const INTRODUCTION_TITLE = {

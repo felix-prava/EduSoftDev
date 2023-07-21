@@ -78,14 +78,6 @@ const CreateProblem = ({ auth: { user }, addLearningMaterial, setAlert }) => {
     learningMaterialTranslations.addNewExample[language];
   const addEmptyHintMessage =
     learningMaterialTranslations.addEmptyHint[language];
-  const nameIsRequiredMessage =
-    learningMaterialTranslations.nameIsRequired[language];
-  const expMinIsRequiredMessage =
-    learningMaterialTranslations.expMinIsRequired[language];
-  const expNeededIsRequiredMessage =
-    learningMaterialTranslations.expNeededIsRequired[language];
-  const shortDescIsRequiredMessage =
-    learningMaterialTranslations.shortDescIsRequired[language];
 
   const bodyLabel = universalTranslations.body[language];
   const shortDescriptionLabel =
@@ -170,25 +162,6 @@ const CreateProblem = ({ auth: { user }, addLearningMaterial, setAlert }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    let errors = [];
-    if (name === '') {
-      errors.push(nameIsRequiredMessage);
-    }
-    if (expNeeded === '') {
-      errors.push(expMinIsRequiredMessage);
-    }
-    if (expGained === '') {
-      errors.push(expNeededIsRequiredMessage);
-    }
-    if (shortDescription === '') {
-      errors.push(shortDescIsRequiredMessage);
-    }
-    if (errors.length !== 0) {
-      errors.forEach((errorMessage) => {
-        setAlert(`${errorMessage}`, 'error', 4500);
-      });
-      return;
-    }
     addLearningMaterial(formData, 'problem', module, navigate);
   };
 
